@@ -3794,13 +3794,9 @@ function saveReview(name, stars, msg, country){
   localStorage.setItem("reviews", JSON.stringify(all));
 }
 
-  if(!localStorage.getItem("reviews")){
-  localStorage.setItem("reviews", JSON.stringify([
-    {name:"Sarah", stars:5, msg:"Chauffeur très ponctuel, voiture propre, service parfait.", country:"fr"},
-    {name:"John", stars:5, msg:"Excursion Paradise Valley incroyable. Organisation top !", country:"gb"},
-    {name:"Fatima", stars:5, msg:"Très bonne communication WhatsApp, je recommande.", country:"ma"}
-  ]));
-  }
+if (!localStorage.getItem("reviews")) {
+  localStorage.setItem("reviews", JSON.stringify(DEFAULT_REVIEWS));
+}
 
 function loadReviews(){
   const all = JSON.parse(localStorage.getItem("reviews") || "[]");
