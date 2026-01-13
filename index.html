@@ -2595,36 +2595,7 @@ puis vous reconduiront au même point après votre excursion, pour un confort et
 Avis de nos clients
 </h2>
   
-<div id="liveReviews">
-
-  <div class="review-card">
-    <div class="review-stars">⭐⭐⭐⭐⭐</div>
-    <div class="review-msg">“Chauffeur très ponctuel, voiture propre, service parfait.”</div>
-    <div class="review-name">
-      <img src="https://flagcdn.com/w20/fr.png" class="review-flag">
-      <span>Sarah</span>
-    </div>
-  </div>
-
-  <div class="review-card">
-    <div class="review-stars">⭐⭐⭐⭐⭐</div>
-    <div class="review-msg">“Excursion Paradise Valley incroyable. Organisation top !”</div>
-    <div class="review-name">
-      <img src="https://flagcdn.com/w20/gb.png" class="review-flag">
-      <span>John</span>
-    </div>
-  </div>
-
-  <div class="review-card">
-    <div class="review-stars">⭐⭐⭐⭐⭐</div>
-    <div class="review-msg">“Très bonne communication WhatsApp, je recommande.”</div>
-    <div class="review-name">
-      <img src="https://flagcdn.com/w20/ma.png" class="review-flag">
-      <span>Fatima</span>
-    </div>
-  </div>
-
-</div>
+<div id="liveReviews"></div>
 </section>
 
   <section id="leaveReview">
@@ -3822,6 +3793,14 @@ function saveReview(name, stars, msg, country){
   all.unshift({name, stars, msg, country});
   localStorage.setItem("reviews", JSON.stringify(all));
 }
+
+  if(!localStorage.getItem("reviews")){
+  localStorage.setItem("reviews", JSON.stringify([
+    {name:"Sarah", stars:5, msg:"Chauffeur très ponctuel, voiture propre, service parfait.", country:"fr"},
+    {name:"John", stars:5, msg:"Excursion Paradise Valley incroyable. Organisation top !", country:"gb"},
+    {name:"Fatima", stars:5, msg:"Très bonne communication WhatsApp, je recommande.", country:"ma"}
+  ]));
+  }
 
 function loadReviews(){
   const all = JSON.parse(localStorage.getItem("reviews") || "[]");
