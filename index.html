@@ -3843,6 +3843,43 @@ document.addEventListener("DOMContentLoaded", ()=>{
     setTimeout(()=>btn.classList.remove("menu-shake"),600);
   });
 },3000);
+
+  function enableAdminDelete(){
+
+  const container = document.getElementById("liveReviews");
+  if (!container) return alert("Reviews not ready yet");
+
+  const password = "1590";
+  const p = prompt("Code admin ?");
+  if(p !== password) return;
+
+  let all = JSON.parse(localStorage.getItem("reviews") || "[]");
+
+  const cards = container.querySelectorAll(".review-card");
+
+  cards.forEach((card)=>{
+    const btn = document.createElement("span");
+    btn.innerHTML = "🗑️";
+    btn.style.cssText = `
+      position:absolute;
+      top:8px;
+      right:10px;
+      cursor:pointer;
+      font-size:20px;
+      z-index:10;
+    `;
+
+    btn.onclick = ()=>{
+      const msg = card.querySelector(".review-msg").innerText;
+      all = all.filter(r => r.msg !== msg);
+      localStorage.setItem("reviews", JSON.stringify(all));
+      card.remove();
+    };
+
+    card.style.position = "relative";
+    card.appendChild(btn);
+  });
+  }
   
 
 </script>
