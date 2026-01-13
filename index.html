@@ -2772,8 +2772,7 @@ const fixedTime = document.getElementById("fixedTime");
 
 const heureField = document.getElementById("heureField");
   
-const REVIEW_SYS  = "MTT_SYS_REVIEWS";
-const REVIEW_USER = "MTT_USER_REVIEWS";
+const REVIEWS_KEY = "MTT_REVIEWS_FINAL";
   
 
   
@@ -3725,7 +3724,6 @@ function setLang(langParam) {
   if(service.value === "excursion"){
   updateCircuitPlaces();
   }
-
 }
   
  
@@ -3751,32 +3749,29 @@ function updateLangFlag(){
 
   
   
+
+
 function bootReviews(){
-  if(!localStorage.getItem(REVIEW_SYS)){
-    localStorage.setItem(REVIEW_SYS, JSON.stringify([
-      {id:1, name:"Sarah", stars:5, msg:"Chauffeur très ponctuel, voiture propre, service parfait.", country:"🇫🇷"},
-      {id:2, name:"John", stars:5, msg:"Excursion Paradise Valley incroyable.", country:"🇬🇧"},
-      {id:3, name:"Fatima", stars:5, msg:"Très bonne communication WhatsApp.", country:"🇲🇦"}
+  if(!localStorage.getItem(REVIEWS_KEY)){
+    localStorage.setItem(REVIEWS_KEY, JSON.stringify([
+      {id:1,name:"Sarah",stars:5,msg:"Chauffeur très ponctuel, voiture propre, service parfait.",country:"🇫🇷"},
+      {id:2,name:"John",stars:5,msg:"Excursion Paradise Valley incroyable.",country:"🇬🇧"},
+      {id:3,name:"Fatima",stars:5,msg:"Très bonne communication WhatsApp.",country:"🇲🇦"}
     ]));
-  }
-  if(!localStorage.getItem(REVIEW_USER)){
-    localStorage.setItem(REVIEW_USER, "[]");
   }
   loadReviews();
 }
 
 function loadReviews(){
-  const wrap = document.getElementById("liveReviews");
-  wrap.innerHTML = "";
+  const wrap=document.getElementById("liveReviews");
+  wrap.innerHTML="";
+  const data=JSON.parse(localStorage.getItem(REVIEWS_KEY)||"[]");
 
-  const sys = JSON.parse(localStorage.getItem(REVIEW_SYS));
-  const usr = JSON.parse(localStorage.getItem(REVIEW_USER));
-
-  [...usr, ...sys].forEach(r=>{
-    const card = document.createElement("div");
-    card.className = "review-card";
-    card.dataset.id = r.id;
-    card.innerHTML = `
+  data.forEach(r=>{
+    const card=document.createElement("div");
+    card.className="review-card";
+    card.dataset.id=r.id;
+    card.innerHTML=`
       <div class="review-stars">${"⭐".repeat(r.stars)}</div>
       <div class="review-msg">“${escapeHTML(r.msg)}”</div>
       <div class="review-name">${r.country} ${escapeHTML(r.name)}</div>
@@ -3786,16 +3781,15 @@ function loadReviews(){
 }
 
 function sendReview(){
-  const name=reviewName.value.trim();
-  const msg=reviewMessage.value.trim();
-  const stars=parseInt(reviewStars.value);
-  const country=reviewCountry.value;
-
-  if(!name||!msg||!stars) return alert("Champs manquants");
-
-  const usr=JSON.parse(localStorage.getItem(REVIEW_USER));
-  usr.unshift({id:Date.now(),name,stars,msg,country});
-  localStorage.setItem(REVIEW_USER,JSON.stringify(usr));
+  const data=JSON.parse(localStorage.getItem(REVIEWS_KEY));
+  data.unshift({
+    id:Date.now(),
+    name:reviewName.value.trim(),
+    stars:parseInt(reviewStars.value),
+    msg:reviewMessage.value.trim(),
+    country:reviewCountry.value
+  });
+  localStorage.setItem(REVIEWS_KEY,JSON.stringify(data));
   reviewForm.reset();
   loadReviews();
 }
@@ -3808,9 +3802,9 @@ function enableAdminDelete(){
     del.textContent="🗑️";
     del.style.cssText="position:absolute;top:5px;right:8px;cursor:pointer";
     del.onclick=()=>{
-      let usr=JSON.parse(localStorage.getItem(REVIEW_USER));
-      usr=usr.filter(r=>String(r.id)!==card.dataset.id);
-      localStorage.setItem(REVIEW_USER,JSON.stringify(usr));
+      let data=JSON.parse(localStorage.getItem(REVIEWS_KEY));
+      data=data.filter(r=>String(r.id)!==card.dataset.id);
+      localStorage.setItem(REVIEWS_KEY,JSON.stringify(data));
       card.remove();
     };
     card.style.position="relative";
