@@ -926,8 +926,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐PPP 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐PPP 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
@@ -3800,8 +3800,9 @@ function saveReview(name, stars, msg, country){
   localStorage.setItem("reviews", JSON.stringify(all));
 }
 
-if (!localStorage.getItem("reviews")) {
+if (!localStorage.getItem("reviews_init")) {
   localStorage.setItem("reviews", JSON.stringify(DEFAULT_REVIEWS));
+  localStorage.setItem("reviews_init", "1");
 }
 
 function loadReviews(){
