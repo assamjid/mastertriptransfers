@@ -2771,8 +2771,11 @@ const fixedTimeField = document.getElementById("fixedTimeField");
 const fixedTime = document.getElementById("fixedTime");
 
 const heureField = document.getElementById("heureField");
-  
-const REVIEWS_KEY = "MTT_REVIEWS_FINAL";
+
+const DB_NAME="MTT_DB";
+const STORE="reviews";
+
+
   
 
   
@@ -3751,61 +3754,81 @@ function updateLangFlag(){
   
 
 
-function bootReviews(){
-  if(!localStorage.getItem(REVIEWS_KEY)){
-    localStorage.setItem(REVIEWS_KEY, JSON.stringify([
-      {id:1,name:"Sarah",stars:5,msg:"Chauffeur très ponctuel, voiture propre, service parfait.",country:"🇫🇷"},
-      {id:2,name:"John",stars:5,msg:"Excursion Paradise Valley incroyable.",country:"🇬🇧"},
-      {id:3,name:"Fatima",stars:5,msg:"Très bonne communication WhatsApp.",country:"🇲🇦"}
-    ]));
-  }
-  loadReviews();
-}
 
-function loadReviews(){
-  const wrap=document.getElementById("liveReviews");
-  wrap.innerHTML="";
-  const data=JSON.parse(localStorage.getItem(REVIEWS_KEY)||"[]");
-
-  data.forEach(r=>{
-    const card=document.createElement("div");
-    card.className="review-card";
-    card.dataset.id=r.id;
-    card.innerHTML=`
-      <div class="review-stars">${"⭐".repeat(r.stars)}</div>
-      <div class="review-msg">“${escapeHTML(r.msg)}”</div>
-      <div class="review-name">${r.country} ${escapeHTML(r.name)}</div>
-    `;
-    wrap.appendChild(card);
+function openDB(){
+  return new Promise(res=>{
+    const req=indexedDB.open(DB_NAME,1);
+    req.onupgradeneeded=e=>{
+      const db=e.target.result;
+      if(!db.objectStoreNames.contains(STORE)){
+        db.createObjectStore(STORE,{keyPath:"id"});
+      }
+    };
+    req.onsuccess=e=>res(e.target.result);
   });
 }
 
-function sendReview(){
-  const data=JSON.parse(localStorage.getItem(REVIEWS_KEY));
-  data.unshift({
+async function bootReviews(){
+  const db=await openDB();
+  const tx=db.transaction(STORE,"readonly");
+  const st=tx.objectStore(STORE);
+  const req=st.getAll();
+  req.onsuccess=async()=>{
+    if(req.result.length===0){
+      const tx2=db.transaction(STORE,"readwrite");
+      const st2=tx2.objectStore(STORE);
+      [
+        {id:1,name:"Sarah",stars:5,msg:"Service parfait",country:"🇫🇷"},
+        {id:2,name:"John",stars:5,msg:"Excursion Paradise Valley incroyable",country:"🇬🇧"},
+        {id:3,name:"Fatima",stars:5,msg:"Très bonne communication",country:"🇲🇦"}
+      ].forEach(r=>st2.put(r));
+      tx2.oncomplete=loadReviews;
+    } else loadReviews();
+  };
+}
+
+async function loadReviews(){
+  const db=await openDB();
+  const tx=db.transaction(STORE,"readonly");
+  const st=tx.objectStore(STORE);
+  st.getAll().onsuccess=e=>{
+    const wrap=document.getElementById("liveReviews");
+    wrap.innerHTML="";
+    e.target.result.forEach(r=>{
+      const d=document.createElement("div");
+      d.className="review-card";
+      d.dataset.id=r.id;
+      d.innerHTML=`<div>${"⭐".repeat(r.stars)}</div><div>“${r.msg}”</div><b>${r.country} ${r.name}</b>`;
+      wrap.appendChild(d);
+    });
+  };
+}
+
+async function sendReview(){
+  const db=await openDB();
+  const tx=db.transaction(STORE,"readwrite");
+  const st=tx.objectStore(STORE);
+  st.put({
     id:Date.now(),
-    name:reviewName.value.trim(),
-    stars:parseInt(reviewStars.value),
-    msg:reviewMessage.value.trim(),
+    name:reviewName.value,
+    stars:+reviewStars.value,
+    msg:reviewMessage.value,
     country:reviewCountry.value
   });
-  localStorage.setItem(REVIEWS_KEY,JSON.stringify(data));
-  reviewForm.reset();
-  loadReviews();
+  tx.oncomplete=()=>{reviewForm.reset();loadReviews();}
 }
 
-function enableAdminDelete(){
+async function enableAdminDelete(){
   if(prompt("Code admin ?")!=="1590")return;
-
   document.querySelectorAll(".review-card").forEach(card=>{
     const del=document.createElement("span");
     del.textContent="🗑️";
     del.style.cssText="position:absolute;top:5px;right:8px;cursor:pointer";
-    del.onclick=()=>{
-      let data=JSON.parse(localStorage.getItem(REVIEWS_KEY));
-      data=data.filter(r=>String(r.id)!==card.dataset.id);
-      localStorage.setItem(REVIEWS_KEY,JSON.stringify(data));
-      card.remove();
+    del.onclick=async()=>{
+      const db=await openDB();
+      const tx=db.transaction(STORE,"readwrite");
+      tx.objectStore(STORE).delete(Number(card.dataset.id));
+      tx.oncomplete=()=>card.remove();
     };
     card.style.position="relative";
     card.appendChild(del);
@@ -3813,6 +3836,13 @@ function enableAdminDelete(){
 }
 
 document.addEventListener("DOMContentLoaded",bootReviews);
+
+
+
+
+
+
+
 
 
 
