@@ -2771,7 +2771,9 @@ const fixedTimeField = document.getElementById("fixedTimeField");
 const fixedTime = document.getElementById("fixedTime");
 
 const heureField = document.getElementById("heureField");
-const REVIEW_KEY = "MTT_REVIEWS_V1";
+  
+const REVIEW_SYS  = "MTT_SYS_REVIEWS";
+const REVIEW_USER = "MTT_USER_REVIEWS";
   
 
   
@@ -3749,28 +3751,17 @@ function updateLangFlag(){
 
   
   
-function initReviews(){
-  if(localStorage.getItem(REVIEW_KEY)) return;
-
-  localStorage.setItem(REVIEW_KEY, JSON.stringify([
-    {id:1, name:"Sarah", stars:5, msg:"Chauffeur très ponctuel, voiture propre, service parfait.", country:"fr"},
-    {id:2, name:"John", stars:5, msg:"Excursion Paradise Valley incroyable. Organisation top !", country:"gb"},
-    {id:3, name:"Fatima", stars:5, msg:"Très bonne communication WhatsApp, je recommande.", country:"ma"}
-  ]));
-}
-
-function sendReview(){
-  const name  = reviewName.value.trim();
-  const msg   = reviewMessage.value.trim();
-  const stars = parseInt(reviewStars.value);
-  const country = reviewCountry.value;
-
-  if(!name || !msg || !stars) return alert("Veuillez remplir tous les champs");
-
-  const all = JSON.parse(localStorage.getItem(REVIEW_KEY));
-  all.unshift({ id:Date.now(), name, msg, stars, country });
-  localStorage.setItem(REVIEW_KEY, JSON.stringify(all));
-  reviewForm.reset();
+function bootReviews(){
+  if(!localStorage.getItem(REVIEW_SYS)){
+    localStorage.setItem(REVIEW_SYS, JSON.stringify([
+      {id:1, name:"Sarah", stars:5, msg:"Chauffeur très ponctuel, voiture propre, service parfait.", country:"🇫🇷"},
+      {id:2, name:"John", stars:5, msg:"Excursion Paradise Valley incroyable.", country:"🇬🇧"},
+      {id:3, name:"Fatima", stars:5, msg:"Très bonne communication WhatsApp.", country:"🇲🇦"}
+    ]));
+  }
+  if(!localStorage.getItem(REVIEW_USER)){
+    localStorage.setItem(REVIEW_USER, "[]");
+  }
   loadReviews();
 }
 
@@ -3778,35 +3769,48 @@ function loadReviews(){
   const wrap = document.getElementById("liveReviews");
   wrap.innerHTML = "";
 
-  const all = JSON.parse(localStorage.getItem(REVIEW_KEY) || "[]");
+  const sys = JSON.parse(localStorage.getItem(REVIEW_SYS));
+  const usr = JSON.parse(localStorage.getItem(REVIEW_USER));
 
-  all.forEach(r=>{
+  [...usr, ...sys].forEach(r=>{
     const card = document.createElement("div");
     card.className = "review-card";
     card.dataset.id = r.id;
     card.innerHTML = `
       <div class="review-stars">${"⭐".repeat(r.stars)}</div>
       <div class="review-msg">“${escapeHTML(r.msg)}”</div>
-      <div class="review-name">
-        <span>${r.country}</span>
-        <span>${escapeHTML(r.name)}</span>
-      </div>
+      <div class="review-name">${r.country} ${escapeHTML(r.name)}</div>
     `;
     wrap.appendChild(card);
   });
 }
 
+function sendReview(){
+  const name=reviewName.value.trim();
+  const msg=reviewMessage.value.trim();
+  const stars=parseInt(reviewStars.value);
+  const country=reviewCountry.value;
+
+  if(!name||!msg||!stars) return alert("Champs manquants");
+
+  const usr=JSON.parse(localStorage.getItem(REVIEW_USER));
+  usr.unshift({id:Date.now(),name,stars,msg,country});
+  localStorage.setItem(REVIEW_USER,JSON.stringify(usr));
+  reviewForm.reset();
+  loadReviews();
+}
+
 function enableAdminDelete(){
-  if(prompt("Code admin ?") !== "1590") return;
+  if(prompt("Code admin ?")!=="1590")return;
 
   document.querySelectorAll(".review-card").forEach(card=>{
-    const del = document.createElement("span");
-    del.textContent = "🗑️";
-    del.style.cssText = "position:absolute;top:5px;right:8px;font-size:20px;cursor:pointer";
-    del.onclick = ()=>{
-      let all = JSON.parse(localStorage.getItem(REVIEW_KEY));
-      all = all.filter(r => String(r.id) !== String(card.dataset.id));
-      localStorage.setItem(REVIEW_KEY, JSON.stringify(all));
+    const del=document.createElement("span");
+    del.textContent="🗑️";
+    del.style.cssText="position:absolute;top:5px;right:8px;cursor:pointer";
+    del.onclick=()=>{
+      let usr=JSON.parse(localStorage.getItem(REVIEW_USER));
+      usr=usr.filter(r=>String(r.id)!==card.dataset.id);
+      localStorage.setItem(REVIEW_USER,JSON.stringify(usr));
       card.remove();
     };
     card.style.position="relative";
@@ -3814,51 +3818,7 @@ function enableAdminDelete(){
   });
 }
 
-document.addEventListener("DOMContentLoaded", ()=>{
-  initReviews();
-  loadReviews();
-});
-
-</script>
-
-  <div class="wa-label"
-     data-fr="Besoin d’aide ?"
-     data-en="Need help?">
-Besoin d’aide ?
-  </div>
-
-<a href="https://wa.me/212691059759?text=Bonjour%20je%20souhaite%20réserver%20un%20transfert%20ou%20une%20excursion%20avec%20MasterTripTransfers"
-   class="whatsapp-float"
-   target="_blank"
-   aria-label="Contact WhatsApp">
-  📲
-</a>
-
-<style>
-.whatsapp-float{
-  position:fixed;
-  bottom:22px;
-  right:22px;
-  width:62px;
-  height:62px;
-  background:#25D366;
-  color:white;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:30px;
-  text-decoration:none;
-  z-index:9999;
-  box-shadow:0 12px 30px rgba(37,211,102,0.45);
-  animation:pulse 1.6s infinite;
-}
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.1)}
-  100%{transform:scale(1)}
-}
-
+document.addEventListener("DOMContentLoaded",bootReviews);
 </style>
 
 <footer id="siteFooter">
