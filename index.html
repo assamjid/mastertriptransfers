@@ -3796,7 +3796,7 @@ ${msg}`), "_blank");
   
 function saveReview(name, stars, msg, country){
   const all = JSON.parse(localStorage.getItem("reviews") || "[]");
-  all.unshift({name, stars, msg, country});
+  all.unshift({id:Date.now(), name, msg, stars, country:countryCode});
   localStorage.setItem("reviews", JSON.stringify(all));
 }
 
@@ -3805,11 +3805,20 @@ if (!localStorage.getItem("reviews")) {
 }
 
 function loadReviews(){
+
+  const container = document.getElementById("liveReviews");
+  if(!container) return;
+
+  container.innerHTML = ""; // vide avant recharge
+
   const all = JSON.parse(localStorage.getItem("reviews") || "[]");
 
   all.forEach(r=>{
+
     const box = document.createElement("div");
     box.className = "review-card";
+    box.dataset.id = r.id; // ID UNIQUE
+
     box.innerHTML = `
       <div class="review-stars">${"⭐".repeat(r.stars)}</div>
       <div class="review-msg">“${r.msg}”</div>
@@ -3818,7 +3827,35 @@ function loadReviews(){
         <span>${r.name}</span>
       </div>
     `;
-    document.getElementById("liveReviews").appendChild(box);
+
+    // 🔥 suppression LONG TAP (Android)
+    box.addEventListener("contextmenu", e=>{
+      e.preventDefault();
+
+      if(prompt("Code admin") !== "1590") return;
+
+      let allReviews = JSON.parse(localStorage.getItem("reviews") || "[]");
+      allReviews = allReviews.filter(x => x.id != box.dataset.id);
+      localStorage.setItem("reviews", JSON.stringify(allReviews));
+
+      box.remove();
+    });
+
+    // 🔥 suppression LONG TAP MOBILE
+    let pressTimer;
+    box.addEventListener("touchstart", ()=>{
+      pressTimer = setTimeout(()=>{
+        if(prompt("Code admin") === "1590"){
+          let allReviews = JSON.parse(localStorage.getItem("reviews") || "[]");
+          allReviews = allReviews.filter(x => x.id != box.dataset.id);
+          localStorage.setItem("reviews", JSON.stringify(allReviews));
+          box.remove();
+        }
+      },800);
+    });
+    box.addEventListener("touchend", ()=> clearTimeout(pressTimer));
+
+    container.appendChild(box);
   });
 }
 
