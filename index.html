@@ -926,8 +926,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐XXX 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐XXX 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
@@ -2716,11 +2716,7 @@ if(!lang){
   localStorage.setItem("lang","EN");
       }
 
-  const DEFAULT_REVIEWS = [
-  {name:"Sarah", stars:5, msg:"Chauffeur très ponctuel, voiture propre, service parfait.", country:"fr"},
-  {name:"John", stars:5, msg:"Excursion Paradise Valley incroyable. Organisation top !", country:"gb"},
-  {name:"Fatima", stars:5, msg:"Très bonne communication WhatsApp, je recommande.", country:"ma"}
-];
+  
   
 /* =====================================================
    VARIABLES GLOBALES
@@ -2775,7 +2771,7 @@ const fixedTimeField = document.getElementById("fixedTimeField");
 const fixedTime = document.getElementById("fixedTime");
 
 const heureField = document.getElementById("heureField");
-
+const REVIEW_KEY = "MTT_REVIEWS_V1";
   
 
   
@@ -3752,162 +3748,87 @@ function updateLangFlag(){
 }
 
   
-  function sendReview(){
-
-  const name  = document.getElementById("reviewName").value.trim();
-  const stars = document.getElementById("reviewStars").value;
-  const msg   = document.getElementById("reviewMessage").value.trim();
-  const countryEmoji = document.getElementById("reviewCountry").value;
-
-  if(!name || !stars || !msg){
-    alert("Merci de remplir tous les champs ⭐");
-    return;
-  }
-
-  const countryCode = countryEmoji.split(" ")[0]
-    .replace("🇫🇷","fr").replace("🇬🇧","gb").replace("🇲🇦","ma")
-    .replace("🇺🇸","us").replace("🇮🇹","it").replace("🇧🇪","be")
-    .replace("🇳🇱","nl").replace("🇨🇭","ch").replace("🇩🇪","de").replace("🇪🇸","es");
-
-  const box = document.createElement("div");
-  box.className = "review-card";
-  box.innerHTML = `
-    <div class="review-stars">${"⭐".repeat(stars)}</div>
-    <div class="review-msg">“${msg}”</div>
-    <div class="review-name">
-      <img loading="lazy" src="https://flagcdn.com/w20/${countryCode}.png" class="review-flag">
-      <span>${name}</span>
-    </div>
-  `;
-
-  document.getElementById("liveReviews").prepend(box);
-  saveReview(name, parseInt(stars), msg, countryCode);
-
-  window.open("https://wa.me/212691059759?text=" + encodeURIComponent(
-`⭐ NOUVEL AVIS CLIENT ⭐
-Nom : ${name}
-Note : ${stars}/5
-
-Avis :
-${msg}`), "_blank");
-
-  document.getElementById("reviewForm").reset();
-  }
   
-function saveReview(name, stars, msg, country){
-  const all = JSON.parse(localStorage.getItem("reviews") || "[]");
-  all.unshift({ id:Date.now(), name, stars, msg, country });
-  localStorage.setItem("reviews", JSON.stringify(all));
-  }
-  
-if (!localStorage.getItem("reviews_init")) {
-  localStorage.setItem("reviews", JSON.stringify(DEFAULT_REVIEWS));
-  localStorage.setItem("reviews_init", "1");
+/* =========================
+   INIT UNE SEULE FOIS
+========================= */
+if (!localStorage.getItem(REVIEW_KEY)) {
+  localStorage.setItem(REVIEW_KEY, JSON.stringify([
+    {id:1, name:"Sarah", stars:5, msg:"Chauffeur très ponctuel, voiture propre, service parfait.", country:"fr"},
+    {id:2, name:"John", stars:5, msg:"Excursion Paradise Valley incroyable. Organisation top !", country:"gb"},
+    {id:3, name:"Fatima", stars:5, msg:"Très bonne communication WhatsApp, je recommande.", country:"ma"}
+  ]));
 }
 
+/* =========================
+   ENVOI CLIENT
+========================= */
+function sendReview(){
+  const name  = reviewName.value.trim();
+  const msg   = reviewMessage.value.trim();
+  const stars = reviewStars.value;
+  const country = reviewCountry.value;
+
+  if(!name || !msg || !stars) return alert("Veuillez remplir tous les champs");
+
+  const all = JSON.parse(localStorage.getItem(REVIEW_KEY));
+  all.unshift({
+    id: Date.now(),
+    name, msg, stars, country
+  });
+
+  localStorage.setItem(REVIEW_KEY, JSON.stringify(all));
+  reviewForm.reset();
+  loadReviews();
+}
+
+/* =========================
+   AFFICHAGE
+========================= */
 function loadReviews(){
-
-  const container = document.getElementById("liveReviews");
-  if(!container) return;
-
-  container.innerHTML = "";
-
-  const all = JSON.parse(localStorage.getItem("reviews") || "[]");
+  const wrap = document.getElementById("liveReviews");
+  wrap.innerHTML = "";
+  const all = JSON.parse(localStorage.getItem(REVIEW_KEY));
 
   all.forEach(r=>{
-
-    const box = document.createElement("div");
-    box.className = "review-card";
-    box.dataset.id = r.id;
-
-    box.innerHTML = `
+    const card = document.createElement("div");
+    card.className = "review-card";
+    card.dataset.id = r.id;
+    card.innerHTML = `
       <div class="review-stars">${"⭐".repeat(r.stars)}</div>
       <div class="review-msg">“${escapeHTML(r.msg)}”</div>
       <div class="review-name">
-        <img loading="lazy"
-             src="https://flagcdn.com/w20/${r.country || "ma"}.png"
-             class="review-flag">
+        <img src="https://flagcdn.com/w20/${r.country}.png">
         <span>${escapeHTML(r.name)}</span>
       </div>
     `;
-
-    // 🖥️ clic droit PC
-    box.addEventListener("contextmenu", e=>{
-      e.preventDefault();
-      if(prompt("Code admin") !== "1590") return;
-      deleteReview(box.dataset.id, box);
-    });
-
-    // 📱 long tap mobile
-    let timer;
-    box.addEventListener("touchstart", ()=>{
-      timer = setTimeout(()=>{
-        if(prompt("Code admin") === "1590"){
-          deleteReview(box.dataset.id, box);
-        }
-      },700);
-    });
-    box.addEventListener("touchend", ()=> clearTimeout(timer));
-
-    container.appendChild(box);
+    wrap.appendChild(card);
   });
 }
-  function deleteReview(id, box){
-  let all = JSON.parse(localStorage.getItem("reviews") || "[]");
-  all = all.filter(r => String(r.id) !== String(id));
-  localStorage.setItem("reviews", JSON.stringify(all));
-  box.remove();
-  }
 
-document.addEventListener("DOMContentLoaded", ()=>{
-  setLang(lang);
-  updateLangFlag();
-  loadReviews();
-});
+/* =========================
+   SUPPRESSION ADMIN
+========================= */
+function enableAdminDelete(){
+  const code = prompt("Code admin ?");
+  if(code !== "1590") return;
 
-  setInterval(()=>{
-  document.querySelectorAll("#mainHeader nav a").forEach(btn=>{
-    btn.classList.add("menu-shake");
-    setTimeout(()=>btn.classList.remove("menu-shake"),600);
-  });
-},3000);
-
-  function enableAdminDelete(){
-
-  const container = document.getElementById("liveReviews");
-  if (!container) return alert("Reviews not ready yet");
-
-  const password = "1590";
-  const p = prompt("Code admin ?");
-  if(p !== password) return;
-
-  let all = JSON.parse(localStorage.getItem("reviews") || "[]");
-
-  const cards = container.querySelectorAll(".review-card");
-
-  cards.forEach((card)=>{
-    const btn = document.createElement("span");
-    btn.innerHTML = "🗑️";
-    btn.style.cssText = `
-      position:absolute;
-      top:8px;
-      right:10px;
-      cursor:pointer;
-      font-size:20px;
-      z-index:10;
-    `;
-
-    btn.onclick = ()=>{
-      const msg = card.querySelector(".review-msg").innerText;
-      all = all.filter(r => r.msg !== msg);
-      localStorage.setItem("reviews", JSON.stringify(all));
+  document.querySelectorAll(".review-card").forEach(card=>{
+    const del = document.createElement("span");
+    del.textContent = "🗑️";
+    del.style.cssText = "position:absolute;top:5px;right:8px;cursor:pointer;font-size:20px;";
+    del.onclick = ()=>{
+      let all = JSON.parse(localStorage.getItem(REVIEW_KEY));
+      all = all.filter(r => String(r.id) !== String(card.dataset.id));
+      localStorage.setItem(REVIEW_KEY, JSON.stringify(all));
       card.remove();
     };
-
     card.style.position = "relative";
-    card.appendChild(btn);
+    card.appendChild(del);
   });
-  }
+}
+
+document.addEventListener("DOMContentLoaded", loadReviews);
   
 
 </script>
