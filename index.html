@@ -3751,92 +3751,131 @@ function updateLangFlag(){
 }
 
   
+
+function sendReview(){
+
+  const name  = document.getElementById("reviewName").value.trim();
+  const stars = document.getElementById("reviewStars").value;
+  const msg   = document.getElementById("reviewMessage").value.trim();
+  const countryEmoji = document.getElementById("reviewCountry").value;
+
+  if(!name || !stars || !msg){
+    alert("Merci de remplir tous les champs ⭐");
+    return;
+  }
+
+  const countryCode = countryEmoji.split(" ")[0]
+    .replace("🇫🇷","fr").replace("🇬🇧","gb").replace("🇲🇦","ma")
+    .replace("🇺🇸","us").replace("🇮🇹","it").replace("🇧🇪","be")
+    .replace("🇳🇱","nl").replace("🇨🇭","ch").replace("🇩🇪","de").replace("🇪🇸","es");
+
+  const box = document.createElement("div");
+  box.className = "review-card";
+  box.innerHTML = `
+    <div class="review-stars">${"⭐".repeat(stars)}</div>
+    <div class="review-msg">“${msg}”</div>
+    <div class="review-name">
+      <img loading="lazy" src="https://flagcdn.com/w20/${countryCode}.png" class="review-flag">
+      <span>${name}</span>
+    </div>
+  `;
+
+  document.getElementById("liveReviews").prepend(box);
+  saveReview(name, parseInt(stars), msg, countryCode);
+
+  window.open("https://wa.me/212691059759?text=" + encodeURIComponent(
+`⭐ NOUVEL AVIS CLIENT ⭐
+Nom : ${name}
+Note : ${stars}/5
+
+Avis :
+${msg}`), "_blank");
+
+  document.getElementById("reviewForm").reset();
+  }
   
+function saveReview(name, stars, msg, country){
+  const all = JSON.parse(localStorage.getItem("reviews") || "[]");
+  all.unshift({name, stars, msg, country});
+  localStorage.setItem("reviews", JSON.stringify(all));
+}
+
+  if(!localStorage.getItem("reviews")){
+  localStorage.setItem("reviews", JSON.stringify([
+    {name:"Sarah", stars:5, msg:"Chauffeur très ponctuel, voiture propre, service parfait.", country:"fr"},
+    {name:"John", stars:5, msg:"Excursion Paradise Valley incroyable. Organisation top !", country:"gb"},
+    {name:"Fatima", stars:5, msg:"Très bonne communication WhatsApp, je recommande.", country:"ma"}
+  ]));
+  }
+
+function loadReviews(){
+  const all = JSON.parse(localStorage.getItem("reviews") || "[]");
+
+  all.forEach(r=>{
+    const box = document.createElement("div");
+    box.className = "review-card";
+    box.innerHTML = `
+      <div class="review-stars">${"⭐".repeat(r.stars)}</div>
+      <div class="review-msg">“${r.msg}”</div>
+      <div class="review-name">
+        <img loading="lazy" src="https://flagcdn.com/w20/${r.country || "ma"}.png" class="review-flag">
+        <span>${r.name}</span>
+      </div>
+    `;
+    document.getElementById("liveReviews").appendChild(box);
+  });
+}
 
 
+document.addEventListener("DOMContentLoaded", ()=>{
+  setLang(lang);
+  updateLangFlag();
+  loadReviews();
+});
 
-function openDB(){
-  return new Promise(res=>{
-    const req=indexedDB.open(DB_NAME,1);
-    req.onupgradeneeded=e=>{
-      const db=e.target.result;
-      if(!db.objectStoreNames.contains(STORE)){
-        db.createObjectStore(STORE,{keyPath:"id"});
-      }
+  setInterval(()=>{
+  document.querySelectorAll("#mainHeader nav a").forEach(btn=>{
+    btn.classList.add("menu-shake");
+    setTimeout(()=>btn.classList.remove("menu-shake"),600);
+  });
+},3000);
+
+  function enableAdminDelete(){
+
+  const container = document.getElementById("liveReviews");
+  if (!container) return alert("Reviews not ready yet");
+
+  const password = "1590";
+  const p = prompt("Code admin ?");
+  if(p !== password) return;
+
+  let all = JSON.parse(localStorage.getItem("reviews") || "[]");
+
+  const cards = container.querySelectorAll(".review-card");
+
+  cards.forEach((card)=>{
+    const btn = document.createElement("span");
+    btn.innerHTML = "🗑️";
+    btn.style.cssText = `
+      position:absolute;
+      top:8px;
+      right:10px;
+      cursor:pointer;
+      font-size:20px;
+      z-index:10;
+    `;
+
+    btn.onclick = ()=>{
+      const msg = card.querySelector(".review-msg").innerText;
+      all = all.filter(r => r.msg !== msg);
+      localStorage.setItem("reviews", JSON.stringify(all));
+      card.remove();
     };
-    req.onsuccess=e=>res(e.target.result);
+
+    card.style.position = "relative";
+    card.appendChild(btn);
   });
-}
-
-async function bootReviews(){
-  const db=await openDB();
-  const tx=db.transaction(STORE,"readonly");
-  const st=tx.objectStore(STORE);
-  const req=st.getAll();
-  req.onsuccess=async()=>{
-    if(req.result.length===0){
-      const tx2=db.transaction(STORE,"readwrite");
-      const st2=tx2.objectStore(STORE);
-      [
-        {id:1,name:"Sarah",stars:5,msg:"Service parfait",country:"🇫🇷"},
-        {id:2,name:"John",stars:5,msg:"Excursion Paradise Valley incroyable",country:"🇬🇧"},
-        {id:3,name:"Fatima",stars:5,msg:"Très bonne communication",country:"🇲🇦"}
-      ].forEach(r=>st2.put(r));
-      tx2.oncomplete=loadReviews;
-    } else loadReviews();
-  };
-}
-
-async function loadReviews(){
-  const db=await openDB();
-  const tx=db.transaction(STORE,"readonly");
-  const st=tx.objectStore(STORE);
-  st.getAll().onsuccess=e=>{
-    const wrap=document.getElementById("liveReviews");
-    wrap.innerHTML="";
-    e.target.result.forEach(r=>{
-      const d=document.createElement("div");
-      d.className="review-card";
-      d.dataset.id=r.id;
-      d.innerHTML=`<div>${"⭐".repeat(r.stars)}</div><div>“${r.msg}”</div><b>${r.country} ${r.name}</b>`;
-      wrap.appendChild(d);
-    });
-  };
-}
-
-async function sendReview(){
-  const db=await openDB();
-  const tx=db.transaction(STORE,"readwrite");
-  const st=tx.objectStore(STORE);
-  st.put({
-    id:Date.now(),
-    name:reviewName.value,
-    stars:+reviewStars.value,
-    msg:reviewMessage.value,
-    country:reviewCountry.value
-  });
-  tx.oncomplete=()=>{reviewForm.reset();loadReviews();}
-}
-
-async function enableAdminDelete(){
-  if(prompt("Code admin ?")!=="1590")return;
-  document.querySelectorAll(".review-card").forEach(card=>{
-    const del=document.createElement("span");
-    del.textContent="🗑️";
-    del.style.cssText="position:absolute;top:5px;right:8px;cursor:pointer";
-    del.onclick=async()=>{
-      const db=await openDB();
-      const tx=db.transaction(STORE,"readwrite");
-      tx.objectStore(STORE).delete(Number(card.dataset.id));
-      tx.oncomplete=()=>card.remove();
-    };
-    card.style.position="relative";
-    card.appendChild(del);
-  });
-}
-
-document.addEventListener("DOMContentLoaded",bootReviews);
-
+  }
 
 
 
