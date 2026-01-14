@@ -1042,36 +1042,33 @@ button[type="submit"]{
   
 }
 
-#btnReserve{
-  position:relative;
+.btn-book-main{
   width:340px;
-  height:72px;                /* ⬅️ PLUS HAUT */
+  height:78px;
   border-radius:14px;
   background:linear-gradient(135deg,#f39c12,#f1c40f);
   border:none;
-  font-weight:900;
-  font-size:18px;
   color:#001F3F;
+  font-weight:900;
   cursor:pointer;
   padding:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 }
 
-/* TEXTE PRINCIPAL */
-#btnReserve{
-  line-height:44px;           /* centre le “Book now” */
+.btn-book-text{
+  font-size:18px;
+  line-height:22px;
 }
 
-/* TEXTE DU BAS */
-#btnReserve .book-sub-label{
-  position:absolute;
-  bottom:6px;
-  left:50%;
-  transform:translateX(-50%);
+.btn-book-sub{
   font-size:12px;
-  font-weight:700;
+  margin-top:4px;
   color:#000;
   opacity:0.9;
-  pointer-events:none;
+  font-weight:700;
 }
     
 </style>
@@ -1135,8 +1132,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐EE 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐EE 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
@@ -1849,18 +1846,14 @@ Nos services
 <input type="hidden" id="finalPrice" name="price">
 <input type="hidden" id="emailMessage" name="final_message">
 <input type="hidden" name="_template" value="table">
-<button type="submit" id="btnReserve"
-        data-fr="Réserver maintenant"
-        data-en="Book Now">
-  <span class="book-main-text"
-        data-fr="Réserver maintenant"
-        data-en="Book Now">Réserver maintenant</span>
+<button type="submit" id="btnReserve" class="btn-book-main">
+  <div class="btn-book-text"
+       data-fr="Réserver maintenant"
+       data-en="Book Now">Book Now</div>
 
-  <span class="book-sub-label"
-        data-fr="Payer sur place"
-        data-en="Pay on arrival">
-        Pay on arrival
-  </span>
+  <div class="btn-book-sub"
+       data-fr="Payer sur place"
+       data-en="Pay on arrival">Pay on arrival</div>
 </button>
 
   
