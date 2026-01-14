@@ -3652,14 +3652,24 @@ function escapeHTML(str) {
 
   openResume(recap, msg);
 
-    // 🔥 ACTION SELON MODE DE PAIEMENT
-  if (PAYMENT_MODE === "full") {
-    window.open("https://buy.stripe.com/XXXXXXXX", "_blank");
-  }
+  /* 1️⃣ WHATSAPP */
+  window.location.href = "https://wa.me/212691059759?text=" + encodeURIComponent(msg);
 
-  if (PAYMENT_MODE === "deposit") {
-    window.open("https://buy.stripe.com/YYYYYYYY", "_blank");
-  }
+  /* 2️⃣ EMAIL */
+  setTimeout(()=> bookingForm.submit(), 1200);
+
+  /* 3️⃣ PAIEMENT */
+  setTimeout(()=>{
+
+    if(PAYMENT_MODE === "full"){
+      window.open("https://buy.stripe.com/XXXXXXXX", "_blank");
+    }
+
+    if(PAYMENT_MODE === "deposit"){
+      window.open("https://buy.stripe.com/YYYYYYYY", "_blank");
+    }
+
+  }, 1800);
 });
 
   
