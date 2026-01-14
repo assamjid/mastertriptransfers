@@ -3960,13 +3960,13 @@ function enableAdminDelete(){
 document.addEventListener("DOMContentLoaded",initReviews);
 
 const serviceSelect = document.getElementById("service");
-const camelPhoto = document.getElementById("soukPhoto");
+const soukPhoto = document.getElementById("soukPhoto");
 
 serviceSelect.addEventListener("change", ()=>{
   if(serviceSelect.value !== ""){
-    camelPhoto.style.display = "block";
+    soukPhoto.style.display = "block";
   }else{
-    camelPhoto.style.display = "none";
+    soukPhoto.style.display = "none";
   }
 });
 
