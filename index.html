@@ -926,8 +926,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐CCC 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐CCC 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐DDD 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐DDD 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
@@ -2772,8 +2772,7 @@ const fixedTime = document.getElementById("fixedTime");
 
 const heureField = document.getElementById("heureField");
 
-const DB_NAME="MTT_DB";
-const STORE="reviews";
+const REVIEW_STORE = "MTT_REVIEWS";
 
 
   
@@ -3764,127 +3763,83 @@ function updateLangFlag(){
 
   
 
-function sendReview(){
 
-  const name  = document.getElementById("reviewName").value.trim();
-  const stars = document.getElementById("reviewStars").value;
-  const msg   = document.getElementById("reviewMessage").value.trim();
-  const countryEmoji = document.getElementById("reviewCountry").value;
 
-  if(!name || !stars || !msg){
-    alert("Merci de remplir tous les champs ⭐");
-    return;
-  }
-
-  const countryCode = countryEmoji.split(" ")[0]
-    .replace("🇫🇷","fr").replace("🇬🇧","gb").replace("🇲🇦","ma")
-    .replace("🇺🇸","us").replace("🇮🇹","it").replace("🇧🇪","be")
-    .replace("🇳🇱","nl").replace("🇨🇭","ch").replace("🇩🇪","de").replace("🇪🇸","es");
-
-  const box = document.createElement("div");
-  box.className = "review-card";
-  box.innerHTML = `
-    <div class="review-stars">${"⭐".repeat(stars)}</div>
-    <div class="review-msg">“${msg}”</div>
-    <div class="review-name">
-      <img loading="lazy" src="https://flagcdn.com/w20/${countryCode}.png" class="review-flag">
-      <span>${name}</span>
-    </div>
-  `;
-
-  document.getElementById("liveReviews").prepend(box);
-  saveReview(name, parseInt(stars), msg, countryCode);
-
-  window.open("https://wa.me/212691059759?text=" + encodeURIComponent(
-`⭐ NOUVEL AVIS CLIENT ⭐
-Nom : ${name}
-Note : ${stars}/5
-
-Avis :
-${msg}`), "_blank");
-
-  document.getElementById("reviewForm").reset();
-  }
-  
-function saveReview(name, stars, msg, country){
-  const all = JSON.parse(localStorage.getItem("reviews") || "[]");
-  all.unshift({name, stars, msg, country});
-  localStorage.setItem("reviews", JSON.stringify(all));
+function getReviews(){
+  return JSON.parse(localStorage.getItem(REVIEW_STORE) || "[]");
+}
+function saveReviews(arr){
+  localStorage.setItem(REVIEW_STORE, JSON.stringify(arr));
 }
 
-  if(!localStorage.getItem("reviews")){
-  localStorage.setItem("reviews", JSON.stringify([
-    {name:"Sarah", stars:5, msg:"Chauffeur très ponctuel, voiture propre, service parfait.", country:"fr"},
-    {name:"John", stars:5, msg:"Excursion Paradise Valley incroyable. Organisation top !", country:"gb"},
-    {name:"Fatima", stars:5, msg:"Très bonne communication WhatsApp, je recommande.", country:"ma"}
-  ]));
+/* ---------- BOOT ---------- */
+function initReviews(){
+  let all = getReviews();
+  if(all.length === 0){
+    all = [
+      {id:1,name:"Sarah",stars:5,msg:"Chauffeur très ponctuel, voiture propre, service parfait.",country:"fr"},
+      {id:2,name:"John",stars:5,msg:"Excursion Paradise Valley incroyable. Organisation top !",country:"gb"},
+      {id:3,name:"Fatima",stars:5,msg:"Très bonne communication WhatsApp, je recommande.",country:"ma"}
+    ];
+    saveReviews(all);
   }
+  renderReviews();
+}
 
-function loadReviews(){
-  const all = JSON.parse(localStorage.getItem("reviews") || "[]");
-
-  all.forEach(r=>{
-    const box = document.createElement("div");
-    box.className = "review-card";
-    box.innerHTML = `
+/* ---------- AFFICHAGE ---------- */
+function renderReviews(){
+  const box = document.getElementById("liveReviews");
+  box.innerHTML="";
+  getReviews().forEach(r=>{
+    const d=document.createElement("div");
+    d.className="review-card";
+    d.dataset.id=r.id;
+    d.innerHTML=`
       <div class="review-stars">${"⭐".repeat(r.stars)}</div>
       <div class="review-msg">“${r.msg}”</div>
-      <div class="review-name">
-        <img loading="lazy" src="https://flagcdn.com/w20/${r.country || "ma"}.png" class="review-flag">
-        <span>${r.name}</span>
-      </div>
+      <div class="review-name">${r.name}</div>
     `;
-    document.getElementById("liveReviews").appendChild(box);
+    box.appendChild(d);
   });
 }
 
+/* ---------- AJOUT ---------- */
+function sendReview(){
+  const n=reviewName.value.trim();
+  const m=reviewMessage.value.trim();
+  const s=+reviewStars.value;
+  const c=reviewCountry.value;
 
+  if(!n||!m||!s) return alert("Merci de remplir tous les champs");
 
+  const all=getReviews();
+  all.unshift({id:Date.now(),name:n,stars:s,msg:m,country:c});
+  saveReviews(all);
+  reviewForm.reset();
+  renderReviews();
+}
 
-  
+/* ---------- MODE ADMIN (SUPPRESSION) ---------- */
+function enableAdminDelete(){
+  if(prompt("Code admin ?")!=="1590") return;
 
-  function enableAdminDelete(){
-
-  const container = document.getElementById("liveReviews");
-  if (!container) return alert("Reviews not ready yet");
-
-  const password = "1590";
-  const p = prompt("Code admin ?");
-  if(p !== password) return;
-
-  let all = JSON.parse(localStorage.getItem("reviews") || "[]");
-
-  const cards = container.querySelectorAll(".review-card");
-
-  cards.forEach((card)=>{
-    const btn = document.createElement("span");
-    btn.innerHTML = "🗑️";
-    btn.style.cssText = `
-      position:absolute;
-      top:8px;
-      right:10px;
-      cursor:pointer;
-      font-size:20px;
-      z-index:10;
-    `;
-
-    btn.onclick = ()=>{
-      const msg = card.querySelector(".review-msg").innerText;
-      all = all.filter(r => r.msg !== msg);
-      localStorage.setItem("reviews", JSON.stringify(all));
+  document.querySelectorAll(".review-card").forEach(card=>{
+    const del=document.createElement("span");
+    del.textContent="🗑️";
+    del.style.cssText="position:absolute;top:5px;right:8px;cursor:pointer;font-size:20px";
+    del.onclick=()=>{
+      const id=Number(card.dataset.id);
+      const all=getReviews().filter(r=>r.id!==id);
+      saveReviews(all);
       card.remove();
     };
-
-    card.style.position = "relative";
-    card.appendChild(btn);
+    card.style.position="relative";
+    card.appendChild(del);
   });
-  }
+}
 
-
-
-
-
-
+/* ---------- BOOT AUTO ---------- */
+document.addEventListener("DOMContentLoaded",initReviews);
 
 
 
