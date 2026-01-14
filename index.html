@@ -875,7 +875,60 @@ button[type="submit"]{
   margin-left:30px;        /* aligne à gauche */
 }
 
-  
+
+
+  .booking-layout{
+  display:flex;
+  align-items:flex-start;
+  gap:30px;
+}
+
+/* carte formulaire */
+.booking-card{
+  background:#fff;
+  padding:25px;
+  border-radius:14px;
+  box-shadow:0 10px 35px rgba(0,0,0,.12);
+  width:360px;          /* largeur fixe premium */
+}
+
+/* colonne droite photos */
+.booking-side{
+  width:360px;          /* EXACTEMENT la même largeur */
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+/* cartes photos */
+.side-card{
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 8px 25px rgba(0,0,0,.15);
+}
+
+.side-card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  transition:.35s;
+}
+
+.side-card:hover img{
+  transform:scale(1.08);
+}
+
+/* Mobile : repasse en colonne */
+@media(max-width:900px){
+  .booking-layout{
+    flex-direction:column;
+  }
+  .booking-card,
+  .booking-side{
+    width:100%;
+  }
+}
     
 </style>
   
@@ -938,8 +991,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐AAA 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐AAA 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
@@ -1658,19 +1711,26 @@ Nos services
 
   </div>   <!-- fin booking-card -->
 
-<div class="booking-side">
-  <div class="side-card">
-    <img src="./images/excursions/agadir/Agadir1.jpg">
+</div> <!-- booking-card -->
+
+  <div class="booking-side">
+
+    <div class="side-card">
+      <img src="./images/excursions/agadir/Agadir1.jpg">
+    </div>
+
+    <div class="side-card">
+      <img src="./images/excursions/paradise/Paradise1.jpg">
+    </div>
+
+    <div class="side-card">
+      <img src="./images/excursions/quad/Quad1.jpg">
+    </div>
+
   </div>
-  <div class="side-card">
-    <img src="./images/excursions/paradise/Paradise1.jpg">
-  </div>
-  <div class="side-card">
-    <img src="./images/excursions/quad/Quad1.jpg">
-  </div>
+
 </div>
 
-</div>   <!-- fin booking-layout -->
 
   <div class="trust-box">
 
