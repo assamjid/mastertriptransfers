@@ -1818,11 +1818,10 @@ Nos services
 <input type="hidden" id="emailMessage" name="final_message">
 <input type="hidden" name="_template" value="table">
 <button type="submit" id="btnReserve" data-fr="Réserver maintenant" data-en="Book Now">Réserver maintenant</button>
-<div class="floating-field pay-arrival-field">
-  <select id="payArrival" name="pay_arrival">
-    <option value=""
-      data-fr="Mode de paiement"
-      data-en="Payment method"></option>
+
+  <div class="floating-field pay-arrival-floating">
+  <select id="payArrival" name="pay_arrival" required>
+    <option value=""></option>
 
     <option value="arrival"
       data-fr="Payer sur place"
@@ -1842,7 +1841,7 @@ Nos services
     data-en="Payment">
     Paiement
   </label>
-</div>
+  </div>
   
   <button type="button" id="btnPay" data-fr="💳 Payer Maintenant" data-en="💳 Pay Now" onclick="payByCard()">💳 Pay Now</button>
 <button type="button" id="btnPayDeposit" onclick="payDeposit()" data-fr="💳 Accompte 20% " data-en="💳 Deposit 20%">
