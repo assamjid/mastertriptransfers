@@ -1913,43 +1913,21 @@ Nos services
 <input type="hidden" name="_template" value="table">
 <div class="floating-field floating-btn-field">
 
-  <button type="submit" id="btnReserve" class="floating-btn">
-    BOOK NOW
-  </button>
+          <button type="submit" id="btnReserve"
+               onclick="PAYMENT_MODE='arrival'">
+               BOOK NOW
+          <span class="book-sub-label">Pay on arrival</span>
+          </button>
 
-  <label for="btnReserve"
-        data-fr="Payer sur place"
-        data-en="Pay on arrival">
-    Payer sur place
-  </label>
+          <button type="submit" id="btnPay"
+          onclick="PAYMENT_MODE='full'">
+          PAY NOW
+          </button>
 
-</div>
-  
-  <div class="floating-field floating-btn-field paynow-field">
-  <button type="button" id="btnPay" class="floating-btn paynow-btn"
-          onclick="payByCard()">
-    PAY NOW
-  </button>
-
-  <label for="btnPay"
-        data-fr="Réserver et  "
-        data-en="Book and ">
-    Paiement en ligne
-  </label>
-</div>
-  
-<div class="floating-field floating-btn-field deposit-field">
-  <button type="button" id="btnPayDeposit" class="floating-btn deposit-btn"
-          onclick="payDeposit()">
-    PAY 20%
-  </button>
-
-  <label for="btnPayDeposit"
-        data-fr="Réserver et "
-        data-en="Book and ">
-    Acompte
-  </label>
-</div>
+         <button type="submit" id="btnPayDeposit"
+         onclick="PAYMENT_MODE='deposit'">
+         PAY 20%
+         </button>
 
  </form>
 
@@ -3673,6 +3651,15 @@ function escapeHTML(str) {
   if(price) recap+=`<p><b>💰 Prix :</b> ${price}</p>`;
 
   openResume(recap, msg);
+
+    // 🔥 ACTION SELON MODE DE PAIEMENT
+  if (PAYMENT_MODE === "full") {
+    window.open("https://buy.stripe.com/XXXXXXXX", "_blank");
+  }
+
+  if (PAYMENT_MODE === "deposit") {
+    window.open("https://buy.stripe.com/YYYYYYYY", "_blank");
+  }
 });
 
   
