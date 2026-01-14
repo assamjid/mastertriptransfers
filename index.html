@@ -1042,37 +1042,35 @@ button[type="submit"]{
   
 }
 
+/* STRUCTURE FLOATING POUR LES 3 BOUTONS */
 .floating-btn-field{
   position:relative;
-  width:320px;
+  width:100%;
+  max-width:320px;
 }
 
 .floating-btn{
   position:relative;
   width:100%;
-  max-width:320px;
   height:64px;
   border-radius:14px;
-  background:linear-gradient(135deg,#f39c12,#f1c40f);
   border:none;
   font-weight:900;
-  font-size:20px;
-  color:#001F3F;
+  font-size:17px;
   cursor:pointer;
-
-  line-height:34px;       /* ⬅️ rapproche le texte du bas */
-  padding-bottom:8px;    /* ⬅️ réduit l’espace vide */
+  padding:0;
 }
 
+/* LABEL EN BAS CENTRÉ */
 .floating-btn-field label{
   position:absolute;
-  bottom:6px;                  /* ⬅️ FORCÉ EN BAS */
+  bottom:6px;
   left:50%;
   transform:translateX(-50%);
   font-size:12px;
   font-weight:800;
-  color:#000;
   pointer-events:none;
+  color:#000;
 }
     
 </style>
@@ -1136,8 +1134,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐DD 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐DD 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
@@ -1863,13 +1861,32 @@ Nos services
   </label>
 
 </div>
+  
+  <div class="floating-field floating-btn-field paynow-field">
+  <button type="button" id="btnPay" class="floating-btn paynow-btn"
+          onclick="payByCard()">
+    PAY NOW
+  </button>
 
+  <label for="btnPay"
+        data-fr="Paiement en ligne"
+        data-en="Pay online now">
+    Paiement en ligne
+  </label>
+</div>
   
-  
-  <button type="button" id="btnPay" data-fr="💳 Payer Maintenant" data-en="💳 Pay Now" onclick="payByCard()">💳 Pay Now</button>
-<button type="button" id="btnPayDeposit" onclick="payDeposit()" data-fr="💳 Accompte 20% " data-en="💳 Deposit 20%">
-💳 Pay 20% Now
-</button>
+<div class="floating-field floating-btn-field deposit-field">
+  <button type="button" id="btnPayDeposit" class="floating-btn deposit-btn"
+          onclick="payDeposit()">
+    PAY 20%
+  </button>
+
+  <label for="btnPayDeposit"
+        data-fr="Acompte"
+        data-en="Deposit">
+    Acompte
+  </label>
+</div>
 
  </form>
 
