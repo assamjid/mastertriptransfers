@@ -1048,7 +1048,7 @@ button[type="submit"]{
 }
 
 .floating-btn{
-  position:relative;           /* IMPORTANT */
+  position:relative;
   width:100%;
   max-width:320px;
   height:64px;
@@ -1056,10 +1056,12 @@ button[type="submit"]{
   background:linear-gradient(135deg,#f39c12,#f1c40f);
   border:none;
   font-weight:900;
-  font-size:17px;
+  font-size:20px;
   color:#001F3F;
   cursor:pointer;
-  padding:0;
+
+  line-height:34px;       /* ⬅️ rapproche le texte du bas */
+  padding-bottom:8px;    /* ⬅️ réduit l’espace vide */
 }
 
 .floating-btn-field label{
@@ -1134,8 +1136,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐AA 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐AA 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
