@@ -1042,33 +1042,32 @@ button[type="submit"]{
   
 }
 
-.btn-book-main{
+.floating-btn-field{
+  position:relative;
   width:340px;
-  height:78px;
+}
+
+.floating-btn{
+  width:100%;
+  height:72px;
   border-radius:14px;
   background:linear-gradient(135deg,#f39c12,#f1c40f);
   border:none;
-  color:#001F3F;
   font-weight:900;
-  cursor:pointer;
-  padding:0;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-}
-
-.btn-book-text{
   font-size:18px;
-  line-height:22px;
+  color:#001F3F;
+  cursor:pointer;
 }
 
-.btn-book-sub{
+.floating-btn-field label{
+  position:absolute;
+  bottom:6px;                 /* ⬅️ EN BAS */
+  left:50%;
+  transform:translateX(-50%);
   font-size:12px;
-  margin-top:4px;
-  color:#000;
-  opacity:0.9;
   font-weight:700;
+  color:#000;
+  pointer-events:none;
 }
     
 </style>
@@ -1846,15 +1845,19 @@ Nos services
 <input type="hidden" id="finalPrice" name="price">
 <input type="hidden" id="emailMessage" name="final_message">
 <input type="hidden" name="_template" value="table">
-<button type="submit" id="btnReserve" class="btn-book-main">
-  <div class="btn-book-text"
-       data-fr="Réserver maintenant"
-       data-en="Book Now">Book Now</div>
+<div class="floating-field floating-btn-field">
 
-  <div class="btn-book-sub"
-       data-fr="Payer sur place"
-       data-en="Pay on arrival">Pay on arrival</div>
-</button>
+  <button type="submit" id="btnReserve" class="floating-btn">
+    BOOK NOW
+  </button>
+
+  <label for="btnReserve"
+        data-fr="Payer sur place"
+        data-en="Pay on arrival">
+    Payer sur place
+  </label>
+
+</div>
 
   
   
