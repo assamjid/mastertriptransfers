@@ -1049,25 +1049,28 @@ button[type="submit"]{
 
 .floating-btn{
   width:100%;
-  height:72px;
+  max-width:320px;      /* même largeur que Pay Now */
+  height:64px;          /* même hauteur que Pay Now */
   border-radius:14px;
   background:linear-gradient(135deg,#f39c12,#f1c40f);
   border:none;
   font-weight:900;
-  font-size:18px;
+  font-size:17px;
   color:#001F3F;
   cursor:pointer;
-}
+  padding-bottom:16px;  /* espace pour “Payer sur place” */
+  }
 
 .floating-btn-field label{
   position:absolute;
-  bottom:6px;                 /* ⬅️ EN BAS */
+  bottom:8px;                 /* bien en bas */
   left:50%;
   transform:translateX(-50%);
   font-size:12px;
-  font-weight:700;
+  font-weight:800;
   color:#000;
   pointer-events:none;
+  letter-spacing:0.3px;
 }
     
 </style>
@@ -1131,8 +1134,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐EE 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐EE 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐tt 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐tt 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
