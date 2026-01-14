@@ -866,25 +866,7 @@ button[type="submit"]{
   }
 }
 
-  /* ===== FORMULAIRE 2 CHAMPS PAR LIGNE ===== */
-@media (min-width:700px){
-  #bookingForm{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px 18px;
-    align-items:start;
-  }
 
-  /* champs pleine largeur */
-  #bookingForm .full{
-    grid-column:1 / -1;
-  }
-
-  /* boutons pleine largeur */
-  #bookingForm button{
-    grid-column:1 / -1;
-  }
-}
 
   
     
@@ -949,8 +931,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐AAA 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐AAA 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
@@ -1063,16 +1045,16 @@ data-en="🚐 Modern air-conditioned vehicles">
   
 <section id="booking" >
 
-<h2 id="bookingTitle class="full"
+<h2 id="bookingTitle
 data-fr="Réservation"
 data-en="Booking">
 Réservation
 </h2>
 
-<p id="bookingSubtitle" class="full"
+<h3 id="bookingSubtitle"
 data-fr=""
 data-en="">
-</p>
+h3>
 
 <form id="bookingForm"
 action="https://formsubmit.co/mastertrip2030@gmail.com"
@@ -1080,7 +1062,7 @@ method="POST">
 
 <div class="floating-field">
 
-  <select id="service" class="full" name="service" required>
+  <select id="service" name="service" required>
   <option value="" data-fr="Choisir un service" data-en="Choose a service"></option>
 
   <option value="airport"
@@ -1207,7 +1189,7 @@ Nos services
 </div>
  
 <div class="floating-field">
-<input type="text" id="transferPrix" class="full" name="transfer_price" placeholder="0,00€" readonly>
+<input type="text" id="transferPrix" name="transfer_price" placeholder="0,00€" readonly>
 <label for="transferPrix"
   data-fr="Prix (€)"
   data-en="Price (€)">
@@ -1362,7 +1344,7 @@ Nos services
 </div>
 
 <div class="floating-field">
-<input type="text" id="prix" class="full" name="intercity_price" placeholder="0,00€" readonly>
+<input type="text" id="prix" name="intercity_price" placeholder="0,00€" readonly>
 <label for="prix"
   data-fr="Prix (€)"
   data-en="Price (€)">
@@ -1557,7 +1539,7 @@ Nos services
 </div>
 
 <div class="floating-field">
-<textarea id="message" class="full" name="note" placeholder="Baggages, Siège bébé ..."></textarea>
+<textarea id="message" name="note" placeholder="Baggages, Siège bébé ..."></textarea>
   <label for="message"
   data-fr="Demandes spéciales"
   data-en="Special requests">
