@@ -233,53 +233,55 @@ form{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:10px;
+  gap:12px;
 }
 
 /* Tous les champs */
 form input,
 form select,
 form textarea{
-  width:320px;
-  height:60px;
-  padding:14px;
-  border-radius:12px;
+  width:340px;            /* ⬅️ +20px */
+  height:62px;           /* ⬅️ un peu plus haut */
+  padding:14px 16px;
+  border-radius:14px;
   border:2px solid #dde3ea;
   background:#f9fbfc;
-  font-size:16px;
+  font-size:16.5px;
   box-sizing:border-box;
 }
 
 /* Groupe téléphone */
 .phone-group{
   display:flex;
-  width:320px;      /* largeur exacte du formulaire */
-  gap:8px;
+  width:340px;           /* même largeur que les autres */
+  gap:10px;
 }
 
 /* Indicatif */
 .phone-group select{
-  width:90px;       /* largeur parfaite */
-  height:60px;
-  border-radius:12px;
+  width:110px;           /* ⬅️ plus large */
+  height:62px;
+  border-radius:14px;
   border:2px solid #dde3ea;
   background:#f9fbfc;
-  font-size:16px;
-  font-weight:600;
+  font-size:16.5px;
+  font-weight:700;
   text-align:center;
   box-sizing:border-box;
 }
 
 /* Numéro */
 .phone-group input{
-  width:222px;      /* 320 - 90 - 8 */
-  height:60px;
-  border-radius:12px;
+  width:220px;           /* 340 - 110 - 10 */
+  height:62px;
+  border-radius:14px;
   border:2px solid #dde3ea;
   background:#f9fbfc;
-  font-size:16px;
+  font-size:16.5px;
   box-sizing:border-box;
-  }
+}
+
+  
 /* Boutons */
 button{
   width:300px;
@@ -1035,8 +1037,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐AA 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐AA 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
