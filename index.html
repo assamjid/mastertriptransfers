@@ -877,49 +877,42 @@ button[type="submit"]{
 
 
 
-  .booking-layout{
+/* layout général */
+.booking-layout{
   display:flex;
   align-items:flex-start;
-  gap:30px;
+  gap:20px;
 }
 
 /* carte formulaire */
 .booking-card{
-  background:#fff;
-  padding:25px;
-  border-radius:14px;
-  box-shadow:0 10px 35px rgba(0,0,0,.12);
-  width:360px;          /* largeur fixe premium */
+  width:360px;
 }
 
 /* colonne droite photos */
 .booking-side{
-  width:360px;          /* EXACTEMENT la même largeur */
+  width:360px;
   display:flex;
   flex-direction:column;
-  gap:20px;
+  gap:14px;
 }
 
 /* cartes photos */
 .side-card{
   background:#fff;
-  border-radius:14px;
+  border-radius:16px;
   overflow:hidden;
-  box-shadow:0 8px 25px rgba(0,0,0,.15);
+  box-shadow:0 8px 22px rgba(0,0,0,.15);
 }
 
 .side-card img{
   width:100%;
-  height:200px;
+  height:135px;
   object-fit:cover;
-  transition:.35s;
+  display:block;
 }
 
-.side-card:hover img{
-  transform:scale(1.08);
-}
-
-/* Mobile : repasse en colonne */
+/* mobile */
 @media(max-width:900px){
   .booking-layout{
     flex-direction:column;
@@ -1709,7 +1702,7 @@ Nos services
 
 </form>
 
-  </div>   <!-- fin booking-card -->
+  
 
 </div> <!-- booking-card -->
 
