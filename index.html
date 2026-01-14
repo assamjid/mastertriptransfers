@@ -925,10 +925,11 @@ button[type="submit"]{
 /* Carte FORMULAIRE */
 .booking-form-card{
   width:380px;
-  height:auto;       /* ⬅️ laisse le formulaire respirer */
-  padding:20px;
-}
-
+  height:auto;
+  padding:24px 28px;        /* vrai espace premium */
+  box-sizing:border-box;
+  margin-left:0;           /* empêche tout collage */
+  }
 .booking-empty-card img{
   width:100%;
   height:100%;
@@ -939,12 +940,13 @@ button[type="submit"]{
 .booking-cards-row{
   display:flex;
   justify-content:flex-start;
-  margin-left:0;        /* empêche le collage */
   gap:20px;
-  max-width:1200px;   /* ✔ RESPONSIVE */
+  max-width:1200px;
   width:100%;
-  margin-top:25px;
-}
+  margin:25px auto 0;      /* centre le conteneur */
+  padding-left:24px;      /* ⬅️ décale les cartes du bord */
+  box-sizing:border-box;
+  }
   
   .booking-right{
   display:flex;
@@ -959,30 +961,45 @@ button[type="submit"]{
   flex-direction:column;
   gap:20px;              /* ↕ espace entre photos */
 }
-/* ================= MOBILE RESPONSIVE ================= */
-@media (max-width: 600px){
+/* ================= MOBILE (téléphone uniquement) ================= */
+@media (max-width:600px){
 
-.booking-cards-row{
-    padding-left:10px;        /* petit décalage gauche */
-    justify-content:flex-start;   /* ⬅️ À GAUCHE */
-}
+  .booking-cards-row{
+    justify-content:flex-start;
+    padding-left:10px;     /* petit espace côté écran */
+    gap:16px;
+  }
 
   .booking-form-card{
     width:100%;
     max-width:360px;
     margin-left:0;
+    padding:22px 16px;
   }
 
   .booking-right{
     width:100%;
     max-width:360px;
-    margin-top:20px;
+    margin-top:18px;
   }
 
   .booking-empty-card:not(.booking-form-card){
     width:100%;
     height:220px;
   }
+
+  form{
+    width:100%;
+  }
+
+  form input,
+  form select,
+  form textarea,
+  .phone-group{
+    width:100%;
+    max-width:100%;
+  }
+
 }
     
 </style>
@@ -1046,8 +1063,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐ AA4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐ AA4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
