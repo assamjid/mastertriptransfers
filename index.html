@@ -1045,8 +1045,11 @@ button[type="submit"]{
 
 .floating-book-btn{
   position:relative;
+  width:100%;
+  max-width:340px;
 }
 
+/* Bouton principal */
 .floating-book-btn .floating-btn{
   width:100%;
   height:64px;
@@ -1054,26 +1057,29 @@ button[type="submit"]{
   background:linear-gradient(135deg,#f39c12,#f1c40f);
   border:none;
   font-weight:900;
-  font-size:16px;
+  font-size:18px;
   cursor:pointer;
   color:#001F3F;
   position:relative;
-  padding-top:18px;
+  padding-top:14px;
+  box-shadow:0 8px 22px rgba(0,0,0,.25);
 }
 
+/* Label DANS le bouton */
 .floating-book-btn label{
   position:absolute;
-  top:6px;
-  left:16px;
-  font-size:12px;
+  bottom:6px;                  /* ⬅️ collé en bas */
+  left:50%;
+  transform:translateX(-50%);  /* ⬅️ centré */
+  font-size:11.5px;
+  font-weight:800;
   color:#001F3F;
-  font-weight:700;
   pointer-events:none;
-  background:#fff;
-  padding:0 6px;
-  border-radius:6px;
+  background:rgba(255,255,255,0.65);  /* fond visible dans le bouton */
+  padding:3px 10px;
+  border-radius:10px;
+  letter-spacing:0.4px;
 }
-
     
 </style>
   
@@ -1136,8 +1142,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐BBB 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐BBB 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
