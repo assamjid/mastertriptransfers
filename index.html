@@ -941,9 +941,13 @@ button[type="submit"]{
   gap:20px;   /* ⬅️ ESPACE ENTRE LES PHOTOS */
   }
 
-  .booking-right .booking-empty-card{
-  margin-top:40px;   /* déplace uniquement les photos */
-  }
+/* Décale tout le bloc photos vers le bas */
+.booking-right{
+  margin-top:40px;        /* ↓ descend les photos */
+  display:flex;
+  flex-direction:column;
+  gap:20px;              /* ↕ espace entre photos */
+}
 
     
 </style>
@@ -1007,8 +1011,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐CC 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐CC 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐BB 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐BB 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
