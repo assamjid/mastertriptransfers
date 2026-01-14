@@ -763,6 +763,24 @@ button[type="submit"]{
   letter-spacing:0.8px;
   }
 
+#btnPayDeposit{
+  width:100%;
+  max-width:340px;
+  margin-top:8px;
+  background:linear-gradient(135deg,#00c853,#00e676);
+  color:#003300;
+  font-weight:900;
+  letter-spacing:.6px;
+  box-shadow:0 6px 18px rgba(0,200,83,.45);
+  border:none;
+  border-radius:14px;
+}
+
+#btnPayDeposit:hover{
+  background:linear-gradient(135deg,#1aff88,#00c853);
+  transform:scale(1.05);
+}
+
 /* ===== FORMULAIRE REVIEWS ===== */
 .review-row{
   display:flex;
@@ -1802,8 +1820,10 @@ Nos services
 <input type="hidden" id="emailMessage" name="final_message">
 <input type="hidden" name="_template" value="table">
 <button type="submit" id="btnReserve" data-fr="Réserver maintenant" data-en="Book Now">Réserver maintenant</button>
-<button type="button" id="btnPay" onclick="payByCard()">💳 Pay 100% or 20% Now</button>
-
+<button type="button" id="btnPay" onclick="payByCard()">💳 Pay 100% Now</button>
+<button type="button" id="btnPayDeposit" onclick="payDeposit()" data-fr="💳 Payer 20% Ici" data-en="💳 Pay 20% Now">
+💳 Pay 20% Now
+</button>
 
  </form>
 
@@ -2871,7 +2891,8 @@ FR:{
   phone:"Téléphone",
   note:"Demandes spéciales",
   reserve:"Réserver maintenant",
-  pay: "💳 Payer 100% ou 20% Ici",
+  pay: "💳 Payer Ici",
+  payDeposit:"💳 Payer 20% Maintenant",
   subtitle_transfer:"Détails de votre transfert",
   subtitle_intercity:"Détails du transport interville",
   subtitle_excursion:"Détails de votre excursion",
@@ -2895,7 +2916,8 @@ EN:{
   phone:"Phone number",
   note:"Special requests",
   reserve:"Book Now",
-  pay: "💳 Pay 100% or 20% Now",
+  pay: "💳 Pay Now",
+  payDeposit:"💳 Pay 20% Now",
   subtitle_transfer:"Transfer details",
   subtitle_intercity:"Intercity transfer details",
   subtitle_excursion:"Excursion details",
@@ -3794,6 +3816,9 @@ function openInterville(trajetValue) {
   function payByCard(){
   window.open("https://buy.stripe.com/xxxxxxxxx","_blank");
   }
+  function payDeposit(){
+  alert("Paiement acompte 20% — bientôt disponible");
+  }
 
   /* =====================================================
    MOTEUR MULTI-LANGUE MASTERTRIP (FR / EN)
@@ -3895,6 +3920,7 @@ function setLang(langParam) {
   =============================== */
   document.getElementById("btnReserve").innerText = LANG[lang].reserve;
   document.getElementById("btnPay").innerText = LANG[lang].pay;
+  document.getElementById("btnPayDeposit").innerText = LANG[lang].payDeposit;
 
   /* ===============================
      SOUS-TITRE FORMULAIRE
