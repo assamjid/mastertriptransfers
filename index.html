@@ -1093,6 +1093,48 @@ button[type="submit"]{
   #btnReserve{
   color:#001F3F;   /* Bleu nuit MasterTripTransfers */
   }
+
+
+  /* ==== FLOATING LABEL PREMIUM (FIX FINAL) ==== */
+.floating-btn-field{
+  position:relative;
+  width:100%;
+  max-width:320px;
+  margin-bottom:14px;              /* espace propre entre boutons */
+}
+
+/* Bouton */
+.floating-btn{
+  position:relative;
+  width:100%;
+  height:64px;
+  border-radius:14px;
+  border:none;
+  font-weight:900;
+  font-size:20px;
+  cursor:pointer;
+  padding-top:6px;                 /* laisse de la place au label */
+}
+
+/* Label en BAS DANS le bouton */
+.floating-btn-field label{
+  position:absolute;
+  bottom:6px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:12px;
+  font-weight:900;
+  color:#000;
+  pointer-events:none;
+  opacity:.95;
+}
+
+/* Empêche que le texte principal écrase le label */
+#btnReserve,
+#btnPay,
+#btnPayDeposit{
+  line-height:1.15;
+}
     
 </style>
   
