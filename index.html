@@ -3789,15 +3789,34 @@ function initReviews(){
 /* ---------- AFFICHAGE ---------- */
 function renderReviews(){
   const box = document.getElementById("liveReviews");
-  box.innerHTML="";
+  box.innerHTML = "";
+
   getReviews().forEach(r=>{
-    const d=document.createElement("div");
-    d.className="review-card";
-    d.dataset.id=r.id;
-    d.innerHTML=`
+    const d = document.createElement("div");
+    d.className = "review-card";
+    d.dataset.id = r.id;
+
+    // Extraire le code du drapeau (🇫🇷 France → fr)
+    const flag = r.country.split(" ")[0].replace(/🇲🇦/g,"ma")
+                                       .replace(/🇫🇷/g,"fr")
+                                       .replace(/🇬🇧/g,"gb")
+                                       .replace(/🇩🇪/g,"de")
+                                       .replace(/🇪🇸/g,"es")
+                                       .replace(/🇺🇸/g,"us")
+                                       .replace(/🇮🇹/g,"it")
+                                       .replace(/🇧🇪/g,"be")
+                                       .replace(/🇳🇱/g,"nl")
+                                       .replace(/🇨🇭/g,"ch");
+
+    d.innerHTML = `
       <div class="review-stars">${"⭐".repeat(r.stars)}</div>
-      <div class="review-msg">“${r.msg}”</div>
-      <div class="review-name">${r.name}</div>
+      <div class="review-msg">“${escapeHTML(r.msg)}”</div>
+      <div class="review-name">
+        <img class="review-flag"
+             src="https://flagcdn.com/w20/${flag}.png"
+             alt="${r.country}">
+        ${escapeHTML(r.name)}
+      </div>
     `;
     box.appendChild(d);
   });
