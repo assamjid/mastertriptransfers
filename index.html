@@ -253,18 +253,20 @@ form textarea{
   font-size:16.5px;
   box-sizing:border-box;
 }
-  
+    
 
-/* Groupe téléphone */
+/* Groupe téléphone — aligné PARFAITEMENT au formulaire */
 .phone-group{
   display:flex;
-  width:340px;           /* même largeur que les autres */
+  width:340px;                 /* même largeur que les champs */
+  margin:0 auto;               /* centre exactement */
   gap:10px;
+  box-sizing:border-box;
 }
 
 /* Indicatif */
 .phone-group select{
-  width:110px;           /* ⬅️ plus large */
+  width:110px;
   height:62px;
   border-radius:14px;
   border:2px solid #dde3ea;
@@ -277,7 +279,7 @@ form textarea{
 
 /* Numéro */
 .phone-group input{
-  width:230px;           /* 340 - 110 - 10 */
+  flex:1;                      /* prend le reste automatiquement */
   height:62px;
   border-radius:14px;
   border:2px solid #dde3ea;
@@ -286,7 +288,7 @@ form textarea{
   box-sizing:border-box;
 }
   #message{
-  min-height:140px;   /* plus haut */
+  min-height:68px;   /* plus haut */
   line-height:1.6;
   }
 
@@ -1046,8 +1048,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐BB 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐BB 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
