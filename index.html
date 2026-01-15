@@ -3183,13 +3183,22 @@ fixedTime.required = false;
 
   setHeureMode("hidden");
   resetDefaults();
+  
 }
 function resetDefaults(){
   const today = new Date().toISOString().split("T")[0];
+
   date.value = today;
   date.min = today;
   heure.value = "07:00";
-  service.value = "Choisir un service";
+
+  // Reset service PROPRE (anti Android / anti traduction)
+  const firstOption = service.querySelector("option[value='']");
+  service.value = "";
+  firstOption.selected = true;
+
+  // Force visuel (Android)
+  service.dispatchEvent(new Event("change"));
 }
 
 /* =====================================================
