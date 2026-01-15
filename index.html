@@ -1919,9 +1919,24 @@ Nos services
 <input type="hidden" name="_template" value="table">
 <div class="floating-field floating-btn-field">
 
-<button type="submit" id="btnReserve" onclick="PAYMENT_MODE='arrival'">
-<button type="button" id="btnPay" onclick="PAYMENT_MODE='full'; bookingForm.requestSubmit()">
-<button type="button" id="btnPayDeposit" onclick="PAYMENT_MODE='deposit'; bookingForm.requestSubmit()">
+<div class="floating-field floating-btn-field">
+
+<button type="submit" id="btnReserve" class="floating-btn"
+        onclick="PAYMENT_MODE='arrival'">
+  BOOK NOW
+</button>
+
+<button type="button" id="btnPay" class="floating-btn"
+        onclick="PAYMENT_MODE='full'; bookingForm.requestSubmit()">
+  PAY NOW
+</button>
+
+<button type="button" id="btnPayDeposit" class="floating-btn"
+        onclick="PAYMENT_MODE='deposit'; bookingForm.requestSubmit()">
+  PAY 20%
+</button>
+
+</div>
 
  </form>
 
@@ -2870,7 +2885,7 @@ puis vous reconduiront au même point après votre excursion, pour un confort et
 
 </section>
 
-<div id="resumeOverlay" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="resumeTitle">
+<div id="resumeOverlay" role="dialog" aria-modal="true" aria-labelledby="resumeTitle">
   <div id="resumeBox">
 
     <h3 id="resumeTitle"
