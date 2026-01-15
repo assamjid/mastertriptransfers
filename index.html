@@ -1219,7 +1219,8 @@ button[type="submit"]{
   overscroll-behavior:contain;
   }
 
-    /* ================== CONTENEUR PRINCIPAL ================== */
+    /* ================== CARTES FORM ET PHOTOS DROITE ================== */
+   /* ================== CONTENEUR PRINCIPAL ================== */
 .booking-cards-row{
   display:flex;
   align-items:flex-start;
@@ -1227,7 +1228,7 @@ button[type="submit"]{
   gap:20px;                 /* 20px ENTRE formulaire et photos */
   width:100%;
   margin:0;
-  padding:0 20px 0 12px;    /* 12px à gauche, 20px à droite (respiration écran) */
+  padding:0 20px 0 12px;    /* respiration écran */
   box-sizing:border-box;
 }
 
@@ -1235,35 +1236,35 @@ button[type="submit"]{
 .booking-form-card{
   width:380px;
   flex:0 0 380px;
-  padding:24px 28px;
+  padding:26px;
   background:#fff;
-  border-radius:18px;
-  box-shadow:0 12px 35px rgba(0,0,0,.14);
+  border-radius:20px;
+  box-shadow:0 14px 40px rgba(0,0,0,.16);
   box-sizing:border-box;
-  margin:0;                /* COLLÉ À GAUCHE */
+  margin:0;                /* collée à gauche */
 }
 
 /* ================== COLONNE PHOTOS ================== */
 .booking-right{
   display:flex;
   flex-direction:column;
-  gap:20px;                /* 20px ENTRE photos */
+  gap:20px;                /* espace entre photos */
   flex:0 0 360px;
   max-width:360px;
-  margin-right:20px;      /* 20px AVANT BORD DROIT écran */
+  margin-right:20px;      /* respiration bord droit écran */
 }
 
-/* ================== CARTE PHOTO ================== */
+/* ================== CARTES PHOTOS ================== */
 .booking-empty-card{
   width:360px;
   height:260px;
-  border-radius:18px;
-  overflow:hidden;
   background:#fff;
-  box-shadow:0 10px 28px rgba(0,0,0,.15);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 12px 35px rgba(0,0,0,.15);
 }
 
-/* Image dans carte */
+/* Images */
 .booking-empty-card img{
   width:100%;
   height:100%;
@@ -1273,7 +1274,6 @@ button[type="submit"]{
 
 /* ================== MOBILE ================== */
 @media(max-width:600px){
-
   .booking-cards-row{
     flex-direction:column;
     padding:0 12px;
@@ -1296,6 +1296,10 @@ button[type="submit"]{
     height:220px;
   }
 }
+
+
+  
+
     
 </style>
 
@@ -1360,8 +1364,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐yyy 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐ttt 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐AAA 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐AAA 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
