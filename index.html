@@ -1134,104 +1134,13 @@ button[type="submit"]{
   }                   */
 
 
-.booking-card{
-  background:#fff;
-  padding:25px;
-  border-radius:14px;
-  box-shadow:0 10px 35px rgba(0,0,0,.12);
-  width:max-content;       /* largeur = largeur des champs */
-  margin-left:30px;        /* aligne à gauche */
-}
 
 
-
-/* Cartes PHOTOS uniquement */
-.booking-empty-card:not(.booking-form-card){
-  width:360px;
-  height:300px;
-  background:#ffffff;
-  border-radius:18px;
-  box-shadow:0 10px 28px rgba(0,0,0,0.15);
-  overflow:hidden;
-  display:block;
-}
-
-/* Carte FORMULAIRE */
-.booking-form-card{
-  width:380px;
-  height:auto;
-  padding:24px 28px;        /* vrai espace premium */
-  box-sizing:border-box;
-  margin-left:0;           /* empêche tout collage */
-  margin-top:30px;        /* ↓ descend les photos */  
-  flex:0 0 380px;/* ↕ espace entre photos */
-  }
-  
-.booking-empty-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-
-.booking-cards-row{
-  display:flex;
-  justify-content:flex-start;
-  align-items:flex-start;
-  gap:20px;
-  width:100%;
-  max-width:100%;
-  margin:0;                 /* 🔥 plus de centrage */
-  padding-left:12px;       /* petit respirateur seulement */
-  padding-right:12px;
-  box-sizing:border-box;
-}
-  
-  .booking-right{
-  display:flex;
-  flex-direction:column;
-  margin-right:20px;    
-  gap:20px;   /* ⬅️ ESPACE ENTRE LES PHOTOS */
-  margin-top:30px;        /* ↓ descend les photos */  
-  flex:0 0 380px;/* ↕ espace entre photos */
-  }
-
-
-  
-
-/* ================= MOBILE (téléphone uniquement) ================= */
-@media (max-width:600px){
-
-  .booking-cards-row{
-    justify-content:flex-start;
-    padding-left:10px;
-    gap:16px;
-  }
-
-  .booking-form-card{
-    width:100%;
-    max-width:360px;
-    margin-left:0;
-    padding:22px 16px;
-  }
-
-  .booking-right{
-    width:100%;
-    max-width:360px;
-    margin-top:18px;
-  }
-
-  .booking-empty-card:not(.booking-form-card){
-    width:100%;
-    height:220px;
-  }
-
+@media (max-width:600px){  
   /* Formulaire fluide */
   form{
     width:100%;
   }
-
   form input,
   form select,
   form textarea,
@@ -1240,44 +1149,21 @@ button[type="submit"]{
     max-width:100%;
     box-sizing:border-box;
   }
-
   /* Groupe téléphone */
   .phone-group select{
     width:96px;
   }
-
   .phone-group input{
     flex:1;
     min-width:0;
-  }
-  
+  }  
   .phone-group select{
     font-size:13px;
-  }
-  
+  }  
   #countryCode{
     padding-left:5px !important;
     background-position:3px center !important;
   }
-
-  /* ===== FIX PHOTOS MOBILE ===== */
-  .booking-right{
-    display:flex !important;
-    flex-direction:column !important;
-  }
-
-  .booking-right .booking-empty-card{
-    display:block !important;
-    opacity:1 !important;
-  }
-
-  .booking-right img{
-    display:block !important;
-    width:100% !important;
-    height:100% !important;
-    object-fit:cover;
-  }
-  
 }
 
 
@@ -1322,37 +1208,98 @@ button[type="submit"]{
 #btnPay,
 #btnPayDeposit{
   line-height:1.15;
-}
-
-  /* changement.......*/
-  .booking-cards-row{
-  display:flex;
-  align-items:flex-start;
-  flex-wrap:nowrap;      /* 🔒 empêche la chute */
-}
-
-.booking-form-card{
-  flex:0 0 380px;
-  margin-left:0px;
-}
-
-.booking-right{
-  flex:0 0 360px;      /* largeur fixe */
-  margin-right:20px;  /* espace de 20px à droite */
-}
-    
+}    
 
   #btnReserve{
   color:#001F3F;   /* Bleu nuit MasterTripTransfers */
   }
-
   
   #resumeOverlay.active{
   touch-action:none;
   overscroll-behavior:contain;
   }
+
+    /* ================== CONTENEUR PRINCIPAL ================== */
+.booking-cards-row{
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-start;
+  gap:20px;                 /* 20px ENTRE formulaire et photos */
+  width:100%;
+  margin:0;
+  padding:0 20px 0 12px;    /* 12px à gauche, 20px à droite (respiration écran) */
+  box-sizing:border-box;
+}
+
+/* ================== CARTE FORMULAIRE ================== */
+.booking-form-card{
+  width:380px;
+  flex:0 0 380px;
+  padding:24px 28px;
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 12px 35px rgba(0,0,0,.14);
+  box-sizing:border-box;
+  margin:0;                /* COLLÉ À GAUCHE */
+}
+
+/* ================== COLONNE PHOTOS ================== */
+.booking-right{
+  display:flex;
+  flex-direction:column;
+  gap:20px;                /* 20px ENTRE photos */
+  flex:0 0 360px;
+  max-width:360px;
+  margin-right:20px;      /* 20px AVANT BORD DROIT écran */
+}
+
+/* ================== CARTE PHOTO ================== */
+.booking-empty-card{
+  width:360px;
+  height:260px;
+  border-radius:18px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 10px 28px rgba(0,0,0,.15);
+}
+
+/* Image dans carte */
+.booking-empty-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* ================== MOBILE ================== */
+@media(max-width:600px){
+
+  .booking-cards-row{
+    flex-direction:column;
+    padding:0 12px;
+  }
+
+  .booking-form-card,
+  .booking-right{
+    width:100%;
+    max-width:100%;
+    flex:1;
+  }
+
+  .booking-right{
+    margin-right:0;
+    margin-top:18px;
+  }
+
+  .booking-empty-card{
+    width:100%;
+    height:220px;
+  }
+}
     
 </style>
+
+
   
 <script type="application/ld+json">
 {
@@ -1413,8 +1360,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐yyy 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐ttt 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
