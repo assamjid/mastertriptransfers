@@ -3182,8 +3182,14 @@ camelType.required = false;
 fixedTime.required = false;
 
   setHeureMode("hidden");
+  resetDefaults();
 }
-
+function resetDefaults(){
+  const today = new Date().toISOString().split("T")[0];
+  date.value = today;
+  date.min = today;
+  heure.value = "07:00";
+}
 
 /* =====================================================
    CHOIX SERVICE
