@@ -1167,6 +1167,7 @@ button[type="submit"]{
 .booking-empty-card img{
   width:100%;
   height:100%;
+  margin-right:20px;
   object-fit:cover;
   display:block;
 }
@@ -1177,7 +1178,7 @@ button[type="submit"]{
   gap:20px;
   max-width:1200px;
   width:100%;
-  margin:25px auto 0;      /* centre le conteneur */
+/*  margin:25px auto 0;       centre le conteneur */
   padding-left:24px;      /* ⬅️ décale les cartes du bord */
   box-sizing:border-box;
   }
@@ -1277,52 +1278,19 @@ button[type="submit"]{
   
 }
 
-/* STRUCTURE FLOATING POUR LES 3 BOUTONS */
+
+  /* CONTENEUR DES 3 BOUTONS */
 .floating-btn-field{
   position:relative;
   width:100%;
   max-width:320px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;               /* espace entre les boutons */
 }
 
+/* BOUTONS */
 .floating-btn{
-  position:relative;
-  width:100%;
-  height:64px;
-  border-radius:14px;
-  border:none;
-  font-weight:900;
-  font-size:17px;
-  cursor:pointer;
-  padding:0;
-}
-
-/* LABEL EN BAS CENTRÉ */
-.floating-btn-field label{
-  position:absolute;
-  bottom:6px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:12px;
-  font-weight:800;
-  pointer-events:none;
-  color:#000;
-}
-  #btnReserve{
-  color:#001F3F;   /* Bleu nuit MasterTripTransfers */
-  }
-
-
-  /* ==== FLOATING LABEL PREMIUM (FIX FINAL) ==== */
-.floating-btn-field{
-  position:relative;
-  width:100%;
-  max-width:320px;
-  margin-bottom:14px;              /* espace propre entre boutons */
-}
-
-/* Bouton */
-.floating-btn{
-  position:relative;
   width:100%;
   height:64px;
   border-radius:14px;
@@ -1330,10 +1298,11 @@ button[type="submit"]{
   font-weight:900;
   font-size:20px;
   cursor:pointer;
-  padding-top:6px;                 /* laisse de la place au label */
+  padding-top:6px;       /* espace pour le label bas */
+  line-height:1.15;
 }
 
-/* Label en BAS DANS le bouton */
+/* LABEL EN BAS DANS LE BOUTON */
 .floating-btn-field label{
   position:absolute;
   bottom:6px;
@@ -1362,13 +1331,18 @@ button[type="submit"]{
 
 .booking-form-card{
   flex:0 0 380px;
+  margin-left:0px;
 }
 
 .booking-right{
-  flex:0 0 360px;
+  flex:0 0 360px;      /* largeur fixe */
+  margin-right:20px;  /* espace de 20px à droite */
 }
     
 
+  #btnReserve{
+  color:#001F3F;   /* Bleu nuit MasterTripTransfers */
+  }
 
   
   #resumeOverlay.active{
@@ -1437,8 +1411,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐aa 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐aa 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐kk 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐kk 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
