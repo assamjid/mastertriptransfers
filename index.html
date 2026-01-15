@@ -2154,24 +2154,14 @@ Nos services
 <input type="hidden" id="finalPrice" name="price">
 <input type="hidden" id="emailMessage" name="final_message">
 <input type="hidden" name="_template" value="table">
+<input type="submit" id="realSubmit" hidden>
 <div class="floating-field floating-btn-field">
 
 <div class="floating-field floating-btn-field">
 
-<button type="submit" id="btnReserve" class="floating-btn"
- onclick="PAYMENT_MODE='arrival'">
-  BOOK NOW
-</button>
-
-<button type="submit" id="btnPay" class="floating-btn"
- onclick="PAYMENT_MODE='full'">
-  PAY NOW
-</button>
-
-<button type="submit" id="btnPayDeposit" class="floating-btn"
- onclick="PAYMENT_MODE='deposit'">
-  PAY 20%
-</button>
+<button type="button" id="btnReserve" class="floating-btn" onclick="setPayment('arrival')">BOOK NOW</button>
+<button type="button" id="btnPay" class="floating-btn" onclick="setPayment('full')">PAY NOW</button>
+<button type="button" id="btnPayDeposit" class="floating-btn" onclick="setPayment('deposit')">PAY 20%</button>
 
 </div>
 
