@@ -922,15 +922,16 @@ button[type="submit"]{
   padding:25px;
   border-radius:14px;
   box-shadow:0 10px 35px rgba(0,0,0,.12);
-  width:max-content;       /* largeur = largeur des champs */
-  margin-left:30px;        /* aligne à gauche */
+  width:360px;           /* ⬅️ largeur FIXE */
+  max-width:360px;
+  margin-left:30px;
 }
 
 
 
 /* Cartes PHOTOS uniquement */
 .booking-empty-card:not(.booking-form-card){
-  width:300px;
+  width:360px;
   height:300px;
   background:#ffffff;
   border-radius:18px;
@@ -946,6 +947,14 @@ button[type="submit"]{
   padding:24px 28px;        /* vrai espace premium */
   box-sizing:border-box;
   margin-left:0;           /* empêche tout collage */
+  }
+  .booking-form-card{
+  max-width:360px;
+  width:360px;
+}
+
+.booking-right{
+  max-width:300px;
   }
 .booking-empty-card img{
   width:100%;
@@ -1192,8 +1201,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐nn 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐nn 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
