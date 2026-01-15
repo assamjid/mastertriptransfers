@@ -1927,12 +1927,12 @@ Nos services
 </button>
 
 <button type="button" id="btnPay" class="floating-btn"
-        onclick="PAYMENT_MODE='full'; bookingForm.requestSubmit()">
+ onclick="PAYMENT_MODE='full'; bookingForm.submit()">
   PAY NOW
 </button>
 
 <button type="button" id="btnPayDeposit" class="floating-btn"
-        onclick="PAYMENT_MODE='deposit'; bookingForm.requestSubmit()">
+ onclick="PAYMENT_MODE='deposit'; bookingForm.submit()">
   PAY 20%
 </button>
 
@@ -3676,7 +3676,7 @@ function escapeHTML(str) {
   html+=`<p><b>⏰ Heure :</b> ${timeValue}</p>`;
   if(message.value) html+=`<p><b>📝 Message :</b> ${message.value}</p>`;
   if(price) html+=`<p><b>💰 Prix :</b> ${price}</p>`;
-  msg += `💳 *Paiement* : ${PAYMENT_MODE}\n`;
+  
 
   document.getElementById("resumeContent").innerHTML = html;
   }
@@ -3708,7 +3708,7 @@ if (btnCancel && btnConfirm) {
 
   btnCancel.addEventListener("click", closeResume);
 
-  btnConfirm.onclick = () => {
+  btnConfirm.onclick = function(){
   const msg = document.getElementById("emailMessage").value;
 
   if(PAYMENT_MODE === "full"){
