@@ -3701,31 +3701,31 @@ if (btnCancel && btnConfirm) {
   btnCancel.addEventListener("click", closeResume);
 
   btnConfirm.addEventListener("click", function(e){
-    e.preventDefault();
+  e.preventDefault();
 
-    const msg = document.getElementById("emailMessage").value;
+  const msg = document.getElementById("emailMessage").value;
 
-    // 1️⃣ STRIPE
-    if(PAYMENT_MODE === "full"){
-      window.open("https://buy.stripe.com/FULL_LINK","_blank");
-    }
-    if(PAYMENT_MODE === "deposit"){
-      window.open("https://buy.stripe.com/DEPOSIT_LINK","_blank");
-    }
+  // 1️⃣ STRIPE TOUJOURS EN PREMIER (ANDROID SAFE)
+  if(PAYMENT_MODE === "full"){
+    window.location.href = "https://buy.stripe.com/FULL_LINK";
+  }
+  if(PAYMENT_MODE === "deposit"){
+    window.location.href = "https://buy.stripe.com/DEPOSIT_LINK";
+  }
 
-    // 2️⃣ WHATSAPP
-    location.href = "https://wa.me/212691059759?text=" + encodeURIComponent(msg);
+  // 2️⃣ WHATSAPP
+  window.location.assign("https://wa.me/212691059759?text=" + encodeURIComponent(msg));
 
-    // 3️⃣ EMAIL
-    setTimeout(()=> bookingForm.submit(), 1200);
+  // 3️⃣ EMAIL
+  setTimeout(()=> bookingForm.submit(), 1500);
 
-    // 4️⃣ RESET + FERMETURE
-    setTimeout(()=>{
-      bookingForm.reset();
-      resetAll();
-      closeResume();
-    }, 1800);
-  });
+  // 4️⃣ RESET
+  setTimeout(()=>{
+    bookingForm.reset();
+    resetAll();
+    closeResume();
+  }, 2000);
+});
 }
   
 
