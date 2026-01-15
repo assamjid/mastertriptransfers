@@ -3061,7 +3061,7 @@ EN:{
 
 };
 
-  
+  let lang = localStorage.getItem("lang") || "EN";
 if(!lang){
   lang = "EN";
   localStorage.setItem("lang","EN");
@@ -4031,7 +4031,7 @@ if(service.value === "excursion"){
 
     /* ================= LANGUE (VERSION STABLE) ================= */
 
-let lang = localStorage.getItem("lang") || "EN";
+
 
 /* Applique une langue */
 function setLang(l){
