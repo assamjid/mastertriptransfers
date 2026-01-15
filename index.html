@@ -1919,14 +1919,14 @@ Nos services
           <span class="book-sub-label">Pay on arrival</span>
           </button>
 
-          <button type="submit" id="btnPay"
-          onclick="PAYMENT_MODE='full'">
+          <button type="button" id="btnPay"
+        onclick="PAYMENT_MODE='full'; bookingForm.requestSubmit();">
           PAY NOW
           </button>
 
-         <button type="submit" id="btnPayDeposit"
-         onclick="PAYMENT_MODE='deposit'">
-         PAY 20%
+         <button type="button" id="btnPayDeposit"
+        onclick="PAYMENT_MODE='deposit'; bookingForm.requestSubmit();">
+          PAY 20%
          </button>
 
  </form>
@@ -3600,8 +3600,7 @@ if(serviceSelect && soukPhoto){
   });
 }
 
-/* MODE DE PAIEMENT GLOBAL */
-let PAYMENT_MODE = "arrival";
+
 
 /* =====================================================
    SOUMISSION – RÉSUMÉ & WHATSAPP (FINAL PRO)
@@ -3635,42 +3634,50 @@ let PAYMENT_MODE = "arrival";
   if(service.value==="intercity"){ type=trajet.value; placesTxt=places.value; }
   if(service.value==="excursion"){ type=circuit.value; choix=quadType.value||camelType.value||"-"; placesTxt=circuitPlaces.value; }
 
+  /* ===== MESSAGE WHATSAPP / EMAIL ===== */
   let msg = `📩 *NOUVELLE RÉSERVATION MASTERTRIPTRANSFERS*\n\n`;
-  if(nom.value) msg+=`👤 *Nom* : ${nom.value}\n`;
-  if(tel.value) msg+=`📞 *Téléphone* : +${countryCode.value}${tel.value}\n`;
-  if(email.value) msg+=`📧 *Email* : ${email.value}\n\n`;
-  if(service.value) msg+=`🛎️ *Service* : ${service.options[service.selectedIndex].text}\n`;
+  msg+=`👤 *Nom* : ${nom.value}\n`;
+  msg+=`📞 *Téléphone* : +${countryCode.value}${tel.value}\n`;
+  msg+=`📧 *Email* : ${email.value}\n\n`;
+  msg+=`🛎️ *Service* : ${service.options[service.selectedIndex].text}\n`;
   if(type!=="-") msg+=`🚘 *Type* : ${type}\n`;
   if(choix!=="-") msg+=`🎯 *Choix* : ${choix}\n`;
+  if(depart.value) msg+=`📍 *Départ* : ${depart.value}\n`;
+  if(arrivee.value) msg+=`🏁 *Destination* : ${arrivee.value}\n`;
   if(placesTxt!=="-") msg+=`👥 *Places* : ${placesTxt}\n`;
-  if(date.value) msg+=`📅 *Date* : ${date.value}\n`;
-  if(timeValue) msg+=`⏰ *Heure* : ${timeValue}\n`;
+  if(flightNumber.value) msg+=`✈️ *Vol* : ${flightNumber.value}\n`;
+  msg+=`📅 *Date* : ${date.value}\n`;
+  msg+=`⏰ *Heure* : ${timeValue}\n`;
   if(message.value) msg+=`\n📝 *Message* : ${message.value}\n`;
   if(price) msg+=`\n💰 *Prix* : ${price}\n`;
 
   document.getElementById("emailMessage").value = msg;
 
-  document.getElementById("resumeContent").innerHTML = `
-    <p><b>Nom:</b> ${nom.value}</p>
-    <p><b>Téléphone:</b> +${countryCode.value}${tel.value}</p>
-    <p><b>Service:</b> ${service.options[service.selectedIndex].text}</p>
-    <p><b>Type:</b> ${type}</p>
-    <p><b>Places:</b> ${placesTxt}</p>
-    <p><b>Date:</b> ${date.value}</p>
-    <p><b>Heure:</b> ${timeValue}</p>
-    <p><b>Prix:</b> ${price}</p>
-  `;
-  }
+  /* ===== RÉCAP HTML CLIENT ===== */
+  let html = "";
+  html+=`<p><b>👤 Nom :</b> ${nom.value}</p>`;
+  html+=`<p><b>📞 Téléphone :</b> +${countryCode.value}${tel.value}</p>`;
+  html+=`<p><b>📧 Email :</b> ${email.value}</p><hr>`;
+  html+=`<p><b>🛎️ Service :</b> ${service.options[service.selectedIndex].text}</p>`;
+  if(type!=="-") html+=`<p><b>🚘 Type :</b> ${type}</p>`;
+  if(choix!=="-") html+=`<p><b>🎯 Choix :</b> ${choix}</p>`;
+  if(depart.value) html+=`<p><b>📍 Départ :</b> ${depart.value}</p>`;
+  if(arrivee.value) html+=`<p><b>🏁 Destination :</b> ${arrivee.value}</p>`;
+  if(placesTxt!=="-") html+=`<p><b>👥 Places :</b> ${placesTxt}</p>`;
+  if(flightNumber.value) html+=`<p><b>✈️ Vol :</b> ${flightNumber.value}</p>`;
+  html+=`<p><b>📅 Date :</b> ${date.value}</p>`;
+  html+=`<p><b>⏰ Heure :</b> ${timeValue}</p>`;
+  if(message.value) html+=`<p><b>📝 Message :</b> ${message.value}</p>`;
+  if(price) html+=`<p><b>💰 Prix :</b> ${price}</p>`;
 
-  
+  document.getElementById("resumeContent").innerHTML = html;
+  }
   
 /* =====================================================
    OVERLAY ANIMÉ
 ===================================================== */
-function openResume(html, text) {
-  
+function openResume(){
   const overlay = document.getElementById("resumeOverlay");
-  document.getElementById("resumeContent").innerHTML = html;
   overlay.style.display = "flex";
   overlay.offsetHeight;
   overlay.classList.add("active");
@@ -3694,61 +3701,33 @@ if (btnCancel && btnConfirm) {
   btnCancel.addEventListener("click", closeResume);
 
   btnConfirm.addEventListener("click", function(e){
-  e.preventDefault();
+    e.preventDefault();
 
-  const msg = document.getElementById("emailMessage").value;
+    const msg = document.getElementById("emailMessage").value;
 
-  // 1️⃣ STRIPE D’ABORD (ANDROID SAFE)
-  if(PAYMENT_MODE === "full"){
-    window.open("https://buy.stripe.com/FULL_LINK","_blank");
-  }
-  if(PAYMENT_MODE === "deposit"){
-    window.open("https://buy.stripe.com/DEPOSIT_LINK","_blank");
-  }
+    // 1️⃣ STRIPE
+    if(PAYMENT_MODE === "full"){
+      window.open("https://buy.stripe.com/FULL_LINK","_blank");
+    }
+    if(PAYMENT_MODE === "deposit"){
+      window.open("https://buy.stripe.com/DEPOSIT_LINK","_blank");
+    }
 
-  // 2️⃣ WHATSAPP
-  location.href = "https://wa.me/212691059759?text=" + encodeURIComponent(msg);
+    // 2️⃣ WHATSAPP
+    location.href = "https://wa.me/212691059759?text=" + encodeURIComponent(msg);
 
-  // 3️⃣ EMAIL
-  setTimeout(() => bookingForm.submit(), 600);
+    // 3️⃣ EMAIL
+    setTimeout(()=> bookingForm.submit(), 1200);
 
-  // === RESET PARFAIT ===
-  setTimeout(() => {
-
-    bookingForm.reset();
-    resetAll();
-
-    ["emailMessage","finalPrice"].forEach(id=>{
-      const el = document.getElementById(id);
-      if(el) el.value = "";
-    });
-
-    setLang(lang);
-
-    document.querySelectorAll("#bookingForm select").forEach(s=>{
-      s.selectedIndex = 0;
-    });
-
-    date.value = today;
-    heure.value = "07:00";
-    bookingSubtitle.textContent = "";
-
-    service.value = "";
-    service.dispatchEvent(new Event("change"));
-
-    date.dispatchEvent(new Event("change"));
-    heure.dispatchEvent(new Event("change"));
-    message.value = "";
-    message.dispatchEvent(new Event("input"));
-
-    heure.closest(".floating-field").style.display = "block";
-
-    closeResume();
-
-  }, 1300);
-});
+    // 4️⃣ RESET + FERMETURE
+    setTimeout(()=>{
+      bookingForm.reset();
+      resetAll();
+      closeResume();
+    }, 1800);
+  });
+}
   
-  }
 
 
 
@@ -3796,6 +3775,7 @@ function fixBookingScroll(){
 
   window.scrollTo({ top: y, behavior:"smooth" });
 }
+  
 
 
 
@@ -4197,7 +4177,7 @@ serviceSelect.addEventListener("change", ()=>{
   }
 });
 
-let PAYMENT_MODE = "arrival";
+
 
 
 </script>
