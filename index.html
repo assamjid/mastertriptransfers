@@ -1135,6 +1135,12 @@ button[type="submit"]{
 #btnPayDeposit{
   line-height:1.15;
 }
+
+
+  #resumeOverlay.active{
+  touch-action:none;
+  overscroll-behavior:contain;
+  }
     
 </style>
   
@@ -1919,15 +1925,11 @@ Nos services
           <span class="book-sub-label">Pay on arrival</span>
           </button>
 
-          <button type="button" id="btnPay"
-        onclick="PAYMENT_MODE='full'; bookingForm.requestSubmit();">
-          PAY NOW
-          </button>
+          <button type="submit" id="btnPay"
+ onclick="PAYMENT_MODE='full'">
 
-         <button type="button" id="btnPayDeposit"
-        onclick="PAYMENT_MODE='deposit'; bookingForm.requestSubmit();">
-          PAY 20%
-         </button>
+         <button type="submit" id="btnPayDeposit"
+ onclick="PAYMENT_MODE='deposit'">
 
  </form>
 
@@ -3705,26 +3707,28 @@ if (btnCancel && btnConfirm) {
 
   const msg = document.getElementById("emailMessage").value;
 
-  // 1️⃣ STRIPE TOUJOURS EN PREMIER (ANDROID SAFE)
+  // 1️⃣ Stripe
   if(PAYMENT_MODE === "full"){
-    window.location.href = "https://buy.stripe.com/FULL_LINK";
+    window.open("https://buy.stripe.com/FULL_LINK","_blank");
   }
   if(PAYMENT_MODE === "deposit"){
-    window.location.href = "https://buy.stripe.com/DEPOSIT_LINK";
+    window.open("https://buy.stripe.com/DEPOSIT_LINK","_blank");
   }
 
-  // 2️⃣ WHATSAPP
-  window.location.assign("https://wa.me/212691059759?text=" + encodeURIComponent(msg));
+  // 2️⃣ WhatsApp
+  setTimeout(()=>{
+    window.location.href="https://wa.me/212691059759?text="+encodeURIComponent(msg);
+  },600);
 
-  // 3️⃣ EMAIL
-  setTimeout(()=> bookingForm.submit(), 1500);
+  // 3️⃣ Email
+  setTimeout(()=> bookingForm.submit(), 2500);
 
-  // 4️⃣ RESET
+  // 4️⃣ Reset
   setTimeout(()=>{
     bookingForm.reset();
     resetAll();
     closeResume();
-  }, 2000);
+  },3500);
 });
 }
   
