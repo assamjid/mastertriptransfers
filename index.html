@@ -1203,8 +1203,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐bb 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐bb 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
@@ -3712,31 +3712,34 @@ if (btnCancel && btnConfirm) {
 
   const msg = document.getElementById("emailMessage").value;
 
-  // 1️⃣ WHATSAPP D’ABORD (Android autorise)
+  // WhatsApp (auto)
   window.open(
     "https://wa.me/212691059759?text=" + encodeURIComponent(msg),
     "_blank"
   );
 
-  // 2️⃣ STRIPE APRÈS (Android safe)
-  setTimeout(()=>{
-    if(PAYMENT_MODE === "full"){
-      window.open("https://buy.stripe.com/FULL_LINK","_blank");
-    }
-    if(PAYMENT_MODE === "deposit"){
-      window.open("https://buy.stripe.com/DEPOSIT_LINK","_blank");
-    }
-  },900);
+  // Email
+  setTimeout(()=> bookingForm.submit(), 800);
 
-  // 3️⃣ EMAIL
-  setTimeout(()=> bookingForm.submit(), 1700);
+  // Message paiement manuel
+  if(PAYMENT_MODE !== "arrival"){
+    setTimeout(()=>{
+      alert("Merci ! Appuyez maintenant sur OK pour procéder au paiement sécurisé.");
+      if(PAYMENT_MODE === "full"){
+        window.open("https://buy.stripe.com/FULL_LINK","_blank");
+      }
+      if(PAYMENT_MODE === "deposit"){
+        window.open("https://buy.stripe.com/DEPOSIT_LINK","_blank");
+      }
+    },1200);
+  }
 
-  // 4️⃣ RESET
+  // Reset
   setTimeout(()=>{
     bookingForm.reset();
     resetAll();
     closeResume();
-  },2600);
+  },2200);
 };
 }
   
