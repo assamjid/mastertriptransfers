@@ -916,226 +916,6 @@ button[type="submit"]{
   }
 }
 
-
-
-
-/* Cartes PHOTOS uniquement 
-.booking-empty-card:not(.booking-form-card){
-  width:360px;
-  height:300px;
-  background:#ffffff;
-  border-radius:18px;
-  box-shadow:0 10px 28px rgba(0,0,0,0.15);
-  overflow:hidden;
-  display:block;
-}
-
-
-.booking-empty-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-
-
-  /* ====== ZONE BOOKING ALIGNÉE PROPRE ====== 
-
-.booking-cards-row{
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  gap:24px;
-  max-width:1100px;
-  margin:30px auto 0;
-}
-
-.booking-form-card{
-  width:340px;
-  background:#fff;
-  padding:22px;
-  border-radius:16px;
-  box-shadow:0 10px 35px rgba(0,0,0,.12);
-}
-
-.booking-right{
-  width:300px;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
-
-.booking-empty-card{
-  width:100%;
-  height:230px;
-  border-radius:16px;
-  overflow:hidden;
-  box-shadow:0 10px 28px rgba(0,0,0,.15);
-}
-
-.booking-empty-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* ================= MOBILE (téléphone uniquement) ================= 
-@media (max-width:600px){
-
-  .booking-cards-row{
-    justify-content:flex-start;
-    padding-left:10px;
-    gap:16px;
-  }
-
-  .booking-form-card{
-    width:100%;
-    max-width:360px;
-    margin-left:0;
-    padding:22px 16px;
-  }
-
-  .booking-right{
-    width:100%;
-    max-width:360px;
-    margin-top:18px;
-  }
-
-  .booking-empty-card:not(.booking-form-card){
-    width:100%;
-    height:220px;
-  }
-
-  /* Formulaire fluide 
-  form{
-    width:100%;
-  }
-
-  form input,
-  form select,
-  form textarea,
-  .phone-group{
-    width:100%;
-    max-width:100%;
-    box-sizing:border-box;
-  }
-
-  /* Groupe téléphone 
-  .phone-group select{
-    width:96px;
-  }
-
-  .phone-group input{
-    flex:1;
-    min-width:0;
-  }
-  
-  .phone-group select{
-    font-size:13px;
-  }
-  
-  #countryCode{
-    padding-left:5px !important;
-    background-position:3px center !important;
-  }
-
-  /* ===== FIX PHOTOS MOBILE ===== 
-  .booking-right{
-    display:flex !important;
-    flex-direction:column !important;
-  }
-
-  .booking-right .booking-empty-card{
-    display:block !important;
-    opacity:1 !important;
-  }
-
-  .booking-right img{
-    display:block !important;
-    width:100% !important;
-    height:100% !important;
-    object-fit:cover;
-  }
-  
-}
-
-  
-
-/* CONTENEUR DES 3 BOUTONS 
-.floating-btn-field{
-  position:relative;
-  width:100%;
-  max-width:320px;
-  display:flex;
-  flex-direction:column;
-  gap:14px;              /* espace entre les 3 boutons */
-}
-
-/* BOUTONS 
-.floating-btn{
-  width:100%;
-  height:64px;
-  border-radius:14px;
-  border:none;
-  font-weight:900;
-  font-size:20px;
-  cursor:pointer;
-  padding-top:6px;      /* place pour le label bas 
-  line-height:1.15;
-}
-
-/* LABEL EN BAS DANS LE BOUTON 
-.floating-btn-field label{
-  position:absolute;
-  bottom:6px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:12px;
-  font-weight:900;
-  color:#000;
-  pointer-events:none;
-  opacity:.95;
-}
-
-/* Couleur texte Book Now 
-#btnReserve{
-  color:#001F3F;
-  }
-
-/* Empêche que le texte principal écrase le label 
-#btnReserve,
-#btnPay,
-#btnPayDeposit{
-  line-height:1.15;
-}
-
-.booking-form-card form{
-  width:100%;
-  max-width:100%;
-}
-
-.booking-form-card{
-  flex:0 0 360px;      /* largeur propre dans la ligne 
-  max-width:360px;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  }
-  .booking-cards-row{
-  align-items:flex-start;
-  flex-wrap:nowrap;    /* empêche les cartes de tomber dessous 
-  }
-  
-  
-  .floating-btn-field{
-  width:100%;
-  max-width:320px;
-  }                   */
-
-
-
-
 @media (max-width:600px){  
   /* Formulaire fluide */
   form{
@@ -1297,7 +1077,55 @@ button[type="submit"]{
   }
 }
 
+/* ===== FIX DÉBORDEMENT MOBILE FORMULAIRE ===== */
+@media (max-width:600px){
 
+  /* Empêche tout scroll horizontal */
+  html,body{
+    max-width:100%;
+    overflow-x:hidden;
+  }
+
+  /* Formulaire plein écran */
+  .booking-form-card,
+  .booking-form-card form{
+    width:100% !important;
+    max-width:100% !important;
+  }
+
+  /* Tous les champs deviennent fluides */
+  form input,
+  form select,
+  form textarea,
+  .floating-field,
+  .phone-group{
+    width:100% !important;
+    max-width:100% !important;
+    box-sizing:border-box;
+  }
+
+  /* Téléphone = parfaitement fluide */
+  .phone-group{
+    display:flex;
+  }
+
+  .phone-group select{
+    width:96px !important;
+    min-width:96px;
+    flex-shrink:0;
+  }
+
+  .phone-group input{
+    flex:1;
+    min-width:0;
+  }
+
+  /* Boutons */
+  .floating-btn-field,
+  .floating-btn{
+    width:100% !important;
+  }
+}
   
 
     
