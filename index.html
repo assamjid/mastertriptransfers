@@ -1203,8 +1203,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐bb 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐bb 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
@@ -2900,19 +2900,24 @@ puis vous reconduiront au même point après votre excursion, pour un confort et
       <button type="button"
               id="resumeCancel"
               data-fr="✏️ Modifier"
-              data-en="✏️ Edit"
-              aria-label="Edit booking">
+              data-en="✏️ Edit">
         ✏️ Modifier
       </button>
 
       <button type="button"
               id="resumeConfirm"
               data-fr="📲 Confirmer & WhatsApp"
-              data-en="📲 Confirm & WhatsApp"
-              aria-label="Confirm booking and open WhatsApp">
+              data-en="📲 Confirm & WhatsApp">
         📲 Confirmer & WhatsApp
       </button>
     </div>
+
+    <!-- BOUTON STRIPE MANUEL -->
+    <button id="payNowAfterConfirm"
+            class="floating-btn"
+            style="display:none;margin-top:18px;width:100%">
+      💳 PAYER MAINTENANT
+    </button>
 
   </div>
 </div>
@@ -3701,48 +3706,53 @@ function closeResume() {
    BOUTONS RÉSUMÉ
 ===================================================== */
 
-const btnCancel = document.getElementById("resumeCancel");
+const btnCancel  = document.getElementById("resumeCancel");
 const btnConfirm = document.getElementById("resumeConfirm");
+const stripeBtn  = document.getElementById("payNowAfterConfirm");
 
-if (btnCancel && btnConfirm) {
+if (btnCancel && btnConfirm && stripeBtn) {
 
   btnCancel.addEventListener("click", closeResume);
 
+  // 1️⃣ CONFIRMATION = WhatsApp + Email seulement
   btnConfirm.onclick = function(){
 
-  const msg = document.getElementById("emailMessage").value;
+    const msg = document.getElementById("emailMessage").value;
 
-  // WhatsApp (auto)
-  window.open(
-    "https://wa.me/212691059759?text=" + encodeURIComponent(msg),
-    "_blank"
-  );
+    // WhatsApp
+    window.open("https://wa.me/212691059759?text=" + encodeURIComponent(msg), "_blank");
 
-  // Email
-  setTimeout(()=> bookingForm.submit(), 800);
+    // Email
+    setTimeout(() => bookingForm.submit(), 800);
 
-  // Message paiement manuel
-  if(PAYMENT_MODE !== "arrival"){
+    // Si paiement demandé → afficher le bouton Stripe
+    if(PAYMENT_MODE !== "arrival"){
+      stripeBtn.style.display = "block";
+    } else {
+      closeResume();
+    }
+  };
+
+  // 2️⃣ BOUTON STRIPE = OUVERTURE SÉCURISÉE
+  stripeBtn.onclick = function(){
+
+    if(PAYMENT_MODE === "full"){
+      window.open("https://buy.stripe.com/FULL_LINK","_blank");
+    }
+
+    if(PAYMENT_MODE === "deposit"){
+      window.open("https://buy.stripe.com/DEPOSIT_LINK","_blank");
+    }
+
+    // Reset propre après paiement
     setTimeout(()=>{
-      alert("Merci ! Appuyez maintenant sur OK pour procéder au paiement sécurisé.");
-      if(PAYMENT_MODE === "full"){
-        window.open("https://buy.stripe.com/FULL_LINK","_blank");
-      }
-      if(PAYMENT_MODE === "deposit"){
-        window.open("https://buy.stripe.com/DEPOSIT_LINK","_blank");
-      }
-    },1200);
-  }
-
-  // Reset
-  setTimeout(()=>{
-    bookingForm.reset();
-    resetAll();
-    closeResume();
-  },2200);
-};
+      bookingForm.reset();
+      resetAll();
+      stripeBtn.style.display = "none";
+      closeResume();
+    }, 1000);
+  };
 }
-  
 
 
 
