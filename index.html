@@ -3656,6 +3656,7 @@ function escapeHTML(str) {
   msg+=`⏰ *Heure* : ${timeValue}\n`;
   if(message.value) msg+=`\n📝 *Message* : ${message.value}\n`;
   if(price) msg+=`\n💰 *Prix* : ${price}\n`;
+  msg += `💳 *Paiement* : ${PAYMENT_MODE}\n`;
 
   document.getElementById("emailMessage").value = msg;
 
@@ -3675,6 +3676,7 @@ function escapeHTML(str) {
   html+=`<p><b>⏰ Heure :</b> ${timeValue}</p>`;
   if(message.value) html+=`<p><b>📝 Message :</b> ${message.value}</p>`;
   if(price) html+=`<p><b>💰 Prix :</b> ${price}</p>`;
+  msg += `💳 *Paiement* : ${PAYMENT_MODE}\n`;
 
   document.getElementById("resumeContent").innerHTML = html;
   }
