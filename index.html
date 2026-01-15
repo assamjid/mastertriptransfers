@@ -1221,8 +1221,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐TTT 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐TTT 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐yyy 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐yyy 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
@@ -3187,19 +3187,17 @@ fixedTime.required = false;
 }
 function resetDefaults(){
   const today = new Date().toISOString().split("T")[0];
-
   date.value = today;
   date.min = today;
   heure.value = "07:00";
-
-  // Reset service PROPRE (anti Android / anti traduction)
+  setHeureMode("free","07:00");
+  resetServiceSelect();
+}
+  function resetServiceSelect(){
   const firstOption = service.querySelector("option[value='']");
   service.value = "";
   firstOption.selected = true;
-
-  // Force visuel (Android)
-  service.dispatchEvent(new Event("change"));
-}
+  }
 
 /* =====================================================
    CHOIX SERVICE
@@ -4084,6 +4082,7 @@ function setLang(langParam) {
   if(service.value === "excursion"){
   updateCircuitPlaces();
   }
+  resetServiceSelect();
 }
   
  
