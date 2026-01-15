@@ -1924,12 +1924,15 @@ Nos services
                BOOK NOW
           <span class="book-sub-label">Pay on arrival</span>
           </button>
-
-          <button type="submit" id="btnPay"
+<button type="submit" id="btnPay"
  onclick="PAYMENT_MODE='full'">
+  PAY NOW
+</button>
 
-         <button type="submit" id="btnPayDeposit"
+<button type="submit" id="btnPayDeposit"
  onclick="PAYMENT_MODE='deposit'">
+  PAY 20%
+</button>
 
  </form>
 
@@ -3702,12 +3705,11 @@ if (btnCancel && btnConfirm) {
 
   btnCancel.addEventListener("click", closeResume);
 
-  btnConfirm.addEventListener("click", function(e){
-  e.preventDefault();
+  btnConfirm.onclick = () => {
 
   const msg = document.getElementById("emailMessage").value;
 
-  // 1️⃣ Stripe
+  // STRIPE FIRST (safe Android)
   if(PAYMENT_MODE === "full"){
     window.open("https://buy.stripe.com/FULL_LINK","_blank");
   }
@@ -3715,21 +3717,21 @@ if (btnCancel && btnConfirm) {
     window.open("https://buy.stripe.com/DEPOSIT_LINK","_blank");
   }
 
-  // 2️⃣ WhatsApp
+  // WhatsApp
   setTimeout(()=>{
-    window.location.href="https://wa.me/212691059759?text="+encodeURIComponent(msg);
-  },600);
+    window.open("https://wa.me/212691059759?text="+encodeURIComponent(msg),"_blank");
+  },800);
 
-  // 3️⃣ Email
-  setTimeout(()=> bookingForm.submit(), 2500);
+  // Email
+  setTimeout(()=> bookingForm.submit(), 1600);
 
-  // 4️⃣ Reset
+  // Reset après tout
   setTimeout(()=>{
     bookingForm.reset();
     resetAll();
     closeResume();
-  },3500);
-});
+  }, 2600);
+};
 }
   
 
