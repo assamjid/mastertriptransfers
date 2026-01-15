@@ -3590,16 +3590,35 @@ function escapeHTML(str) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 }
+  
+const serviceSelect = document.getElementById("service");
+const soukPhoto = document.getElementById("soukPhoto");
 
+if(serviceSelect && soukPhoto){
+  serviceSelect.addEventListener("change", ()=>{
+    soukPhoto.style.display = serviceSelect.value ? "block" : "none";
+  });
+}
+
+/* MODE DE PAIEMENT GLOBAL */
+let PAYMENT_MODE = "arrival";
 
 /* =====================================================
    SOUMISSION – RÉSUMÉ & WHATSAPP (FINAL PRO)
 ===================================================== */
   
-  bookingForm.addEventListener("submit", function(e){
+   bookingForm.addEventListener("submit", function(e){
   e.preventDefault();
+  if(!bookingForm.checkValidity()) return;
 
-  if (!bookingForm.checkValidity()) return;
+  buildRecap();      // prépare msg + html
+  openResume();     // affiche le popup
+});
+
+
+
+
+  function buildRecap(){
 
   let price = "";
   if(service.value === "airport")   price = transferPrix.value;
@@ -3610,9 +3629,9 @@ function escapeHTML(str) {
 
   const timeValue = fixedTimeField.style.display === "block" ? fixedTime.value : heure.value;
 
-  let type="-", choix="", departTxt="-", destTxt="-", placesTxt="-";
+  let type="-", choix="", placesTxt="-";
 
-  if(service.value==="airport"){ type=transferType.value; departTxt=depart.value; destTxt=arrivee.value; placesTxt=transferPlaces.value; }
+  if(service.value==="airport"){ type=transferType.value; placesTxt=transferPlaces.value; }
   if(service.value==="intercity"){ type=trajet.value; placesTxt=places.value; }
   if(service.value==="excursion"){ type=circuit.value; choix=quadType.value||camelType.value||"-"; placesTxt=circuitPlaces.value; }
 
@@ -3622,11 +3641,8 @@ function escapeHTML(str) {
   if(email.value) msg+=`📧 *Email* : ${email.value}\n\n`;
   if(service.value) msg+=`🛎️ *Service* : ${service.options[service.selectedIndex].text}\n`;
   if(type!=="-") msg+=`🚘 *Type* : ${type}\n`;
-  if(service.value==="excursion" && choix!=="-") msg+=`🎯 *Choix* : ${choix}\n`;
-  if(depart.value) msg+=`📍 *Départ* : ${depart.value}\n`;
-  if(arrivee.value) msg+=`🏁 *Destination* : ${arrivee.value}\n`;
+  if(choix!=="-") msg+=`🎯 *Choix* : ${choix}\n`;
   if(placesTxt!=="-") msg+=`👥 *Places* : ${placesTxt}\n`;
-  if(flightNumber.value) msg+=`✈️ *Vol* : ${flightNumber.value}\n`;
   if(date.value) msg+=`📅 *Date* : ${date.value}\n`;
   if(timeValue) msg+=`⏰ *Heure* : ${timeValue}\n`;
   if(message.value) msg+=`\n📝 *Message* : ${message.value}\n`;
@@ -3634,43 +3650,17 @@ function escapeHTML(str) {
 
   document.getElementById("emailMessage").value = msg;
 
-  let recap = "";
-  if(nom.value) recap+=`<p><b>👤 Nom :</b> ${nom.value}</p>`;
-  if(tel.value) recap+=`<p><b>📞 Téléphone :</b> +${countryCode.value}${tel.value}</p>`;
-  if(email.value) recap+=`<p><b>📧 Email :</b> ${email.value}</p><hr>`;
-  if(service.value) recap+=`<p><b>🛎️ Service :</b> ${service.options[service.selectedIndex].text}</p>`;
-  if(type!=="-") recap+=`<p><b>🚘 Type :</b> ${type}</p>`;
-  if(choix!=="-") recap+=`<p><b>🎯 Choix :</b> ${choix}</p>`;
-  if(depart.value) recap+=`<p><b>📍 Départ :</b> ${depart.value}</p>`;
-  if(arrivee.value) recap+=`<p><b>🏁 Destination :</b> ${arrivee.value}</p>`;
-  if(placesTxt!=="-") recap+=`<p><b>👥 Places :</b> ${placesTxt}</p>`;
-  if(flightNumber.value) recap+=`<p><b>✈️ Vol :</b> ${flightNumber.value}</p>`;
-  if(date.value) recap+=`<p><b>📅 Date :</b> ${date.value}</p>`;
-  if(timeValue) recap+=`<p><b>⏰ Heure :</b> ${timeValue}</p>`;
-  if(message.value) recap+=`<p><b>📝 Message :</b> ${message.value}</p>`;
-  if(price) recap+=`<p><b>💰 Prix :</b> ${price}</p>`;
-
-  openResume(recap, msg);
-
-  /* 1️⃣ WHATSAPP */
-  window.location.href = "https://wa.me/212691059759?text=" + encodeURIComponent(msg);
-
-  /* 2️⃣ EMAIL */
-  setTimeout(()=> bookingForm.submit(), 1200);
-
-  /* 3️⃣ PAIEMENT */
-  setTimeout(()=>{
-
-    if(PAYMENT_MODE === "full"){
-      window.open("https://buy.stripe.com/XXXXXXXX", "_blank");
-    }
-
-    if(PAYMENT_MODE === "deposit"){
-      window.open("https://buy.stripe.com/YYYYYYYY", "_blank");
-    }
-
-  }, 1800);
-});
+  document.getElementById("resumeContent").innerHTML = `
+    <p><b>Nom:</b> ${nom.value}</p>
+    <p><b>Téléphone:</b> +${countryCode.value}${tel.value}</p>
+    <p><b>Service:</b> ${service.options[service.selectedIndex].text}</p>
+    <p><b>Type:</b> ${type}</p>
+    <p><b>Places:</b> ${placesTxt}</p>
+    <p><b>Date:</b> ${date.value}</p>
+    <p><b>Heure:</b> ${timeValue}</p>
+    <p><b>Prix:</b> ${price}</p>
+  `;
+  }
 
   
   
@@ -3706,66 +3696,56 @@ if (btnCancel && btnConfirm) {
   btnConfirm.addEventListener("click", function(e){
   e.preventDefault();
 
-  
-
   const msg = document.getElementById("emailMessage").value;
 
-  // WhatsApp avec message PRÉ-REMPLI (OBLIGATOIRE)
+  // 1️⃣ STRIPE D’ABORD (ANDROID SAFE)
+  if(PAYMENT_MODE === "full"){
+    window.open("https://buy.stripe.com/FULL_LINK","_blank");
+  }
+  if(PAYMENT_MODE === "deposit"){
+    window.open("https://buy.stripe.com/DEPOSIT_LINK","_blank");
+  }
+
+  // 2️⃣ WHATSAPP
   location.href = "https://wa.me/212691059759?text=" + encodeURIComponent(msg);
 
-  // Envoi email juste après
-  setTimeout(() => bookingForm.submit(), 500);
+  // 3️⃣ EMAIL
+  setTimeout(() => bookingForm.submit(), 600);
 
+  // === RESET PARFAIT ===
   setTimeout(() => {
 
-  // Reset HTML natif
-  bookingForm.reset();
+    bookingForm.reset();
+    resetAll();
 
-  // Reset JS complet
-  resetAll();
+    ["emailMessage","finalPrice"].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.value = "";
+    });
 
-  // Vide tous les champs cachés
-  ["emailMessage","finalPrice"].forEach(id=>{
-    const el = document.getElementById(id);
-    if(el) el.value = "";
-  });
+    setLang(lang);
 
-  // Remet la langue
-  setLang(lang);
+    document.querySelectorAll("#bookingForm select").forEach(s=>{
+      s.selectedIndex = 0;
+    });
 
-  // Force la remise à zéro des selects
-  document.querySelectorAll("#bookingForm select").forEach(s=>{
-    s.selectedIndex = 0;
-  });
+    date.value = today;
+    heure.value = "07:00";
+    bookingSubtitle.textContent = "";
 
-  // Remet date/heure par défaut
-  date.value = today;
-  heure.value = "07:00";
+    service.value = "";
+    service.dispatchEvent(new Event("change"));
 
-  // Nettoie le sous-titre
-  bookingSubtitle.textContent = "";
+    date.dispatchEvent(new Event("change"));
+    heure.dispatchEvent(new Event("change"));
+    message.value = "";
+    message.dispatchEvent(new Event("input"));
 
-    // 🔥 Retour sur "Choisir service"
-service.value = "";
-service.dispatchEvent(new Event("change"));
-    // Reset DATE
-date.value = today;
-date.dispatchEvent(new Event("change"));
+    heure.closest(".floating-field").style.display = "block";
 
-// Reset HEURE
-heure.value = "07:00";
-heure.dispatchEvent(new Event("change"));
+    closeResume();
 
-// Reset MESSAGE
-message.value = "";
-message.dispatchEvent(new Event("input"));
-
-heure.closest(".floating-field").style.display = "block";
-
-  // Ferme le popup
-  closeResume();
-
-}, 1200);
+  }, 1300);
 });
   
   }
@@ -4217,7 +4197,7 @@ serviceSelect.addEventListener("change", ()=>{
   }
 });
 
-
+let PAYMENT_MODE = "arrival";
 
 
 </script>
