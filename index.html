@@ -1138,17 +1138,21 @@ button[type="submit"]{
   .phone-group{
     display:flex;
   }
+  
+/* INDICATIF + large */
+.phone-group select{
+  width:110px;      /* +14px */
+  min-width:110px;
+}
 
-  .phone-group select{
-    width:96px !important;
-    min-width:96px;
-    flex-shrink:0;
-  }
+/* TÉLÉPHONE légèrement réduit */
+.phone-group input{
+  flex:1;
+  min-width:0;
+}
+  
 
-  .phone-group input{
-    flex:1;
-    min-width:0;
-  }
+
 
   /* Boutons */
   .floating-btn-field,
