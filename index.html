@@ -1222,8 +1222,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐AAA 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐AAA 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
@@ -4082,15 +4082,39 @@ function updateLangFlag(){
 
 /* Force langue calendrier Android */
 function forceDateLang(){
+
   const d = document.getElementById("date");
   const t = document.getElementById("heure");
-
   if(!d || !t) return;
 
-  const locale = (lang === "EN") ? "en-GB" : "fr-FR";
-  d.setAttribute("lang", locale);
-  t.setAttribute("lang", locale);
-}
+  if(lang === "EN"){
+    // Date en texte (anglais garanti)
+    d.type = "text";
+    d.placeholder = "YYYY-MM-DD";
+
+    // Validation format EN
+    d.onblur = () => {
+      if(!/^\d{4}-\d{2}-\d{2}$/.test(d.value)){
+        d.setCustomValidity("Use format YYYY-MM-DD");
+      } else {
+        d.setCustomValidity("");
+      }
+    };
+
+    // Heure en texte
+    t.type = "text";
+    t.placeholder = "HH:MM";
+
+  } else {
+    // Français → natif
+    d.type = "date";
+    d.placeholder = "";
+    d.onblur = null;
+
+    t.type = "time";
+    t.placeholder = "";
+  }
+       }
 
   
   setInterval(()=>{
