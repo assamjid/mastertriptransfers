@@ -38,9 +38,10 @@ header{
   background:#001f3f;
   color:#fff;
   padding:22px 15px 55px; /* espace pour trust-top */
-  position: sticky;      /* ⬅️ IMPORTANT */
-  top: 0;
-  z-index: 1000;
+  position: relative;   /* ou static */
+  top: auto;
+  z-index: auto;
+    }
   }
 
 /* Titre */
@@ -769,13 +770,13 @@ button[type="submit"]{
   font-weight:900;
   letter-spacing:0.6px;
   border:none;
-  box-shadow:0 4px 10px rgba(0,200,83,0.35);
+  box-shadow:none;
   transition:0.3s;
 }
 
 #btnPayDeposit:hover{
   background:#00AAFF;
-  box-shadow:0 6px 14px rgba(0,200,83,0.45);
+  box-shadow:none;
   transform:translateY(-2px) scale(1.05);
 }
 
@@ -1226,8 +1227,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐eee 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐eee 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐ddd 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐ddd 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
