@@ -1222,8 +1222,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐AAA 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐AAA 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
@@ -4028,72 +4028,69 @@ if(service.value === "excursion"){
    APPLIQUER LANGUE
 ===================================================== */
 
-function setLang(langParam) {
 
-  // 🌍 Sauvegarde + variable globale
-  lang = langParam;
+    /* ================= LANGUE (VERSION STABLE) ================= */
+
+let lang = localStorage.getItem("lang") || "EN";
+
+/* Applique une langue */
+function setLang(l){
+
+  lang = l;
   localStorage.setItem("lang", lang);
-  document.documentElement.lang = lang === "EN" ? "en" : "fr";
+  document.documentElement.lang = (lang === "EN") ? "en" : "fr";
 
   translateTexts(lang);
   translateSelects(lang);
   setPlaceholders(lang);
 
-  document.getElementById("btnReserve").innerText     = LANG[lang].reserve;
-  document.getElementById("btnPay").innerText         = LANG[lang].pay;
-  document.getElementById("btnPayDeposit").innerText  = LANG[lang].payDeposit;
+  document.getElementById("btnReserve").textContent    = LANG[lang].reserve;
+  document.getElementById("btnPay").textContent        = LANG[lang].pay;
+  document.getElementById("btnPayDeposit").textContent = LANG[lang].payDeposit;
 
-  // Sous-titre
   if (service.value === "airport")   bookingSubtitle.textContent = LANG[lang].subtitle_transfer;
   if (service.value === "intercity") bookingSubtitle.textContent = LANG[lang].subtitle_intercity;
   if (service.value === "excursion") bookingSubtitle.textContent = LANG[lang].subtitle_excursion;
 
-  // Labels prix
   document.querySelectorAll("input[readonly] + label").forEach(label => {
-    label.textContent = lang === "EN" ? "Price (€)" : "Prix (€)";
+    label.textContent = (lang === "EN") ? "Price (€)" : "Prix (€)";
   });
 
-  // Excursions
   if(service.value === "excursion") updateCircuitPlaces();
 
-  // 🔥 Fix Android / reset service
   resetServiceSelect();
-
-  // 🔥 Fix calendrier EN/FR
   forceDateLang();
+  updateLangFlag();
 }
-  
-  function forceDateLang(){
-  const d = document.getElementById("date");
-  const t = document.getElementById("heure");
 
-  if(lang === "EN"){
-    d.lang = "en";
-    t.lang = "en";
-  } else {
-    d.lang = "fr";
-    t.lang = "fr";
-  }
-  }
-  
- 
- 
-  function toggleLang(){
-  const newLang = lang === "FR" ? "EN" : "FR";
-  setLang(newLang);
-  updateLangFlag(newLang);
-  }
+/* Bouton drapeau */
+function toggleLang(){
+  setLang(lang === "EN" ? "FR" : "EN");
+}
 
-function updateLangFlag(l = lang){
+/* Drapeau */
+function updateLangFlag(){
   const flag = document.getElementById("langFlagBtn");
 
-  if(l === "FR"){
+  if(lang === "FR"){
     flag.src = "https://flagcdn.com/w40/gb.png";
     flag.title = "English";
   } else {
     flag.src = "https://flagcdn.com/w40/fr.png";
     flag.title = "Français";
   }
+}
+
+/* Force langue calendrier Android */
+function forceDateLang(){
+  const d = document.getElementById("date");
+  const t = document.getElementById("heure");
+
+  if(!d || !t) return;
+
+  const locale = (lang === "EN") ? "en-GB" : "fr-FR";
+  d.setAttribute("lang", locale);
+  t.setAttribute("lang", locale);
 }
 
   
@@ -4214,7 +4211,7 @@ function setPayment(mode){
   PAYMENT_MODE = mode;
   document.getElementById('realSubmit').click();
 }
-
+setLang(lang);
 
 
 
