@@ -4420,7 +4420,10 @@ function enableAdminDelete(){
 document.addEventListener("DOMContentLoaded",initReviews);
 
 
-
+function setPayment(mode){
+  PAYMENT_MODE = mode;
+  document.getElementById('realSubmit').click();
+}
 
 
 
