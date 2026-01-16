@@ -1278,11 +1278,20 @@ button[type="submit"]{
 
   <nav class="main-nav">
 
-  <a href="javascript:void(0)" onclick="
+<!--changement-->
+    <a href="javascript:void(0)" onclick="
+const s = document.getElementById('services');
+const y = s.getBoundingClientRect().top + window.pageYOffset - 20;
+window.scrollTo({ top: y, behavior: 'smooth' });
+" data-fr="Services" data-en="Services">Services</a>
+
+    
+
+ <!-- <a href="javascript:void(0)" onclick="
 const h=document.getElementById('mainHeader');
 const s=document.getElementById('services');
 window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
-" data-fr="Services" data-en="Services">Services</a>  
+" data-fr="Services" data-en="Services">Services</a>  -->
 
    
 
