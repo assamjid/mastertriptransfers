@@ -267,6 +267,35 @@ form textarea{
   font-size:16.5px;
   box-sizing:border-box;
 }
+
+  /* ===============================
+   FORMULAIRE ADAPTATIF À LA CARTE
+================================= */
+.booking-form-card form,
+.booking-form-card input,
+.booking-form-card select,
+.booking-form-card textarea,
+.booking-form-card button,
+.booking-form-card .phone-group{
+  width:100%;
+  max-width:100%;
+  box-sizing:border-box;
+}
+
+  .booking-form-card .phone-group{
+  display:flex;
+  gap:10px;
+}
+
+.booking-form-card .phone-group select{
+  width:96px;
+  flex-shrink:0;
+}
+
+.booking-form-card .phone-group input{
+  flex:1;
+  min-width:0;   /* ⬅️ CLÉ ANTI-DÉBORDEMENT */
+}
     
 
 /* Groupe téléphone — aligné PARFAITEMENT au formulaire */
@@ -1199,8 +1228,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐bb 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐bb 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐cc 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐cc 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
