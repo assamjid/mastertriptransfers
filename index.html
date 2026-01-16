@@ -799,7 +799,7 @@ button[type="submit"]{
 
 #btnPayDeposit{
   background:#8FD3F4;        /* Bleu perle */
-  color:#001F3F;;
+  color:#001F3F;
   font-size:20px;
   font-weight:900;
   letter-spacing:0.6px;
@@ -951,8 +951,8 @@ button[type="submit"]{
   }
 }
  
-
-@media (max-width:600px){  
+@media (min-width:601px) and (max-width:1024px){
+/*@media (max-width:600px){  */
   /* Formulaire fluide */
   form{
     width:100%;
@@ -1138,8 +1138,9 @@ button[type="submit"]{
 
   
 
-/* ================== MOBILE ================== */
-@media(max-width:600px){
+/* ================== MOBILE ================== 
+@media(max-width:600px){*/
+  @media (min-width:601px) and (max-width:1024px){
   .booking-cards-row{
     flex-direction:column;
     padding:0 12px;
