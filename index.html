@@ -826,16 +826,21 @@ button[type="submit"]{
   gap:10px;
 }
 
+/* ===== DRAPEAU DANS FORMULAIRE REVIEW ===== */
 .review-country{
-  width:90px;
+  width:70px;
   height:60px;
-  border-radius:12px;
-  border:2px solid #dde3ea;
-  background:#f9fbfc;
-  text-align:center;
-  font-size:16px;
-  font-weight:600;
-}
+  padding-left:44px;                 /* espace pour le drapeau */
+  background-position:10px center;   /* position du drapeau */
+  background-size:35px 30px;         /* ⬅️ TAILLE DU DRAPEAU */
+  background-repeat:no-repeat;
+  }
+  @media(max-width:600px){
+  .review-country{
+    background-size:35px 25px;
+    padding-left:20px;
+  }
+  }
 
 .review-stars-select{
   width:220px;
@@ -1387,8 +1392,8 @@ window.scrollTo({ top: y, behavior: 'smooth' });
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐ZZZ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐ZZZ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
