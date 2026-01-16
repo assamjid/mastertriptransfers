@@ -74,7 +74,7 @@ header{
 
 /* Boutons du menu – Style MasterTripTransfers */
 #mainHeader nav a{
-  background:#FFB400;;
+  background:#FFB400;
   color:#001F3F;                 /* Bleu nuit MasterTrip */
   padding:12px 22px;
   border-radius:30px;
@@ -1033,8 +1033,8 @@ button[type="submit"]{
 
 /* ================== CARTE FORMULAIRE ================== */
 .booking-form-card{
-  width:380px;
-  flex:0 0 380px;
+  width:420px;          /* AVANT 380px */
+  flex:0 0 420px;
   padding:26px;
   background:#fff;
   border-radius:20px;
@@ -1078,11 +1078,13 @@ button[type="submit"]{
     padding:0 12px;
   }
 
-  .booking-form-card,
+.booking-form-card,
   .booking-right{
     width:100%;
-    max-width:100%;
+    max-width:320px;
     flex:1;
+    margin:0 auto;
+    box-sizing:border-box;
   }
 
   .booking-right{
