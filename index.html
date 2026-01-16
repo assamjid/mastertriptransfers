@@ -229,12 +229,13 @@ h2{color:#001f3f;margin-bottom:30px}
   font-size:20px;         /* +2px */
   letter-spacing:0.6px;   /* meilleure lisibilité */
 }
+
 .service-pro h3 a{
-  color:#000;               /* couleur finale (noir) */
-  font-size:22px;           /* taille voulue */
-  font-weight:800;          /* gras valide */
-  letter-spacing:0.6px;
-  text-decoration:none;
+color:#f1c40f;              /* couleur voulue */
+font-size:22px;          /* taille voulue */
+font-weight:800;         /* gras */
+letter-spacing:0.6px;
+text-decoration:none;
 }
 
   
@@ -271,17 +272,18 @@ form textarea{
     
 
 /* Groupe téléphone — aligné PARFAITEMENT au formulaire */
+/* ================= PHONE GROUP (DESKTOP) ================= */
+
 .phone-group{
   display:flex;
-  width:310px;
-  margin:0;           /* ⬅️ enlève le centrage */
+  width:310px;              /* aligné avec les autres champs */
   gap:10px;
   box-sizing:border-box;
 }
 
 /* Indicatif */
 .phone-group select{
-  width:130px;
+  width:110px;              /* indicatif lisible */
   height:62px;
   border-radius:14px;
   border:2px solid #dde3ea;
@@ -294,8 +296,8 @@ form textarea{
 
 /* Numéro */
 .phone-group input{
-  flex:1;                      /* prend le reste automatiquement */
-  width:180px;
+  flex:1;                   /* prend le reste */
+  min-width:0;              /* évite overflow */
   height:62px;
   border-radius:14px;
   border:2px solid #dde3ea;
@@ -303,6 +305,9 @@ form textarea{
   font-size:16.5px;
   box-sizing:border-box;
 }
+
+
+  
   #message{
   min-height:80px;   /* plus haut */
   line-height:1.6;
@@ -948,22 +953,7 @@ button[type="submit"]{
     max-width:100%;
     box-sizing:border-box;
   }
-  /* Groupe téléphone */
-  .phone-group select{
-    width:96px;
-  }
-  .phone-group input{
-    flex:1;
-    min-width:0;
-  }  
-  .phone-group select{
-    font-size:13px;
-  }  
-  #countryCode{
-    padding-left:5px !important;
-    background-position:3px center !important;
-  }
-}
+
 
 
   /* CONTENEUR DES 3 BOUTONS */
@@ -1119,25 +1109,30 @@ button[type="submit"]{
     box-sizing:border-box;
   }
 
+  
+  .floating-btn-field,
+  .floating-btn{
+    width:100% !important;
+  }
+    }
+
+
+  @media (max-width:600px){
+
   .phone-group{
-    display:flex;
+    width:100%;              /* plein écran mobile */
   }
 
   .phone-group select{
-    width:96px !important;
-    flex-shrink:0;
+    width:96px;              /* compact mobile */
+    font-size:14px;
   }
 
   .phone-group input{
     flex:1;
     min-width:0;
   }
-
-  .floating-btn-field,
-  .floating-btn{
-    width:100% !important;
   }
-    }
 
 
   
@@ -1154,23 +1149,6 @@ button[type="submit"]{
   }
 
   /* Téléphone = parfaitement fluide */
-  .phone-group{
-    display:flex;
-  }
-  
-/* INDICATIF + large */
-.phone-group select{
-  width:60px;      /* +14px */
-  min-width:60px;
-}
-
-/* TÉLÉPHONE légèrement réduit */
-.phone-group input{
-  flex:1;
-  min-width:0;
-}
-  
-
 
 
   /* Boutons */
@@ -1318,11 +1296,10 @@ Transferts confortables depuis/vers l’aéroport, hôtels, riads et adresses pr
     Découvrez les merveilles d’Agadir et ses environs avec nos excursions organisées et guidées.
   </p>
 
-   <h3>
-  <a data-fr="Voir nos excursions →"
-     data-en="View our excursions →">
-    Voir les excursions →
-  </a>
+   <h3
+      data-fr="Voir nos excursions →"
+      data-en="View our excursions →">
+        Voir les excursions →
    </h3>
 
 </div>
