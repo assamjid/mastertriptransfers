@@ -1004,8 +1004,8 @@ button[type="submit"]{
 
 
   /* CONTENEUR DES 3 BOUTONS */
-.floating-btn-field{
-  /*position:relative;*/
+ .floating-btn-field{
+  position:relative;
   width:100%;
   max-width:320px;
   display:flex;
@@ -1014,7 +1014,7 @@ button[type="submit"]{
 }
 
 /* BOUTONS */
-.floating-btn{
+/*.floating-btn{
   width:100%;
   height:64px;
   border-radius:14px;
@@ -1022,13 +1022,13 @@ button[type="submit"]{
   font-weight:900;
   font-size:20px;
   cursor:pointer;
-  padding-top:6px;       /* espace pour le label bas */
+  padding-top:6px;       /* espace pour le label bas 
   line-height:1.15;
-}
+}*/
 
-/* LABEL EN BAS DANS LE BOUTON */
+/* LABEL EN BAS DANS LE BOUTON 
 .floating-btn-field label{
-_*  position:absolute;*/
+  position:absolute;
    bottom:6px;
   left:50%;
   transform:translateX(-50%);
@@ -1040,10 +1040,43 @@ _*  position:absolute;*/
 }
   .floating-btn .btn-text{
   margin-top:4px;   /* ⬅️ descend le texte */
+}*/
+
+.floating-btn{
+  width:100%;
+  height:64px;
+  border-radius:14px;
+  border:none;
+  cursor:pointer;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  font-weight:900;
+  font-size:20px;
+  line-height:1.15;
 }
 
+.floating-btn .btn-text{
+  margin-top:4px;   /* ⬅️ descend le texte principal */
+}
+
+.floating-btn .btn-label{
+  font-size:12px;
+  font-weight:900;
+  opacity:.95;
+  margin-top:2px;
+  pointer-events:none;
+}
+  
 
 
+
+
+
+  /*≈=======fin essai====*/
 /* Empêche que le texte principal écrase le label */
 #btnReserve,
 #btnPay,
@@ -1399,8 +1432,8 @@ window.scrollTo({ top: y, behavior: 'smooth' });
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐⭐v 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐⭐v 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐⭐m 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐⭐m 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
@@ -2166,9 +2199,24 @@ Nos services
   
 <div class="floating-field floating-btn-field">
 
-  <button type="submit" id="btnReserve" class="floating-btn">
+  <!-- <button type="submit" id="btnReserve" class="floating-btn">
     BOOK NOW
-  </button>
+  </button> -->
+
+  <button type="submit" id="btnReserve" class="floating-btn">
+  <span class="btn-text"
+        data-fr="RÉSERVER"
+        data-en="BOOK NOW">
+    BOOK NOW
+  </span>
+
+  <span class="btn-label"
+        data-fr="Paiement sur place"
+        data-en="Pay on arrival">
+    Paiement sur place
+  </span>
+</button>
+  
 
   <label for="btnReserve"
         data-fr="Payer sur place"
