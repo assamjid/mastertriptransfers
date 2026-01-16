@@ -3979,6 +3979,31 @@ function openInterville(trajetValue) {
   alert("Paiement acompte 20% — bientôt disponible");
   }
 
+  function payByCard(){
+
+  // 🔒 Vérification formulaire
+  if(!bookingForm.checkValidity()){
+    bookingForm.reportValidity(); // affiche les champs manquants
+    return;
+  }
+
+  PAYMENT_MODE = "full";
+
+  // 🔁 même logique que BOOK NOW
+  bookingForm.requestSubmit();
+  }
+
+  function payDeposit(){
+
+  if(!bookingForm.checkValidity()){
+    bookingForm.reportValidity();
+    return;
+  }
+
+  PAYMENT_MODE = "deposit";
+  bookingForm.requestSubmit();
+  }
+
   /* =====================================================
    MOTEUR MULTI-LANGUE MASTERTRIP (FR / EN)
 ===================================================== */
