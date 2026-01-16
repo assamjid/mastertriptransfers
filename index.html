@@ -3223,16 +3223,16 @@ Votre avis est précieux. Aidez d’autres voyageurs en partageant votre expéri
 
   <!-- INDICATIF PAYS -->
   <select id="reviewCountry" class="review-country">
-    <option value="🇲🇦 Maroc">🇲🇦 </option>
-    <option value="🇫🇷 France">🇫🇷 </option>
-    <option value="🇬🇧 UK">🇬🇧 </option>
-    <option value="🇩🇪 Germany">🇩🇪 </option>
-    <option value="🇪🇸 Spain">🇪🇸 </option>
-    <option value="🇺🇸 USA">🇺🇸 </option>
-    <option value="🇮🇹 Italy">🇮🇹 </option>
-    <option value="🇧🇪 Belgium">🇧🇪 </option>
-    <option value="🇳🇱 Netherlands">🇳🇱 </option>
-    <option value="🇨🇭 Switzerland">🇨🇭 </option>
+    <option value="🇬🇧 UK">🇬🇧 UK </option>
+    <option value="🇫🇷 France">🇫🇷 France </option>
+    <option value="🇲🇦 Maroc">🇲🇦 Maroc </option>
+    <option value="🇩🇪 Germany">🇩🇪 Germany </option>
+    <option value="🇪🇸 Spain">🇪🇸 Spain</option>
+    <option value="🇺🇸 USA">🇺🇸 USA </option>
+    <option value="🇮🇹 Italy">🇮🇹 Italy</option>
+    <option value="🇧🇪 Belgium">🇧🇪 Belgium </option>
+    <option value="🇳🇱 Netherlands">🇳🇱 NethLand </option>
+    <option value="🇨🇭 Switzerland">🇨🇭 Swiss</option>
   </select>
 
   <!-- NOTE -->
@@ -3582,7 +3582,7 @@ function calculPrixTransfert() {
     base = 40; extra = 2.5;
   }
 
-  transferPrix.value = (base + Math.max(0, nb - 4) * extra) + " €";
+  transferPrix.value = (base + Math.max(0, nb - 5) * extra) + " €";
 }
 transferPlaces.addEventListener("change", calculPrixTransfert);
 
