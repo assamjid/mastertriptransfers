@@ -1133,6 +1133,23 @@ button[type="submit"]{
   display:block;
 }
 
+  /* ===============================
+   CARTE PHOTOS ADAPTATIVE
+================================= */
+.booking-right,
+.booking-empty-card,
+.booking-empty-card img{
+  width:100%;
+  max-width:100%;
+  box-sizing:border-box;
+}
+  .booking-empty-card{
+  overflow:hidden;      /* ⬅️ CLÉ */
+  border-radius:20px;   /* cohérent avec la carte formulaire */
+  }
+
+  
+
 /* ================== MOBILE ================== */
 @media(max-width:600px){
   .booking-cards-row{
