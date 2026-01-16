@@ -1235,6 +1235,37 @@ button[type="submit"]{
   box-sizing:border-box;
 }
 
+/* ===============================
+   CARTE FORMULAIRE reviews AVIS CLIENT
+================================= */
+
+.review-form-card{
+  width:50%;
+  max-width:600px;
+  margin:0 auto;                 /* CENTRÉ */
+  background:#ffffff;
+  padding:30px 28px;
+  border-radius:22px;
+  box-shadow:0 18px 45px rgba(0,0,0,0.18);
+  box-sizing:border-box;
+}
+
+/* Centrage du bouton */
+#leaveReview form button{
+  width:100%;
+  margin-top:10px;
+}
+
+/* Mobile */
+@media(max-width:900px){
+  .review-form-card{
+    width:100%;
+    max-width:100%;
+    padding:24px 18px;
+  }
+}
+
+
   
 
     
@@ -1318,8 +1349,8 @@ window.scrollTo({ top: y, behavior: 'smooth' });
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐kk 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐kk 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
@@ -3124,7 +3155,8 @@ Avis de nos clients
 <div id="liveReviews"></div>
 </section>
 
-  <section id="leaveReview">
+ <section id="leaveReview">
+  <div class="review-form-card">
 
 <h2 data-fr="Laissez votre avis"
     data-en="Leave your review">
@@ -3179,8 +3211,10 @@ Votre avis est précieux. Aidez d’autres voyageurs en partageant votre expéri
 
   <button type="button" onclick="sendReview()">📝 Envoyer mon avis</button>
 </form>
-
-  </section>
+    
+</div>
+ </section>
+  
 
 <script>
   
