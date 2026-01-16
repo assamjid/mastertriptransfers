@@ -4233,6 +4233,9 @@ function openInterville(trajetValue) {
   alert("Paiement acompte 20% — bientôt disponible");
   }
 
+
+/*=========STRIPE PAY NOW ET DEPOSIT =======
+  
   function payByCard(){
 
   // 🔒 Vérification formulaire
@@ -4257,6 +4260,11 @@ function openInterville(trajetValue) {
   PAYMENT_MODE = "deposit";
   bookingForm.requestSubmit();
   }
+
+
+
+
+  =========AND FONCTION PAY NOW AND DEPOSIT===========*/
 
   /* =====================================================
    MOTEUR MULTI-LANGUE MASTERTRIP (FR / EN)
@@ -4528,10 +4536,27 @@ function setPayment(mode){
   document.getElementById('realSubmit').click();
 }
 
+/*=======MESSAGE DE PAIEMENT DISPONIBLE BIENTÔT =====*/
+  
+function paiementBientotDisponible(){
+  const lang = document.documentElement.lang || "fr";
 
+  if(lang.startsWith("fr")){
+    alert("💳 Paiement en ligne bientôt disponible.\nMerci de votre patience 🙏");
+  }else{
+    alert("💳 Online payment coming soon.\nThank you for your patience 🙏");
+  }
+}
 
+/* Override temporaire Stripe */
+function payByCard(){
+  paiementBientotDisponible();
+}
 
-</script>
+function payDeposit(){
+  paiementBientotDisponible();
+}
+
 
   <div class="wa-label"
      data-fr="Besoin d’aide ?"
