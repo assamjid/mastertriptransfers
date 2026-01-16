@@ -1335,8 +1335,17 @@ transfert aéroport agadir, transport agadir, excursion agadir, taxi privé agad
 
 <div class="service-grid">
 
-  <div class="service-pro" onclick="openService('airport')" style="cursor:pointer;">
+<!-- <div class="service-pro" onclick="openService('airport')" style="cursor:pointer;">-->
+<div class="service-pro"
+onclick="
+openService('airport');
+const s = document.getElementById('bookingTitle');
+const y = s.getBoundingClientRect().top + window.pageYOffset - 20;
+window.scrollTo({ top: y, behavior: 'smooth' });
+"
+style="cursor:pointer;">
 
+  
   <h3 data-fr="Transferts Privés & Aéroport"
     data-en="Private & Airport Transfers">
 Transferts Privés & Aéroport
