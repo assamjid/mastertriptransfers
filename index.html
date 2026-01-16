@@ -1282,10 +1282,19 @@ button[type="submit"]{
 const h=document.getElementById('mainHeader');
 const s=document.getElementById('services');
 window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
-" data-fr="Services" data-en="Services">Services</a>
+" data-fr="Services" data-en="Services">Services</a>  
 
-  <a href="javascript:void(0)" onclick="fixBookingScroll()"
-     data-fr="Réserver Ici" data-en="Book Now">Réservation</a>
+   
+
+ <!-- <a href="javascript:void(0)" onclick="fixBookingScroll()"
+     data-fr="Réserver Ici" data-en="Book Now">Réservation</a>  -->
+
+    <a href="javascript:void(0)" onclick="
+const h = document.getElementById('mainHeader');
+const s = document.getElementById('bookingTitle');
+const y = s.getBoundingClientRect().top + window.pageYOffset;
+window.scrollTo({ top: y - h.offsetHeight - 10, behavior: 'smooth' });
+" data-fr="Réserver" data-en="Book">Réserver</a>
 
   <span class="lang-flag-single">
     <img id="langFlagBtn"
@@ -1301,8 +1310,8 @@ window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐yy 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐yy 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐rr 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐rr 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
