@@ -307,7 +307,7 @@ box-sizing:border-box;
   border:2px solid #dde3ea;
   background:#f9fbfc;
   font-size:16.5px;
-  padding:0 18px; 
+  padding:0 16px; 
   box-sizing:border-box;
 }
     /* =======ajout=====*/
@@ -371,9 +371,9 @@ button:hover{transform:translateY(-2px)}
   width:100%;
   max-width:320px;
 }
-.floating-field select{padding:22px 18px 10px}
-.floating-field input{padding:22px 18px 10px}
-.floating-field textarea{padding:28px 18px 10px;resize:none}
+.floating-field select{padding:22px 16px 10px}
+.floating-field input{padding:22px 16px 10px}
+.floating-field textarea{padding:28px 16px 10px;resize:none}
 .floating-field label{
   position:absolute;
   top:6px;
