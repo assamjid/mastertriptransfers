@@ -1329,7 +1329,7 @@ button[type="submit"]{
 .cta-fixed{
   position:fixed;
   bottom:2px;
-  left:60px;
+  left:80px;
   transform:translateX(-50%);
   z-index:9999;
   display: none;
