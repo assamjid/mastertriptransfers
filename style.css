@@ -370,8 +370,8 @@ button:hover{transform:translateY(-2px)}
   width:100%;
   max-width:320px;
 }
-.floating-field input{padding:22px 14px 10px}
-.floating-field textarea{padding:28px 14px 10px;resize:none}
+.floating-field input{padding:22px 20px 10px}
+.floating-field textarea{padding:28px 20px 10px;resize:none}
 .floating-field label{
   position:absolute;
   top:6px;
