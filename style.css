@@ -250,7 +250,7 @@ form select,
 form textarea{
 width:320px; /* ⬅️ +20px */
 height:62px; / ⬅️ un peu plus haut */
-padding:14px 16px;
+padding:18px 16px;
 border-radius:14px;
 border:2px solid #dde3ea;
 background:#f9fbfc;
@@ -307,6 +307,7 @@ box-sizing:border-box;
   border:2px solid #dde3ea;
   background:#f9fbfc;
   font-size:16.5px;
+  padding:0 18px; 
   box-sizing:border-box;
 }
     /* =======ajout=====*/
@@ -370,8 +371,8 @@ button:hover{transform:translateY(-2px)}
   width:100%;
   max-width:320px;
 }
-.floating-field input{padding:22px 20px 10px}
-.floating-field textarea{padding:28px 20px 10px;resize:none}
+.floating-field input{padding:22px 18px 10px}
+.floating-field textarea{padding:28px 18px 10px;resize:none}
 .floating-field label{
   position:absolute;
   top:6px;
