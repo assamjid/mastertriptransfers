@@ -771,6 +771,14 @@ if (btnCancel && btnConfirm && stripeBtn) {
   };
 }
 
+        /* fonction réinitialise formulaire après clic sur bouton.   */
+function afterFormSent(){
+  bookingForm.reset();      // vide le formulaire
+  resetAll();               // remet prix, services, champs dynamiques
+  stripeBtn.style.display = "none";
+  closeResume();
+}
+
 /* =====================================================
    FERMETURE OVERLAY AU CLIC EXTÉRIEUR
 ===================================================== */
