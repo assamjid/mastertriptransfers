@@ -1385,19 +1385,6 @@ const y = s.getBoundingClientRect().top + window.pageYOffset - 20;
 window.scrollTo({ top: y, behavior: 'smooth' });
 " data-fr="Services" data-en="Services">Services</a>
 
-    
-
- <!-- <a href="javascript:void(0)" onclick="
-const h=document.getElementById('mainHeader');
-const s=document.getElementById('services');
-window.scrollTo({top:s.offsetTop-h.offsetHeight-10,behavior:'smooth'});
-" data-fr="Services" data-en="Services">Services</a>  -->
-
-   
-
- <!-- <a href="javascript:void(0)" onclick="fixBookingScroll()"
-     data-fr="Réserver Ici" data-en="Book Now">Réservation</a>  -->
-
     <a href="javascript:void(0)" onclick="
 const s = document.getElementById('bookingTitle');
 const y = s.getBoundingClientRect().top + window.pageYOffset - 20;
@@ -1418,8 +1405,8 @@ window.scrollTo({ top: y, behavior: 'smooth' });
 
 
   <div class="trust-top"
-    data-fr="⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
-    data-en="⭐⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
+    data-fr="⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7"
+    data-en="⭐⭐⭐⭐⭐ 4.9/5 – 120+ verified reviews • Certified drivers • Pay on arrival • WhatsApp 7/7">
     ⭐⭐⭐⭐⭐ 4.9/5 – 120+ avis vérifiés • Chauffeurs certifiés • Paiement sur place • WhatsApp 7j/7
 </div>
   
@@ -1461,8 +1448,6 @@ Transferts confortables depuis/vers l’aéroport, hôtels, riads et adresses pr
 </h3>
 </div>
 
- <!-- <div class="service-pro" onclick="goInterville()" style="cursor:pointer;"> -->
-  
 <div class="service-pro"
 onclick="
 goInterville();
@@ -1496,7 +1481,6 @@ style="cursor:pointer;">
 
   </div>
 
-<!-- <div class="service-pro" onclick="goExcursions()" style="cursor:pointer;"> -->
 <div class="service-pro"
 onclick="
 goExcursions();
@@ -2004,10 +1988,7 @@ Nos services
   Chameau
   </label>
 </div>
-
-
-
-
+  
 <div class="floating-field">
   <select id="circuitPlaces" name="excursion_people" required></select>
   <label for="circuitPlaces"
@@ -2016,8 +1997,6 @@ Nos services
   Places
   </label>
 </div>
-
-
 
 <div class="floating-field">
 <input type="text" id="circuitPrix" class="full" name="excursion_price" placeholder="0,00€" readonly>
@@ -2029,8 +2008,7 @@ Nos services
 </div>
 
 </div>
-
-
+  
 <div class="floating-field">
 <input type="date" id="date" name="date" required>
   
@@ -2040,8 +2018,6 @@ Nos services
   Date
   </label>
 </div>
-
-
 
 <div class="floating-field" id="heureField">
   <input type="time" id="heure" name="time" required>
@@ -2145,8 +2121,6 @@ Nos services
 <option value="963">🇸🇾 +963</option>
 <option value="964">🇮🇶 +964</option>
 <option value="970">🇵🇸 +970</option>
-
-
   
 </select>
 <input id="tel" name="phone" type="tel" data-fr="Téléphone" data-en="Phone number" placeholder="Téléphone" required>
@@ -2172,24 +2146,11 @@ Nos services
 <input type="hidden" name="_template" value="table">
 <input type="submit" id="realSubmit" hidden>
 
-  <!-- ================= HEADER ================= --
-<div class="floating-field floating-btn-field">
-
-<button type="button" id="btnReserve" class="floating-btn" onclick="setPayment('arrival')">BOOK NOW</button>
-<button type="button" id="btnPay" class="floating-btn" onclick="setPayment('full')">PAY NOW</button>
-<button type="button" id="btnPayDeposit" class="floating-btn" onclick="setPayment('deposit')">PAY 20%</button>
-
-</div>
-
--->
+  <!-- ================= HEADER ================= -->
   
 <div class="floating-field floating-btn-field">
 
-  <!-- <button type="submit" id="btnReserve" class="floating-btn">
-    BOOK NOW
-  </button> -->
-
-  <button type="submit" id="btnReserve" class="floating-btn">
+   <button type="submit" id="btnReserve" class="floating-btn">
   <span class="btn-text"
         data-fr="RÉSERVER"
         data-en="BOOK NOW">
@@ -2236,10 +2197,7 @@ Nos services
         data-en="Book and ">
     Acompte
   </label>
-</div>
-
-
-  
+</div>  
 
  </form>
       <iframe name="hiddenFrame" style="display:none"></iframe>
@@ -2271,9 +2229,6 @@ Nos services
   </div>
 
 </section>
-
-
-  
 
 
   <div class="trust-box">
@@ -2310,8 +2265,6 @@ Nos services
 
   </div>
   
-
-
 <section style="text-align:center">
 
 <h2 data-fr="Ils nous font confiance" data-en="They trust us">
@@ -2357,11 +2310,8 @@ height:40px;
 z-index:99999;
 ">.</button>
 
-  
 </div>
-</section>
-  
-  
+</section>  
   
 <section id="popularDestinations">
 
@@ -2566,7 +2516,6 @@ onclick="openExcursion('Tour de la ville d’Agadir')">
 Réserver maintenant
 </a>
   
-
 </div>
 
 <div class="exc-card">
@@ -3285,7 +3234,7 @@ Votre avis est précieux. Aidez d’autres voyageurs en partageant votre expéri
 <option value="🇨🇦 Canada">🇨🇦 Canada</option>
 <option value="🇺🇸 USA">🇺🇸 USA</option>
 <option value="🇦🇺 Australia">🇦🇺 Australia</option>
-<option value="🇳🇿 New Zealand">🇳🇿 New Zealand</option>
+<option value="🇳🇿 New Zealand">🇳🇿 </option>
 <option value="🇵🇱 Poland">🇵🇱 Poland</option>
 <option value="🇨🇿 Czech Republic">🇨🇿 Czech Republic</option>
 <option value="🇭🇺 Hungary">🇭🇺 Hungary</option>
@@ -4098,9 +4047,6 @@ if (btnCancel && btnConfirm && stripeBtn) {
   };
 }
 
-
-
-
 /* =====================================================
    FERMETURE OVERLAY AU CLIC EXTÉRIEUR
 ===================================================== */
@@ -4145,10 +4091,6 @@ function fixBookingScroll(){
   window.scrollTo({ top: y, behavior:"smooth" });
 }
   
-
-
-
-
 function openService(serviceValue) {
 
   // Scroll propre vers la réservation
@@ -4192,10 +4134,6 @@ function goExcursions(){
   window.scrollTo({ top: y, behavior: "smooth" });
 }
   
-
-
-
-
 function setHeureMode(mode, defaultValue = "") {
   if (mode === "free") {
     heureField.style.display = "block";
@@ -4438,7 +4376,6 @@ function setLang(langParam) {
 }
   
  
- 
   function toggleLang(){
   const current = localStorage.getItem("lang") || "EN";
   setLang(current === "FR" ? "EN" : "FR");
@@ -4473,9 +4410,6 @@ function updateLangFlag(){
 });
 
   
-
-
-
 function getReviews(){
   return JSON.parse(localStorage.getItem(REVIEW_STORE) || "[]");
 }
