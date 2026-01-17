@@ -1328,8 +1328,8 @@ button[type="submit"]{
 /* CTA BOUTON EN BAS FIXE MOBILE */
 .cta-fixed{
   position:fixed;
-  bottom:0px;
-  left:50%;
+  bottom:2px;
+  left:16px;
   transform:translateX(-50%);
   z-index:9999;
   display: none;
