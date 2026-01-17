@@ -1325,6 +1325,32 @@ button[type="submit"]{
   }
 }
 
+/* CTA BOUTON EN BAS FIXE MOBILE */
+.cta-fixed{
+  position:fixed;
+  bottom:0px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:9999;
+  display: none;
+
+  background:#ffad33;
+  color:#001f3f;
+  font-weight:900;
+  font-size:18px;
+
+  padding:14px 10px;
+  border-radius:40px;
+  text-decoration:none;
+}
+
+/* Affiché surtout sur mobile */
+@media(min-width:768px){
+  .cta-fixed{
+    display:none;
+  }
+}
+
 
 .whatsapp-float{
   position:fixed;
