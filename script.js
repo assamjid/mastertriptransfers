@@ -116,6 +116,8 @@ const fixedTime = document.getElementById("fixedTime");
 
 const heureField = document.getElementById("heureField");
 
+const ctaFixed = document.querySelector(".cta-fixed");
+const bookingFormCard = document.querySelector(".booking-form-card");
 
 const REVIEW_STORE = "MTT_REVIEWS";
 
@@ -972,10 +974,19 @@ function openInterville(trajetValue) {
   bookingForm.requestSubmit();
   }
 
-
-
-
   =========AND FONCTION PAY NOW AND DEPOSIT===========*/
+
+/*=====FONCTION BOUTON EN BAS BOOK NOW=====*/
+function updateCTA(lang){
+  if(!ctaFixed) return;
+  ctaFixed.textContent =
+    lang === "FR"
+      ? ctaFixed.dataset.fr
+      : ctaFixed.dataset.en;
+}
+
+
+
 
   /* =====================================================
    MOTEUR MULTI-LANGUE MASTERTRIP (FR / EN)
@@ -1105,6 +1116,7 @@ function setLang(langParam) {
   if(service.value === "excursion"){
   updateCircuitPlaces();
   }
+  updateCTA(lang);
 }
   
  
@@ -1125,7 +1137,7 @@ function updateLangFlag(){
     flag.src = "https://flagcdn.com/w40/fr.png";
     flag.title = "Français";
   }
-}
+  }
   
   
   setInterval(()=>{
@@ -1264,5 +1276,20 @@ function payDeposit(){
   paiementBientotDisponible();
 }
 
+/*========BOUTON BOUK NOW EN BAS=======*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  if (!ctaFixed || !bookingFormCard) return;
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      ctaFixed.style.display = entry.isIntersecting ? "none" : "flex";
+    },
+    { threshold: 0.25 }
+  );
+
+  observer.observe(bookingFormCard);
+});
 
    
