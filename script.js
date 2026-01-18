@@ -654,8 +654,6 @@ function escapeHTML(str) {
 
   function buildRecap(){
 
-    if (!stripeAmountInput) return;
-
   let price = "";
   if(service.value === "airport")   price = transferPrix.value;
   if(service.value === "intercity") price = prix.value;
@@ -764,43 +762,28 @@ if (btnCancel && btnConfirm) {
 
   // 1️⃣ CONFIRMATION = WhatsApp + Email seulement
 
-  btnConfirm.onclick = async function () {
+  btnConfirm.onclick = function () {
 
   const msg = document.getElementById("emailMessage").value;
 
-  // 1️⃣ WhatsApp (toujours)
+  // 1️⃣ WhatsApp
   window.open(
     "https://wa.me/212691059759?text=" + encodeURIComponent(msg),
     "_blank"
   );
 
-  // ⚠️ Stripe demandé MAIS pas de montant (sur devis)
-  if (PAYMENT_MODE !== "arrival" && !stripeAmountInput.value) {
-    alert("Paiement en ligne indisponible pour ce service (sur devis).");
-    return;
-  }
-
-  // 2️⃣ Stripe (si paiement en ligne possible)
-  if (PAYMENT_MODE !== "arrival" && stripeAmountInput.value) {
-
-    const res = await fetch("/.netlify/functions/create-checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        amount: Number(stripeAmountInput.value)
-      })
-    });
-
-    const data = await res.json();
-    window.location.href = data.url;
-    return; // ⛔ stop ici
-  }
-
-  // 3️⃣ Email uniquement (paiement à l’arrivée)
+  // 2️⃣ Email
   bookingForm.requestSubmit();
-  closeResume();
+
+  // 3️⃣ Si paiement à l’arrivée → fermer
+  if (PAYMENT_MODE === "arrival") {
+    closeResume();
+  }
+
+  // 👉 Si pay now / deposit
+  // on NE FERME PAS le récap
+  // le bouton Stripe reste visible
 };
-  
  
 }
 
@@ -999,7 +982,38 @@ function openInterville(trajetValue) {
 
  /* =========AND FONCTION PAY NOW AND DEPOSIT===========*/
 
-  
+  async function payNowAfterConfirm(btn){
+
+  // 🔒 Sécurité anti double clic
+  btn.disabled = true;
+  btn.textContent = "Redirection…";
+
+  try {
+    const res = await fetch("/.netlify/functions/create-checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: Number(stripeAmountInput.value)
+      })
+    });
+
+    const data = await res.json();
+
+    if (!data.url) {
+      alert("Erreur de paiement, merci de réessayer.");
+      btn.disabled = false;
+      btn.textContent = "Payer par carte";
+      return;
+    }
+
+    window.location.href = data.url;
+
+  } catch (e) {
+    alert("Connexion Stripe impossible.");
+    btn.disabled = false;
+    btn.textContent = "Payer par carte";
+  }
+  }
 
 
 
