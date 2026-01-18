@@ -122,12 +122,14 @@ const bookingFormCard = document.querySelector(".booking-form-card");
 
 const REVIEW_STORE = "MTT_REVIEWS";
 
-const stripeBtn = document.getElementById("payNowAfterConfirm");
-
-const stripeAmountInput = document.getElementById("stripe_amount");
-
 let PAYMENT_MODE = "arrival";   // arrival | full | deposit
+let stripeBtn;
+let stripeAmountInput;
 
+document.addEventListener("DOMContentLoaded", () => {
+  stripeBtn = document.getElementById("payNowAfterConfirm");
+  stripeAmountInput = document.getElementById("stripe_amount");
+});
 
   
 
@@ -1278,19 +1280,6 @@ function enableAdminDelete(){
 
 /* ---------- BOOT AUTO ---------- */
 document.addEventListener("DOMContentLoaded",initReviews);
-
-
-/*=======MESSAGE DE PAIEMENT DISPONIBLE BIENTÔT =====
-  
-function paiementBientotDisponible(){
-  const lang = document.documentElement.lang || "fr";
-
-  if(lang.startsWith("fr")){
-    alert("💳 Paiement en ligne bientôt disponible.\nMerci de votre patience 🙏");
-  }else{
-    alert("💳 Online payment coming soon.\nThank you for your patience 🙏");
-  }
-} 
 
 
 /*========BOUTON BOUK NOW EN BAS=======*/
