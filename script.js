@@ -782,25 +782,7 @@ if (btnCancel && btnConfirm && stripeBtn) {
     }
   };
 
-  // 2️⃣ BOUTON STRIPE = OUVERTURE SÉCURISÉE
-  stripeBtn.onclick = function(){
-
-    if(PAYMENT_MODE === "full"){
-      window.open("https://buy.stripe.com/FULL_LINK","_blank");
-    }
-
-    if(PAYMENT_MODE === "deposit"){
-      window.open("https://buy.stripe.com/DEPOSIT_LINK","_blank");
-    }
-
-    // Reset propre après paiement
-    setTimeout(()=>{
-      bookingForm.reset();
-      resetAll();
-      stripeBtn.style.display = "none";
-      closeResume();
-    }, 1000);
-  };
+ 
 }
 
         /* fonction réinitialise formulaire après clic sur bouton.   */
