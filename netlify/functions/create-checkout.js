@@ -7,8 +7,9 @@ exports.handler = async (event) => {
     }
 
     const data = JSON.parse(event.body);
+    const amount = parseInt(data.amount, 10);
 
-    if (!data.amount || data.amount <= 0) {
+    if (!amount || amount <= 0) {
       return { statusCode: 400, body: "Montant invalide" };
     }
 
@@ -21,10 +22,13 @@ exports.handler = async (event) => {
           product_data: {
             name: "MasterTripTransfers – Réservation",
           },
-          unit_amount: data.amount,
+          unit_amount: amount,
         },
         quantity: 1,
       }],
+      metadata: {
+        source: "mastertrip-booking",
+      },
       success_url: "https://www.mastertriptransfers.com/success.html",
       cancel_url: "https://www.mastertriptransfers.com/cancel.html",
     });
