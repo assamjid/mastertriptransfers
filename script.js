@@ -762,7 +762,6 @@ function closeResume() {
 
 const btnCancel  = document.getElementById("resumeCancel");
 const btnConfirm = document.getElementById("resumeConfirm");
-const stripeBtn  = document.getElementById("payNowAfterConfirm");
 
 if (btnCancel && btnConfirm && stripeBtn) {
 
@@ -794,9 +793,8 @@ if (btnCancel && btnConfirm && stripeBtn) {
 function afterFormSent(){
   bookingForm.reset();
   resetAll();
-
-  const stripeBtn = document.getElementById("payNowAfterConfirm");
-  if(stripeBtn) stripeBtn.style.display = "none";
+  
+    if(stripeBtn) stripeBtn.style.display = "none";
 
   closeResume();
 }
