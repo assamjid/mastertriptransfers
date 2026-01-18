@@ -3,10 +3,16 @@ require 'vendor/autoload.php';
 
 \Stripe\Stripe::setApiKey('sk_live_TA_CLE_SECRETE');
 
+// 🔒 Vérification présence du montant
+if (!isset($_POST['stripe_amount'])) {
+  die("Requête invalide");
+}
+
 // Montant reçu depuis le formulaire
 $amount = (int) $_POST['stripe_amount'];
 
-if($amount <= 0){
+// 🔒 Vérification valeur
+if ($amount <= 0) {
   die("Montant invalide");
 }
 
@@ -26,5 +32,5 @@ $session = \Stripe\Checkout\Session::create([
   'cancel_url' => 'https://tonsite.com/cancel.html',
 ]);
 
-header("Location: ".$session->url);
+header("Location: " . $session->url);
 exit;
