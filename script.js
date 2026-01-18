@@ -939,15 +939,8 @@ function openInterville(trajetValue) {
   window.scrollTo({top:y,behavior:"smooth"});
   }
 
-  function payByCard(){
-  window.open("https://buy.stripe.com/xxxxxxxxx","_blank");
-  }
-  function payDeposit(){
-  alert("Paiement acompte 20% — bientôt disponible");
-  }
 
-
-/*=========STRIPE PAY NOW ET DEPOSIT =======
+/*=========STRIPE PAY NOW ET DEPOSIT =======*/
   
   function payByCard(){
 
@@ -974,7 +967,17 @@ function openInterville(trajetValue) {
   bookingForm.requestSubmit();
   }
 
-  =========AND FONCTION PAY NOW AND DEPOSIT===========*/
+ /* =========AND FONCTION PAY NOW AND DEPOSIT===========*/
+
+  function payByCard(){
+  window.open("https://buy.stripe.com/xxxxxxxxx","_blank");
+  }
+  function payDeposit(){
+  alert("Paiement acompte 20% — bientôt disponible");
+  }
+
+
+
 
 /*=====FONCTION BOUTON EN BAS BOOK NOW=====*/
 function updateCTA(lang){
@@ -1255,7 +1258,7 @@ function setPayment(mode){
   document.getElementById('realSubmit').click();
 }
 
-/*=======MESSAGE DE PAIEMENT DISPONIBLE BIENTÔT =====*/
+/*=======MESSAGE DE PAIEMENT DISPONIBLE BIENTÔT =====
   
 function paiementBientotDisponible(){
   const lang = document.documentElement.lang || "fr";
@@ -1265,7 +1268,8 @@ function paiementBientotDisponible(){
   }else{
     alert("💳 Online payment coming soon.\nThank you for your patience 🙏");
   }
-}
+} 
+=============FIN PAIEMENT BIENTÔT DISPONIBLE */
 
 /* Override temporaire Stripe */
 function payByCard(){
