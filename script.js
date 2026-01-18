@@ -1326,4 +1326,30 @@ document.addEventListener("DOMContentLoaded", () => {
   observer.observe(bookingFormCard);
 });
 
+
+/*==≈==========FONCTION STRIPE ========*/
+document.addEventListener("DOMContentLoaded", () => {
+
+  const stripeBtn = document.getElementById("payNowAfterConfirm");
+  const bookingForm = document.getElementById("bookingForm");
+  const stripeAmountInput = document.getElementById("stripe_amount");
+
+  if (!stripeBtn || !bookingForm || !stripeAmountInput) return;
+
+  stripeBtn.onclick = function () {
+
+    if (!stripeAmountInput.value) {
+      alert("Paiement non disponible pour cette réservation.");
+      return;
+    }
+
+    // 🔐 Envoi vers Stripe
+    bookingForm.action = "/checkout.php";   // chemin vers ton PHP Stripe
+    bookingForm.method = "POST";
+    bookingForm.target = "_self";
+
+    bookingForm.submit();
+  };
+});
+
    
