@@ -654,6 +654,8 @@ function escapeHTML(str) {
 
   function buildRecap(){
 
+    if (!stripeAmountInput) return;
+
   let price = "";
   if(service.value === "airport")   price = transferPrix.value;
   if(service.value === "intercity") price = prix.value;
@@ -715,27 +717,22 @@ function escapeHTML(str) {
     
            const total = getFormPriceValue();
 
-           // 🔒 Sécurité : pas de paiement si pas de prix
-                 if (!total || isNaN(total) || total <= 0) {
-                document.getElementById("stripe_amount").value = "";
-                 return;
-                }        
-            if (PAYMENT_MODE === "arrival") {
-             document.getElementById("stripe_amount").value = "";
-            return;
-             }
-             let amount = total;
-                // acompte 20 %
-              if(PAYMENT_MODE === "deposit"){
-               amount = Math.round(total * 0.2);
-              }
+       // 🔒 Gestion Stripe
+         stripeAmountInput.value = "";
 
-       // Stripe veut des CENTIMES
-        document.getElementById("stripe_amount").value = Math.round(amount * 100);   
-    
-          
+        if (total && !isNaN(total) && total > 0 && PAYMENT_MODE !== "arrival") {
+        let amount = total;
 
-         }
+        // acompte 20 %
+        if (PAYMENT_MODE === "deposit") {
+         amount = total * 0.2;
+          }
+
+         // Stripe → centimes
+           stripeAmountInput.value = Math.round(amount * 100);
+          }    
+
+  }
 
   
 /* =====================================================
@@ -771,13 +768,19 @@ if (btnCancel && btnConfirm) {
 
   const msg = document.getElementById("emailMessage").value;
 
-  // WhatsApp
+  // 1️⃣ WhatsApp (toujours)
   window.open(
     "https://wa.me/212691059759?text=" + encodeURIComponent(msg),
     "_blank"
   );
 
-  // Stripe
+  // ⚠️ Stripe demandé MAIS pas de montant (sur devis)
+  if (PAYMENT_MODE !== "arrival" && !stripeAmountInput.value) {
+    alert("Paiement en ligne indisponible pour ce service (sur devis).");
+    return;
+  }
+
+  // 2️⃣ Stripe (si paiement en ligne possible)
   if (PAYMENT_MODE !== "arrival" && stripeAmountInput.value) {
 
     const res = await fetch("/.netlify/functions/create-checkout", {
@@ -790,10 +793,10 @@ if (btnCancel && btnConfirm) {
 
     const data = await res.json();
     window.location.href = data.url;
-    return;
+    return; // ⛔ stop ici
   }
 
-  // Email uniquement
+  // 3️⃣ Email uniquement (paiement à l’arrivée)
   bookingForm.requestSubmit();
   closeResume();
 };
