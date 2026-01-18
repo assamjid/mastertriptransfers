@@ -1304,20 +1304,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!stripeBtn || !bookingForm || !stripeAmountInput) return;
 
-  stripeBtn.onclick = function () {
+  stripeBtn.onclick = async function () {
 
-    if (!stripeAmountInput.value) {
-      alert("Paiement non disponible pour cette réservation.");
-      return;
-    }
+  if (!stripeAmountInput.value) {
+    alert("Paiement non disponible");
+    return;
+  }
 
-    // 🔐 Envoi vers Stripe
-    bookingForm.action = "/checkout.php";   // chemin vers ton PHP Stripe
-    bookingForm.method = "POST";
-    bookingForm.target = "_self";
+  const res = await fetch("/.netlify/functions/create-checkout", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      amount: stripeAmountInput.value
+    })
+  });
 
-    bookingForm.submit();
-  };
-});
+  const data = await res.json();
+  window.location.href = data.url;
+};
 
    
