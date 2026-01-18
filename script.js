@@ -999,13 +999,7 @@ function openInterville(trajetValue) {
 
  /* =========AND FONCTION PAY NOW AND DEPOSIT===========*/
 
-  function payByCard(){
-  window.open("https://buy.stripe.com/xxxxxxxxx","_blank");
-  }
-  function payDeposit(){
-  alert("Paiement acompte 20% — bientôt disponible");
-  }
-
+  
 
 
 
@@ -1314,16 +1308,7 @@ function paiementBientotDisponible(){
     alert("💳 Online payment coming soon.\nThank you for your patience 🙏");
   }
 } 
-=============FIN PAIEMENT BIENTÔT DISPONIBLE */
 
-/* Override temporaire Stripe */
-function payByCard(){
-  paiementBientotDisponible();
-}
-
-function payDeposit(){
-  paiementBientotDisponible();
-}
 
 /*========BOUTON BOUK NOW EN BAS=======*/
 
