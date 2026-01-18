@@ -121,6 +121,10 @@ const bookingFormCard = document.querySelector(".booking-form-card");
 
 const REVIEW_STORE = "MTT_REVIEWS";
 
+const stripeBtn = document.getElementById("payNowAfterConfirm");
+const bookingForm = document.getElementById("bookingForm");
+const stripeAmountInput = document.getElementById("stripe_amount");
+
 let PAYMENT_MODE = "arrival";   // arrival | full | deposit
 
 
@@ -726,7 +730,11 @@ function escapeHTML(str) {
               }
 
        // Stripe veut des CENTIMES
-        document.getElementById("stripe_amount").value = Math.round(amount * 100);    
+        document.getElementById("stripe_amount").value = Math.round(amount * 100);   
+    
+           if (stripeBtn) {
+             stripeBtn.disabled = !document.getElementById("stripe_amount").value;
+             }
 
          }
 
@@ -1306,9 +1314,7 @@ document.addEventListener("DOMContentLoaded", () => {
 /*==≈==========FONCTION STRIPE ========*/
 document.addEventListener("DOMContentLoaded", () => {
 
-  const stripeBtn = document.getElementById("payNowAfterConfirm");
-  const bookingForm = document.getElementById("bookingForm");
-  const stripeAmountInput = document.getElementById("stripe_amount");
+  
 
   if (!stripeBtn || !bookingForm || !stripeAmountInput) return;
 
