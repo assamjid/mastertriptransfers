@@ -1,17 +1,14 @@
 <?php
 require 'vendor/autoload.php';
 
-\Stripe\Stripe::setApiKey('sk_live_TA_CLE_SECRETE');
+\Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
 
-// 🔒 Vérification présence du montant
 if (!isset($_POST['stripe_amount'])) {
   die("Requête invalide");
 }
 
-// Montant reçu depuis le formulaire
 $amount = (int) $_POST['stripe_amount'];
 
-// 🔒 Vérification valeur
 if ($amount <= 0) {
   die("Montant invalide");
 }
@@ -28,8 +25,8 @@ $session = \Stripe\Checkout\Session::create([
     ],
     'quantity' => 1,
   ]],
-  'success_url' => 'https://tonsite.com/success.html',
-  'cancel_url' => 'https://tonsite.com/cancel.html',
+  'success_url' => 'https://mastertriptransfers.com/?payment=success',
+  'cancel_url'  => 'https://mastertriptransfers.com/?payment=cancel',
 ]);
 
 header("Location: " . $session->url);
