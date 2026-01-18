@@ -70,6 +70,7 @@ if(!lang){
 /* =====================================================
    RÉFÉRENCES DOM
 ===================================================== */
+
 const bookingForm = document.getElementById("bookingForm");
 
 const service = document.getElementById("service");
@@ -122,7 +123,7 @@ const bookingFormCard = document.querySelector(".booking-form-card");
 const REVIEW_STORE = "MTT_REVIEWS";
 
 const stripeBtn = document.getElementById("payNowAfterConfirm");
-const bookingForm = document.getElementById("bookingForm");
+
 const stripeAmountInput = document.getElementById("stripe_amount");
 
 let PAYMENT_MODE = "arrival";   // arrival | full | deposit
