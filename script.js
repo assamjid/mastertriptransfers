@@ -122,7 +122,7 @@ const bookingFormCard = document.querySelector(".booking-form-card");
 
 const REVIEW_STORE = "MTT_REVIEWS";
 
-const stripeBtn = document.getElementById("payNowAfterConfirm");
+/*const stripeBtn = document.getElementById("payNowAfterConfirm");*/
 const stripeAmountInput = document.getElementById("stripe_amount");
 
 let PAYMENT_MODE = "arrival";   // arrival | full | deposit
@@ -733,9 +733,7 @@ function escapeHTML(str) {
        // Stripe veut des CENTIMES
         document.getElementById("stripe_amount").value = Math.round(amount * 100);   
     
-           if (stripeBtn) {
-             stripeBtn.disabled = !document.getElementById("stripe_amount").value;
-             }
+          
 
          }
 
@@ -763,29 +761,43 @@ function closeResume() {
 const btnCancel  = document.getElementById("resumeCancel");
 const btnConfirm = document.getElementById("resumeConfirm");
 
-if (btnCancel && btnConfirm && stripeBtn) {
+if (btnCancel && btnConfirm) {
 
   btnCancel.addEventListener("click", closeResume);
 
   // 1️⃣ CONFIRMATION = WhatsApp + Email seulement
-  btnConfirm.onclick = function(){
 
-    const msg = document.getElementById("emailMessage").value;
+  btnConfirm.onclick = async function () {
 
-    // WhatsApp
-    window.open("https://wa.me/212691059759?text=" + encodeURIComponent(msg), "_blank");
+  const msg = document.getElementById("emailMessage").value;
 
-    // Email
-    setTimeout(() => bookingForm.submit(), 800);
+  // WhatsApp
+  window.open(
+    "https://wa.me/212691059759?text=" + encodeURIComponent(msg),
+    "_blank"
+  );
 
-    // Si paiement demandé → afficher le bouton Stripe
-    if(PAYMENT_MODE !== "arrival"){
-      stripeBtn.style.display = "block";
-    } else {
-      closeResume();
-    }
-  };
+  // Stripe
+  if (PAYMENT_MODE !== "arrival" && stripeAmountInput.value) {
 
+    const res = await fetch("/.netlify/functions/create-checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: Number(stripeAmountInput.value)
+      })
+    });
+
+    const data = await res.json();
+    window.location.href = data.url;
+    return;
+  }
+
+  // Email uniquement
+  bookingForm.requestSubmit();
+  closeResume();
+};
+  
  
 }
 
@@ -793,9 +805,6 @@ if (btnCancel && btnConfirm && stripeBtn) {
 function afterFormSent(){
   bookingForm.reset();
   resetAll();
-  
-    if(stripeBtn) stripeBtn.style.display = "none";
-
   closeResume();
 }
 
@@ -1297,30 +1306,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-/*==≈==========FONCTION STRIPE ========*/
-document.addEventListener("DOMContentLoaded", () => {
-
-  
-
-  if (!stripeBtn || !bookingForm || !stripeAmountInput) return;
-
-  stripeBtn.onclick = async function () {
-
-  if (!stripeAmountInput.value) {
-    alert("Paiement non disponible");
-    return;
-  }
-
-  const res = await fetch("/.netlify/functions/create-checkout", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      amount: stripeAmountInput.value
-    })
-  });
-
-  const data = await res.json();
-  window.location.href = data.url;
-};
 
    
