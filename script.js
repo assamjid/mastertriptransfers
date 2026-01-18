@@ -122,14 +122,12 @@ const bookingFormCard = document.querySelector(".booking-form-card");
 
 const REVIEW_STORE = "MTT_REVIEWS";
 
-let PAYMENT_MODE = "arrival";   // arrival | full | deposit
-let stripeBtn;
-let stripeAmountInput;
+const stripeBtn = document.getElementById("payNowAfterConfirm");
+const stripeAmountInput = document.getElementById("stripe_amount");
 
-document.addEventListener("DOMContentLoaded", () => {
-  stripeBtn = document.getElementById("payNowAfterConfirm");
-  stripeAmountInput = document.getElementById("stripe_amount");
-});
+let PAYMENT_MODE = "arrival";   // arrival | full | deposit
+
+
 
   
 
