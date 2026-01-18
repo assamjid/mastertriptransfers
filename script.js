@@ -645,7 +645,7 @@ function escapeHTML(str) {
 });
 
 
-
+      /*===========RÉCAPITULATIF =========*/
 
   function buildRecap(){
 
@@ -680,7 +680,11 @@ function escapeHTML(str) {
   msg+=`⏰ *Heure* : ${timeValue}\n`;
   if(message.value) msg+=`\n📝 *Message* : ${message.value}\n`;
   if(price) msg+=`\n💰 *Prix* : ${price}\n`;
-  msg += `💳 *Paiement* : ${PAYMENT_MODE}\n`;
+  let paymentLabel = "Paiement à l’arrivée";
+    
+  if (PAYMENT_MODE === "full") paymentLabel = "Paiement en ligne (100%)";
+  if (PAYMENT_MODE === "deposit") paymentLabel = "Acompte 20% en ligne";
+  msg += `💳 *Paiement* : ${paymentLabel}\n`;
 
   document.getElementById("emailMessage").value = msg;
 
@@ -703,7 +707,33 @@ function escapeHTML(str) {
   
 
   document.getElementById("resumeContent").innerHTML = html;
+    
+           const total = getFormPriceValue();
+
+           // 🔒 Sécurité : pas de paiement si pas de prix
+                 if (!total || isNaN(total) || total <= 0) {
+                document.getElementById("stripe_amount").value = "";
+                 return;
+                }        
+            if (PAYMENT_MODE === "arrival") {
+             document.getElementById("stripe_amount").value = "";
+            return;
+             }
+             let amount = total;
+                // acompte 20 %
+              if(PAYMENT_MODE === "deposit"){
+               amount = Math.round(total * 0.2);
+              }
+
+       // Stripe veut des CENTIMES
+        document.getElementById("stripe_amount").value = Math.round(amount * 100);    
+
+         const stripeBtn = document.getElementById("payNowAfterConfirm");
+         if (stripeBtn) {
+          stripeBtn.disabled = !document.getElementById("stripe_amount").value;
+          }
   }
+
   
 /* =====================================================
    OVERLAY ANIMÉ
@@ -986,6 +1016,21 @@ function updateCTA(lang){
     lang === "FR"
       ? ctaFixed.dataset.fr
       : ctaFixed.dataset.en;
+}
+
+
+/*====RECUPERER PRIX DU FORMULAIR====*/
+function getFormPriceValue(){
+  let price = "";
+
+  if(service.value === "airport")   price = transferPrix.value;
+  if(service.value === "intercity") price = prix.value;
+  if(service.value === "excursion") price = circuitPrix.value;
+
+  if(!price) return 0;
+
+  // "125 €" ou "125€" → 125
+  return parseFloat(price.replace("€","").replace(",",".").trim());
 }
 
 
