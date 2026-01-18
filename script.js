@@ -728,11 +728,7 @@ function escapeHTML(str) {
        // Stripe veut des CENTIMES
         document.getElementById("stripe_amount").value = Math.round(amount * 100);    
 
-         const stripeBtn = document.getElementById("payNowAfterConfirm");
-         if (stripeBtn) {
-          stripeBtn.disabled = !document.getElementById("stripe_amount").value;
-          }
-  }
+         }
 
   
 /* =====================================================
@@ -787,9 +783,12 @@ if (btnCancel && btnConfirm && stripeBtn) {
 
         /* fonction réinitialise formulaire après clic sur bouton.   */
 function afterFormSent(){
-  bookingForm.reset();      // vide le formulaire
-  resetAll();               // remet prix, services, champs dynamiques
-  stripeBtn.style.display = "none";
+  bookingForm.reset();
+  resetAll();
+
+  const stripeBtn = document.getElementById("payNowAfterConfirm");
+  if(stripeBtn) stripeBtn.style.display = "none";
+
   closeResume();
 }
 
@@ -1273,11 +1272,6 @@ function enableAdminDelete(){
 /* ---------- BOOT AUTO ---------- */
 document.addEventListener("DOMContentLoaded",initReviews);
 
-
-function setPayment(mode){
-  PAYMENT_MODE = mode;
-  document.getElementById('realSubmit').click();
-}
 
 /*=======MESSAGE DE PAIEMENT DISPONIBLE BIENTÔT =====
   
