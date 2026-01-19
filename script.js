@@ -961,7 +961,7 @@ function openInterville(trajetValue) {
   }
 
   
-/*=========STRIPE PAY NOW ET DEPOSIT =======
+/*=========STRIPE PAY NOW ET DEPOSIT ======= */
   
   function payByCard(){
   if(!bookingForm.checkValidity()){
@@ -983,33 +983,8 @@ function payDeposit(){
 
 
 
-  =========END FONCTION PAY NOW AND DEPOSIT===========*/
+  /*=========END FONCTION PAY NOW AND DEPOSIT===========*/
 
-
-
-
-function payByCard(){
-  console.log("PAY NOW CLICKED");
-
-  if(!bookingForm.checkValidity()){
-    bookingForm.reportValidity();
-    return;
-  }
-
-  PAYMENT_MODE = "full";
-  bookingForm.requestSubmit();
-}
-function payDeposit(){
-  console.log("PAY DEPOSIT CLICKED");
-
-  if(!bookingForm.checkValidity()){
-    bookingForm.reportValidity();
-    return;
-  }
-
-  PAYMENT_MODE = "deposit";
-  bookingForm.requestSubmit();
-    }
 
   /* =====================================================
    MOTEUR MULTI-LANGUE MASTERTRIP (FR / EN)
@@ -1269,7 +1244,7 @@ function enableAdminDelete(){
 }
 
 
-/*======= STRIPE CLICK =======*/
+/*======= STRIPE CLICK =======
 document.addEventListener("DOMContentLoaded", () => {
 
   const stripeBtn = document.getElementById("payNowAfterConfirm");
@@ -1321,7 +1296,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-});
+});*/
 
 /* ---------- BOOT AUTO ---------- */
 document.addEventListener("DOMContentLoaded",initReviews);
