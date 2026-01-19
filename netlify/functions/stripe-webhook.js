@@ -1,18 +1,28 @@
-import Stripe from "stripe";
-import { Resend } from "resend";
+const Stripe = require("stripe");
+const { Resend } = require("resend");
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const handler = async (event) => {
+exports.handler = async (event) => {
+  const sig = event.headers["stripe-signature"];
   let stripeEvent;
 
   try {
-    stripeEvent = JSON.parse(event.body);
+    stripeEvent = stripe.webhooks.constructEvent(
+      event.body,
+      sig,
+      process.env.STRIPE_WEBHOOK_SECRET
+    );
   } catch (err) {
-    return { statusCode: 400, body: "Invalid payload" };
+    console.error("Webhook signature error:", err.message);
+    return {
+      statusCode: 400,
+      body: `Webhook Error: ${err.message}`
+    };
   }
 
+  // ✅ Paiement confirmé
   if (stripeEvent.type === "checkout.session.completed") {
     const session = stripeEvent.data.object;
 
@@ -20,7 +30,9 @@ export const handler = async (event) => {
     const amount = (session.amount_total / 100).toFixed(2);
     const lang = session.locale?.startsWith("fr") ? "FR" : "EN";
 
-    if (!email) return { statusCode: 200, body: "No email" };
+    if (!email) {
+      return { statusCode: 200, body: "No customer email" };
+    }
 
     const TEXT = {
       FR: {
@@ -47,6 +59,7 @@ export const handler = async (event) => {
 
     const T = TEXT[lang];
 
+    // 📧 Email client
     await resend.emails.send({
       from: "MasterTripTransfers <noreply@mastertriptransfers.com>",
       to: email,
@@ -59,9 +72,16 @@ export const handler = async (event) => {
       from: "MasterTripTransfers <noreply@mastertriptransfers.com>",
       to: "contact@mastertriptransfers.com",
       subject: "💳 Nouveau paiement Stripe",
-      html: `<p>Paiement reçu : <b>${amount} €</b><br>Email client : ${email}</p>`
+      html: `
+        <p><b>Paiement Stripe reçu</b></p>
+        <p>Montant : <b>${amount} €</b></p>
+        <p>Email client : ${email}</p>
+      `
     });
   }
 
-  return { statusCode: 200, body: "OK" };
+  return {
+    statusCode: 200,
+    body: "OK"
+  };
 };
