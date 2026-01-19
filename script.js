@@ -1250,6 +1250,81 @@ function enableAdminDelete(){
 
 
 /*======= STRIPE CLICK =======*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const stripeBtn = document.getElementById("payNowAfterConfirm");
+  const stripeAmountInput = document.getElementById("stripe_amount");
+  const emailInput = document.getElementById("email");
+
+  if (!stripeBtn || !stripeAmountInput || !emailInput) return;
+
+  stripeBtn.addEventListener("click", async () => {
+
+    const amount = Number(stripeAmountInput.value);
+    const email  = emailInput.value;
+    const lang   = localStorage.getItem("lang") || "EN";
+
+    // 🔎 Sécurités
+    if (!amount || amount <= 0) {
+      alert(lang === "EN"
+        ? "Online payment unavailable for this service."
+        : "Paiement indisponible pour ce service."
+      );
+      return;
+    }
+
+    if (!email) {
+      alert(lang === "EN"
+        ? "Please enter your email address."
+        : "Veuillez saisir votre adresse email."
+      );
+      return;
+    }
+
+    stripeBtn.disabled = true;
+    stripeBtn.textContent = lang === "EN"
+      ? "Redirecting…"
+      : "Redirection…";
+
+    try {
+      const res = await fetch("/.netlify/functions/create-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: amount,   // centimes
+          email: email,     // 🔥 OBLIGATOIRE
+          lang: lang        // FR / EN
+        })
+      });
+
+      const data = await res.json();
+
+      if (!data.url) {
+        throw new Error("No Stripe URL returned");
+      }
+
+      // 🚀 Redirection Stripe
+      window.location.href = data.url;
+
+    } catch (err) {
+
+      stripeBtn.disabled = false;
+      stripeBtn.textContent = lang === "EN"
+        ? "💳 Pay by card"
+        : "💳 Payer par carte";
+
+      alert(lang === "EN"
+        ? "Payment error. Please try again."
+        : "Erreur de paiement. Réessayez."
+      );
+    }
+  });
+
+});
+
+
+/* =====avant changement langue fr en success et cancel, et eemail après paiement 
 document.addEventListener("DOMContentLoaded", () => {
 
   const stripeBtn = document.getElementById("payNowAfterConfirm");
@@ -1257,6 +1332,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!stripeBtn || !stripeAmountInput) return;
 
+  
   stripeBtn.addEventListener("click", async () => {
 
     if (!stripeAmountInput.value) {
@@ -1302,6 +1378,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+        foin changeement*/
 
 /* ---------- BOOT AUTO ---------- */
 document.addEventListener("DOMContentLoaded",initReviews);
