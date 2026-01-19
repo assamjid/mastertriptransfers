@@ -155,19 +155,19 @@ export const handler = async (event) => {
 
     // 📧 EMAIL CLIENT
     await resend.emails.send({
-      from: "MasterTripTransfers <noreply@mastertriptransfers.com>",
-      to: email,
-      subject: T.subject,
-      html: T.html
-    });
+  from: "MasterTripTransfers <onboarding@resend.dev>",
+  to: email,
+  subject: T.subject,
+  html: T.html
+});
 
     // 📧 EMAIL ADMIN
-    await resend.emails.send({
-      from: "MasterTripTransfers <noreply@mastertriptransfers.com>",
-      to: "contact@mastertriptransfers.com",
-      subject: "💳 Nouveau paiement Stripe",
-      html: `<p>Paiement reçu : <b>${amount} €</b><br>Email client : ${email}</p>`
-    });
+ await resend.emails.send({
+  from: "MasterTripTransfers <onboarding@resend.dev>",
+  to: "mastertrip2030@gmail.com",
+  subject: "💳 Nouveau paiement Stripe",
+  html: `<p>Paiement reçu : <b>${amount} €</b><br>Email client : ${email}</p>`
+});
   }
 
   return { statusCode: 200, body: "OK" };
