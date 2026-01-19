@@ -88,22 +88,34 @@ exports.handler = async (event) => {
 
 */
 
-import Stripe from "stripe";
 import { Resend } from "resend";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const handler = async (event) => {
-  console.log("📩 WEBHOOK CALLED");
+export const handler = async () => {
+  try {
+    const result = await resend.emails.send({
+      from: "Test <onboarding@resend.dev>",
+      to: "mastertrip2030@gmail.com",
+      subject: "🧪 TEST RESEND DIRECT",
+      html: "<p>Si tu vois ce mail, Resend fonctionne.</p>"
+    });
 
-  // Envoie un email à CHAQUE appel (debug)
-  await resend.emails.send({
-    from: "Test <onboarding@resend.dev>",
-    to: "mastertrip2030@gmail.com",
-    subject: "🧪 WEBHOOK APPELÉ",
-    html: `<pre>${event.body}</pre>`
-  });
+    console.log("✅ RESEND RESULT:", result);
 
-  return { statusCode: 200, body: "Webhook received" };
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ ok: true, result })
+    };
+
+  } catch (err) {
+    console.error("❌ RESEND ERROR:", err);
+
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error: err.message || err
+      })
+    };
+  }
 };
