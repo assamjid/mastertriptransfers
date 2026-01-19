@@ -84,8 +84,13 @@ const arrivee = document.getElementById("arrivee");
 const transferPlaces = document.getElementById("transferPlaces");
 const transferPrix = document.getElementById("transferPrix");
 const flightNumber = document.getElementById("flightNumber");
+
+/*const flightField = document.getElementById("flightField");
+flightField.style.display = "none";   // caché par défaut*/
 const flightField = document.getElementById("flightField");
-flightField.style.display = "none";   // caché par défaut
+if (flightField) {
+  flightField.style.display = "none";
+}
 
 const trajet = document.getElementById("trajet");
 const places = document.getElementById("places");
@@ -1244,7 +1249,7 @@ function enableAdminDelete(){
 }
 
 
-/*======= STRIPE CLICK =======
+/*======= STRIPE CLICK =======*/
 document.addEventListener("DOMContentLoaded", () => {
 
   const stripeBtn = document.getElementById("payNowAfterConfirm");
@@ -1296,7 +1301,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-});*/
+});
 
 /* ---------- BOOT AUTO ---------- */
 document.addEventListener("DOMContentLoaded",initReviews);
