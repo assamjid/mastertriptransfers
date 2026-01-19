@@ -1,4 +1,4 @@
-const Stripe = require("stripe");
+/*const Stripe = require("stripe");
 const { Resend } = require("resend");
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -84,4 +84,61 @@ exports.handler = async (event) => {
     statusCode: 200,
     body: "OK"
   };
+};
+
+*/
+
+import Stripe from "stripe";
+import { Resend } from "resend";
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export const handler = async (event) => {
+  const sig = event.headers["stripe-signature"];
+
+  let stripeEvent;
+
+  try {
+    stripeEvent = stripe.webhooks.constructEvent(
+      event.body,
+      sig,
+      process.env.STRIPE_WEBHOOK_SECRET
+    );
+  } catch (err) {
+    return { statusCode: 400, body: "Webhook signature failed" };
+  }
+
+  if (stripeEvent.type === "checkout.session.completed") {
+    const session = stripeEvent.data.object;
+
+    const email = session.customer_details?.email;
+    const amount = (session.amount_total / 100).toFixed(2);
+
+    if (!email) {
+      return { statusCode: 200, body: "No email" };
+    }
+
+    // 📧 Email client
+    await resend.emails.send({
+      from: "MasterTripTransfers <noreply@mastertriptransfers.com>",
+      to: email,
+      subject: "Booking confirmed – MasterTripTransfers",
+      html: `
+        <h2>Payment successful</h2>
+        <p>Amount paid: <b>${amount} €</b></p>
+        <p>We will contact you shortly on WhatsApp.</p>
+      `
+    });
+
+    // 📧 Email admin
+    await resend.emails.send({
+      from: "MasterTripTransfers <noreply@mastertriptransfers.com>",
+      to: "contact@mastertriptransfers.com",
+      subject: "💳 New Stripe payment",
+      html: `<p>Payment received: <b>${amount} €</b><br>Email: ${email}</p>`
+    });
+  }
+
+  return { statusCode: 200, body: "OK" };
 };
