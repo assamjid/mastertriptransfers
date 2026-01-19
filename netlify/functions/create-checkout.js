@@ -1,28 +1,45 @@
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const Stripe = require("stripe");
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event) => {
   try {
     if (event.httpMethod !== "POST") {
       return {
         statusCode: 405,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ error: "Method Not Allowed" }),
+        body: "Method Not Allowed",
       };
     }
 
-    const { amount } = JSON.parse(event.body || "{}");
+    const data = JSON.parse(event.body);
+
+    const amount = parseInt(data.amount, 10); // en centimes
+    const email = data.email;                 // email client (OBLIGATOIRE)
 
     if (!amount || amount <= 0) {
       return {
         statusCode: 400,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ error: "Invalid amount" }),
+        body: "Invalid amount",
+      };
+    }
+
+    if (!email) {
+      return {
+        statusCode: 400,
+        body: "Customer email required",
       };
     }
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       payment_method_types: ["card"],
+
+      // 🔥 EMAIL CLIENT (clé du problème)
+      customer_email: email,
+
+      // 🔥 Stripe collecte bien les infos client
+      billing_address_collection: "required",
+
       line_items: [
         {
           price_data: {
@@ -35,26 +52,26 @@ exports.handler = async (event) => {
           quantity: 1,
         },
       ],
-      success_url: "https://www.mastertriptransfers.com/success.html",
-      cancel_url: "https://www.mastertriptransfers.com/cancel.html",
+
       metadata: {
         source: "mastertrip-booking",
       },
+
+      success_url: "https://www.mastertriptransfers.com/success.html",
+      cancel_url: "https://www.mastertriptransfers.com/cancel.html",
     });
 
     return {
       statusCode: 200,
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ url: session.url }),
     };
 
   } catch (err) {
-    console.error("Stripe error:", err);
+    console.error("Stripe checkout error:", err);
 
     return {
       statusCode: 500,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ error: err.message }),
+      body: "Stripe error",
     };
   }
 };
