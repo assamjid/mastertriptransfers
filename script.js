@@ -122,8 +122,27 @@ const bookingFormCard = document.querySelector(".booking-form-card");
 
 const REVIEW_STORE = "MTT_REVIEWS";
 
-/*const stripeBtn = document.getElementById("payNowAfterConfirm");*/
+/*let stripeBtn;*/
+
+/*const stripeBtn = document.getElementById("payNowAfterConfirm");
+
 const stripeAmountInput = document.getElementById("stripe_amount");
+if (!stripeAmountInput) {
+  console.warn("Stripe amount input manquant");
+}*/
+
+
+let stripeBtn;
+let stripeAmountInput;
+
+document.addEventListener("DOMContentLoaded", () => {
+  stripeBtn = document.getElementById("payNowAfterConfirm");
+  stripeAmountInput = document.getElementById("stripe_amount");
+
+  if (!stripeAmountInput) {
+    console.warn("Stripe amount input manquant");
+  }
+});
 
 let PAYMENT_MODE = "arrival";   // arrival | full | deposit
 
@@ -778,11 +797,17 @@ if (btnCancel && btnConfirm) {
   // 3️⃣ Si paiement à l’arrivée → fermer
   if (PAYMENT_MODE === "arrival") {
     closeResume();
+    return;
   }
 
-  // 👉 Si pay now / deposit
-  // on NE FERME PAS le récap
-  // le bouton Stripe reste visible
+  // 👉 AJOUT ICI 👇
+      if (
+      stripeBtn &&
+      stripeAmountInput.value &&
+        Number(stripeAmountInput.value) > 0
+        ) {
+            stripeBtn.style.display = "inline-flex";
+          }
 };
  
 }
@@ -791,6 +816,13 @@ if (btnCancel && btnConfirm) {
 function afterFormSent(){
   bookingForm.reset();
   resetAll();
+
+  if (stripeBtn) {
+    stripeBtn.style.display = "none";
+    stripeBtn.disabled = false;
+    stripeBtn.textContent = "💳 Payer par carte";
+  }
+
   closeResume();
 }
 
@@ -982,9 +1014,16 @@ function openInterville(trajetValue) {
 
  /* =========AND FONCTION PAY NOW AND DEPOSIT===========*/
 
-  async function payNowAfterConfirm(btn){
+  async function payNowAfterConfirm(btn) {
 
-  // 🔒 Sécurité anti double clic
+  // 🔒 VÉRIFICATION MONTANT STRIPE
+  if (!stripeAmountInput.value || Number(stripeAmountInput.value) <= 0) {
+    alert("Paiement en ligne indisponible pour ce service.");
+    if (stripeBtn) stripeBtn.style.display = "none";
+    return;
+  }
+
+  // 🔒 Anti double clic
   btn.disabled = true;
   btn.textContent = "Redirection…";
 
@@ -1002,7 +1041,7 @@ function openInterville(trajetValue) {
     if (!data.url) {
       alert("Erreur de paiement, merci de réessayer.");
       btn.disabled = false;
-      btn.textContent = "Payer par carte";
+      btn.textContent = "💳 Payer par carte";
       return;
     }
 
@@ -1011,7 +1050,7 @@ function openInterville(trajetValue) {
   } catch (e) {
     alert("Connexion Stripe impossible.");
     btn.disabled = false;
-    btn.textContent = "Payer par carte";
+    btn.textContent = "💳 Payer par carte";
   }
   }
 
