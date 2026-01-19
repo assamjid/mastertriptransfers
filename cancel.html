@@ -1,12 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Payment cancelled</title>
+  <meta charset="UTF-8">
+  <title>Payment Cancelled – MasterTripTransfers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+
+  <style>
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:#f6f8fb;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+      color:#333;
+    }
+    .box{
+      background:#fff;
+      max-width:520px;
+      width:90%;
+      padding:40px 30px;
+      border-radius:14px;
+      text-align:center;
+      box-shadow:0 15px 40px rgba(0,0,0,0.12);
+    }
+    h1{
+      color:#e74c3c;
+      margin-bottom:15px;
+      font-size:30px;
+    }
+    p{
+      font-size:16px;
+      line-height:1.6;
+      margin:12px 0;
+    }
+    .actions{
+      margin-top:25px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .btn{
+      display:inline-block;
+      padding:14px 28px;
+      background:linear-gradient(135deg,#ffb400,#ff8f00);
+      color:#fff;
+      text-decoration:none;
+      border-radius:30px;
+      font-weight:bold;
+      font-size:16px;
+      box-shadow:0 10px 25px rgba(255,159,0,0.35);
+    }
+    .btn.secondary{
+      background:#ecf0f1;
+      color:#333;
+      box-shadow:none;
+      font-weight:600;
+    }
+    .note{
+      margin-top:25px;
+      font-size:14px;
+      color:#666;
+    }
+  </style>
 </head>
-<body style="text-align:center;font-family:sans-serif;padding:50px">
-<h1>❌ Payment cancelled</h1>
-<p>You can try again or contact us on WhatsApp.</p>
-<a href="/">Back to website</a>
+
+<body>
+
+  <div class="box">
+    <h1>❌ Payment cancelled</h1>
+
+    <p>
+      Your payment was not completed.<br>
+      No charges have been made to your card.
+    </p>
+
+    <p>
+      You can try again or contact our team for assistance.
+      We are available 7/7 on WhatsApp.
+    </p>
+
+    <div class="actions">
+      <a href="https://www.mastertriptransfers.com/#booking" class="btn">
+        Try payment again
+      </a>
+
+      <a href="https://wa.me/212691059759" class="btn secondary">
+        Contact us on WhatsApp
+      </a>
+    </div>
+
+    <p class="note">
+      Our drivers and support team are ready to assist you at any time.
+    </p>
+  </div>
+
 </body>
 </html>
