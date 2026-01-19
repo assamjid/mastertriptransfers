@@ -707,23 +707,21 @@ function escapeHTML(str) {
     setStripeAmount(price);
   }
 
-        /*=====DTRIPE EN CENTIMES=======*/
+        /*=====STRIPE EN CENTIMES=======*/
+
 function setStripeAmount(priceText) {
   const input = document.getElementById("stripe_amount");
 
-  // Pas de paiement en ligne
-  if (PAYMENT_MODE === "arrival") {
-    input.value = "";
+  if (!input || PAYMENT_MODE === "arrival") {
+    if(input) input.value = "";
     return;
   }
 
-  // Cas "Sur devis"
   if (!priceText || priceText.toLowerCase().includes("devis")) {
     input.value = "";
     return;
   }
 
-  // "120 €" → 120
   const amountEuro = parseFloat(
     priceText.replace("€", "").trim()
   );
@@ -733,15 +731,13 @@ function setStripeAmount(priceText) {
     return;
   }
 
-  // FULL ou DEPOSIT
   let finalEuro = amountEuro;
 
   if (PAYMENT_MODE === "deposit") {
-    finalEuro = amountEuro * 0.2; // 20 %
+    finalEuro = amountEuro * 0.2;
   }
 
-  // 👉 STRIPE = CENTIMES
-  input.value = Math.round(finalEuro * 100);
+  input.value = Math.round(finalEuro * 100); // Stripe = centimes
 }
 
 
@@ -973,8 +969,10 @@ function openInterville(trajetValue) {
     bookingForm.reportValidity();
     return;
   }
+
   PAYMENT_MODE = "full";
-  bookingForm.requestSubmit();
+  buildRecap();
+  openResume();
 }
 
 function payDeposit(){
@@ -982,8 +980,10 @@ function payDeposit(){
     bookingForm.reportValidity();
     return;
   }
+
   PAYMENT_MODE = "deposit";
-  bookingForm.requestSubmit();
+  buildRecap();
+  openResume();
 }
 
 
