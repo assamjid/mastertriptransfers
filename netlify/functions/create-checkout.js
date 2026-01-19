@@ -1,9 +1,11 @@
 const Stripe = require("stripe");
 
+// 🔑 Clé Stripe (TEST ou LIVE selon ton mode)
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event) => {
   try {
+    // 🔒 Autoriser uniquement POST
     if (event.httpMethod !== "POST") {
       return {
         statusCode: 405,
@@ -11,11 +13,13 @@ exports.handler = async (event) => {
       };
     }
 
-    const data = JSON.parse(event.body);
+    // 📥 Données reçues depuis le frontend
+    const data = JSON.parse(event.body || "{}");
 
     const amount = parseInt(data.amount, 10); // en centimes
-    const email = data.email;                 // email client (OBLIGATOIRE)
+    const email = data.email;
 
+    // 🔎 Vérifications obligatoires
     if (!amount || amount <= 0) {
       return {
         statusCode: 400,
@@ -30,14 +34,16 @@ exports.handler = async (event) => {
       };
     }
 
+    // 💳 Création de la session Stripe Checkout
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
+
       payment_method_types: ["card"],
 
-      // 🔥 EMAIL CLIENT (clé du problème)
+      // ✅ Email client (clé pour le webhook + email auto)
       customer_email: email,
 
-      // 🔥 Stripe collecte bien les infos client
+      // ✅ Stripe collecte les infos client
       billing_address_collection: "required",
 
       line_items: [
@@ -57,21 +63,25 @@ exports.handler = async (event) => {
         source: "mastertrip-booking",
       },
 
+      // 🔁 URLs retour
       success_url: "https://www.mastertriptransfers.com/success.html",
       cancel_url: "https://www.mastertriptransfers.com/cancel.html",
     });
 
+    // 🚀 Réponse OK → redirection Stripe
     return {
       statusCode: 200,
-      body: JSON.stringify({ url: session.url }),
+      body: JSON.stringify({
+        url: session.url,
+      }),
     };
 
   } catch (err) {
-    console.error("Stripe checkout error:", err);
+    console.error("❌ Stripe create-checkout error:", err);
 
     return {
       statusCode: 500,
-      body: "Stripe error",
+      body: "Stripe checkout error",
     };
   }
 };
