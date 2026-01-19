@@ -727,47 +727,34 @@ const btnConfirm = document.getElementById("resumeConfirm");
 const stripeBtn  = document.getElementById("payNowAfterConfirm");
 
 if (btnCancel && btnConfirm && stripeBtn) {
-
+  
   btnCancel.addEventListener("click", closeResume);
+  btnConfirm.onclick = function () {
 
-  // 1️⃣ CONFIRMATION = WhatsApp + Email seulement
-  btnConfirm.onclick = function(){
+  // 1️⃣ Message déjà prêt
+  const msg = document.getElementById("emailMessage").value;
 
-    const msg = document.getElementById("emailMessage").value;
+  // 2️⃣ WhatsApp (nouvel onglet)
+  window.open(
+    "https://wa.me/212691059759?text=" + encodeURIComponent(msg),
+    "_blank"
+  );
 
-    // WhatsApp
-    window.open("https://wa.me/212691059759?text=" + encodeURIComponent(msg), "_blank");
+  // 3️⃣ EMAIL
+  // ⚠️ RIEN À FAIRE ICI
+  // L’email est envoyé par le submit initial du formulaire
 
-    // Email
-    setTimeout(() => bookingForm.submit(), 800);
+  // 4️⃣ LOGIQUE PAIEMENT
+  if (PAYMENT_MODE === "arrival") {
+    // Paiement à l’arrivée → on ferme le récap
+    closeResume();
+  } else {
+    // Paiement en ligne → on laisse le récap ouvert
+    stripeBtn.style.display = "block";
+  }
+};
 
-    // Si paiement demandé → afficher le bouton Stripe
-    if(PAYMENT_MODE !== "arrival"){
-      stripeBtn.style.display = "block";
-    } else {
-      closeResume();
-    }
-  };
-
-  // 2️⃣ BOUTON STRIPE = OUVERTURE SÉCURISÉE
-  stripeBtn.onclick = function(){
-
-    if(PAYMENT_MODE === "full"){
-      window.open("https://buy.stripe.com/FULL_LINK","_blank");
-    }
-
-    if(PAYMENT_MODE === "deposit"){
-      window.open("https://buy.stripe.com/DEPOSIT_LINK","_blank");
-    }
-
-    // Reset propre après paiement
-    setTimeout(()=>{
-      bookingForm.reset();
-      resetAll();
-      stripeBtn.style.display = "none";
-      closeResume();
-    }, 1000);
-  };
+  
 }
 
         /* fonction réinitialise formulaire après clic sur bouton.   */
@@ -936,45 +923,30 @@ function openInterville(trajetValue) {
   window.scrollTo({top:y,behavior:"smooth"});
   }
 
-  function payByCard(){
-  window.open("https://buy.stripe.com/xxxxxxxxx","_blank");
-  }
-  function payDeposit(){
-  alert("Paiement acompte 20% — bientôt disponible");
-  }
-
-
-/*=========STRIPE PAY NOW ET DEPOSIT =======
+  
+/*=========STRIPE PAY NOW ET DEPOSIT =======*/
   
   function payByCard(){
-
-  // 🔒 Vérification formulaire
-  if(!bookingForm.checkValidity()){
-    bookingForm.reportValidity(); // affiche les champs manquants
-    return;
-  }
-
-  PAYMENT_MODE = "full";
-
-  // 🔁 même logique que BOOK NOW
-  bookingForm.requestSubmit();
-  }
-
-  function payDeposit(){
-
   if(!bookingForm.checkValidity()){
     bookingForm.reportValidity();
     return;
   }
+  PAYMENT_MODE = "full";
+  bookingForm.requestSubmit();
+}
 
+function payDeposit(){
+  if(!bookingForm.checkValidity()){
+    bookingForm.reportValidity();
+    return;
+  }
   PAYMENT_MODE = "deposit";
   bookingForm.requestSubmit();
-  }
+}
 
 
 
-
-  =========AND FONCTION PAY NOW AND DEPOSIT===========*/
+ /* =========END FONCTION PAY NOW AND DEPOSIT===========*/
 
   /* =====================================================
    MOTEUR MULTI-LANGUE MASTERTRIP (FR / EN)
@@ -1242,26 +1214,7 @@ function setPayment(mode){
   document.getElementById('realSubmit').click();
 }
 
-/*=======MESSAGE DE PAIEMENT DISPONIBLE BIENTÔT =====*/
-  
-function paiementBientotDisponible(){
-  const lang = document.documentElement.lang || "fr";
 
-  if(lang.startsWith("fr")){
-    alert("💳 Paiement en ligne bientôt disponible.\nMerci de votre patience 🙏");
-  }else{
-    alert("💳 Online payment coming soon.\nThank you for your patience 🙏");
-  }
-}
-
-/* Override temporaire Stripe */
-function payByCard(){
-  paiementBientotDisponible();
-}
-
-function payDeposit(){
-  paiementBientotDisponible();
-}
 
 
    
