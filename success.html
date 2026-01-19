@@ -26,24 +26,10 @@
       text-align:center;
       box-shadow:0 15px 40px rgba(0,0,0,0.12);
     }
-    h1{
-      color:#27ae60;
-      margin-bottom:15px;
-      font-size:30px;
-    }
-    p{
-      font-size:16px;
-      line-height:1.6;
-      margin:12px 0;
-    }
-    .features{
-      margin:25px 0;
-      text-align:left;
-    }
-    .features p{
-      margin:6px 0;
-      font-size:15px;
-    }
+    h1{margin-bottom:15px;font-size:30px}
+    .success{color:#27ae60}
+    p{font-size:16px;line-height:1.6;margin:12px 0}
+    .features{text-align:left;margin:25px 0}
     .btn{
       display:inline-block;
       margin-top:25px;
@@ -54,49 +40,58 @@
       border-radius:30px;
       font-weight:bold;
       font-size:16px;
-      box-shadow:0 10px 25px rgba(255,159,0,0.35);
     }
-    .btn:hover{
-      opacity:0.95;
-    }
-    .note{
-      margin-top:30px;
-      font-size:14px;
-      color:#666;
-    }
+    .note{margin-top:30px;font-size:14px;color:#666}
   </style>
 </head>
 
 <body>
 
-  <div class="box">
-    <h1>🎉 Booking successful!</h1>
+<div class="box">
+  <h1 class="success" id="title"></h1>
 
-    <p>
-      Thank you for your payment.<br>
-      Your reservation with <strong>MasterTripTransfers</strong> is confirmed.
-    </p>
+  <p id="line1"></p>
 
-    <div class="features">
-      <p>🚐 Professional driver</p>
-      <p>⏱ On-time pickup</p>
-      <p>📍 Door-to-door service</p>
-    </div>
+  <div class="features" id="features"></div>
 
-    <p>
-      Our team will contact you shortly on <strong>WhatsApp</strong>
-      with all booking details.
-    </p>
+  <p id="line2"></p>
 
-    <a href="https://www.mastertriptransfers.com" class="btn">
-      Back to homepage
-    </a>
+  <a href="https://www.mastertriptransfers.com" class="btn" id="btn"></a>
 
-    <p class="note">
-      If you don’t receive a WhatsApp message within a few minutes,
-      please contact us directly.
-    </p>
-  </div>
+  <p class="note" id="note"></p>
+</div>
+
+<script>
+  const isFR = navigator.language.toLowerCase().startsWith("fr");
+
+  const TEXT = {
+    FR:{
+      title:"🎉 Réservation confirmée !",
+      line1:"Merci pour votre paiement.<br>Votre réservation avec <b>MasterTripTransfers</b> est confirmée.",
+      features:"🚐 Chauffeur professionnel<br>⏱ Prise en charge ponctuelle<br>📍 Service porte-à-porte",
+      line2:"Notre équipe vous contactera très bientôt sur <b>WhatsApp</b> avec tous les détails.",
+      btn:"Retour au site",
+      note:"Si vous ne recevez pas de message WhatsApp dans quelques minutes, merci de nous contacter directement."
+    },
+    EN:{
+      title:"🎉 Booking successful!",
+      line1:"Thank you for your payment.<br>Your reservation with <b>MasterTripTransfers</b> is confirmed.",
+      features:"🚐 Professional driver<br>⏱ On-time pickup<br>📍 Door-to-door service",
+      line2:"Our team will contact you shortly on <b>WhatsApp</b> with all booking details.",
+      btn:"Back to homepage",
+      note:"If you don’t receive a WhatsApp message within a few minutes, please contact us directly."
+    }
+  };
+
+  const T = isFR ? TEXT.FR : TEXT.EN;
+
+  document.getElementById("title").innerHTML = T.title;
+  document.getElementById("line1").innerHTML = T.line1;
+  document.getElementById("features").innerHTML = T.features;
+  document.getElementById("line2").innerHTML = T.line2;
+  document.getElementById("btn").innerText = T.btn;
+  document.getElementById("note").innerText = T.note;
+</script>
 
 </body>
 </html>
