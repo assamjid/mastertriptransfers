@@ -780,8 +780,7 @@ if (btnCancel && btnConfirm) {
   btnCancel.addEventListener("click", closeResume);
 
   // 1️⃣ CONFIRMATION = WhatsApp + Email seulement
-
-  btnConfirm.onclick = function () {
+btnConfirm.onclick = function () {
 
   const msg = document.getElementById("emailMessage").value;
 
@@ -791,23 +790,20 @@ if (btnCancel && btnConfirm) {
     "_blank"
   );
 
-  // 2️⃣ Email
-  bookingForm.requestSubmit();
-
-  // 3️⃣ Si paiement à l’arrivée → fermer
+  // 2️⃣ Paiement à l’arrivée → on ferme
   if (PAYMENT_MODE === "arrival") {
     closeResume();
     return;
   }
 
-  // 👉 AJOUT ICI 👇
-      if (
-      stripeBtn &&
-      stripeAmountInput.value &&
-        Number(stripeAmountInput.value) > 0
-        ) {
-            stripeBtn.style.display = "inline-flex";
-          }
+  // 3️⃣ Paiement en ligne → afficher bouton Stripe
+  if (
+    stripeBtn &&
+    stripeAmountInput &&
+    Number(stripeAmountInput.value) > 0
+  ) {
+    stripeBtn.style.display = "inline-flex";
+  }
 };
  
 }
