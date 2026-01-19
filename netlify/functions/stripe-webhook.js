@@ -88,34 +88,14 @@ exports.handler = async (event) => {
 
 */
 
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export const handler = async () => {
-  try {
-    const result = await resend.emails.send({
-      from: "Test <onboarding@resend.dev>",
-      to: "mastertrip2030@gmail.com",
-      subject: "🧪 TEST RESEND DIRECT",
-      html: "<p>Si tu vois ce mail, Resend fonctionne.</p>"
-    });
-
-    console.log("✅ RESEND RESULT:", result);
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ ok: true, result })
-    };
-
-  } catch (err) {
-    console.error("❌ RESEND ERROR:", err);
-
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        error: err.message || err
-      })
-    };
-  }
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      resend_key: process.env.RESEND_API_KEY || "❌ UNDEFINED",
+      length: process.env.RESEND_API_KEY
+        ? process.env.RESEND_API_KEY.length
+        : 0
+    })
+  };
 };
