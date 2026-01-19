@@ -696,11 +696,50 @@ function escapeHTML(str) {
   html+=`<p><b>📅 Date :</b> ${date.value}</p>`;
   html+=`<p><b>⏰ Heure :</b> ${timeValue}</p>`;
   if(message.value) html+=`<p><b>📝 Message :</b> ${message.value}</p>`;
-  if(price) html+=`<p><b>💰 Prix :</b> ${price}</p>`;
-  
+  if(price) html+=`<p><b>💰 Prix :</b> ${price}</p>`;  
 
   document.getElementById("resumeContent").innerHTML = html;
+    setStripeAmount(price);
   }
+
+        /*=====DTRIPE EN CENTIMES=======*/
+function setStripeAmount(priceText) {
+  const input = document.getElementById("stripe_amount");
+
+  // Pas de paiement en ligne
+  if (PAYMENT_MODE === "arrival") {
+    input.value = "";
+    return;
+  }
+
+  // Cas "Sur devis"
+  if (!priceText || priceText.toLowerCase().includes("devis")) {
+    input.value = "";
+    return;
+  }
+
+  // "120 €" → 120
+  const amountEuro = parseFloat(
+    priceText.replace("€", "").trim()
+  );
+
+  if (isNaN(amountEuro) || amountEuro <= 0) {
+    input.value = "";
+    return;
+  }
+
+  // FULL ou DEPOSIT
+  let finalEuro = amountEuro;
+
+  if (PAYMENT_MODE === "deposit") {
+    finalEuro = amountEuro * 0.2; // 20 %
+  }
+
+  // 👉 STRIPE = CENTIMES
+  input.value = Math.round(finalEuro * 100);
+}
+
+
   
 /* =====================================================
    OVERLAY ANIMÉ
@@ -727,34 +766,32 @@ const btnConfirm = document.getElementById("resumeConfirm");
 const stripeBtn  = document.getElementById("payNowAfterConfirm");
 
 if (btnCancel && btnConfirm && stripeBtn) {
-  
+
   btnCancel.addEventListener("click", closeResume);
-  btnConfirm.onclick = function () {
 
-  // 1️⃣ Message déjà prêt
-  const msg = document.getElementById("emailMessage").value;
+  // 🔵 CONFIRMATION
+  btnConfirm.addEventListener("click", () => {
 
-  // 2️⃣ WhatsApp (nouvel onglet)
-  window.open(
-    "https://wa.me/212691059759?text=" + encodeURIComponent(msg),
-    "_blank"
-  );
+    const msg = document.getElementById("emailMessage").value;
 
-  // 3️⃣ EMAIL
-  // ⚠️ RIEN À FAIRE ICI
-  // L’email est envoyé par le submit initial du formulaire
+    // 1️⃣ WhatsApp
+    window.open(
+      "https://wa.me/212691059759?text=" + encodeURIComponent(msg),
+      "_blank"
+    );
 
-  // 4️⃣ LOGIQUE PAIEMENT
-  if (PAYMENT_MODE === "arrival") {
-    // Paiement à l’arrivée → on ferme le récap
-    closeResume();
-  } else {
-    // Paiement en ligne → on laisse le récap ouvert
-    stripeBtn.style.display = "block";
-  }
-};
+    // 2️⃣ Email (form submit silencieux)
+ //   bookingForm.requestSubmit();
 
-  
+    // 3️⃣ Paiement
+    if (PAYMENT_MODE === "arrival") {
+      // paiement à l’arrivée → on ferme
+      closeResume();
+    } else {
+      // paiement en ligne → on reste sur le récap
+      stripeBtn.style.display = "inline-block";
+    }
+  });
 }
 
         /* fonction réinitialise formulaire après clic sur bouton.   */
@@ -1204,6 +1241,61 @@ function enableAdminDelete(){
     card.appendChild(del);
   });
 }
+
+
+/*======= STRIPE CLICK =======*/
+document.addEventListener("DOMContentLoaded", () => {
+
+  const stripeBtn = document.getElementById("payNowAfterConfirm");
+  const stripeAmountInput = document.getElementById("stripe_amount");
+
+  if (!stripeBtn || !stripeAmountInput) return;
+
+  stripeBtn.addEventListener("click", async () => {
+
+    if (!stripeAmountInput.value) {
+      alert(lang === "EN"
+        ? "Online payment unavailable for this service."
+        : "Paiement indisponible pour ce service."
+      );
+      return;
+    }
+
+    stripeBtn.disabled = true;
+    stripeBtn.textContent = lang === "EN"
+      ? "Redirecting…"
+      : "Redirection…";
+
+    try {
+      const res = await fetch("/.netlify/functions/create-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: Number(stripeAmountInput.value)
+        })
+      });
+
+      const data = await res.json();
+
+      if (!data.url) throw new Error("No Stripe URL");
+
+      window.location.href = data.url;
+
+    } catch (err) {
+
+      stripeBtn.disabled = false;
+      stripeBtn.textContent = lang === "EN"
+        ? "💳 Pay by card"
+        : "💳 Payer par carte";
+
+      alert(lang === "EN"
+        ? "Payment error. Please try again."
+        : "Erreur de paiement. Réessayez."
+      );
+    }
+  });
+
+});
 
 /* ---------- BOOT AUTO ---------- */
 document.addEventListener("DOMContentLoaded",initReviews);
