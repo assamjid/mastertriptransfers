@@ -1118,13 +1118,13 @@ function setLang(langParam) {
   
  
   function toggleLang(){
-  const current = localStorage.getItem("lang") || "EN";
+  const current = localStorage.getItem("lang") || lang;
   setLang(current === "FR" ? "EN" : "FR");
   updateLangFlag();
 }
 
 function updateLangFlag(){
-  const current = localStorage.getItem("lang") || "EN";
+  const current = localStorage.getItem("lang") || lang;
   const flag = document.getElementById("langFlagBtn");
 
   if(current === "FR"){
