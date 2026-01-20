@@ -53,7 +53,7 @@ EN:{
 
 };
 
-let lang = localStorage.getItem("lang") || "EN";
+let lang;
  
   
 /* =====================================================
@@ -1144,10 +1144,13 @@ function updateLangFlag(){
   });
 },3000);
 
-  document.addEventListener("DOMContentLoaded", ()=>{
+  document.addEventListener("DOMContentLoaded", () => {
+  lang = localStorage.getItem("lang") || "EN";
   setLang(lang);
   updateLangFlag();
-  
+
+  // 🔓 autorise l’affichage
+  document.documentElement.setAttribute("data-lang-ready", "1");
 });
 
   
