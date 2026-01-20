@@ -1158,15 +1158,16 @@ setInterval(() => {
 }, 3000);
 
 /*==========SHAKE BOUTON EN BAS=========*/
-       setInterval(() => {
-         const inner = document.querySelector("#bookBtnNow .shake-inner");
-          if (!inner) return;
+       document.addEventListener("DOMContentLoaded", () => {
+  setInterval(() => {
+    const btn = document.getElementById("bookNowBtn");
+    if (!btn) return;
 
-          inner.classList.remove("btn-shake");
-          void inner.offsetWidth;
-          inner.classList.add("btn-shake");
-         }, 4000);
-
+    btn.classList.remove("btn-shake");
+    void btn.offsetWidth; // reset animation
+    btn.classList.add("btn-shake");
+  }, 4000);
+});
 
   document.addEventListener("DOMContentLoaded", () => {
   lang = localStorage.getItem("lang") || "EN";
