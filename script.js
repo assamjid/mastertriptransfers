@@ -53,12 +53,13 @@ EN:{
 
 };
 
-  let lang = localStorage.getItem("lang") || "EN";
-if(!lang){
-  lang = "EN";
-  localStorage.setItem("lang","EN");
-      }
+let lang = localStorage.getItem("lang");
 
+if (!lang) {
+  const browserLang = navigator.language || navigator.userLanguage || "en";
+  lang = browserLang.toLowerCase().startsWith("fr") ? "FR" : "EN";
+  localStorage.setItem("lang", lang);
+}
   
   
 /* =====================================================
