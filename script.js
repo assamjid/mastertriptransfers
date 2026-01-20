@@ -1394,7 +1394,7 @@ function setPayment(mode){
 document.addEventListener("DOMContentLoaded", () => {
 
   const bookBtn = document.getElementById("bookNowBtn");
-  const bookingForm = document.getElementById("bookingform");
+  const bookingForm = document.getElementById("bookingForm");
 
   if (!bookBtn || !bookingForm) return;
 
