@@ -53,21 +53,7 @@ EN:{
 
 };
 
-let lang = localStorage.getItem("lang");
-const langInitialized = localStorage.getItem("lang_initialized");
-
-if (!langInitialized) {
-  const browserLang = (navigator.language || "en").toLowerCase();
-  lang = browserLang.startsWith("fr") ? "FR" : "EN";
-
-  localStorage.setItem("lang", lang);
-  localStorage.setItem("lang_initialized", "1");
-}
-
-if (!lang) {
-  lang = "EN";
-  localStorage.setItem("lang", "EN");
-}
+let lang = localStorage.getItem("lang") || "EN";
  
   
 /* =====================================================
