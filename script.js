@@ -1378,7 +1378,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
-        foin changeement*/
+        fin changeement*/
 
 /* ---------- BOOT AUTO ---------- */
 document.addEventListener("DOMContentLoaded",initReviews);
@@ -1388,6 +1388,35 @@ function setPayment(mode){
   PAYMENT_MODE = mode;
   document.getElementById('realSubmit').click();
 }
+
+/*=========BOUTON BOOKK NOW FIXE EN BAS===========*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const bookBtn = document.getElementById("bookNowBtn");
+  const bookingForm = document.getElementById("booking-form");
+
+  if (!bookBtn || !bookingForm) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // 🚫 Formulaire visible → cacher le bouton
+          bookBtn.classList.add("hidden");
+        } else {
+          // ✅ Formulaire hors écran → afficher le bouton
+          bookBtn.classList.remove("hidden");
+        }
+      });
+    },
+    {
+      threshold: 0.2 // 20% du formulaire visible
+    }
+  );
+
+  observer.observe(bookingForm);
+});
 
 
 
