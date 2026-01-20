@@ -1325,6 +1325,29 @@ button[type="submit"]{
   }
 }
 
+/*========BOUTON BOOK NOW FIXE EN BAS D ECRAN==========*/
+#bookNowBtn{
+  position:fixed;
+  bottom:2px;
+  right:20px;
+  z-index:9999;
+  background:linear-gradient(135deg,#ffb400,#ff8f00);
+  color:#fff;
+  padding:14px 26px;
+  border-radius:40px;
+  font-size:16px;
+  font-weight:800;
+  text-decoration:none;
+  box-shadow:0 10px 30px rgba(0,0,0,0.35);
+  transition:opacity .3s ease, transform .3s ease;
+}
+
+#bookNowBtn.hidden{
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(20px);
+}
+
 /* CTA BOUTON EN BAS FIXE MOBILE */
 .cta-fixed{
   position:fixed;
