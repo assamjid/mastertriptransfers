@@ -1137,12 +1137,36 @@ function updateLangFlag(){
 }
   
   
-  setInterval(()=>{
+ /*=====Ancien SHAKE BOUTON MENU======
+   setInterval(()=>{
   document.querySelectorAll("#mainHeader nav a").forEach(btn=>{
     btn.classList.add("menu-shake");
     setTimeout(()=>btn.classList.remove("menu-shake"),600);
   });
 },3000);
+=========FIN SHAKE======*/
+
+/*======NOUVEAU SHAKE BOUTON MENU=====*/
+setInterval(() => {
+  const menuBtns = document.querySelectorAll("#mainHeader nav a");
+  if (!menuBtns.length) return;
+
+  menuBtns.forEach(btn => {
+    btn.classList.add("menu-shake");
+    setTimeout(() => btn.classList.remove("menu-shake"), 600);
+  });
+}, 3000);
+
+/*==========SHAKE BOUTON EN BAS=========*/
+       setInterval(() => {
+         const inner = document.querySelector("#bookBtnNow .shake-inner");
+          if (!inner) return;
+
+          inner.classList.remove("btn-shake");
+          void inner.offsetWidth;
+          inner.classList.add("btn-shake");
+         }, 4000);
+
 
   document.addEventListener("DOMContentLoaded", () => {
   lang = localStorage.getItem("lang") || "EN";
