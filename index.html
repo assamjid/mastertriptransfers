@@ -57,13 +57,18 @@
 <meta name="robots" content="index, follow">
 <meta name="author" content="MasterTripTransfers">
 
-  <!--    MASQUE VF avant VA.   -->
-  <style>
+<head>
+<meta charset="UTF-8">
+
+<!-- 🔒 ANTI-FLASH : DOIT ÊTRE AVANT TOUT -->
+<style>
   html:not([data-lang-ready]) body {
-    display: none;
+    visibility: hidden;
   }
-  </style>
-  <script>
+</style>
+
+<!-- 🌍 DÉTECTION LANGUE AVANT RENDU -->
+<script>
 (function () {
   try {
     let lang = localStorage.getItem("lang");
@@ -81,18 +86,17 @@
       localStorage.setItem("lang", "EN");
     }
 
-    // 👉 Applique immédiatement la langue au HTML
     document.documentElement.lang = lang === "FR" ? "fr" : "en";
-
-    // 👉 Marqueur pour éviter le flash
     document.documentElement.setAttribute("data-lang-ready", lang);
 
   } catch (e) {
     document.documentElement.lang = "en";
+    document.documentElement.setAttribute("data-lang-ready", "EN");
   }
 })();
-  </script>
+</script>
 
+<!-- ⬇️ SEULEMENT APRÈS -->
 
 <link rel="stylesheet" href="style.css">
   
