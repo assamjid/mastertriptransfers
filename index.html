@@ -57,6 +57,42 @@
 <meta name="robots" content="index, follow">
 <meta name="author" content="MasterTripTransfers">
 
+  <script>
+(function () {
+  try {
+    let lang = localStorage.getItem("lang");
+    const initialized = localStorage.getItem("lang_initialized");
+
+    if (!initialized) {
+      const browserLang = (navigator.language || "en").toLowerCase();
+      lang = browserLang.startsWith("fr") ? "FR" : "EN";
+      localStorage.setItem("lang", lang);
+      localStorage.setItem("lang_initialized", "1");
+    }
+
+    if (!lang) {
+      lang = "EN";
+      localStorage.setItem("lang", "EN");
+    }
+
+    // 👉 Applique immédiatement la langue au HTML
+    document.documentElement.lang = lang === "FR" ? "fr" : "en";
+
+    // 👉 Marqueur pour éviter le flash
+    document.documentElement.setAttribute("data-lang-ready", lang);
+
+  } catch (e) {
+    document.documentElement.lang = "en";
+  }
+})();
+  </script>
+
+  <style>
+  html:not([data-lang-ready]) body {
+    visibility: hidden;
+  }
+  </style>
+
 <link rel="stylesheet" href="style.css">
   
 <script type="application/ld+json">
