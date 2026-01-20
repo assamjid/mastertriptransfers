@@ -1329,7 +1329,7 @@ button[type="submit"]{
 #bookNowBtn{
   position:fixed;
   bottom:2px;
-  left:80px;
+  left:20px;
   z-index:9999;
   background:#ffb400;
   color:#001F3F;
