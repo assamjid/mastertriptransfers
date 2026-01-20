@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="x-default">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 
@@ -65,36 +65,7 @@
   
 </style>
 
-<!-- 🌍 DÉTECTION LANGUE AVANT RENDU -->
-<script>
-(function () {
-  try {
-    let lang = localStorage.getItem("lang");
-    const initialized = localStorage.getItem("lang_initialized");
 
-    if (!initialized) {
-      const browserLang = (navigator.language || "en").toLowerCase();
-      lang = browserLang.startsWith("fr") ? "FR" : "EN";
-      localStorage.setItem("lang", lang);
-      localStorage.setItem("lang_initialized", "1");
-    }
-
-    if (!lang) {
-      lang = "EN";
-      localStorage.setItem("lang", "EN");
-    }
-
-    document.documentElement.lang = lang === "FR" ? "fr" : "en";
-    document.documentElement.setAttribute("data-lang-ready", lang);
-
-  } catch (e) {
-    document.documentElement.lang = "en";
-    document.documentElement.setAttribute("data-lang-ready", "EN");
-  }
-})();
-</script>
-
-<!-- ⬇️ SEULEMENT APRÈS -->
 
 <link rel="stylesheet" href="style.css">
   
