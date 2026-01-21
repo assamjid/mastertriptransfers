@@ -776,9 +776,21 @@ if (btnCancel && btnConfirm && stripeBtn) {
       "_blank"
     );
 
-    // 2️⃣ Email (form submit silencieux)
-    bookingForm.requestSubmit();
+  // 2️⃣ EMAIL (Netlify Function)
+  try {
+    await fetch("/.netlify/functions/send-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        subject: "📩 Nouvelle réservation MasterTripTransfers",
+        message: msg
+      })
+    });
+  } catch (e) {
+    console.error("Email non envoyé", e);
+  }
 
+    
     // 3️⃣ Paiement
     if (PAYMENT_MODE === "arrival") {
       // paiement à l’arrivée → on ferme
