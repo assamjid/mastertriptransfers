@@ -772,7 +772,7 @@ if (btnCancel && btnConfirm && stripeBtn) {
 
     // 1️⃣ WhatsApp
     window.open(
-      "https://wa.me/212691059759?text=" + encodeURIComponent(msg),
+      "https://wa.me/212636342776?text=" + encodeURIComponent(msg),
       "_blank"
     );
 
