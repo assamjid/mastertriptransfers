@@ -763,6 +763,42 @@ const stripeBtn  = document.getElementById("payNowAfterConfirm");
 
 if (btnCancel && btnConfirm && stripeBtn) {
 
+btnConfirm.addEventListener("click", async () => {
+
+  const msg = document.getElementById("emailMessage").value;
+
+  // 1️⃣ WhatsApp
+  window.open(
+    "https://wa.me/212636342776?text=" + encodeURIComponent(msg),
+    "_blank"
+  );
+
+  // 2️⃣ EMAIL (Netlify Function)
+  try {
+    await fetch("/.netlify/functions/send-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        subject: "📩 Nouvelle réservation MasterTripTransfers",
+        message: msg
+      })
+    });
+  } catch (e) {
+    console.error("Email non envoyé", e);
+  }
+
+  // 3️⃣ Stripe ou fermeture
+  if (PAYMENT_MODE === "arrival") {
+    closeResume();
+  } else {
+    stripeBtn.style.display = "inline-block";
+  }
+});
+  
+}
+
+
+  /*===========DEBUT WHATSAPP ET STRIPE=======
   btnCancel.addEventListener("click", closeResume);
 
   // 🔵 CONFIRMATION
@@ -776,19 +812,8 @@ if (btnCancel && btnConfirm && stripeBtn) {
       "_blank"
     );
 
-  /* 2️⃣ EMAIL (Netlify Function)
-  try {
-    await fetch("/.netlify/functions/send-email", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        subject: "📩 Nouvelle réservation MasterTripTransfers",
-        message: msg
-      })
-    });
-  } catch (e) {
-    console.error("Email non envoyé", e);
-  }      */
+  /* 2️⃣ ====≈====EMAIL ==========
+  
 
     
     // 3️⃣ Paiement
@@ -801,6 +826,8 @@ if (btnCancel && btnConfirm && stripeBtn) {
     }
   });
 }
+
+       =========Ancien. WHATSAPP ET RENVOIE VERS PAYER==============*/
 
         /* fonction réinitialise formulaire après clic sur bouton.   */
 function afterFormSent(){
