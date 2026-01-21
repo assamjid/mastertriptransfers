@@ -1,6 +1,4 @@
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import nodemailer from "nodemailer";
 
 export async function handler(event) {
   try {
@@ -13,16 +11,24 @@ export async function handler(event) {
       };
     }
 
-    const data = await resend.emails.send({
-      from: "MasterTripTransfers <onboarding@resend.dev>",
-      to: ["mastertrip2030@gmail.com"],
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
+
+    await transporter.sendMail({
+      from: `"MasterTripTransfers" <${process.env.EMAIL_USER}>`,
+      to: "mastertrip2030@gmail.com",
       subject: subject || "📩 Nouvelle réservation MasterTripTransfers",
       text: message
     });
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ success: true, data })
+      body: "Email envoyé"
     };
 
   } catch (err) {
