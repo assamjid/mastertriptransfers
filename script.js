@@ -776,7 +776,7 @@ if (btnCancel && btnConfirm && stripeBtn) {
       "_blank"
     );
 
-  // 2️⃣ EMAIL (Netlify Function)
+  /* 2️⃣ EMAIL (Netlify Function)
   try {
     await fetch("/.netlify/functions/send-email", {
       method: "POST",
@@ -788,7 +788,7 @@ if (btnCancel && btnConfirm && stripeBtn) {
     });
   } catch (e) {
     console.error("Email non envoyé", e);
-  }
+  }      */
 
     
     // 3️⃣ Paiement
