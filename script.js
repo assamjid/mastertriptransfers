@@ -777,7 +777,7 @@ if (btnCancel && btnConfirm && stripeBtn) {
     );
 
     // 2️⃣ Email (form submit silencieux)
- //   bookingForm.requestSubmit();
+    bookingForm.requestSubmit();
 
     // 3️⃣ Paiement
     if (PAYMENT_MODE === "arrival") {
