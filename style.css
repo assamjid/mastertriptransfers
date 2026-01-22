@@ -1398,6 +1398,14 @@ button[type="submit"]{
   color: #0056b3; /* bleu plus soutenu pour mots clés */
 }
 
+.intro-seo-card h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+
+
+
 /* Affiché surtout sur mobile */
 @media(min-width:768px){
   .cta-fixed{
