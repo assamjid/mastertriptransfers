@@ -1381,12 +1381,11 @@ button[type="submit"]{
 
 .intro-seo-card {
   background: #eaf6ff; /* bleu ciel léger */
-  border-radius: 14px;
-  padding: 24px 28px;
+  border-radius: 6px;
+  padding: 6px 6px;
   max-width: 900px;
-  margin: 20px auto 40px;
-  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.08);
-  text-align: center;
+  margin: 0px auto 0px;
+  text-align: left;
 }
 
 .intro-seo-card .intro-seo {
