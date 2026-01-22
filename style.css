@@ -1379,6 +1379,26 @@ button[type="submit"]{
   text-decoration:none;
 }
 
+.intro-seo-card {
+  background: #eaf6ff; /* bleu ciel léger */
+  border-radius: 14px;
+  padding: 24px 28px;
+  max-width: 900px;
+  margin: 20px auto 40px;
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.08);
+  text-align: center;
+}
+
+.intro-seo-card .intro-seo {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #0b2e4a; /* bleu foncé lisible */
+}
+
+.intro-seo-card .intro-seo strong {
+  color: #0056b3; /* bleu plus soutenu pour mots clés */
+}
+
 /* Affiché surtout sur mobile */
 @media(min-width:768px){
   .cta-fixed{
