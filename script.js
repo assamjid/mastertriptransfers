@@ -1029,7 +1029,7 @@ function payDeposit(){
    MOTEUR MULTI-LANGUE MASTERTRIP (FR / EN)
 ===================================================== */
   
-  
+  /*
   function translateTexts(lang){
   document.querySelectorAll("[data-fr]").forEach(el=>{
     el.textContent = (lang === "EN" && el.dataset.en)
@@ -1040,6 +1040,28 @@ function payDeposit(){
 if(service.value === "excursion"){
   bookingSubtitle.textContent = LANG[lang].subtitle_excursion;
 }
+}*/
+
+function translateTexts(lang){
+  document.querySelectorAll("[data-fr]").forEach(el => {
+
+    const value = (lang === "EN" && el.dataset.en)
+      ? el.dataset.en
+      : el.dataset.fr;
+
+    // ✅ Autoriser le HTML UNIQUEMENT pour intro SEO
+    if (el.classList.contains("intro-seo")) {
+      el.innerHTML = value;
+    } else {
+      el.textContent = value;
+    }
+
+  });
+
+  // 🔒 Protège le sous-titre excursion
+  if(service.value === "excursion"){
+    bookingSubtitle.textContent = LANG[lang].subtitle_excursion;
+  }
 }
 
   function translateSelects(lang){
