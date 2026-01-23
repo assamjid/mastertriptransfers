@@ -1045,26 +1045,24 @@ if(service.value === "excursion"){
 function translateTexts(lang) {
   document.querySelectorAll("[data-fr]").forEach(el => {
 
-    // Choix de la langue
-    const value =
-      (lang === "EN" && el.dataset.en)
-        ? el.dataset.en
-        : el.dataset.fr;
+    const value = (lang === "EN" && el.dataset.en)
+      ? el.dataset.en
+      : el.dataset.fr;
 
-    // ✅ Autoriser le HTML UNIQUEMENT pour les blocs SEO
+    // ✅ Autoriser le HTML pour les blocs SEO
     if (
       el.classList.contains("intro-seo") ||
       el.classList.contains("seo-services")
     ) {
-      el.innerHTML = value;   // interprète <strong>, <br>, etc.
+      el.innerHTML = value;
     } else {
-      el.textContent = value; // sécurité pour le reste
+      el.textContent = value;
     }
 
   });
 
-  // 🔒 Protéger le sous-titre excursion (logique existante)
-  if (service && service.value === "excursion") {
+  // 🔒 Protège le sous-titre excursion
+  if (service.value === "excursion") {
     bookingSubtitle.textContent = LANG[lang].subtitle_excursion;
   }
 }
