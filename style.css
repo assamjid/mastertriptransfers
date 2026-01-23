@@ -1404,8 +1404,20 @@ button[type="submit"]{
 }
 
 .dest-intro {
-  margin-bottom: 30px; /* ajuste 20–40px selon ton goût */
+  margin-bottom: 30px; /* espace avant les cartes */
 }
+
+.dest-intro h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.dest-intro p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+
 
 
 
