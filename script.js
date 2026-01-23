@@ -1042,6 +1042,10 @@ if(service.value === "excursion"){
 }
 }*/
 
+  /* =====================================================
+   MOTEUR MULTI-LANGUE MASTERTRIP (FR / EN)
+===================================================== */
+  
 function translateTexts(lang) {
 
   document.querySelectorAll("[data-fr]").forEach(el => {
@@ -1078,7 +1082,7 @@ function translateTexts(lang) {
     }
   }
 }
-
+  
 
 
   function translateSelects(lang){
