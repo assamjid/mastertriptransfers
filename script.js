@@ -1079,19 +1079,8 @@ function translateTexts(lang) {
   }
 }
 
-  // 🔒 Sécurité : garder le bon sous-titre selon le service
-  if (service && service.value === "excursion") {
-    bookingSubtitle.textContent = LANG[lang].subtitle_excursion;
-  }
 
-  if (service && service.value === "airport") {
-    bookingSubtitle.textContent = LANG[lang].subtitle_transfer;
-  }
 
-  if (service && service.value === "intercity") {
-    bookingSubtitle.textContent = LANG[lang].subtitle_intercity;
-  }
-}
   function translateSelects(lang){
   document.querySelectorAll("select").forEach(select=>{
     select.querySelectorAll("option").forEach(option=>{
@@ -1108,6 +1097,9 @@ if(service.value === "excursion"){
   bookingSubtitle.textContent = LANG[lang].subtitle_excursion;
 }
   }
+
+
+
   function setPlaceholders(lang){
 
   const PH = {
