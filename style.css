@@ -1403,6 +1403,10 @@ button[type="submit"]{
   margin-bottom: 2px;
 }
 
+.dest-intro {
+  margin-bottom: 30px; /* ajuste 20–40px selon ton goût */
+}
+
 
 
 
