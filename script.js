@@ -1,4 +1,7 @@
-  
+document.addEventListener("DOMContentLoaded", () => {
+  document.documentElement.setAttribute("data-lang-ready", "true");
+});
+
 const LANG = {
 
 FR:{
