@@ -1042,24 +1042,29 @@ if(service.value === "excursion"){
 }
 }*/
 
-function translateTexts(lang){
+function translateTexts(lang) {
   document.querySelectorAll("[data-fr]").forEach(el => {
 
-    const value = (lang === "EN" && el.dataset.en)
-      ? el.dataset.en
-      : el.dataset.fr;
+    // Choix de la langue
+    const value =
+      (lang === "EN" && el.dataset.en)
+        ? el.dataset.en
+        : el.dataset.fr;
 
-    // ✅ Autoriser le HTML UNIQUEMENT pour intro SEO
-    if (el.classList.contains("intro-seo")) {
-      el.innerHTML = value;
+    // ✅ Autoriser le HTML UNIQUEMENT pour les blocs SEO
+    if (
+      el.classList.contains("intro-seo") ||
+      el.classList.contains("seo-services")
+    ) {
+      el.innerHTML = value;   // interprète <strong>, <br>, etc.
     } else {
-      el.textContent = value;
+      el.textContent = value; // sécurité pour le reste
     }
 
   });
 
-  // 🔒 Protège le sous-titre excursion
-  if(service.value === "excursion"){
+  // 🔒 Protéger le sous-titre excursion (logique existante)
+  if (service && service.value === "excursion") {
     bookingSubtitle.textContent = LANG[lang].subtitle_excursion;
   }
 }
