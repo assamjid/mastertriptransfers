@@ -200,6 +200,682 @@ window.scrollTo({ top: y, behavior: 'smooth' });
   </p>
 
 </div>
+
+
+  <!--=============DEBUT FORMULAIRE =========-->
+
+
+<section id="booking">
+  <h2 id="bookingTitle"
+data-fr="Réservation"
+data-en="Booking">
+Réservation
+</h2>
+
+<h3 id="bookingSubtitle"
+data-fr=""
+data-en="">
+</h3>
+
+  <div class="booking-cards-row">
+
+    <!-- FORMULAIRE À GAUCHE -->
+    <div class="booking-form-card">
+
+  
+<form id="bookingForm"
+      action="https://formsubmit.co/mastertrip2030@gmail.com"
+      method="POST"
+      target="hiddenFrame">
+
+  <input type="hidden" name="_next" value="">
+  <input type="hidden" name="_captcha" value="false">
+
+<div class="floating-field">
+
+  <select id="service" name="service" required>
+  <option value="" data-fr="Choisir un service" data-en="Choose a service"></option>
+
+  <option value="airport"
+    data-fr="Transferts Aéroport & Privés"
+    data-en="Airport & Private Transfers">
+    Transferts Aéroport & Privés
+  </option>
+
+  <option value="intercity"
+    data-fr="Transferts Inter-Villes Maroc"
+    data-en="Intercity Transfers Morocco">
+    Transferts Inter-Villes Maroc
+  </option>
+
+  <option value="excursion"
+    data-fr="Excursions & Circuits Touristiques"
+    data-en="Excursions & Tours">
+    Excursions & Circuits Touristiques
+  </option>
+  </select>
+
+  <label for="service"
+data-fr="Nos services"
+data-en="Our services">
+Nos services
+</label>
+</div>
+
+
+<div id="transferFields">   
+
+<div class="floating-field">
+
+  
+<select id="transferType" name="transfer_type">
+    <option value=""
+  data-fr="Choisir transfert"
+  data-en="Choose transfer">
+  Choisir transfert
+</option>
+
+  <option value="Transfert Privé Personnalisé"
+          data-fr="Transfert Privé Personnalisé"
+          data-en="Custom Private Transfer">
+    Transfert Privé Personnalisé
+  </option>
+
+  <option value="Aéroport d'Agadir vers Agadir ville"
+          data-fr="Aéroport d'Agadir vers Agadir ville"
+          data-en="Agadir Airport to Agadir City">
+    Aéroport d'Agadir vers Agadir ville
+  </option>
+
+  <option value="Agadir ville vers Aéroport d'Agadir"
+          data-fr="Agadir ville vers Aéroport d'Agadir"
+          data-en="Agadir City to Agadir Airport">
+    Agadir ville vers Aéroport d'Agadir
+  </option>
+
+  <option value="Aéroport d'Agadir vers Taghazout Bay"
+          data-fr="Aéroport d'Agadir vers Taghazout Bay"
+          data-en="Agadir Airport to Taghazout Bay">
+    Aéroport d'Agadir vers Taghazout Bay
+  </option>
+
+  <option value="Taghazout Bay vers Aéroport d'Agadir"
+          data-fr="Taghazout Bay vers Aéroport d'Agadir"
+          data-en="Taghazout Bay to Agadir Airport">
+    Taghazout Bay vers Aéroport d'Agadir
+  </option>
+</select>
+  
+  <label for="transferType"
+  data-fr="Transferts"
+  data-en="Transfers">
+  Transferts
+  </label>
+</div>
+
+<div class="floating-field">
+  <input id="depart" name="pickup" type="text" placeholder="adresse, aéroport, hotel ..." >
+  <label for="depart"
+  data-fr="Lieu de prise en charge"
+  data-en="Pickup location">
+  Lieu de prise en charge
+  </label>
+</div>
+
+  <div class="floating-field">
+  <input id="arrivee" name="dropoff" type="text" placeholder="adresse, aéroport, hotel ..." >
+  <label for="arrivee"
+  data-fr="Destination"
+  data-en="Drop-off location">
+  Destination
+  </label>
+</div>
+
+  
+<div class="floating-field">
+  <select id="transferPlaces" name="transfer_people" required>
+  <option value=""
+  data-fr="Nombre de places"
+  data-en="Number of people">
+  Nombre de places
+</option>
+  <option value="5" data-fr="5 et moins" data-en="Up to 5">5 et moins</option>
+  <option value="6" data-fr="6" data-en="6">6</option>
+  <option value="7" data-fr="7" data-en="7">7</option>
+  <option value="8" data-fr="8" data-en="8">8</option>
+  <option value="9" data-fr="9" data-en="9">9</option>
+  <option value="10" data-fr="10" data-en="10">10</option>
+  <option value="11" data-fr="11" data-en="11">11</option>
+  <option value="12" data-fr="12" data-en="12">12</option>
+  <option value="13" data-fr="13" data-en="13">13</option>
+  <option value="14" data-fr="14" data-en="14">14</option>
+  <option value="15" data-fr="15" data-en="15">15</option>
+  </select>
+    
+  <label for="transferPlaces"
+  data-fr="Places"
+  data-en="People">
+  Places
+  </label>
+</div>
+  <div class="floating-field">
+<input type="text" id="transferPrix" name="transfer_price" placeholder="0,00€" readonly>
+<label for="transferPrix"
+  data-fr="Prix (€)"
+  data-en="Price (€)">
+  Prix (€)
+</label>
+</div>
+
+<div class="floating-field" id="flightField">
+<input id="flightNumber" name="flight" placeholder="Ex: FR456">
+  <label for="flightNumber"
+  data-fr="Numéro de vol"
+  data-en="Flight number">
+  Numéro de vol
+  </label>
+</div>
+
+  
+</div>
+
+<div id="intervillesFields">
+<div class="floating-field">
+  
+<select id="trajet" name="route" required>
+  <option value=""
+  data-fr="Choisir Trajet"
+  data-en="Choose route">
+  Choisir Trajet
+  </option>
+
+  <option value="Agadir / Taghazout vers Marrakech"
+          data-fr="Agadir / Taghazout vers Marrakech"
+          data-en="Agadir / Taghazout to Marrakech">
+    Agadir / Taghazout vers Marrakech
+  </option>
+
+  <option value="Marrakech vers Agadir / Taghazout"
+          data-fr="Marrakech vers Agadir / Taghazout"
+          data-en="Marrakech to Agadir / Taghazout">
+    Marrakech vers Agadir / Taghazout
+  </option>
+
+  <option value="Agadir / Taghazout vers Essaouira"
+          data-fr="Agadir / Taghazout vers Essaouira"
+          data-en="Agadir / Taghazout to Essaouira">
+    Agadir / Taghazout vers Essaouira
+  </option>
+
+  <option value="Essaouira vers Agadir / Taghazout"
+          data-fr="Essaouira vers Agadir / Taghazout"
+          data-en="Essaouira to Agadir / Taghazout">
+    Essaouira vers Agadir / Taghazout
+  </option>
+
+  <option value="Agadir / Taghazout vers Imsouane"
+          data-fr="Agadir / Taghazout vers Imsouane"
+          data-en="Agadir / Taghazout to Imsouane">
+    Agadir / Taghazout vers Imsouane
+  </option>
+
+  <option value="Imsouane vers Agadir / Taghazout"
+          data-fr="Imsouane vers Agadir / Taghazout"
+          data-en="Imsouane to Agadir / Taghazout">
+    Imsouane vers Agadir / Taghazout
+  </option>
+    <option value="Agadir / Taghazout vers Taroudant"
+          data-fr="Agadir / Taghazout vers Taroudant"
+          data-en="Agadir / Taghazout to Taroudant">
+    Agadir / Taghazout vers Taroudant
+  </option>
+
+  <option value="Taroudant vers Agadir / Taghazout"
+          data-fr="Taroudant vers Agadir / Taghazout"
+          data-en="Taroudant to Agadir / Taghazout">
+    Taroudant vers Agadir / Taghazout
+  </option>
+  
+    <option value="Agadir / Taghazout vers Casablanca"
+          data-fr="Agadir / Taghazout vers Casablanca"
+          data-en="Agadir / Taghazout to Casablanca">
+    Agadir / Taghazout vers Casablanca
+  </option>
+
+  <option value="Casablanca vers Agadir / Taghazout"
+          data-fr="Casablanca vers Agadir / Taghazout"
+          data-en="Casablanca to Agadir / Taghazout">
+    Casablanca vers Agadir / Taghazout
+  </option>
+    <option value="Agadir / Taghazout vers Rabat"
+          data-fr="Agadir / Taghazout vers Rabat"
+          data-en="Agadir / Taghazout to Rabat">
+    Agadir / Taghazout vers Rabat
+  </option>
+
+  <option value="Rabat vers Agadir / Taghazout"
+          data-fr="Rabat vers Agadir / Taghazout"
+          data-en="Rabat to Agadir / Taghazout">
+    Rabat vers Agadir / Taghazout
+  </option>
+  <option value="Agadir / Taghazout vers Fès"
+          data-fr="Agadir / Taghazout vers Fès"
+          data-en="Agadir / Taghazout to Fes">
+    Agadir / Taghazout vers Fes
+  </option>
+
+  <option value="Fes vers Agadir / Taghazout"
+          data-fr="Fès vers Agadir / Taghazout"
+          data-en="Fes to Agadir / Taghazout">
+    Fes vers Agadir / Taghazout
+  </option>
+  <option value="Agadir / Taghazout vers Tanger"
+          data-fr="Agadir / Taghazout vers Tanger"
+          data-en="Agadir / Taghazout to Tanger">
+    Agadir / Taghazout vers Tanger
+  </option>
+
+  <option value="Tanger vers Agadir / Taghazout"
+          data-fr="Tanger vers Agadir / Taghazout"
+          data-en="Tanger to Agadir / Taghazout">
+    Tanger vers Agadir / Taghazout
+  </option>
+  </select>
+
+    <label for="trajet"
+  data-fr="Intervilles"
+  data-en="InterCity">Intervilles</label>
+  
+    
+  <!--<label for="trajet">Intervilles</label>-->
+</div>
+  <div class="floating-field">
+
+<select id="places" name="intercity_people" required>
+  <option value=""
+  data-fr="Nombre de places"
+  data-en="Number of people">
+  Nombre de places
+  </option>
+  <option value="5" data-fr="5 et moins" data-en="Up to 5">5 et moins</option>
+  <option value="6" data-fr="6" data-en="6">6</option>
+  <option value="7" data-fr="7" data-en="7">7</option>
+  <option value="8" data-fr="8" data-en="8">8</option>
+  <option value="9" data-fr="9" data-en="9">9</option>
+  <option value="10" data-fr="10" data-en="10">10</option>
+  <option value="11" data-fr="11" data-en="11">11</option>
+  <option value="12" data-fr="12" data-en="12">12</option>
+  <option value="13" data-fr="13" data-en="13">13</option>
+  <option value="14" data-fr="14" data-en="14">14</option>
+  <option value="15" data-fr="15" data-en="15">15</option>
+  </select>
+
+  <label for="places"
+  data-fr="Places"
+  data-en="People">
+  Places
+  </label>
+</div>
+
+<div class="floating-field">
+<input type="text" id="prix" name="intercity_price" placeholder="0,00€" readonly>
+<label for="prix"
+  data-fr="Prix (€)"
+  data-en="Price (€)">
+  Prix (€)
+</label>
+</div>
+
+</div>
+<div id="circuitsFields"> 
+<div class="floating-field">
+  
+<select id="circuit" name="excursion" required>
+    <option value=""
+  data-fr="Choisir Excursion"
+  data-en="Choose excursion">
+  Choisir Excursion
+    </option>
+
+  <option value="Tour de la ville d’Agadir"
+          data-fr="Tour de la ville d’Agadir"
+          data-en="Agadir City Tour">
+    Tour de la ville d’Agadir
+  </option>
+
+  <option value="Souk El Had – Circuit Shopping"
+          data-fr="Souk El Had – Circuit Shopping"
+          data-en="Souk El Had Shopping Tour">
+    Souk El Had – Circuit Shopping
+  </option>
+
+  <option value="Excursion Paradise Valley"
+          data-fr="Excursion Paradise Valley"
+          data-en="Paradise Valley Excursion">
+    Excursion Paradise Valley
+  </option>
+
+  <option value="Dunes de Timlaline – Expérience Désert"
+          data-fr="Dunes de Timlaline – Expérience Désert"
+          data-en="Timlaline Sand Dunes Experience">
+    Dunes de Timlaline – Expérience Désert
+  </option>
+
+  <option value="Visite du Crocoparc"
+          data-fr="Visite du Crocoparc"
+          data-en="Crocoparc Visit">
+    Visite du Crocoparc
+  </option>
+  <option value="Téléphérique et visite de la Kasbah"
+          data-fr="Téléphérique et visite de la Kasbah"
+          data-en="Cable Car & Kasbah Visit">
+    Téléphérique et visite de la Kasbah
+  </option>
+
+  <option value="Safari Quad / Buggy"
+          data-fr="Safari Quad / Buggy"
+          data-en="Quad / Buggy Safari">
+    Safari Quad / Buggy
+  </option>
+
+  <option value="Chameau"
+          data-fr="Promenade à dos de chameau"
+          data-en="Camel Ride">
+    Promenade à dos de chameau
+  </option>
+  </select>
+
+  <label for="circuit"
+  data-fr="Excursions"
+  data-en="Excursions">
+  Excursions
+  </label>
+</div>
+
+<div class="floating-field" id="quadTypeField" style="display:none;">
+  <select id="quadType" name="quad_type" required>
+    <option value=""
+  data-fr="Type de véhicule"
+  data-en="Vehicle type">
+  Type de véhicule
+    </option>
+
+  <option value="Quad simple"
+          data-fr="Quad simple"
+          data-en="Single Quad">
+    Quad simple
+  </option>
+
+  <option value="Buggy"
+          data-fr="Buggy"
+          data-en="Buggy">
+    Buggy
+  </option>
+    </select>
+    
+  <label for="quadType"
+  data-fr="Quad / Buggy"
+  data-en="Quad / Buggy">
+  Quad / Buggy
+  </label>
+</div>
+
+<div class="floating-field" id="camelTypeField" style="display:none;">
+  <select id="camelType" name="camel_type" required>
+  <option value=""
+  data-fr="Type de promenade"
+  data-en="Ride type">
+  Type de promenade
+  </option>
+
+  <option value="Promenade seule"
+          data-fr="Promenade seule"
+          data-en="Ride Only">
+    Promenade seule
+  </option>
+
+  <option value="Promenade + dîner"
+          data-fr="Promenade + dîner"
+          data-en="Ride + Dinner">
+    Promenade + dîner
+  </option>
+  </select>
+  data-fr="Chameau"
+  data-en="Camel ride">
+  Chameau
+  </label>
+</div>
+  
+<div class="floating-field">
+  <select id="circuitPlaces" name="excursion_people" required></select>
+  <label for="circuitPlaces"
+  data-fr="Places"
+  data-en="People">
+  Places
+  </label>
+</div>
+
+<div class="floating-field">
+<input type="text" id="circuitPrix" class="full" name="excursion_price" placeholder="0,00€" readonly>
+  <label for="circuitPrix"
+  data-fr="Prix (€)"
+  data-en="Price (€)">
+  Prix (€)
+  </label>
+</div>
+
+</div>
+  
+<div class="floating-field">
+<input type="date" id="date" name="date" required>
+  
+  <label for="date"
+  data-fr="Date"
+  data-en="Date">
+  Date
+  </label>
+</div>
+
+<div class="floating-field" id="heureField">
+  <input type="time" id="heure" name="time" required>
+  <label for="heure"
+  data-fr="Heure de prise en charge"
+  data-en="Pickup time">
+  Heure de prise en charge
+  </label>
+</div>
+
+
+<div class="floating-field" id="fixedTimeField" style="display:none;">
+  <select id="fixedTime" name="fixed_time" required>
+    <option value=""
+        data-fr="Choisir l’horaire"
+        data-en="Select time">
+  Choisir l’horaire
+    </option>
+  </select>
+  <label for="fixedTime"
+  data-fr="Horaire"
+  data-en="Time slot">
+  Horaire
+  </label>
+</div>
+    <label for="camelType"
+  
+<div class="floating-field">
+<textarea id="message" name="note" placeholder="Baggages, Siège bébé ..."></textarea>
+  <label for="message"
+  data-fr="Demandes spéciales"
+  data-en="Special requests">
+  Demandes spéciales
+  </label>
+</div>
+        
+<div class="floating-field">
+<input id="nom" name="full_name" type="text" required>
+  <label for="nom"
+  data-fr="Nom et Prénom"
+  data-en="Full name">
+  Nom et Prénom
+  </label>
+</div>
+
+
+<div class="phone-group">
+  <select id="countryCode" name="country_code">
+<option value="44">🇬🇧 +44 </option>
+<option value="212">🇲🇦 +212</option>
+<option value="33">🇫🇷 +33</option>
+<option value="1">🇺🇸 +1</option>
+<option value="32">🇧🇪 +32</option>
+<option value="41">🇨🇭 +41</option>
+<option value="49">🇩🇪 +49</option>
+<option value="34">🇪🇸 +34</option>
+<option value="39">🇮🇹 +39</option>
+<option value="31">🇳🇱 +31</option>
+<option value="351">🇵🇹 +351</option>
+<option value="43">🇦🇹 +43</option>
+<option value="45">🇩🇰 +45</option>
+<option value="46">🇸🇪 +46</option>
+<option value="47">🇳🇴 +47</option>
+<option value="358">🇫🇮 +358</option>
+<option value="353">🇮🇪 +353</option>
+<option value="30">🇬🇷 +30</option>
+<option value="420">🇨🇿 +420</option>
+<option value="421">🇸🇰 +421</option>
+<option value="36">🇭🇺 +36</option>
+<option value="48">🇵🇱 +48</option>
+<option value="40">🇷🇴 +40</option>
+<option value="359">🇧🇬 +359</option>
+<option value="385">🇭🇷 +385</option>
+<option value="386">🇸🇮 +386</option>
+<option value="371">🇱🇻 +371</option>
+<option value="370">🇱🇹 +370</option>
+<option value="372">🇪🇪 +372</option>
+<option value="354">🇮🇸 +354</option>
+<option value="357">🇨🇾 +357</option>
+<option value="355">🇦🇱 +355</option>
+<option value="389">🇲🇰 +389</option>
+<option value="373">🇲🇩 +373</option>
+<option value="376">🇦🇩 +376</option>
+<option value="378">🇸🇲 +378</option>
+<option value="377">🇲🇨 +377</option>
+<option value="423">🇱🇮 +423</option>
+<option value="350">🇬🇮 +350</option>
+<option value="356">🇲🇹 +356</option>
+<option value="380">🇺🇦 +380</option>  
+<option value="216">🇹🇳 +216</option>
+<option value="218">🇱🇾 +218</option>
+<option value="20">🇪🇬 +20</option>
+<option value="971">🇦🇪 +971</option>
+<option value="966">🇸🇦 +966</option>
+<option value="965">🇰🇼 +965</option>
+<option value="974">🇶🇦 +974</option>
+<option value="973">🇧🇭 +973</option>
+<option value="968">🇴🇲 +968</option>
+<option value="967">🇾🇪 +967</option>
+<option value="962">🇯🇴 +962</option>
+<option value="961">🇱🇧 +961</option>
+<option value="963">🇸🇾 +963</option>
+<option value="964">🇮🇶 +964</option>
+<option value="970">🇵🇸 +970</option>
+  
+  </select>
+  <input id="tel" name="phone" type="tel" data-fr="Téléphone" data-en="Phone number" placeholder="Téléphone" required>
+
+</div>
+
+
+<div class="floating-field">
+<input id="email" name="email" type="email" required>
+  <label for="email"
+  data-fr="Email"
+  data-en="Email">
+  Email
+  </label>
+</div>
+
+
+<input type="hidden" name="_subject" value="Nouvelle réservation MasterTripTransfers">
+<input type="hidden" name="_format" value="plain">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" id="finalPrice" name="price">
+<input type="hidden" id="emailMessage" name="final_message">
+<input type="hidden" name="_template" value="table">
+<input type="submit" id="realSubmit" hidden>
+<input type="hidden" id="stripe_amount">
+
+  <!-- ================= HEADER ================= -->
+  
+<div class="floating-field floating-btn-field">
+
+   <button type="submit" id="btnReserve" class="floating-btn">
+  <span class="btn-text"
+        data-fr="RÉSERVER"
+        data-en="BOOK NOW">
+    BOOK NOW
+  </span>
+
+  <span class="btn-label"
+        data-fr="Paiement sur place"
+        data-en="Pay on arrival">
+    Paiement sur place
+  </span>
+</button>
+  
+
+  <label for="btnReserve"
+        data-fr="Payer sur place"
+        data-en="Pay on arrival">
+    Payer sur place
+  </label>
+
+</div>
+  
+  <div class="floating-field floating-btn-field paynow-field">
+  <button type="button" id="btnPay" class="floating-btn paynow-btn"
+          onclick="payByCard()">
+    PAY NOW
+  </button>
+      <label for="btnPay"
+        data-fr="Réserver et  "
+        data-en="Book and ">
+    Paiement en ligne
+  </label>
+</div>
+  
+<div class="floating-field floating-btn-field deposit-field">
+  <button type="button" id="btnPayDeposit" class="floating-btn deposit-btn"
+          onclick="payDeposit()">
+    PAY 20%
+  </button>
+
+  <label for="btnPayDeposit"
+        data-fr="Réserver et "
+        data-en="Book and ">
+    Acompte
+  </label>
+</div>  
+
+ </form>
+      <iframe name="hiddenFrame" style="display:none" onload="afterFormSent()"></iframe>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+  <!--==========FIN FORMULAIRE ==========-->
+
+
+  
   
 <section id="services">
 <h2 data-fr="Nos Services" data-en="Our Services">
@@ -344,666 +1020,19 @@ data-en="🚐 Modern air-conditioned vehicles">
 </div>
 </section>
 
-<section id="booking">
-  <h2 id="bookingTitle"
-data-fr="Réservation"
-data-en="Booking">
-Réservation
-</h2>
-
-<h3 id="bookingSubtitle"
-data-fr=""
-data-en="">
-</h3>
-
-  <div class="booking-cards-row">
-
-    <!-- FORMULAIRE À GAUCHE -->
-    <div class="booking-form-card">
 
   
-<form id="bookingForm"
-      action="https://formsubmit.co/mastertrip2030@gmail.com"
-      method="POST"
-      target="hiddenFrame">
-
-  <input type="hidden" name="_next" value="">
-  <input type="hidden" name="_captcha" value="false">
-
-<div class="floating-field">
-
-  <select id="service" name="service" required>
-  <option value="" data-fr="Choisir un service" data-en="Choose a service"></option>
-
-  <option value="airport"
-    data-fr="Transferts Aéroport & Privés"
-    data-en="Airport & Private Transfers">
-    Transferts Aéroport & Privés
-  </option>
-
-  <option value="intercity"
-    data-fr="Transferts Inter-Villes Maroc"
-    data-en="Intercity Transfers Morocco">
-    Transferts Inter-Villes Maroc
-  </option>
-
-  <option value="excursion"
-    data-fr="Excursions & Circuits Touristiques"
-    data-en="Excursions & Tours">
-    Excursions & Circuits Touristiques
-  </option>
-  </select>
-
-<label for="service"
-data-fr="Nos services"
-data-en="Our services">
-Nos services
-</label>
-</div>
-
-
-<div id="transferFields">   
-
-<div class="floating-field">
-
-  
-<select id="transferType" name="transfer_type">
-    <option value=""
-  data-fr="Choisir transfert"
-  data-en="Choose transfer">
-  Choisir transfert
-</option>
-
-  <option value="Transfert Privé Personnalisé"
-          data-fr="Transfert Privé Personnalisé"
-          data-en="Custom Private Transfer">
-    Transfert Privé Personnalisé
-  </option>
-
-  <option value="Aéroport d'Agadir vers Agadir ville"
-          data-fr="Aéroport d'Agadir vers Agadir ville"
-          data-en="Agadir Airport to Agadir City">
-    Aéroport d'Agadir vers Agadir ville
-  </option>
-
-  <option value="Agadir ville vers Aéroport d'Agadir"
-          data-fr="Agadir ville vers Aéroport d'Agadir"
-          data-en="Agadir City to Agadir Airport">
-    Agadir ville vers Aéroport d'Agadir
-  </option>
-
-  <option value="Aéroport d'Agadir vers Taghazout Bay"
-          data-fr="Aéroport d'Agadir vers Taghazout Bay"
-          data-en="Agadir Airport to Taghazout Bay">
-    Aéroport d'Agadir vers Taghazout Bay
-  </option>
-
-  <option value="Taghazout Bay vers Aéroport d'Agadir"
-          data-fr="Taghazout Bay vers Aéroport d'Agadir"
-          data-en="Taghazout Bay to Agadir Airport">
-    Taghazout Bay vers Aéroport d'Agadir
-  </option>
-  </select>
-  
-  <label for="transferType"
-  data-fr="Transferts"
-  data-en="Transfers">
-  Transferts
-  </label>
-</div>
-
-<div class="floating-field">
-  <input id="depart" name="pickup" type="text" placeholder="adresse, aéroport, hotel ..." >
-  <label for="depart"
-  data-fr="Lieu de prise en charge"
-  data-en="Pickup location">
-  Lieu de prise en charge
-  </label>
-</div>
-
-  <div class="floating-field">
-  <input id="arrivee" name="dropoff" type="text" placeholder="adresse, aéroport, hotel ..." >
-  <label for="arrivee"
-  data-fr="Destination"
-  data-en="Drop-off location">
-  Destination
-  </label>
-</div>
-
-  
-<div class="floating-field">
-  <select id="transferPlaces" name="transfer_people" required>
-  <option value=""
-  data-fr="Nombre de places"
-  data-en="Number of people">
-  Nombre de places
-</option>
-  <option value="5" data-fr="5 et moins" data-en="Up to 5">5 et moins</option>
-  <option value="6" data-fr="6" data-en="6">6</option>
-  <option value="7" data-fr="7" data-en="7">7</option>
-  <option value="8" data-fr="8" data-en="8">8</option>
-  <option value="9" data-fr="9" data-en="9">9</option>
-  <option value="10" data-fr="10" data-en="10">10</option>
-  <option value="11" data-fr="11" data-en="11">11</option>
-  <option value="12" data-fr="12" data-en="12">12</option>
-  <option value="13" data-fr="13" data-en="13">13</option>
-  <option value="14" data-fr="14" data-en="14">14</option>
-  <option value="15" data-fr="15" data-en="15">15</option>
-  </select>
-    
-  <label for="transferPlaces"
-  data-fr="Places"
-  data-en="People">
-  Places
-  </label>
-</div>
  
-<div class="floating-field">
-<input type="text" id="transferPrix" name="transfer_price" placeholder="0,00€" readonly>
-<label for="transferPrix"
-  data-fr="Prix (€)"
-  data-en="Price (€)">
-  Prix (€)
-</label>
-</div>
 
-<div class="floating-field" id="flightField">
-<input id="flightNumber" name="flight" placeholder="Ex: FR456">
-  <label for="flightNumber"
-  data-fr="Numéro de vol"
-  data-en="Flight number">
-  Numéro de vol
-  </label>
-</div>
+
+
 
   
-</div>
-
-<div id="intervillesFields">
-<div class="floating-field">
-  
-<select id="trajet" name="route" required>
-  <option value=""
-  data-fr="Choisir Trajet"
-  data-en="Choose route">
-  Choisir Trajet
-  </option>
-
-  <option value="Agadir / Taghazout vers Marrakech"
-          data-fr="Agadir / Taghazout vers Marrakech"
-          data-en="Agadir / Taghazout to Marrakech">
-    Agadir / Taghazout vers Marrakech
-  </option>
-
-  <option value="Marrakech vers Agadir / Taghazout"
-          data-fr="Marrakech vers Agadir / Taghazout"
-          data-en="Marrakech to Agadir / Taghazout">
-    Marrakech vers Agadir / Taghazout
-  </option>
-
-  <option value="Agadir / Taghazout vers Essaouira"
-          data-fr="Agadir / Taghazout vers Essaouira"
-          data-en="Agadir / Taghazout to Essaouira">
-    Agadir / Taghazout vers Essaouira
-  </option>
-
-  <option value="Essaouira vers Agadir / Taghazout"
-          data-fr="Essaouira vers Agadir / Taghazout"
-          data-en="Essaouira to Agadir / Taghazout">
-    Essaouira vers Agadir / Taghazout
-  </option>
-
-  <option value="Agadir / Taghazout vers Imsouane"
-          data-fr="Agadir / Taghazout vers Imsouane"
-          data-en="Agadir / Taghazout to Imsouane">
-    Agadir / Taghazout vers Imsouane
-  </option>
-
-  <option value="Imsouane vers Agadir / Taghazout"
-          data-fr="Imsouane vers Agadir / Taghazout"
-          data-en="Imsouane to Agadir / Taghazout">
-    Imsouane vers Agadir / Taghazout
-  </option>
-    <option value="Agadir / Taghazout vers Taroudant"
-          data-fr="Agadir / Taghazout vers Taroudant"
-          data-en="Agadir / Taghazout to Taroudant">
-    Agadir / Taghazout vers Taroudant
-  </option>
-
-  <option value="Taroudant vers Agadir / Taghazout"
-          data-fr="Taroudant vers Agadir / Taghazout"
-          data-en="Taroudant to Agadir / Taghazout">
-    Taroudant vers Agadir / Taghazout
-  </option>
-    <option value="Agadir / Taghazout vers Casablanca"
-          data-fr="Agadir / Taghazout vers Casablanca"
-          data-en="Agadir / Taghazout to Casablanca">
-    Agadir / Taghazout vers Casablanca
-  </option>
-
-  <option value="Casablanca vers Agadir / Taghazout"
-          data-fr="Casablanca vers Agadir / Taghazout"
-          data-en="Casablanca to Agadir / Taghazout">
-    Casablanca vers Agadir / Taghazout
-  </option>
-    <option value="Agadir / Taghazout vers Rabat"
-          data-fr="Agadir / Taghazout vers Rabat"
-          data-en="Agadir / Taghazout to Rabat">
-    Agadir / Taghazout vers Rabat
-  </option>
-
-  <option value="Rabat vers Agadir / Taghazout"
-          data-fr="Rabat vers Agadir / Taghazout"
-          data-en="Rabat to Agadir / Taghazout">
-    Rabat vers Agadir / Taghazout
-  </option>
-  <option value="Agadir / Taghazout vers Fès"
-          data-fr="Agadir / Taghazout vers Fès"
-          data-en="Agadir / Taghazout to Fes">
-    Agadir / Taghazout vers Fes
-  </option>
-
-  <option value="Fes vers Agadir / Taghazout"
-          data-fr="Fès vers Agadir / Taghazout"
-          data-en="Fes to Agadir / Taghazout">
-    Fes vers Agadir / Taghazout
-  </option>
-  <option value="Agadir / Taghazout vers Tanger"
-          data-fr="Agadir / Taghazout vers Tanger"
-          data-en="Agadir / Taghazout to Tanger">
-    Agadir / Taghazout vers Tanger
-  </option>
-
-  <option value="Tanger vers Agadir / Taghazout"
-          data-fr="Tanger vers Agadir / Taghazout"
-          data-en="Tanger to Agadir / Taghazout">
-    Tanger vers Agadir / Taghazout
-  </option>
-  </select>
-
-    <label for="trajet"
-  data-fr="Intervilles"
-  data-en="InterCity">Intervilles</label>
-  
-    
-  <!--<label for="trajet">Intervilles</label>-->
-</div>
-
-<div class="floating-field">
-
-<select id="places" name="intercity_people" required>
-  <option value=""
-  data-fr="Nombre de places"
-  data-en="Number of people">
-  Nombre de places
-  </option>
-  <option value="5" data-fr="5 et moins" data-en="Up to 5">5 et moins</option>
-  <option value="6" data-fr="6" data-en="6">6</option>
-  <option value="7" data-fr="7" data-en="7">7</option>
-  <option value="8" data-fr="8" data-en="8">8</option>
-  <option value="9" data-fr="9" data-en="9">9</option>
-  <option value="10" data-fr="10" data-en="10">10</option>
-  <option value="11" data-fr="11" data-en="11">11</option>
-  <option value="12" data-fr="12" data-en="12">12</option>
-  <option value="13" data-fr="13" data-en="13">13</option>
-  <option value="14" data-fr="14" data-en="14">14</option>
-  <option value="15" data-fr="15" data-en="15">15</option>
-  </select>
-
-  <label for="places"
-  data-fr="Places"
-  data-en="People">
-  Places
-  </label>
-</div>
-
-<div class="floating-field">
-<input type="text" id="prix" name="intercity_price" placeholder="0,00€" readonly>
-<label for="prix"
-  data-fr="Prix (€)"
-  data-en="Price (€)">
-  Prix (€)
-</label>
-</div>
-
-</div>
-<div id="circuitsFields"> 
-<div class="floating-field">
-  
-<select id="circuit" name="excursion" required>
-    <option value=""
-  data-fr="Choisir Excursion"
-  data-en="Choose excursion">
-  Choisir Excursion
-    </option>
-
-  <option value="Tour de la ville d’Agadir"
-          data-fr="Tour de la ville d’Agadir"
-          data-en="Agadir City Tour">
-    Tour de la ville d’Agadir
-  </option>
-
-  <option value="Souk El Had – Circuit Shopping"
-          data-fr="Souk El Had – Circuit Shopping"
-          data-en="Souk El Had Shopping Tour">
-    Souk El Had – Circuit Shopping
-  </option>
-
-  <option value="Excursion Paradise Valley"
-          data-fr="Excursion Paradise Valley"
-          data-en="Paradise Valley Excursion">
-    Excursion Paradise Valley
-  </option>
-
-  <option value="Dunes de Timlaline – Expérience Désert"
-          data-fr="Dunes de Timlaline – Expérience Désert"
-          data-en="Timlaline Sand Dunes Experience">
-    Dunes de Timlaline – Expérience Désert
-  </option>
-
-  <option value="Visite du Crocoparc"
-          data-fr="Visite du Crocoparc"
-          data-en="Crocoparc Visit">
-    Visite du Crocoparc
-  </option>
-
-  <option value="Téléphérique et visite de la Kasbah"
-          data-fr="Téléphérique et visite de la Kasbah"
-          data-en="Cable Car & Kasbah Visit">
-    Téléphérique et visite de la Kasbah
-  </option>
-
-  <option value="Safari Quad / Buggy"
-          data-fr="Safari Quad / Buggy"
-          data-en="Quad / Buggy Safari">
-    Safari Quad / Buggy
-  </option>
-
-  <option value="Chameau"
-          data-fr="Promenade à dos de chameau"
-          data-en="Camel Ride">
-    Promenade à dos de chameau
-  </option>
-  </select>
-
-  <label for="circuit"
-  data-fr="Excursions"
-  data-en="Excursions">
-  Excursions
-  </label>
-</div>
-
-<div class="floating-field" id="quadTypeField" style="display:none;">
-  <select id="quadType" name="quad_type" required>
-    <option value=""
-  data-fr="Type de véhicule"
-  data-en="Vehicle type">
-  Type de véhicule
-    </option>
-
-  <option value="Quad simple"
-          data-fr="Quad simple"
-          data-en="Single Quad">
-    Quad simple
-  </option>
-
-  <option value="Buggy"
-          data-fr="Buggy"
-          data-en="Buggy">
-    Buggy
-  </option>
-    </select>
-    
-  <label for="quadType"
-  data-fr="Quad / Buggy"
-  data-en="Quad / Buggy">
-  Quad / Buggy
-  </label>
-</div>
-
-<div class="floating-field" id="camelTypeField" style="display:none;">
-  <select id="camelType" name="camel_type" required>
-  <option value=""
-  data-fr="Type de promenade"
-  data-en="Ride type">
-  Type de promenade
-  </option>
-
-  <option value="Promenade seule"
-          data-fr="Promenade seule"
-          data-en="Ride Only">
-    Promenade seule
-  </option>
-
-  <option value="Promenade + dîner"
-          data-fr="Promenade + dîner"
-          data-en="Ride + Dinner">
-    Promenade + dîner
-  </option>
-  </select>
-  
-  <label for="camelType"
-  data-fr="Chameau"
-  data-en="Camel ride">
-  Chameau
-  </label>
-</div>
-  
-<div class="floating-field">
-  <select id="circuitPlaces" name="excursion_people" required></select>
-  <label for="circuitPlaces"
-  data-fr="Places"
-  data-en="People">
-  Places
-  </label>
-</div>
-
-<div class="floating-field">
-<input type="text" id="circuitPrix" class="full" name="excursion_price" placeholder="0,00€" readonly>
-  <label for="circuitPrix"
-  data-fr="Prix (€)"
-  data-en="Price (€)">
-  Prix (€)
-  </label>
-</div>
-
-</div>
-  
-<div class="floating-field">
-<input type="date" id="date" name="date" required>
-  
-  <label for="date"
-  data-fr="Date"
-  data-en="Date">
-  Date
-  </label>
-</div>
-
-<div class="floating-field" id="heureField">
-  <input type="time" id="heure" name="time" required>
-  <label for="heure"
-  data-fr="Heure de prise en charge"
-  data-en="Pickup time">
-  Heure de prise en charge
-  </label>
-</div>
-
-
-<div class="floating-field" id="fixedTimeField" style="display:none;">
-  <select id="fixedTime" name="fixed_time" required>
-    <option value=""
-        data-fr="Choisir l’horaire"
-        data-en="Select time">
-  Choisir l’horaire
-    </option>
-  </select>
-  <label for="fixedTime"
-  data-fr="Horaire"
-  data-en="Time slot">
-  Horaire
-  </label>
-</div>
-
-<div class="floating-field">
-<textarea id="message" name="note" placeholder="Baggages, Siège bébé ..."></textarea>
-  <label for="message"
-  data-fr="Demandes spéciales"
-  data-en="Special requests">
-  Demandes spéciales
-  </label>
-</div>
-        
-<div class="floating-field">
-<input id="nom" name="full_name" type="text" required>
-  <label for="nom"
-  data-fr="Nom et Prénom"
-  data-en="Full name">
-  Nom et Prénom
-  </label>
-</div>
-
-
-<div class="phone-group">
-  <select id="countryCode" name="country_code">
-<option value="44">🇬🇧 +44 </option>
-<option value="212">🇲🇦 +212</option>
-<option value="33">🇫🇷 +33</option>
-<option value="1">🇺🇸 +1</option>
-<option value="32">🇧🇪 +32</option>
-<option value="41">🇨🇭 +41</option>
-<option value="49">🇩🇪 +49</option>
-<option value="34">🇪🇸 +34</option>
-<option value="39">🇮🇹 +39</option>
-<option value="31">🇳🇱 +31</option>
-<option value="351">🇵🇹 +351</option>
-<option value="43">🇦🇹 +43</option>
-<option value="45">🇩🇰 +45</option>
-<option value="46">🇸🇪 +46</option>
-<option value="47">🇳🇴 +47</option>
-<option value="358">🇫🇮 +358</option>
-<option value="353">🇮🇪 +353</option>
-<option value="30">🇬🇷 +30</option>
-<option value="420">🇨🇿 +420</option>
-<option value="421">🇸🇰 +421</option>
-<option value="36">🇭🇺 +36</option>
-<option value="48">🇵🇱 +48</option>
-<option value="40">🇷🇴 +40</option>
-<option value="359">🇧🇬 +359</option>
-<option value="385">🇭🇷 +385</option>
-<option value="386">🇸🇮 +386</option>
-<option value="371">🇱🇻 +371</option>
-<option value="370">🇱🇹 +370</option>
-<option value="372">🇪🇪 +372</option>
-<option value="354">🇮🇸 +354</option>
-<option value="357">🇨🇾 +357</option>
-<option value="355">🇦🇱 +355</option>
-<option value="389">🇲🇰 +389</option>
-<option value="373">🇲🇩 +373</option>
-<option value="376">🇦🇩 +376</option>
-<option value="378">🇸🇲 +378</option>
-<option value="377">🇲🇨 +377</option>
-<option value="423">🇱🇮 +423</option>
-<option value="350">🇬🇮 +350</option>
-<option value="356">🇲🇹 +356</option>
-<option value="380">🇺🇦 +380</option>  
-<option value="216">🇹🇳 +216</option>
-<option value="218">🇱🇾 +218</option>
-<option value="20">🇪🇬 +20</option>
-<option value="971">🇦🇪 +971</option>
-<option value="966">🇸🇦 +966</option>
-<option value="965">🇰🇼 +965</option>
-<option value="974">🇶🇦 +974</option>
-<option value="973">🇧🇭 +973</option>
-<option value="968">🇴🇲 +968</option>
-<option value="967">🇾🇪 +967</option>
-<option value="962">🇯🇴 +962</option>
-<option value="961">🇱🇧 +961</option>
-<option value="963">🇸🇾 +963</option>
-<option value="964">🇮🇶 +964</option>
-<option value="970">🇵🇸 +970</option>
-  
-</select>
-<input id="tel" name="phone" type="tel" data-fr="Téléphone" data-en="Phone number" placeholder="Téléphone" required>
-
-</div>
-
-
-<div class="floating-field">
-<input id="email" name="email" type="email" required>
-  <label for="email"
-  data-fr="Email"
-  data-en="Email">
-  Email
-  </label>
-</div>
-
-
-<input type="hidden" name="_subject" value="Nouvelle réservation MasterTripTransfers">
-<input type="hidden" name="_format" value="plain">
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" id="finalPrice" name="price">
-<input type="hidden" id="emailMessage" name="final_message">
-<input type="hidden" name="_template" value="table">
-<input type="submit" id="realSubmit" hidden>
-<input type="hidden" id="stripe_amount">
-
-  <!-- ================= HEADER ================= -->
-  
-<div class="floating-field floating-btn-field">
-
-   <button type="submit" id="btnReserve" class="floating-btn">
-  <span class="btn-text"
-        data-fr="RÉSERVER"
-        data-en="BOOK NOW">
-    BOOK NOW
-  </span>
-
-  <span class="btn-label"
-        data-fr="Paiement sur place"
-        data-en="Pay on arrival">
-    Paiement sur place
-  </span>
-</button>
   
 
-  <label for="btnReserve"
-        data-fr="Payer sur place"
-        data-en="Pay on arrival">
-    Payer sur place
-  </label>
 
-</div>
-  
-  <div class="floating-field floating-btn-field paynow-field">
-  <button type="button" id="btnPay" class="floating-btn paynow-btn"
-          onclick="payByCard()">
-    PAY NOW
-  </button>
 
-  <label for="btnPay"
-        data-fr="Réserver et  "
-        data-en="Book and ">
-    Paiement en ligne
-  </label>
-</div>
-  
-<div class="floating-field floating-btn-field deposit-field">
-  <button type="button" id="btnPayDeposit" class="floating-btn deposit-btn"
-          onclick="payDeposit()">
-    PAY 20%
-  </button>
 
-  <label for="btnPayDeposit"
-        data-fr="Réserver et "
-        data-en="Book and ">
-    Acompte
-  </label>
-</div>  
-
- </form>
-      <iframe name="hiddenFrame" style="display:none" onload="afterFormSent()"></iframe>
-
-    </div>
 
     <!-- PHOTOS À DROITE -->
     <div class="booking-right">
