@@ -1,5 +1,5 @@
 /* =====================================================
-   SCRIPT INTERVILLES – SAFE VERSION
+   SCRIPT INTERVILLES – VERSION FINALE STABLE
    Page : intervilles.html uniquement
 ===================================================== */
 
@@ -81,9 +81,11 @@ function smoothScrollTo(id, offset = 0) {
 /* ===============================
    MENU (OPTIONNEL)
 =============================== */
-document.querySelectorAll("[data-scroll]").forEach(btn => {
-  btn.addEventListener("click", () => {
-    smoothScrollTo(btn.dataset.scroll, 80);
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-scroll]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      smoothScrollTo(btn.dataset.scroll, 80);
+    });
   });
 });
 
@@ -98,17 +100,13 @@ setInterval(() => {
 }, 3500);
 
 /* ===============================
-   INIT
+   INIT FINAL (CRITIQUE)
 =============================== */
 document.addEventListener("DOMContentLoaded", () => {
-  const lang = localStorage.getItem("lang") || LANG_DEFAULT;
-  setLang(lang);
-});
-
-document.addEventListener("DOMContentLoaded", () => {
+  // 1️⃣ Appliquer la langue
   const lang = localStorage.getItem("lang") || LANG_DEFAULT;
   setLang(lang);
 
-  // ✅ Débloque l’affichage APRES traduction
+  // 2️⃣ Débloquer l’affichage (repaint garanti)
   document.body.classList.add("lang-ready");
 });
