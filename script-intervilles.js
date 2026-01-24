@@ -70,3 +70,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // 🔓 affiche la page
   document.body.classList.add("lang-ready");
 });
+
+
+/*==========SHAKE BOUTON EN BAS=========*/
+       document.addEventListener("DOMContentLoaded", () => {
+  setInterval(() => {
+    const btn = document.getElementById("bookNowBtn");
+    if (!btn) return;
+
+    btn.classList.remove("btn-shake");
+    void btn.offsetWidth; // reset animation
+    btn.classList.add("btn-shake");
+  }, 4000);
+});
