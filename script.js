@@ -1,3 +1,4 @@
+document.documentElement.setAttribute("data-lang-ready", "1");
 document.addEventListener("DOMContentLoaded", () => {
   document.documentElement.setAttribute("data-lang-ready", "true");
 });
