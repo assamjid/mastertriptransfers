@@ -1458,15 +1458,23 @@ button[type="submit"]{
   100%{transform:scale(1)}
 }
 
-/* 🔴 DEBUG IMAGE DEST CARD */
-.dest-card{
-  background-color: transparent !important;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
-  background-position: center !important;
+.dest-link{
+  display:block;
+  text-decoration:none;
 }
 
-.test-bg{
-  background-image:url("https://mastertriptransfers.com/images/interville/Marrakech.jpg") !important;
+.dest-card{
+  height:240px;
+  border-radius:18px;
+  background-size:cover;
+  background-position:center;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 12px 35px rgba(0,0,0,0.25);
+  transition:.35s;
+}
+
+.dest-card:hover{
+  transform:scale(1.04);
 }
 
