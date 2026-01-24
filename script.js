@@ -1,7 +1,4 @@
 document.documentElement.setAttribute("data-lang-ready", "1");
-document.addEventListener("DOMContentLoaded", () => {
-  document.documentElement.setAttribute("data-lang-ready", "true");
-});
 
 const LANG = {
 
@@ -160,45 +157,44 @@ function resetAll() {
 
   if (bookingSubtitle) bookingSubtitle.textContent = "";
 
-  transferFields.style.display = "none";
-  intervillesFields.style.display = "none";
-  circuitsFields.style.display = "none";
-
-  bookingSubtitle.textContent = "";
-
   [
     transferType, depart, arrivee, transferPlaces,
     trajet, places, circuit, circuitPlaces
   ].forEach(el => {
+    if (!el) return;
     el.value = "";
     el.required = false;
-    el.disabled = false;   // ⬅️ IMPORTANT
+    el.disabled = false;
   });
 
-  flightNumber.value = "";
-  flightNumber.required = false;
-  flightNumber.disabled = false;
+  if (flightNumber) {
+    flightNumber.value = "";
+    flightNumber.required = false;
+    flightNumber.disabled = false;
+  }
 
-  transferPrix.value = "";
-  prix.value = "";
-  circuitPrix.value = "";
+  if (transferPrix) transferPrix.value = "";
+  if (prix) prix.value = "";
+  if (circuitPrix) circuitPrix.value = "";
 
-  quadType.value = "";
-  camelType.value = "";
-  quadTypeField.style.display = "none";
-  camelTypeField.style.display = "none";
+  if (quadType) quadType.value = "";
+  if (camelType) camelType.value = "";
+  if (quadTypeField) quadTypeField.style.display = "none";
+  if (camelTypeField) camelTypeField.style.display = "none";
 
-  depart.readOnly = false;
-  arrivee.readOnly = false;
+  if (depart) depart.readOnly = false;
+  if (arrivee) arrivee.readOnly = false;
 
-  quadType.required = false;
-camelType.required = false;
-fixedTime.required = false;
+  if (quadType) quadType.required = false;
+  if (camelType) camelType.required = false;
+  if (fixedTime) fixedTime.required = false;
 
   setHeureMode("hidden");
-  resetDefaults();
-  
 }
+
+
+
+
 function resetDefaults(){
   const today = new Date().toISOString().split("T")[0];
   date.value = today;
