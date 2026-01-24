@@ -204,7 +204,7 @@ function resetDefaults(){
 /* =====================================================
    CHOIX SERVICE
 ===================================================== */
-
+if (service) {
     service.addEventListener("change", () => {
   resetAll();
 
@@ -242,6 +242,10 @@ function resetDefaults(){
   }
       
 });
+
+}
+
+
 
 /* =====================================================
    TRANSFERT – LOGIQUE
