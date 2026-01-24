@@ -1491,6 +1491,33 @@ document.addEventListener("DOMContentLoaded", () => {
 });
         fin changeement*/
 
+
+/* =====================================================
+   PRÉ-REMPLISSAGE INTERVILLE DEPUIS URL
+===================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+
+  const params = new URLSearchParams(window.location.search);
+  const serviceParam = params.get("service");
+  const trajetParam  = params.get("trajet");
+
+  if (serviceParam === "intercity" && trajetParam) {
+
+    fixBookingScroll();
+
+    setTimeout(() => {
+      service.value = "intercity";
+      service.dispatchEvent(new Event("change"));
+
+      setTimeout(() => {
+        trajet.value = trajetParam;
+        trajet.dispatchEvent(new Event("change"));
+      }, 200);
+
+    }, 200);
+  }
+});
+
 /* ---------- BOOT AUTO ---------- */
 document.addEventListener("DOMContentLoaded",initReviews);
 
