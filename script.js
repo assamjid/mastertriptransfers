@@ -1593,18 +1593,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /*=======rafrainavigateur=rafraîchir formulaire=======*/
 
-window.addEventListener("pageshow", function (event) {
+window.addEventListener("pageshow", () => {
 
-  // 🔥 Si la page vient du cache navigateur (back / refresh mobile)
-  if (event.persisted) {
+  const form = document.getElementById("bookingForm");
+  if (!form) return;
 
-    const form = document.getElementById("bookingForm");
-    if (!form) return;
+  // 🧹 Reset HTML
+  form.reset();
 
-    form.reset();       // vide les champs HTML
-    resetAll();         // cache champs dynamiques
-    resetDefaults();    // remet date + heure
+  // 🧹 Reset logique métier
+  if (typeof resetAll === "function") resetAll();
+  if (typeof resetDefaults === "function") resetDefaults();
 
-  }
 });
    
