@@ -105,5 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
   setLang(lang);
 });
 
-document.documentElement.setAttribute("data-lang-ready", "true");
-document.body.style.opacity = "1";
+document.addEventListener("DOMContentLoaded", () => {
+  const lang = localStorage.getItem("lang") || LANG_DEFAULT;
+  setLang(lang);
+
+  // ✅ Débloque l’affichage APRES traduction
+  document.body.classList.add("lang-ready");
+});
