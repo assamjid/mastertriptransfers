@@ -1,42 +1,15 @@
 /* =====================================================
-   SCRIPT INTERVILLES – VERSION STABLE
-   Page : intervilles.html uniquement
+   SCRIPT INTERVILLES – VERSION SÛRE
 ===================================================== */
 
-/* ===============================
-   CONFIG
-=============================== */
 const LANG_DEFAULT = "EN";
 
 /* ===============================
-   TRADUCTION DES TEXTES
-=============================== */
-function translateTexts(lang) {
-  document.querySelectorAll("[data-fr]").forEach(el => {
-    const value =
-      lang === "EN" && el.dataset.en
-        ? el.dataset.en
-        : el.dataset.fr;
-
-    // Autoriser HTML uniquement pour blocs SEO
-    if (
-      el.classList.contains("dest-intro") ||
-      el.classList.contains("intro-seo-card")
-    ) {
-      el.innerHTML = value;
-    } else {
-      el.textContent = value;
-    }
-  });
-}
-
-/* ===============================
-   LANGUE
+   LANGUE (SANS TOUCHER AU DOM)
 =============================== */
 function setLang(lang) {
   localStorage.setItem("lang", lang);
   document.documentElement.lang = lang === "EN" ? "en" : "fr";
-  translateTexts(lang);
   updateLangFlag();
 }
 
@@ -53,18 +26,14 @@ function updateLangFlag() {
   if (!flag) return;
 
   const lang = localStorage.getItem("lang") || LANG_DEFAULT;
-
-  if (lang === "FR") {
-    flag.src = "https://flagcdn.com/w40/gb.png";
-    flag.title = "English";
-  } else {
-    flag.src = "https://flagcdn.com/w40/fr.png";
-    flag.title = "Français";
-  }
+  flag.src =
+    lang === "FR"
+      ? "https://flagcdn.com/w40/gb.png"
+      : "https://flagcdn.com/w40/fr.png";
 }
 
 /* ===============================
-   SHAKE MENU (SAFE)
+   SHAKE MENU
 =============================== */
 setInterval(() => {
   document.querySelectorAll("#mainHeader nav a").forEach(btn => {
@@ -74,12 +43,12 @@ setInterval(() => {
 }, 3500);
 
 /* ===============================
-   INIT FINAL
+   INIT – CRITIQUE
 =============================== */
 document.addEventListener("DOMContentLoaded", () => {
   const lang = localStorage.getItem("lang") || LANG_DEFAULT;
   setLang(lang);
 
-  // 🔓 Débloque l’affichage
+  // 🔓 OBLIGATOIRE sinon page blanche
   document.documentElement.setAttribute("data-lang-ready", "true");
 });
