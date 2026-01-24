@@ -104,3 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const lang = localStorage.getItem("lang") || LANG_DEFAULT;
   setLang(lang);
 });
+
+document.documentElement.setAttribute("data-lang-ready", "true");
+document.body.style.opacity = "1";
