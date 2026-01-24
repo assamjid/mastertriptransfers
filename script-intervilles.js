@@ -1,15 +1,33 @@
 /* =====================================================
-   SCRIPT INTERVILLES – VERSION SÛRE
+   SCRIPT INTERVILLES – VERSION STABLE FINALE
 ===================================================== */
 
 const LANG_DEFAULT = "EN";
 
 /* ===============================
-   LANGUE (SANS TOUCHER AU DOM)
+   TRADUCTION DES TEXTES
+=============================== */
+function translateTexts(lang) {
+  document.querySelectorAll("[data-fr]").forEach(el => {
+    const value =
+      lang === "EN" && el.dataset.en
+        ? el.dataset.en
+        : el.dataset.fr;
+
+    el.textContent = value;
+  });
+}
+
+/* ===============================
+   LANGUE
 =============================== */
 function setLang(lang) {
   localStorage.setItem("lang", lang);
   document.documentElement.lang = lang === "EN" ? "en" : "fr";
+
+  // ✅ LIGNE MANQUANTE (CAUSE DU BUG)
+  translateTexts(lang);
+
   updateLangFlag();
 }
 
@@ -43,12 +61,12 @@ setInterval(() => {
 }, 3500);
 
 /* ===============================
-   INIT – CRITIQUE
+   INIT
 =============================== */
 document.addEventListener("DOMContentLoaded", () => {
   const lang = localStorage.getItem("lang") || LANG_DEFAULT;
   setLang(lang);
 
-  // ✅ CORRECTION FATALE
+  // 🔓 affiche la page
   document.body.classList.add("lang-ready");
 });
