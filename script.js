@@ -1591,7 +1591,21 @@ document.addEventListener("DOMContentLoaded", () => {
   observer.observe(bookingForm);
 });
 
+/*=======rafrainavigateur=rafraîchir formulaire=======*/
 
+document.addEventListener("DOMContentLoaded", () => {
+
+  const form = document.getElementById("bookingForm");
+  if (!form) return;
+
+  // 🔥 écrase la restauration automatique du navigateur
+  setTimeout(() => {
+    form.reset();
+    resetAll();
+    resetDefaults();
+  }, 50);
+
+});
 
 
    
