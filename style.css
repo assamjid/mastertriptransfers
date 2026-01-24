@@ -549,7 +549,7 @@ button:hover{transform:translateY(-2px)}
 
 .dest-card{
   display:block;              /* 🔑 OBLIGATOIRE */
-  height:240px;               /* 80px est trop petit */
+  height:80px;               /* 80px est trop petit */
   border-radius:18px;
   background-size:cover;
   background-position:center;
@@ -1463,7 +1463,7 @@ button[type="submit"]{
   text-decoration:none;
 }
 
-.dest-card{
+/*.dest-card{
   height:240px;
   border-radius:18px;
   background-size:cover;
@@ -1477,4 +1477,4 @@ button[type="submit"]{
 .dest-card:hover{
   transform:scale(1.04);
 }
-
+*/
