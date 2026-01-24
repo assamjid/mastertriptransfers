@@ -133,15 +133,20 @@ let PAYMENT_MODE = "arrival";   // arrival | full | deposit
    DATE & TÉLÉPHONE
 ===================================================== */
 const today = new Date().toISOString().split("T")[0];
-date.value = today;
-date.min = today;
-heure.value = "07:00";
+if (date) {
+  date.value = today;
+  date.min = today;
+}
 
-tel.addEventListener("input", () => {
-  tel.value = tel.value
-    .replace(/\D/g, "")
-    .slice(0, 15);
-});
+if (heure) {
+  heure.value = "07:00";
+}
+
+if (tel) {
+  tel.addEventListener("input", () => {
+    tel.value = tel.value.replace(/\D/g, "").slice(0, 15);
+  });
+}
 
 /* =====================================================
    RESET GLOBAL
@@ -376,8 +381,10 @@ function calculPrixIntervilles() {
 }
 
 
-trajet.addEventListener("change", calculPrixIntervilles);
-places.addEventListener("change", calculPrixIntervilles);
+if (trajet && places) {
+  trajet.addEventListener("change", calculPrixIntervilles);
+  places.addEventListener("change", calculPrixIntervilles);
+}
 
 
 
@@ -585,7 +592,7 @@ fixedTime.innerHTML = `
   }
 
 
-
+if (service) {
 circuit.addEventListener("change", () => {
 
   // RESET
@@ -613,6 +620,9 @@ circuit.addEventListener("change", () => {
   updateExcursionTimes();
 });
 
+  }
+  
+
   
 quadType.addEventListener("change", calculPrixCircuit);
 circuitPlaces.addEventListener("change", calculPrixCircuit);
@@ -637,13 +647,15 @@ function escapeHTML(str) {
    SOUMISSION – RÉSUMÉ & WHATSAPP (FINAL PRO)
 ===================================================== */
   
-   bookingForm.addEventListener("submit", function(e){
-  e.preventDefault();
-  if(!bookingForm.checkValidity()) return;
+   if (bookingForm) {
+  bookingForm.addEventListener("submit", function(e){
+    e.preventDefault();
+    if(!bookingForm.checkValidity()) return;
 
-  buildRecap();      // prépare msg + html
-  openResume();     // affiche le popup
-});
+    buildRecap();
+    openResume();
+  });
+}
 
 
 
