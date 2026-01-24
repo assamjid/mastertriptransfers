@@ -10,7 +10,7 @@ const LANG_DEFAULT = "EN";
 
 /* ===============================
    TRADUCTION DES TEXTES
-=============================== */
+=============================== 
 function translateTexts(lang) {
   document.querySelectorAll("[data-fr]").forEach(el => {
     const value =
@@ -32,7 +32,7 @@ function translateTexts(lang) {
 
 /* ===============================
    LANGUE
-=============================== */
+=============================== 
 function setLang(lang) {
   localStorage.setItem("lang", lang);
   document.documentElement.lang = lang === "EN" ? "en" : "fr";
@@ -47,7 +47,7 @@ function toggleLang() {
 
 /* ===============================
    DRAPEAU
-=============================== */
+=============================== 
 function updateLangFlag() {
   const flag = document.getElementById("langFlagBtn");
   if (!flag) return;
@@ -65,7 +65,7 @@ function updateLangFlag() {
 
 /* ===============================
    SCROLL UTILITAIRE
-=============================== */
+=============================== 
 function smoothScrollTo(id, offset = 0) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -80,7 +80,7 @@ function smoothScrollTo(id, offset = 0) {
 
 /* ===============================
    MENU (OPTIONNEL)
-=============================== */
+=============================== 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-scroll]").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* ===============================
    SHAKE MENU (SAFE)
-=============================== */
+=============================== 
 setInterval(() => {
   document.querySelectorAll("#mainHeader nav a").forEach(btn => {
     btn.classList.add("menu-shake");
@@ -101,7 +101,7 @@ setInterval(() => {
 
 /* ===============================
    INIT FINAL (CRITIQUE)
-=============================== */
+=============================== 
 document.addEventListener("DOMContentLoaded", () => {
   // 1️⃣ Appliquer la langue
   const lang = localStorage.getItem("lang") || LANG_DEFAULT;
@@ -109,4 +109,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 2️⃣ Débloquer l’affichage (repaint garanti)
   document.body.classList.add("lang-ready");
+});*/
+
+/* ===============================
+   SCRIPT INTERVILLES — TEST IMAGE
+=============================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Langue par défaut
+  document.documentElement.setAttribute("data-lang-ready", "true");
+  document.body.style.opacity = "1";
 });
+
+function toggleLang() {
+  // volontairement vide pour le test
+}
