@@ -644,8 +644,8 @@ quadType.addEventListener("change", calculPrixCircuit);
 circuitPlaces.addEventListener("change", calculPrixCircuit);
 camelType.addEventListener("change", calculPrixCircuit);
 circuit.addEventListener("change", updateExcursionTimes);
-camelType.addEventListener("change", updateExcursionTimes);
-quadType.addEventListener("change", updateExcursionTimes);
+if (quadType) quadType.addEventListener("change", calculPrixCircuit);
+if (camelType) camelType.addEventListener("change", calculPrixCircuit);
 
 function escapeHTML(str) {
   return String(str)
@@ -957,6 +957,8 @@ function goExcursions(){
 }
   
 function setHeureMode(mode, defaultValue = "") {
+
+  if (!heureField || !fixedTimeField || !heure || !fixedTime) return;
   if (mode === "free") {
     heureField.style.display = "block";
     heure.required = true;
@@ -1129,7 +1131,7 @@ function translateTexts(lang) {
     });
   });
     // 🔒 Protège le sous-titre excursion
-if(service.value === "excursion"){
+if (service && service.value === "excursion") {
   bookingSubtitle.textContent = LANG[lang].subtitle_excursion;
 }
   }
@@ -1202,9 +1204,13 @@ function setLang(langParam) {
   /* ===============================
      BOUTONS
   =============================== */
-  document.getElementById("btnReserve").innerText = LANG[lang].reserve;
-  document.getElementById("btnPay").innerText = LANG[lang].pay;
-  document.getElementById("btnPayDeposit").innerText = LANG[lang].payDeposit;
+  const btnReserve = document.getElementById("btnReserve");
+const btnPay = document.getElementById("btnPay");
+const btnPayDeposit = document.getElementById("btnPayDeposit");
+
+if (btnReserve) btnReserve.innerText = LANG[lang].reserve;
+if (btnPay) btnPay.innerText = LANG[lang].pay;
+if (btnPayDeposit) btnPayDeposit.innerText = LANG[lang].payDeposit;
 
   /* ===============================
      SOUS-TITRE FORMULAIRE
