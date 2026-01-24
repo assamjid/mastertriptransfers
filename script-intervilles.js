@@ -49,6 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const lang = localStorage.getItem("lang") || LANG_DEFAULT;
   setLang(lang);
 
-  // 🔓 OBLIGATOIRE sinon page blanche
-  document.documentElement.setAttribute("data-lang-ready", "true");
+  // ✅ CORRECTION FATALE
+  document.body.classList.add("lang-ready");
 });
