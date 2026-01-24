@@ -249,7 +249,7 @@ form input,
 form select,
 form textarea{
 width:320px; /* ⬅️ +20px */
-height:62px; / ⬅️ un peu plus haut */
+height:62px; /* ⬅️ un peu plus haut */
 padding:18px 16px;
 border-radius:14px;
 border:2px solid #dde3ea;
