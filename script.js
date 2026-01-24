@@ -1606,4 +1606,39 @@ window.addEventListener("pageshow", () => {
   if (typeof resetDefaults === "function") resetDefaults();
 
 });
-   
+   (function hardResetBookingForm(){
+
+  const form = document.getElementById("bookingForm");
+  if (!form) return;
+
+  let locked = false;
+
+  function forceReset(){
+    if (locked) return;
+    locked = true;
+
+    // Reset HTML
+    form.reset();
+
+    // Reset logique métier
+    if (typeof resetAll === "function") resetAll();
+    if (typeof resetDefaults === "function") resetDefaults();
+
+    // 🔒 VERROUILLAGE DES CHAMPS (anti-réinjection)
+    form.querySelectorAll("input, select, textarea").forEach(el=>{
+      const v = el.value;
+      el.value = "";
+      el.defaultValue = "";
+      el.setAttribute("value", "");
+    });
+  }
+
+  // 1️⃣ au chargement
+  window.addEventListener("pageshow", forceReset);
+
+  // 2️⃣ après autofill retardé (Chrome mobile)
+  setTimeout(forceReset, 1500);
+  setTimeout(forceReset, 3000);
+  setTimeout(forceReset, 5000);
+
+})();
