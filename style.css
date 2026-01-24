@@ -1458,3 +1458,11 @@ button[type="submit"]{
   100%{transform:scale(1)}
 }
 
+/* 🔴 DEBUG IMAGE DEST CARD */
+.dest-card{
+  background-color: transparent !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
