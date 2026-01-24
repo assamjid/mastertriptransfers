@@ -151,7 +151,15 @@ if (tel) {
 /* =====================================================
    RESET GLOBAL
 ===================================================== */
+
 function resetAll() {
+
+  if (transferFields) transferFields.style.display = "none";
+  if (intervillesFields) intervillesFields.style.display = "none";
+  if (circuitsFields) circuitsFields.style.display = "none";
+
+  if (bookingSubtitle) bookingSubtitle.textContent = "";
+
   transferFields.style.display = "none";
   intervillesFields.style.display = "none";
   circuitsFields.style.display = "none";
@@ -250,6 +258,8 @@ if (service) {
 /* =====================================================
    TRANSFERT – LOGIQUE
 ===================================================== */
+
+if (transferType) {
 transferType.addEventListener("change", () => {
 
   /* ===============================
@@ -313,6 +323,7 @@ transferType.addEventListener("change", () => {
     calculPrixTransfert();
   }
 });
+}
 
 
 /* =====================================================
@@ -335,7 +346,10 @@ function calculPrixTransfert() {
 
   transferPrix.value = (base + Math.max(0, nb - 5) * extra) + " €";
 }
-transferPlaces.addEventListener("change", calculPrixTransfert);
+
+if (transferPlaces) {
+  transferPlaces.addEventListener("change", calculPrixTransfert);
+}
 
 
 
@@ -597,7 +611,9 @@ fixedTime.innerHTML = `
 
 
 if (service) {
-circuit.addEventListener("change", () => {
+
+  if (circuit) {
+    circuit.addEventListener("change", () => {
 
   // RESET
   quadTypeField.style.display = "none";
@@ -625,7 +641,7 @@ circuit.addEventListener("change", () => {
 });
 
   }
-  
+}
 
   
 quadType.addEventListener("change", calculPrixCircuit);
