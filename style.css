@@ -549,7 +549,7 @@ button:hover{transform:translateY(-2px)}
 
 .dest-card{
   display:block;              /* 🔑 OBLIGATOIRE */
-  height:80px;               /* 80px est trop petit */
+  height:240px;               /* 80px est trop petit */
   border-radius:18px;
   background-size:cover;
   background-position:center;
