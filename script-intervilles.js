@@ -36,7 +36,7 @@ function translateTexts(lang) {
 function setLang(lang) {
   localStorage.setItem("lang", lang);
   document.documentElement.lang = lang === "EN" ? "en" : "fr";
-  translateTexts(lang);
+ // translateTexts(lang);
   updateLangFlag();
 }
 
