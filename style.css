@@ -1174,7 +1174,13 @@ button[type="submit"]{
   border-radius:20px;   /* cohérent avec la carte formulaire */
   }
 
-  
+  /* ================== CARTES BOOKING ÉGALES ================== */
+.booking-form-card,
+.booking-right{
+  flex:0 0 50%;
+  max-width:50%;
+  box-sizing:border-box;
+}
 
 /* ================== MOBILE ================== */
 @media(max-width:600px){
@@ -1219,13 +1225,7 @@ button[type="submit"]{
 }
 
   
-  /* ================== CARTES BOOKING ÉGALES ================== */
-.booking-form-card,
-.booking-right{
-  flex:0 0 50%;
-  max-width:50%;
-  box-sizing:border-box;
-}
+  
 
 /* ================== TITRES BOOKING ALIGNÉS À LA CARTE ================== */
 #bookingTitle,
