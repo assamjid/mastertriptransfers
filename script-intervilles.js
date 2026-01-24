@@ -1,5 +1,5 @@
 /* =====================================================
-   SCRIPT INTERVILLES – VERSION FINALE STABLE
+   SCRIPT INTERVILLES – VERSION STABLE
    Page : intervilles.html uniquement
 ===================================================== */
 
@@ -18,7 +18,7 @@ function translateTexts(lang) {
         ? el.dataset.en
         : el.dataset.fr;
 
-    // Autoriser HTML seulement pour blocs SEO
+    // Autoriser HTML uniquement pour blocs SEO
     if (
       el.classList.contains("dest-intro") ||
       el.classList.contains("intro-seo-card")
@@ -36,7 +36,7 @@ function translateTexts(lang) {
 function setLang(lang) {
   localStorage.setItem("lang", lang);
   document.documentElement.lang = lang === "EN" ? "en" : "fr";
- // translateTexts(lang);
+  translateTexts(lang);
   updateLangFlag();
 }
 
@@ -64,32 +64,6 @@ function updateLangFlag() {
 }
 
 /* ===============================
-   SCROLL UTILITAIRE
-=============================== */
-function smoothScrollTo(id, offset = 0) {
-  const el = document.getElementById(id);
-  if (!el) return;
-
-  const y =
-    el.getBoundingClientRect().top +
-    window.pageYOffset -
-    offset;
-
-  window.scrollTo({ top: y, behavior: "smooth" });
-}
-
-/* ===============================
-   MENU (OPTIONNEL)
-=============================== */
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("[data-scroll]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      smoothScrollTo(btn.dataset.scroll, 80);
-    });
-  });
-});
-
-/* ===============================
    SHAKE MENU (SAFE)
 =============================== */
 setInterval(() => {
@@ -100,28 +74,12 @@ setInterval(() => {
 }, 3500);
 
 /* ===============================
-   INIT FINAL (CRITIQUE)
+   INIT FINAL
 =============================== */
 document.addEventListener("DOMContentLoaded", () => {
-  // 1️⃣ Appliquer la langue
   const lang = localStorage.getItem("lang") || LANG_DEFAULT;
   setLang(lang);
 
-  // 2️⃣ Débloquer l’affichage (repaint garanti)
-  document.body.classList.add("lang-ready");
-});*/
-
-/* ===============================
-   SCRIPT INTERVILLES — TEST IMAGE
-=============================== 
-
-document.addEventListener("DOMContentLoaded", () => {
-  // Langue par défaut
+  // 🔓 Débloque l’affichage
   document.documentElement.setAttribute("data-lang-ready", "true");
-  document.body.style.opacity = "1";
 });
-
-function toggleLang() {
-  // volontairement vide pour le test
-}
-*/
