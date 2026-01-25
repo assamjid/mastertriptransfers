@@ -58,24 +58,17 @@ function updateLangFlag() {
    SCROLL VERS DÉTAIL
 =============================== */
 function scrollToExcursionDetail(name) {
-  const details = document.querySelectorAll(".exc-detail");
+  const target = document.querySelector(
+    `.exc-detail[data-excursion="${name}"]`
+  );
+  if (!target) return;
 
-  for (const d of details) {
-    const h = d.querySelector("h3");
-    if (!h) continue;
+  const y =
+    target.getBoundingClientRect().top +
+    window.pageYOffset -
+    120;
 
-    if (h.textContent.toLowerCase().includes(name.toLowerCase())) {
-      const header = document.getElementById("mainHeader");
-      const y =
-        d.getBoundingClientRect().top +
-        window.pageYOffset -
-        (header ? header.offsetHeight : 0) -
-        20;
-
-      window.scrollTo({ top: y, behavior: "smooth" });
-      break;
-    }
-  }
+  window.scrollTo({ top: y, behavior: "smooth" });
 }
 
 
