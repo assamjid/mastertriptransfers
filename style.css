@@ -1462,6 +1462,17 @@ button[type="submit"]{
   display:block;
   text-decoration:none;
 }
+.exc-slider {
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.exc-slider img {
+  min-width: 100%;
+  flex-shrink: 0;
+  cursor: pointer;
+}
 
 /*.dest-card{
   height:240px;
