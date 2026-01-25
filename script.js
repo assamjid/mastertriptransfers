@@ -1547,6 +1547,9 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         trajet.value = trajetParam;
         trajet.dispatchEvent(new Event("change"));
+        
+        // ✅ NETTOYAGE URL → PLUS DE RÉINJECTION AU REFRESH
+        window.history.replaceState({}, document.title, "index.html");
       }, 200);
 
     }, 200);
