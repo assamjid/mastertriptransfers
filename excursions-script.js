@@ -1,11 +1,11 @@
 /* =====================================================
-   SCRIPT EXCURSIONS – VERSION STABLE
+   SCRIPT EXCURSIONS – VERSION STABLE ANTI BLANC
 ===================================================== */
 
 const LANG_DEFAULT = "EN";
 
 /* ===============================
-   TRADUCTION DES TEXTES
+   TRADUCTION
 =============================== */
 function translateTexts(lang) {
   document.querySelectorAll("[data-fr]").forEach(el => {
@@ -14,18 +14,14 @@ function translateTexts(lang) {
         ? el.dataset.en
         : el.dataset.fr;
 
-    // Éléments autorisés à contenir du HTML
     const allowHTML =
       el.classList.contains("intro-seo") ||
       el.classList.contains("seo-services") ||
       el.classList.contains("dest-intro") ||
       el.classList.contains("exc-intro");
 
-    if (allowHTML) {
-      el.innerHTML = value;
-    } else {
-      el.textContent = value;
-    }
+    if (allowHTML) el.innerHTML = value;
+    else el.textContent = value;
   });
 }
 
@@ -35,7 +31,6 @@ function translateTexts(lang) {
 function setLang(lang) {
   localStorage.setItem("lang", lang);
   document.documentElement.lang = lang === "EN" ? "en" : "fr";
-
   translateTexts(lang);
   updateLangFlag();
 }
@@ -60,53 +55,19 @@ function updateLangFlag() {
 }
 
 /* ===============================
-   SLIDERS AUTO (EXCURSIONS)
-=============================== */
-document.querySelectorAll(".exc-slider.auto.fast").forEach(slider => {
-  let i = 0;
-  setInterval(() => {
-    i++;
-    if (i >= slider.children.length) i = 0;
-    slider.scrollTo({
-      left: slider.clientWidth * i,
-      behavior: "smooth"
-    });
-  }, 5000);
-});
-
-document.querySelectorAll(".exc-slider.auto.slow").forEach(slider => {
-  let i = 0;
-  setInterval(() => {
-    i++;
-    if (i >= slider.children.length) i = 0;
-    slider.scrollTo({
-      left: slider.clientWidth * i,
-      behavior: "smooth"
-    });
-  }, 8000);
-});
-
-/* ===============================
-   SCROLL DÉTAIL EXCURSION
+   SCROLL DÉTAIL
 =============================== */
 function scrollToExcursionDetail(name) {
   const details = document.querySelectorAll(".exc-detail");
-
   for (const d of details) {
     const h = d.querySelector("h3");
-    if (
-      h &&
-      h.textContent.toLowerCase().includes(
-        name.toLowerCase().split(" ")[0]
-      )
-    ) {
+    if (h && h.textContent.toLowerCase().includes(name.toLowerCase().split(" ")[0])) {
       const header = document.getElementById("mainHeader");
       const y =
         d.getBoundingClientRect().top +
         window.pageYOffset -
         (header ? header.offsetHeight : 0) -
         15;
-
       window.scrollTo({ top: y, behavior: "smooth" });
       break;
     }
@@ -114,52 +75,71 @@ function scrollToExcursionDetail(name) {
 }
 
 /* ===============================
-   RÉSERVER → REDIRECTION INDEX
+   REDIRECTION RÉSERVATION
 =============================== */
-function openExcursion(excursionName) {
-  const url =
+function openExcursion(name) {
+  window.location.href =
     "index.html?service=excursion&circuit=" +
-    encodeURIComponent(excursionName);
-  window.location.href = url;
+    encodeURIComponent(name);
 }
 
 /* ===============================
-   SHAKE MENU
+   INIT DOM
 =============================== */
-setInterval(() => {
-  document
-    .querySelectorAll("#mainHeader nav a")
-    .forEach(btn => {
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* 🌍 Langue */
+  const lang = localStorage.getItem("lang") || LANG_DEFAULT;
+  setLang(lang);
+
+  /* 🎞️ SLIDERS RAPIDES */
+  document.querySelectorAll(".exc-slider.auto.fast").forEach(slider => {
+    let i = 0;
+    setInterval(() => {
+      if (!slider.children.length) return;
+      i = (i + 1) % slider.children.length;
+      slider.scrollTo({
+        left: slider.clientWidth * i,
+        behavior: "smooth"
+      });
+    }, 5000);
+  });
+
+  /* 🎞️ SLIDERS LENTS */
+  document.querySelectorAll(".exc-slider.auto.slow").forEach(slider => {
+    let i = 0;
+    setInterval(() => {
+      if (!slider.children.length) return;
+      i = (i + 1) % slider.children.length;
+      slider.scrollTo({
+        left: slider.clientWidth * i,
+        behavior: "smooth"
+      });
+    }, 8000);
+  });
+
+  /* 🔔 SHAKE MENU */
+  setInterval(() => {
+    document.querySelectorAll("#mainHeader nav a").forEach(btn => {
       btn.classList.add("menu-shake");
       setTimeout(() => btn.classList.remove("menu-shake"), 600);
     });
-}, 3500);
+  }, 3500);
 
-/* ===============================
-   INIT LANGUE (DOM PRÊT)
-=============================== */
-document.addEventListener("DOMContentLoaded", () => {
-  const lang = localStorage.getItem("lang") || LANG_DEFAULT;
-  setLang(lang);
-});
-
-/* ===============================
-   AFFICHAGE PAGE (ANTI BLANC)
-=============================== */
-window.addEventListener("load", () => {
-  document.body.classList.add("lang-ready");
-});
-
-/* ===============================
-   SHAKE BOUTON BAS
-=============================== */
-document.addEventListener("DOMContentLoaded", () => {
+  /* 🔔 SHAKE BOUTON BAS */
   setInterval(() => {
     const btn = document.getElementById("bookNowBtn");
     if (!btn) return;
-
     btn.classList.remove("btn-shake");
     void btn.offsetWidth;
     btn.classList.add("btn-shake");
   }, 4000);
+
+});
+
+/* ===============================
+   AFFICHAGE FINAL (ANTI BLANC)
+=============================== */
+window.addEventListener("load", () => {
+  document.body.classList.add("lang-ready");
 });
