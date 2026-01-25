@@ -16,7 +16,6 @@ function translateTexts(lang) {
         ? el.dataset.en
         : el.dataset.fr;
 
-    // ✅ Éléments autorisés à contenir du HTML
     const allowHTML =
       el.classList.contains("intro-seo") ||
       el.classList.contains("seo-services") ||
@@ -24,24 +23,12 @@ function translateTexts(lang) {
       el.classList.contains("exc-intro");
 
     if (allowHTML) {
-      el.innerHTML = value;   // 🔥 <strong> interprété
+      el.innerHTML = value;
     } else {
-      el.textContent = value; // 🔒 texte simple sécurisé
+      el.textContent = value;
     }
   });
 
-  // 🔒 Sous-titre dynamique formulaire
-  if (service) {
-    if (service.value === "airport") {
-      bookingSubtitle.textContent = LANG[lang].subtitle_transfer;
-    }
-    if (service.value === "intercity") {
-      bookingSubtitle.textContent = LANG[lang].subtitle_intercity;
-    }
-    if (service.value === "excursion") {
-      bookingSubtitle.textContent = LANG[lang].subtitle_excursion;
-    }
-  }
 }
 
 /* ===============================
