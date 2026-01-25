@@ -1,34 +1,33 @@
 /* =====================================================
-   SCRIPT EXCURSIONS – VERSION FINALE STABLE
-   - Langues FR / EN
-   - Anti page blanche
-   - Sliders auto (Android OK)
-   - Clic photo → détail
-   - Boutons réservation
+   SCRIPT EXCURSIONS — VERSION DÉFINITIVE STABLE
+   ✔ Auto scroll sliders
+   ✔ Swipe manuel OK
+   ✔ Clic image → détail
+   ✔ Langues FR / EN
+   ✔ Aucun conflit / aucun doublon
 ===================================================== */
 
 const LANG_DEFAULT = "EN";
 
 /* ===============================
-   TRADUCTION DES TEXTES
+   TRADUCTION
 =============================== */
 function translateTexts(lang) {
   document.querySelectorAll("[data-fr]").forEach(el => {
-    const value =
+    const txt =
       (lang === "EN" && el.dataset.en)
         ? el.dataset.en
         : el.dataset.fr;
 
-    const allowHTML =
+    if (
       el.classList.contains("intro-seo") ||
       el.classList.contains("seo-services") ||
       el.classList.contains("dest-intro") ||
-      el.classList.contains("exc-intro");
-
-    if (allowHTML) {
-      el.innerHTML = value;
+      el.classList.contains("exc-intro")
+    ) {
+      el.innerHTML = txt;
     } else {
-      el.textContent = value;
+      el.textContent = txt;
     }
   });
 }
@@ -63,29 +62,6 @@ function updateLangFlag() {
 }
 
 /* ===============================
-   SCROLL VERS DÉTAIL
-=============================== */
-function scrollToExcursionDetail(name) {
-  const target = document.querySelector(
-    `.exc-detail[data-excursion="${name}"]`
-  );
-  if (!target) return;
-
-  const header = document.getElementById("mainHeader");
-  const offset = header ? header.offsetHeight + 20 : 120;
-
-  const y =
-    target.getBoundingClientRect().top +
-    window.pageYOffset -
-    offset;
-
-  window.scrollTo({
-    top: y,
-    behavior: "smooth"
-  });
-}
-
-/* ===============================
    REDIRECTION RÉSERVATION
 =============================== */
 function openExcursion(name) {
@@ -95,75 +71,87 @@ function openExcursion(name) {
 }
 
 /* ===============================
-   INIT DOM
+   INIT UNIQUE (OBLIGATOIRE)
 =============================== */
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* 🌍 LANGUE */
+  /* 🌍 Langue */
   const lang = localStorage.getItem("lang") || LANG_DEFAULT;
   setLang(lang);
 
-  /* 🔓 ANTI PAGE BLANCHE */
   document.body.classList.add("lang-ready");
 
-  /* ===============================
-     SLIDERS AUTO + CLIC IMAGE
-     (ANDROID SAFE)
-  =============================== */
+  /* =================================================
+     SLIDERS — LOGIQUE UNIQUE ET STABLE
+  ================================================= */
+
   document.querySelectorAll(".exc-slider.auto").forEach(slider => {
 
     const images = slider.querySelectorAll("img");
     if (images.length <= 1) return;
 
     let index = 0;
-    const interval =
-      slider.classList.contains("slow") ? 8000 : 4500;
+    let isUserInteracting = false;
 
-    /* ▶️ AUTO SCROLL (PAS scrollTo !) */
-    slider._auto = setInterval(() => {
-      index = (index + 1) % images.length;
-      slider.scrollLeft = slider.clientWidth * index;
-    }, interval);
+    const delay = slider.classList.contains("slow") ? 8000 : 4500;
 
-    /* ⏸️ Pause si interaction utilisateur */
+    /* 👉 AUTO SCROLL */
+    const timer = setInterval(() => {
+      if (isUserInteracting) return;
+
+      index++;
+      if (index >= images.length) index = 0;
+
+      slider.scrollTo({
+        left: slider.clientWidth * index,
+        behavior: "smooth"
+      });
+    }, delay);
+
+    /* 👉 DÉTECTE INTERACTION UTILISATEUR (mobile OK) */
     slider.addEventListener("touchstart", () => {
-      clearInterval(slider._auto);
+      isUserInteracting = true;
     });
 
-    /* 🖱️ CLIC PHOTO → DÉTAIL */
+    slider.addEventListener("touchend", () => {
+      setTimeout(() => {
+        isUserInteracting = false;
+      }, 2500);
+    });
+
+    slider.addEventListener("mousedown", () => {
+      isUserInteracting = true;
+    });
+
+    slider.addEventListener("mouseup", () => {
+      setTimeout(() => {
+        isUserInteracting = false;
+      }, 2500);
+    });
+
+    /* 👉 CLIC IMAGE → DÉTAIL */
     const excursionName = slider.dataset.excursion;
     if (excursionName) {
       images.forEach(img => {
-        img.style.cursor = "pointer";
         img.addEventListener("click", () => {
-          scrollToExcursionDetail(excursionName);
+          const target = document.querySelector(
+            `.exc-detail[data-excursion="${excursionName}"]`
+          );
+          if (!target) return;
+
+          const y =
+            target.getBoundingClientRect().top +
+            window.pageYOffset -
+            120;
+
+          window.scrollTo({
+            top: y,
+            behavior: "smooth"
+          });
         });
       });
     }
+
   });
 
-  /* 🔔 SHAKE MENU */
-  setInterval(() => {
-    document.querySelectorAll("#mainHeader nav a").forEach(btn => {
-      btn.classList.add("menu-shake");
-      setTimeout(() => btn.classList.remove("menu-shake"), 600);
-    });
-  }, 3500);
-
-  /* 🔔 SHAKE BOUTON FIXE */
-  setInterval(() => {
-    const btn = document.getElementById("bookNowBtn");
-    if (!btn) return;
-
-    btn.classList.remove("btn-shake");
-    void btn.offsetWidth;
-    btn.classList.add("btn-shake");
-  }, 4000);
-});
-
-/* ===============================
-   SÉCURITÉ LOAD (ANTI BLANC)
-=============================== */
-window.addEventListener("load", () => {
-  document.body.classList.add("lang-ready");
 });
