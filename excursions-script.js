@@ -1,3 +1,11 @@
+/* =====================================================
+   SCRIPT EXCURSIONS – VERSION FINALE STABLE
+   - Langues FR / EN
+   - Anti page blanche
+   - Sliders auto (Android OK)
+   - Clic photo → détail
+   - Boutons réservation
+===================================================== */
 
 const LANG_DEFAULT = "EN";
 
@@ -57,18 +65,25 @@ function updateLangFlag() {
 /* ===============================
    SCROLL VERS DÉTAIL
 =============================== */
-document.querySelectorAll(".exc-slider.auto").forEach(slider => {
-  const images = slider.querySelectorAll("img");
-  if (images.length <= 1) return;
+function scrollToExcursionDetail(name) {
+  const target = document.querySelector(
+    `.exc-detail[data-excursion="${name}"]`
+  );
+  if (!target) return;
 
-  let index = 0;
-  const interval = slider.classList.contains("slow") ? 8000 : 4500;
+  const header = document.getElementById("mainHeader");
+  const offset = header ? header.offsetHeight + 20 : 120;
 
-  setInterval(() => {
-    index = (index + 1) % images.length;
-    slider.scrollLeft = slider.clientWidth * index;
-  }, interval);
-});
+  const y =
+    target.getBoundingClientRect().top +
+    window.pageYOffset -
+    offset;
+
+  window.scrollTo({
+    top: y,
+    behavior: "smooth"
+  });
+}
 
 /* ===============================
    REDIRECTION RÉSERVATION
@@ -93,6 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ===============================
      SLIDERS AUTO + CLIC IMAGE
+     (ANDROID SAFE)
   =============================== */
   document.querySelectorAll(".exc-slider.auto").forEach(slider => {
 
@@ -101,18 +117,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let index = 0;
     const interval =
-      slider.classList.contains("slow") ? 8000 : 5000;
+      slider.classList.contains("slow") ? 8000 : 4500;
 
-    /* ▶️ AUTO SLIDE */
-    setInterval(() => {
+    /* ▶️ AUTO SCROLL (PAS scrollTo !) */
+    slider._auto = setInterval(() => {
       index = (index + 1) % images.length;
-      slider.scrollTo({
-        left: slider.clientWidth * index,
-        behavior: "smooth"
-      });
+      slider.scrollLeft = slider.clientWidth * index;
     }, interval);
 
-    /* 🖱️ CLIC → DÉTAIL */
+    /* ⏸️ Pause si interaction utilisateur */
+    slider.addEventListener("touchstart", () => {
+      clearInterval(slider._auto);
+    });
+
+    /* 🖱️ CLIC PHOTO → DÉTAIL */
     const excursionName = slider.dataset.excursion;
     if (excursionName) {
       images.forEach(img => {
@@ -132,15 +150,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, 3500);
 
-  /* 🔔 SHAKE BOUTON BAS */
+  /* 🔔 SHAKE BOUTON FIXE */
   setInterval(() => {
     const btn = document.getElementById("bookNowBtn");
     if (!btn) return;
+
     btn.classList.remove("btn-shake");
     void btn.offsetWidth;
     btn.classList.add("btn-shake");
   }, 4000);
-
 });
 
 /* ===============================
