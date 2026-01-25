@@ -1609,39 +1609,24 @@ window.addEventListener("pageshow", () => {
   if (typeof resetDefaults === "function") resetDefaults();
 
 });
-   (function hardResetBookingForm(){
+/* ===== RESET PRO AU RAFRAÎCHISSEMENT ===== */
+window.addEventListener("pageshow", (e) => {
 
   const form = document.getElementById("bookingForm");
   if (!form) return;
 
-  let locked = false;
+  // 🔁 Seulement si retour arrière / refresh cache
+  if (e.persisted) {
 
-  function forceReset(){
-    if (locked) return;
-    locked = true;
-
-    // Reset HTML
+    // 1️⃣ Reset HTML simple
     form.reset();
 
-    // Reset logique métier
-    if (typeof resetAll === "function") resetAll();
-    if (typeof resetDefaults === "function") resetDefaults();
+    // 2️⃣ Reset logique métier
+    resetAll();
+    resetDefaults();
 
-    // 🔒 VERROUILLAGE DES CHAMPS (anti-réinjection)
-    form.querySelectorAll("input, select, textarea").forEach(el=>{
-      const v = el.value;
-      el.value = "";
-      el.defaultValue = "";
-      el.setAttribute("value", "");
-    });
+    // 3️⃣ Réappliquer langue & placeholders
+    setPlaceholders(lang);
+    translateSelects(lang);
   }
-
-  // 1️⃣ au chargement
-  window.addEventListener("pageshow", forceReset);
-
-  // 2️⃣ après autofill retardé (Chrome mobile)
-  setTimeout(forceReset, 1500);
-  setTimeout(forceReset, 3000);
-  setTimeout(forceReset, 5000);
-
-})();
+});
