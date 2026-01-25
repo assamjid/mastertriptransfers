@@ -264,6 +264,16 @@ function scrollToExcursionDetail(name) {
   }
 }
 
+
+function openExcursion(name) {
+  // Sauvegarde pour le formulaire
+  localStorage.setItem("selectedService", "excursion");
+  localStorage.setItem("selectedExcursion", name);
+
+  // Redirection vers la page avec formulaire
+  window.location.href = "index.html#bookingForm";
+}
+
 /* ===============================
    REDIRECTION RÉSERVATION
 =============================== */
