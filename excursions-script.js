@@ -2,6 +2,7 @@
    SCRIPT EXCURSIONS – VERSION PROPRE & STABLE
    (ANTI PAGE BLANCHE – SANS SUPPRESSION)
 ===================================================== */
+document.body.classList.add("lang-ready");
 
 const LANG_DEFAULT = "EN";
 
