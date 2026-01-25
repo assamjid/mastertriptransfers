@@ -1474,6 +1474,15 @@ button[type="submit"]{
   cursor: pointer;
 }
 
+.exc-slider {
+  width: 100%;
+  max-width: 100%;
+}
+.exc-card {
+  overflow: hidden;
+}
+
+
 /*.dest-card{
   height:240px;
   border-radius:18px;
