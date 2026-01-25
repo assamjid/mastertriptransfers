@@ -8,14 +8,40 @@ const LANG_DEFAULT = "EN";
    TRADUCTION DES TEXTES
 =============================== */
 function translateTexts(lang) {
+
   document.querySelectorAll("[data-fr]").forEach(el => {
+
     const value =
-      lang === "EN" && el.dataset.en
+      (lang === "EN" && el.dataset.en)
         ? el.dataset.en
         : el.dataset.fr;
 
-    el.textContent = value;
+    // ✅ Éléments autorisés à contenir du HTML
+    const allowHTML =
+      el.classList.contains("intro-seo") ||
+      el.classList.contains("seo-services") ||
+      el.classList.contains("dest-intro") ||
+      el.classList.contains("exc-intro");
+
+    if (allowHTML) {
+      el.innerHTML = value;   // 🔥 <strong> interprété
+    } else {
+      el.textContent = value; // 🔒 texte simple sécurisé
+    }
   });
+
+  // 🔒 Sous-titre dynamique formulaire
+  if (service) {
+    if (service.value === "airport") {
+      bookingSubtitle.textContent = LANG[lang].subtitle_transfer;
+    }
+    if (service.value === "intercity") {
+      bookingSubtitle.textContent = LANG[lang].subtitle_intercity;
+    }
+    if (service.value === "excursion") {
+      bookingSubtitle.textContent = LANG[lang].subtitle_excursion;
+    }
+  }
 }
 
 /* ===============================
