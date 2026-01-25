@@ -1,5 +1,6 @@
 /* =====================================================
-   SCRIPT EXCURSIONS – VERSION STABLE ANTI BLANC
+   SCRIPT EXCURSIONS – VERSION PROPRE & STABLE
+   (ANTI PAGE BLANCHE – SANS SUPPRESSION)
 ===================================================== */
 
 const LANG_DEFAULT = "EN";
@@ -20,8 +21,11 @@ function translateTexts(lang) {
       el.classList.contains("dest-intro") ||
       el.classList.contains("exc-intro");
 
-    if (allowHTML) el.innerHTML = value;
-    else el.textContent = value;
+    if (allowHTML) {
+      el.innerHTML = value;
+    } else {
+      el.textContent = value;
+    }
   });
 }
 
@@ -55,19 +59,26 @@ function updateLangFlag() {
 }
 
 /* ===============================
-   SCROLL DÉTAIL
+   SCROLL VERS DÉTAIL
 =============================== */
 function scrollToExcursionDetail(name) {
   const details = document.querySelectorAll(".exc-detail");
   for (const d of details) {
     const h = d.querySelector("h3");
-    if (h && h.textContent.toLowerCase().includes(name.toLowerCase().split(" ")[0])) {
+    if (!h) continue;
+
+    if (
+      h.textContent
+        .toLowerCase()
+        .includes(name.toLowerCase().split(" ")[0])
+    ) {
       const header = document.getElementById("mainHeader");
       const y =
         d.getBoundingClientRect().top +
         window.pageYOffset -
         (header ? header.offsetHeight : 0) -
         15;
+
       window.scrollTo({ top: y, behavior: "smooth" });
       break;
     }
@@ -84,13 +95,16 @@ function openExcursion(name) {
 }
 
 /* ===============================
-   INIT DOM
+   INIT DOM (AFFICHAGE IMMÉDIAT)
 =============================== */
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* 🌍 Langue */
+  /* 🌍 LANGUE */
   const lang = localStorage.getItem("lang") || LANG_DEFAULT;
   setLang(lang);
+
+  /* ✅ ANTI PAGE BLANCHE */
+  document.body.classList.add("lang-ready");
 
   /* 🎞️ SLIDERS RAPIDES */
   document.querySelectorAll(".exc-slider.auto.fast").forEach(slider => {
@@ -138,8 +152,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ===============================
-   AFFICHAGE FINAL (ANTI BLANC)
+   LOAD (SÉCURITÉ BONUS – NON BLOQUANT)
 =============================== */
 window.addEventListener("load", () => {
+  // Sécurité : au cas où DOMContentLoaded n’aurait pas suffi
   document.body.classList.add("lang-ready");
 });
