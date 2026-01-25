@@ -830,37 +830,6 @@ btnConfirm.addEventListener("click", async () => {
 }
 
 
-  /*===========DEBUT WHATSAPP ET STRIPE=======
-  btnCancel.addEventListener("click", closeResume);
-
-  // 🔵 CONFIRMATION
-  btnConfirm.addEventListener("click", () => {
-
-    const msg = document.getElementById("emailMessage").value;
-
-    // 1️⃣ WhatsApp
-    window.open(
-      "https://wa.me/212636342776?text=" + encodeURIComponent(msg),
-      "_blank"
-    );
-
-  /* 2️⃣ ====≈====EMAIL ==========
-  
-
-    
-    // 3️⃣ Paiement
-    if (PAYMENT_MODE === "arrival") {
-      // paiement à l’arrivée → on ferme
-      closeResume();
-    } else {
-      // paiement en ligne → on reste sur le récap
-      stripeBtn.style.display = "inline-block";
-    }
-  });
-}
-
-       =========Ancien. WHATSAPP ET RENVOIE VERS PAYER==============*/
-
         /* fonction réinitialise formulaire après clic sur bouton.   */
 function afterFormSent(){
   bookingForm.reset();      // vide le formulaire
@@ -883,26 +852,6 @@ if (resumeOverlay) {
   });
 }
 
-
-// Vitesse photos. SLIDERS RAPIDES (cartes excursions)
-document.querySelectorAll(".exc-slider.auto.fast").forEach(slider=>{
-  let i = 0;
-  setInterval(()=>{
-    i++;
-    if(i >= slider.children.length) i = 0;
-    slider.scrollTo({ left: slider.clientWidth * i, behavior:"smooth" });
-  }, 5000);   // 5 secondes
-});
-
-// SLIDERS LENTS (fiches détaillées)
-document.querySelectorAll(".exc-slider.auto.slow").forEach(slider=>{
-  let i = 0;
-  setInterval(()=>{
-    i++;
-    if(i >= slider.children.length) i = 0;
-    slider.scrollTo({ left: slider.clientWidth * i, behavior:"smooth" });
-  }, 8000);   // 8 secondes
-});
 
 function fixBookingScroll(){
   const header = document.getElementById("mainHeader");
