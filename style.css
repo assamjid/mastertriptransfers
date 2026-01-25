@@ -1464,8 +1464,14 @@ button[type="submit"]{
 }
 .exc-slider {
   display: flex;
-  overflow-x: hidden;
+  overflow-x: scroll;
+  overflow-y: hidden;
   scroll-behavior: smooth;
+  scrollbar-width: none;       /* Firefox */
+}
+
+.exc-slider::-webkit-scrollbar {
+  display: none;               /* Chrome / Safari */
 }
 
 .exc-slider img {
@@ -1474,27 +1480,5 @@ button[type="submit"]{
   cursor: pointer;
 }
 
-.exc-slider {
-  width: 100%;
-  max-width: 100%;
-}
-.exc-card {
-  overflow: hidden;
-}
 
 
-/*.dest-card{
-  height:240px;
-  border-radius:18px;
-  background-size:cover;
-  background-position:center;
-  position:relative;
-  overflow:hidden;
-  box-shadow:0 12px 35px rgba(0,0,0,0.25);
-  transition:.35s;
-}
-
-.dest-card:hover{
-  transform:scale(1.04);
-}
-*/
