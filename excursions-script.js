@@ -57,20 +57,18 @@ function updateLangFlag() {
 /* ===============================
    SCROLL VERS DÉTAIL
 =============================== */
-function scrollToExcursionDetail(name) {
-  const target = document.querySelector(
-    `.exc-detail[data-excursion="${name}"]`
-  );
-  if (!target) return;
+document.querySelectorAll(".exc-slider.auto").forEach(slider => {
+  const images = slider.querySelectorAll("img");
+  if (images.length <= 1) return;
 
-  const y =
-    target.getBoundingClientRect().top +
-    window.pageYOffset -
-    120;
+  let index = 0;
+  const interval = slider.classList.contains("slow") ? 8000 : 4500;
 
-  window.scrollTo({ top: y, behavior: "smooth" });
-}
-
+  setInterval(() => {
+    index = (index + 1) % images.length;
+    slider.scrollLeft = slider.clientWidth * index;
+  }, interval);
+});
 
 /* ===============================
    REDIRECTION RÉSERVATION
