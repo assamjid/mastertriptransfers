@@ -133,6 +133,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 8000);
   });
 
+
+   document.addEventListener("DOMContentLoaded", () => {
+
+  document.querySelectorAll(".exc-slider").forEach(slider => {
+    const name = slider.dataset.excursion;
+    if (!name) return;
+
+    slider.querySelectorAll("img").forEach(img => {
+      img.style.cursor = "pointer";
+      img.addEventListener("click", () => {
+        scrollToExcursionDetail(name);
+      });
+    });
+  });
+
+});
+
   /* 🔔 SHAKE MENU */
   setInterval(() => {
     document.querySelectorAll("#mainHeader nav a").forEach(btn => {
