@@ -85,73 +85,53 @@ document.addEventListener("DOMContentLoaded", () => {
      SLIDERS — LOGIQUE UNIQUE ET STABLE
   ================================================= */
 
+/* =====================================================
+   SLIDER EXCURSIONS – VERSION STABLE
+===================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+
   document.querySelectorAll(".exc-slider.auto").forEach(slider => {
 
     const images = slider.querySelectorAll("img");
     if (images.length <= 1) return;
 
     let index = 0;
-    let isUserInteracting = false;
+    let pause = false;
+    const delay = slider.classList.contains("slow") ? 8000 : 5000;
 
-    const delay = slider.classList.contains("slow") ? 8000 : 4500;
-
-    /* 👉 AUTO SCROLL */
-    const timer = setInterval(() => {
-      if (isUserInteracting) return;
-
-      index++;
-      if (index >= images.length) index = 0;
-
+    // Auto scroll
+    setInterval(() => {
+      if (pause) return;
+      index = (index + 1) % images.length;
       slider.scrollTo({
         left: slider.clientWidth * index,
         behavior: "smooth"
       });
     }, delay);
 
-    /* 👉 DÉTECTE INTERACTION UTILISATEUR (mobile OK) */
-    slider.addEventListener("touchstart", () => {
-      isUserInteracting = true;
-    });
+    // Pause quand l'utilisateur touche
+    slider.addEventListener("touchstart", () => pause = true);
+    slider.addEventListener("mousedown", () => pause = true);
 
     slider.addEventListener("touchend", () => {
-      setTimeout(() => {
-        isUserInteracting = false;
-      }, 2500);
+      setTimeout(() => pause = false, 2000);
     });
-
-    slider.addEventListener("mousedown", () => {
-      isUserInteracting = true;
-    });
-
     slider.addEventListener("mouseup", () => {
-      setTimeout(() => {
-        isUserInteracting = false;
-      }, 2500);
+      setTimeout(() => pause = false, 2000);
     });
 
-    /* 👉 CLIC IMAGE → DÉTAIL */
-    const excursionName = slider.dataset.excursion;
-    if (excursionName) {
+    // Clic → détail
+    const name = slider.dataset.excursion;
+    if (name) {
       images.forEach(img => {
         img.addEventListener("click", () => {
-          const target = document.querySelector(
-            `.exc-detail[data-excursion="${excursionName}"]`
-          );
-          if (!target) return;
-
-          const y =
-            target.getBoundingClientRect().top +
-            window.pageYOffset -
-            120;
-
-          window.scrollTo({
-            top: y,
-            behavior: "smooth"
-          });
+          scrollToExcursionDetail(name);
         });
       });
     }
 
   });
+
+});
 
 });
