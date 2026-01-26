@@ -127,3 +127,27 @@ document.addEventListener("DOMContentLoaded", ()=>{
   initExcursionClicks();
 
 });
+
+
+/* ===============================
+   SHAKE MENU
+=============================== */
+setInterval(() => {
+  document.querySelectorAll("#mainHeader nav a").forEach(btn => {
+    btn.classList.add("menu-shake");
+    setTimeout(() => btn.classList.remove("menu-shake"), 600);
+  });
+}, 3500);
+
+
+/*==========SHAKE BOUTON EN BAS=========*/
+       document.addEventListener("DOMContentLoaded", () => {
+  setInterval(() => {
+    const btn = document.getElementById("bookNowBtn");
+    if (!btn) return;
+
+    btn.classList.remove("btn-shake");
+    void btn.offsetWidth; // reset animation
+    btn.classList.add("btn-shake");
+  }, 4000);
+});
