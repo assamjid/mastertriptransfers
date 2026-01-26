@@ -476,38 +476,34 @@ button:hover{transform:translateY(-2px)}
 .exc-card a:hover{background:#e08e0b}
 .exc-card p{font-size:15px;line-height:1.6}
 
-/* ===============================
-   SLIDER EXCURSIONS – SCROLL HORIZONTAL AUTO
-   (COMPATIBLE AVEC scrollTo)
-================================= */
+/* ================= SLIDER AUTO HORIZONTAL ================= */
 
 .exc-slider{
-  display: flex;               /* images alignées horizontalement */
-  width: 100%;
-  height: 200px;               /* HAUTEUR OBLIGATOIRE */
-  overflow: hidden;            /* cache les autres images */
-  scroll-behavior: smooth;     /* animation fluide */
-  position: relative;
+  width:100%;
+  height:200px;
+  display:flex;              /* 🔑 images en ligne */
+  overflow-x:hidden;         /* pas de scroll au doigt */
+  overflow-y:hidden;
+  scroll-behavior:smooth;
+  position:relative;
 }
 
-/* Images du slider */
+/* Images */
 .exc-slider img{
-  min-width: 100%;             /* UNE image par écran */
-  height: 100%;
-  object-fit: cover;
-  flex-shrink: 0;              /* empêche le rétrécissement */
-  display: block;
+  min-width:100%;            /* 🔑 1 image = 1 écran */
+  height:100%;
+  object-fit:cover;
+  flex-shrink:0;             /* 🔑 empêche compression */
 }
 
-/* Slider dans la page détails */
+/* Détails (grands sliders) */
 #excursionDetails .exc-slider{
-  height: 340px;
+  height:340px;
 }
 
-/* Mobile */
-@media (max-width:600px){
+@media(max-width:600px){
   .exc-slider{
-    height: 180px;
+    height:180px;
   }
 }
 
