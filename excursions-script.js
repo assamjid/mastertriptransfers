@@ -93,31 +93,44 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ===============================
      SLIDERS AUTO UNIQUEMENT
   =============================== */
+  document.addEventListener("DOMContentLoaded", () => {
+
   document.querySelectorAll(".exc-slider.auto").forEach(slider => {
 
-  const images = slider.querySelectorAll("img");
-  if (images.length <= 1) return;
+    // 🔧 créer le rail interne automatiquement
+    const images = Array.from(slider.querySelectorAll("img"));
+    if (images.length <= 1) return;
 
-  let index = 0;
-  const delay = slider.classList.contains("slow") ? 8000 : 5000;
+    const track = document.createElement("div");
+    track.className = "exc-slider-track";
 
-  setInterval(() => {
-    index = (index + 1) % images.length;
+    images.forEach(img => track.appendChild(img));
+    slider.appendChild(track);
 
-    slider.style.transition = "transform 0.8s ease-in-out";
-    slider.style.transform =
-      `translateX(-${index * 100}%)`;
-  }, delay);
+    let index = 0;
+    const delay = slider.classList.contains("slow") ? 8000 : 5000;
 
-  /* Clic image → détail */
-  const name = slider.dataset.excursion;
-  if (name) {
-    images.forEach(img => {
-      img.addEventListener("click", () => {
-        scrollToExcursionDetail(name);
+    setInterval(() => {
+      index = (index + 1) % images.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+    }, delay);
+
+    // clic → détail
+    const name = slider.dataset.excursion;
+    if (name) {
+      images.forEach(img => {
+        img.addEventListener("click", () => {
+          const target = document.querySelector(
+            `.exc-detail[data-excursion="${CSS.escape(name)}"]`
+          );
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+        });
       });
-    });
-  }
+    }
+
+  });
 
 });
 
