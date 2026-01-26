@@ -499,6 +499,17 @@ button:hover{transform:translateY(-2px)}
   opacity:1;
 }
 
+/* === FIX VISIBILITÉ SLIDER FADE === */
+.exc-slider{
+  position:relative;
+  width:100%;
+  height:200px;   /* 🔑 OBLIGATOIRE */
+}
+
+#excursionDetails .exc-slider{
+  height:340px;
+}
+
 @media(max-width:600px){
   .exc-slider{
     height:180px;
