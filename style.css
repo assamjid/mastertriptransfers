@@ -1434,7 +1434,15 @@ button[type="submit"]{
   line-height: 1.6;
 }
 
+.exc-slider.auto{
+  overflow:hidden;
+  position:relative;
+}
 
+.exc-slider.auto{
+  transform:translateX(0);
+  will-change:transform;
+}
 
 
 
