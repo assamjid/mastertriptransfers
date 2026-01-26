@@ -1,10 +1,5 @@
 /* =====================================================
-   SCRIPT EXCURSIONS — VERSION DÉFINITIVE STABLE
-   ✔ Auto scroll sliders
-   ✔ Swipe manuel OK
-   ✔ Clic image → détail
-   ✔ Langues FR / EN
-   ✔ Aucun conflit / aucun doublon
+   SCRIPT EXCURSIONS — VERSION FINALE STABLE
 ===================================================== */
 
 const LANG_DEFAULT = "EN";
@@ -71,37 +66,42 @@ function openExcursion(name) {
 }
 
 /* ===============================
-   INIT UNIQUE (OBLIGATOIRE)
+   SCROLL VERS DÉTAIL
+=============================== */
+function scrollToExcursionDetail(name) {
+  const target = document.querySelector(
+    `.exc-detail[data-excursion="${CSS.escape(name)}"]`
+  );
+  if (!target) return;
+
+  target.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+/* ===============================
+   INIT UNIQUE
 =============================== */
 document.addEventListener("DOMContentLoaded", () => {
 
   /* 🌍 Langue */
   const lang = localStorage.getItem("lang") || LANG_DEFAULT;
   setLang(lang);
-
   document.body.classList.add("lang-ready");
 
-  /* =================================================
-     SLIDERS — LOGIQUE UNIQUE ET STABLE
-  ================================================= */
-
-/* =====================================================
-   SLIDER EXCURSIONS – VERSION STABLE
-===================================================== */
-document.addEventListener("DOMContentLoaded", () => {
-
+  /* ===============================
+     SLIDERS AUTO UNIQUEMENT
+  =============================== */
   document.querySelectorAll(".exc-slider.auto").forEach(slider => {
 
     const images = slider.querySelectorAll("img");
     if (images.length <= 1) return;
 
     let index = 0;
-    let pause = false;
     const delay = slider.classList.contains("slow") ? 8000 : 5000;
 
-    // Auto scroll
     setInterval(() => {
-      if (pause) return;
       index = (index + 1) % images.length;
       slider.scrollTo({
         left: slider.clientWidth * index,
@@ -109,18 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }, delay);
 
-    // Pause quand l'utilisateur touche
-    slider.addEventListener("touchstart", () => pause = true);
-    slider.addEventListener("mousedown", () => pause = true);
-
-    slider.addEventListener("touchend", () => {
-      setTimeout(() => pause = false, 2000);
-    });
-    slider.addEventListener("mouseup", () => {
-      setTimeout(() => pause = false, 2000);
-    });
-
-    // Clic → détail
+    /* Clic image → détail */
     const name = slider.dataset.excursion;
     if (name) {
       images.forEach(img => {
@@ -129,9 +118,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       });
     }
-
   });
-
-});
 
 });
