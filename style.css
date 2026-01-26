@@ -476,43 +476,38 @@ button:hover{transform:translateY(-2px)}
 .exc-card a:hover{background:#e08e0b}
 .exc-card p{font-size:15px;line-height:1.6}
 
-/* ================= SLIDER ================= */
-/* ===== SLIDER AUTO DEFINITIF (FADE) ===== */
+/* ===============================
+   SLIDER EXCURSIONS – SCROLL HORIZONTAL AUTO
+   (COMPATIBLE AVEC scrollTo)
+================================= */
+
 .exc-slider{
-  position:relative;
-  width:100%;
-  height:200px;
-  overflow:hidden;
+  display: flex;               /* images alignées horizontalement */
+  width: 100%;
+  height: 200px;               /* HAUTEUR OBLIGATOIRE */
+  overflow: hidden;            /* cache les autres images */
+  scroll-behavior: smooth;     /* animation fluide */
+  position: relative;
 }
 
+/* Images du slider */
 .exc-slider img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  opacity:0;
-  transition:opacity .8s ease-in-out;
+  min-width: 100%;             /* UNE image par écran */
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;              /* empêche le rétrécissement */
+  display: block;
 }
 
-.exc-slider img.active{
-  opacity:1;
-}
-
-/* === FIX VISIBILITÉ SLIDER FADE === */
-.exc-slider{
-  position:relative;
-  width:100%;
-  height:200px;   /* 🔑 OBLIGATOIRE */
-}
-
+/* Slider dans la page détails */
 #excursionDetails .exc-slider{
-  height:340px;
+  height: 340px;
 }
 
-@media(max-width:600px){
+/* Mobile */
+@media (max-width:600px){
   .exc-slider{
-    height:180px;
+    height: 180px;
   }
 }
 
