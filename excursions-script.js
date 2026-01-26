@@ -1,10 +1,6 @@
 /* =====================================================
-   SCRIPT EXCURSIONS — VERSION FINALE STABLE
-   ✔ Langues FR / EN
-   ✔ Sliders automatiques (FADE)
-   ✔ Aucun swipe / aucun scroll manuel
-   ✔ Clic image → scroll vers détail
-   ✔ Aucun doublon / aucun conflit
+   SCRIPT EXCURSIONS — SLIDERS AUTO STABLES
+   Compatible CSS scroll horizontal
 ===================================================== */
 
 const LANG_DEFAULT = "EN";
@@ -71,30 +67,7 @@ function openExcursion(name) {
 }
 
 /* ===============================
-   SCROLL VERS DÉTAIL
-=============================== */
-function scrollToExcursionDetail(name) {
-  const target = document.querySelector(
-    `.exc-detail[data-excursion="${CSS.escape(name)}"]`
-  );
-  if (!target) return;
-
-  const header = document.getElementById("mainHeader");
-  const offset = header ? header.offsetHeight + 20 : 20;
-
-  const y =
-    target.getBoundingClientRect().top +
-    window.pageYOffset -
-    offset;
-
-  window.scrollTo({
-    top: y,
-    behavior: "smooth"
-  });
-}
-
-/* ===============================
-   INIT UNIQUE (IMPORTANT)
+   INIT UNIQUE
 =============================== */
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -103,38 +76,51 @@ document.addEventListener("DOMContentLoaded", () => {
   setLang(lang);
   document.body.classList.add("lang-ready");
 
-  /* ===============================
-     SLIDERS AUTO (FADE UNIQUEMENT)
-  =============================== */
-  document.querySelectorAll(".exc-slider.auto").forEach(slider => {
+  /* =====================================================
+     SLIDERS AUTO — VERSION QUI MARCHE
+  ===================================================== */
+
+  /* SLIDERS RAPIDES (cartes excursions) */
+  document.querySelectorAll(".exc-slider.auto.fast").forEach(slider => {
 
     const images = slider.querySelectorAll("img");
-    if (images.length < 2) return;
+    if (images.length <= 1) return;
 
-    let index = 0;
-    const delay = slider.classList.contains("slow") ? 7000 : 4000;
+    let i = 0;
 
-    // Sécurité : tout masquer
-    images.forEach(img => img.classList.remove("active"));
-    images[0].classList.add("active");
+    // ⚠️ Forcer la position initiale
+    slider.scrollLeft = 0;
 
-    // Auto fade
     setInterval(() => {
-      images[index].classList.remove("active");
-      index = (index + 1) % images.length;
-      images[index].classList.add("active");
-    }, delay);
+      i++;
+      if (i >= images.length) i = 0;
 
-    // Clic image → détail
-    const name = slider.dataset.excursion;
-    if (name) {
-      images.forEach(img => {
-        img.style.cursor = "pointer";
-        img.addEventListener("click", () => {
-          scrollToExcursionDetail(name);
-        });
+      slider.scrollTo({
+        left: slider.clientWidth * i,
+        behavior: "smooth"
       });
-    }
+    }, 5000); // 5 secondes
+  });
+
+  /* SLIDERS LENTS (fiches détails) */
+  document.querySelectorAll(".exc-slider.auto.slow").forEach(slider => {
+
+    const images = slider.querySelectorAll("img");
+    if (images.length <= 1) return;
+
+    let i = 0;
+
+    slider.scrollLeft = 0;
+
+    setInterval(() => {
+      i++;
+      if (i >= images.length) i = 0;
+
+      slider.scrollTo({
+        left: slider.clientWidth * i,
+        behavior: "smooth"
+      });
+    }, 8000); // 8 secondes
   });
 
 });
