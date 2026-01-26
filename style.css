@@ -477,28 +477,30 @@ button:hover{transform:translateY(-2px)}
 .exc-card p{font-size:15px;line-height:1.6}
 
 /* ================= SLIDER ================= */
+/* ===== SLIDER AUTO DEFINITIF (FADE) ===== */
 .exc-slider{
-  overflow:hidden;
-  width:100%;
   position:relative;
-}
-
-.exc-slider-track{
-  display:flex;
   width:100%;
-  transition:transform 0.8s ease-in-out;
+  height:200px;
+  overflow:hidden;
 }
 
-.exc-slider-track img{
-  min-width:100%;
-  height:200px;
+.exc-slider img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
   object-fit:cover;
-  flex-shrink:0;
-  border-radius:14px;
+  opacity:0;
+  transition:opacity .8s ease-in-out;
+}
+
+.exc-slider img.active{
+  opacity:1;
 }
 
 @media(max-width:600px){
-  .exc-slider-track img{
+  .exc-slider{
     height:180px;
   }
 }
