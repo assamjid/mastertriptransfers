@@ -96,40 +96,19 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".exc-slider.auto").forEach(slider => {
+    const imgs = slider.querySelectorAll("img");
+    if (imgs.length < 2) return;
 
-    // 🔧 créer le rail interne automatiquement
-    const images = Array.from(slider.querySelectorAll("img"));
-    if (images.length <= 1) return;
+    let i = 0;
+    const delay = slider.classList.contains("slow") ? 7000 : 4000;
 
-    const track = document.createElement("div");
-    track.className = "exc-slider-track";
-
-    images.forEach(img => track.appendChild(img));
-    slider.appendChild(track);
-
-    let index = 0;
-    const delay = slider.classList.contains("slow") ? 8000 : 5000;
+    imgs[0].classList.add("active");
 
     setInterval(() => {
-      index = (index + 1) % images.length;
-      track.style.transform = `translateX(-${index * 100}%)`;
+      imgs[i].classList.remove("active");
+      i = (i + 1) % imgs.length;
+      imgs[i].classList.add("active");
     }, delay);
-
-    // clic → détail
-    const name = slider.dataset.excursion;
-    if (name) {
-      images.forEach(img => {
-        img.addEventListener("click", () => {
-          const target = document.querySelector(
-            `.exc-detail[data-excursion="${CSS.escape(name)}"]`
-          );
-          if (target) {
-            target.scrollIntoView({ behavior: "smooth" });
-          }
-        });
-      });
-    }
-
   });
 
 });
