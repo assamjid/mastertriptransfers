@@ -125,39 +125,77 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });  ===============FIN==============*/
 
-function scrollToExcursionDetail(name){
-  const details = document.querySelectorAll("#excursionDetails .exc-detail");
+/* =====================================================
+   EXCURSIONS — SLIDER AUTO + CLIC → DÉTAIL (STABLE)
+===================================================== */
 
-  for(const d of details){
-    const h = d.querySelector("h3");
-    if(h && h.textContent.toLowerCase().includes(name.toLowerCase().split(" ")[0])){
-      const header = document.getElementById("mainHeader");
-      const y = d.getBoundingClientRect().top + window.pageYOffset - header.offsetHeight - 15;
-      window.scrollTo({top:y,behavior:"smooth"});
-      break;
-    }
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* ===============================
+     SCROLL VERS DÉTAIL
+  =============================== */
+  function scrollToExcursionDetail(name) {
+    const target = document.querySelector(
+      `.exc-detail[data-excursion="${CSS.escape(name)}"]`
+    );
+    if (!target) return;
+
+    const header = document.getElementById("mainHeader");
+    const offset = header ? header.offsetHeight + 15 : 0;
+
+    const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: y, behavior: "smooth" });
   }
- } 
 
+  /* ===============================
+     SLIDERS RAPIDES (cartes)
+  =============================== */
+  document.querySelectorAll(".exc-slider.auto.fast").forEach(slider => {
 
-// Vitesse photos. SLIDERS RAPIDES (cartes excursions)
-document.querySelectorAll(".exc-slider.auto.fast").forEach(slider=>{
-  let i = 0;
-  setInterval(()=>{
-    i++;
-    if(i >= slider.children.length) i = 0;
-    slider.scrollTo({ left: slider.clientWidth * i, behavior:"smooth" });
-  }, 5000);   // 5 secondes
+    const imgs = slider.querySelectorAll("img");
+    if (imgs.length < 2) return;
+
+    let i = 0;
+    const w = slider.clientWidth;
+
+    // clic image → détail
+    const name = slider.dataset.excursion;
+    if (name) {
+      imgs.forEach(img => {
+        img.style.cursor = "pointer";
+        img.addEventListener("click", () => {
+          scrollToExcursionDetail(name);
+        });
+      });
+    }
+
+    setInterval(() => {
+      i = (i + 1) % imgs.length;
+      slider.scrollTo({
+        left: w * i,
+        behavior: "smooth"
+      });
+    }, 5000);
+  });
+
+  /* ===============================
+     SLIDERS LENTS (détails)
+  =============================== */
+  document.querySelectorAll(".exc-slider.auto.slow").forEach(slider => {
+
+    const imgs = slider.querySelectorAll("img");
+    if (imgs.length < 2) return;
+
+    let i = 0;
+    const w = slider.clientWidth;
+
+    setInterval(() => {
+      i = (i + 1) % imgs.length;
+      slider.scrollTo({
+        left: w * i,
+        behavior: "smooth"
+      });
+    }, 8000);
+  });
+
 });
-
-// SLIDERS LENTS (fiches détaillées)
-document.querySelectorAll(".exc-slider.auto.slow").forEach(slider=>{
-  let i = 0;
-  setInterval(()=>{
-    i++;
-    if(i >= slider.children.length) i = 0;
-    slider.scrollTo({ left: slider.clientWidth * i, behavior:"smooth" });
-  }, 8000);   // 8 secondes
-});
-
-
