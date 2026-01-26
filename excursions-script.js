@@ -1,8 +1,8 @@
 /* =====================================================
-   EXCURSIONS SCRIPT — VERSION STABLE FINALE
-   - Bilingue FR / EN
-   - Slider FADE auto
-   - Clic image → scroll vers détail
+   EXCURSIONS SCRIPT — FINAL STABLE
+   - Slider AUTO (fade)
+   - Click image → scroll détail
+   - Langue FR / EN
 ===================================================== */
 
 /* ===============================
@@ -12,22 +12,10 @@ const LANG_DEFAULT = "FR";
 
 function translateTexts(lang){
   document.querySelectorAll("[data-fr]").forEach(el=>{
-    const value =
+    el.textContent =
       (lang === "EN" && el.dataset.en)
         ? el.dataset.en
         : el.dataset.fr;
-
-    const allowHTML =
-      el.classList.contains("intro-seo") ||
-      el.classList.contains("seo-services") ||
-      el.classList.contains("dest-intro") ||
-      el.classList.contains("exc-intro");
-
-    if (allowHTML) {
-      el.innerHTML = value;
-    } else {
-      el.textContent = value;
-    }
   });
 }
 
@@ -48,74 +36,94 @@ function updateLangFlag(){
   if(!flag) return;
 
   const lang = localStorage.getItem("lang") || LANG_DEFAULT;
-  flag.src = lang === "FR"
-    ? "https://flagcdn.com/w40/gb.png"
-    : "https://flagcdn.com/w40/fr.png";
+  flag.src =
+    lang === "FR"
+      ? "https://flagcdn.com/w40/gb.png"
+      : "https://flagcdn.com/w40/fr.png";
 }
 
 /* ===============================
-   SCROLL VERS DÉTAIL EXCURSION
+   SLIDER AUTO (FADE)
 =============================== */
-function scrollToExcursionDetail(name){
-  const target = document.querySelector(
-    `.exc-detail[data-excursion="${CSS.escape(name)}"]`
-  );
-  if(!target) return;
+function initExcursionSliders(){
 
-  const header = document.getElementById("mainHeader");
-  const offset = header ? header.offsetHeight + 15 : 0;
-
-  const y =
-    target.getBoundingClientRect().top +
-    window.pageYOffset -
-    offset;
-
-  window.scrollTo({ top:y, behavior:"smooth" });
-}
-
-/* ===============================
-   SLIDER FADE AUTOMATIQUE
-=============================== */
-function initFadeSliders(){
-
-  document.querySelectorAll(".exc-slider.auto").forEach(slider => {
+  document.querySelectorAll(".exc-slider.auto").forEach(slider=>{
 
     const imgs = slider.querySelectorAll("img");
-    if (imgs.length < 2) return;
+    if(imgs.length < 2) return;
 
     let index = 0;
-    const delay = slider.classList.contains("slow") ? 8000 : 5000;
-
-    // image initiale
     imgs.forEach(img => img.classList.remove("active"));
     imgs[0].classList.add("active");
 
-    setInterval(() => {
+    setInterval(()=>{
       imgs[index].classList.remove("active");
       index = (index + 1) % imgs.length;
       imgs[index].classList.add("active");
-    }, delay);
+    }, slider.classList.contains("slow") ? 8000 : 4500);
+  });
+}
 
-    // clic image → détail
+/* ===============================
+   SCROLL VERS DÉTAIL
+=============================== */
+function scrollToExcursionDetail(name){
+
+  const details = document.querySelectorAll(".exc-detail");
+  if(!details.length) return;
+
+  const key = name.toLowerCase().split(" ")[0];
+
+  for(const d of details){
+    const h = d.querySelector("h3");
+    if(h && h.textContent.toLowerCase().includes(key)){
+
+      const header = document.getElementById("mainHeader");
+      const offset = header ? header.offsetHeight + 15 : 0;
+
+      const y =
+        d.getBoundingClientRect().top +
+        window.pageYOffset -
+        offset;
+
+      window.scrollTo({ top:y, behavior:"smooth" });
+      break;
+    }
+  }
+}
+
+/* ===============================
+   CLIC IMAGE → DÉTAIL
+=============================== */
+function initExcursionClicks(){
+
+  document.querySelectorAll(".exc-slider[data-excursion]").forEach(slider=>{
+
     const name = slider.dataset.excursion;
-    if (name) {
-      slider.style.cursor = "pointer";
-      slider.addEventListener("click", () => {
+    if(!name) return;
+
+    slider.querySelectorAll("img").forEach(img=>{
+      img.style.cursor = "pointer";
+      img.addEventListener("click", ()=>{
         scrollToExcursionDetail(name);
       });
-    }
+    });
   });
 }
 
 /* ===============================
    INIT GLOBAL
 =============================== */
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", ()=>{
 
-  // 🌍 langue
+  /* Langue */
   const lang = localStorage.getItem("lang") || LANG_DEFAULT;
   setLang(lang);
 
-  // 🎞️ sliders
-  initFadeSliders();
+  /* Sliders */
+  initExcursionSliders();
+
+  /* Click images */
+  initExcursionClicks();
+
 });
