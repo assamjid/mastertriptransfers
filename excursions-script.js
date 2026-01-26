@@ -1,5 +1,10 @@
 /* =====================================================
    SCRIPT EXCURSIONS — VERSION FINALE STABLE
+   ✔ Langues FR / EN
+   ✔ Sliders automatiques (FADE)
+   ✔ Aucun swipe / aucun scroll manuel
+   ✔ Clic image → scroll vers détail
+   ✔ Aucun doublon / aucun conflit
 ===================================================== */
 
 const LANG_DEFAULT = "EN";
@@ -74,14 +79,22 @@ function scrollToExcursionDetail(name) {
   );
   if (!target) return;
 
-  target.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
+  const header = document.getElementById("mainHeader");
+  const offset = header ? header.offsetHeight + 20 : 20;
+
+  const y =
+    target.getBoundingClientRect().top +
+    window.pageYOffset -
+    offset;
+
+  window.scrollTo({
+    top: y,
+    behavior: "smooth"
   });
 }
 
 /* ===============================
-   INIT UNIQUE
+   INIT UNIQUE (IMPORTANT)
 =============================== */
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -91,26 +104,37 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("lang-ready");
 
   /* ===============================
-     SLIDERS AUTO UNIQUEMENT
+     SLIDERS AUTO (FADE UNIQUEMENT)
   =============================== */
-  document.addEventListener("DOMContentLoaded", () => {
-
   document.querySelectorAll(".exc-slider.auto").forEach(slider => {
-    const imgs = slider.querySelectorAll("img");
-    if (imgs.length < 2) return;
 
-    let i = 0;
+    const images = slider.querySelectorAll("img");
+    if (images.length < 2) return;
+
+    let index = 0;
     const delay = slider.classList.contains("slow") ? 7000 : 4000;
 
-    imgs[0].classList.add("active");
+    // Sécurité : tout masquer
+    images.forEach(img => img.classList.remove("active"));
+    images[0].classList.add("active");
 
+    // Auto fade
     setInterval(() => {
-      imgs[i].classList.remove("active");
-      i = (i + 1) % imgs.length;
-      imgs[i].classList.add("active");
+      images[index].classList.remove("active");
+      index = (index + 1) % images.length;
+      images[index].classList.add("active");
     }, delay);
-  });
 
-});
+    // Clic image → détail
+    const name = slider.dataset.excursion;
+    if (name) {
+      images.forEach(img => {
+        img.style.cursor = "pointer";
+        img.addEventListener("click", () => {
+          scrollToExcursionDetail(name);
+        });
+      });
+    }
+  });
 
 });
