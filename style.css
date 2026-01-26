@@ -477,33 +477,28 @@ button:hover{transform:translateY(-2px)}
 .exc-card p{font-size:15px;line-height:1.6}
 
 /* ================= SLIDER ================= */
-.exc-slider.auto{
+.exc-slider{
+  overflow:hidden;
   width:100%;
-  height:200px;
+  position:relative;
+}
+
+.exc-slider-track{
   display:flex;
-  overflow:hidden;          /* ⬅️ BLOQUE LE DOIGT */
-  scroll-behavior:smooth;
-  touch-action:none;        /* ⬅️ BLOQUE SWIPE MOBILE */;
-
-  scrollbar-width: none;       /* Firefox */
+  width:100%;
+  transition:transform 0.8s ease-in-out;
 }
 
-.exc-slider.auto::-webkit-scrollbar{
-  display:none;                /* Chrome / Safari */
-}
-
-.exc-slider.auto img{
+.exc-slider-track img{
   min-width:100%;
   height:200px;
   object-fit:cover;
-  border-radius:14px;
   flex-shrink:0;
-  cursor:pointer;
+  border-radius:14px;
 }
 
 @media(max-width:600px){
-  .exc-slider.auto,
-  .exc-slider.auto img{
+  .exc-slider-track img{
     height:180px;
   }
 }
@@ -1433,17 +1428,6 @@ button[type="submit"]{
   margin: 0;
   line-height: 1.6;
 }
-
-.exc-slider.auto{
-  overflow:hidden;
-  position:relative;
-}
-
-.exc-slider.auto{
-  transform:translateX(0);
-  will-change:transform;
-}
-
 
 
 
