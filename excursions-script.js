@@ -112,24 +112,38 @@ function initExcursionClicks(){
 }
 
 function openExcursion(excursionValue) {
+function openExcursion(excursionValue) {
 
   // Scroll vers la réservation
   fixBookingScroll();
 
-  // Forcer le service "excursion"
+  // Forcer le service excursion
   service.value = "excursion";
   service.dispatchEvent(new Event("change"));
 
-  // Attendre l’ouverture des champs excursions
-  setTimeout(() => {
+  // Attendre que le select circuit soit vraiment prêt
+  let tries = 0;
+  const maxTries = 20;
+
+  const waitCircuit = setInterval(() => {
     const circuitSelect = document.getElementById("circuit");
     if (!circuitSelect) return;
 
-    circuitSelect.value = excursionValue;
-    circuitSelect.dispatchEvent(new Event("change"));
-  }, 250);
-}
+    const option = [...circuitSelect.options]
+      .find(o => o.value === excursionValue);
 
+    if (option) {
+      circuitSelect.value = excursionValue;
+      circuitSelect.dispatchEvent(new Event("change"));
+      clearInterval(waitCircuit);
+    }
+
+    if (++tries >= maxTries) {
+      clearInterval(waitCircuit);
+      console.warn("Excursion non trouvée :", excursionValue);
+    }
+  }, 100);
+}
 /* ===============================
    INIT GLOBAL
 =============================== */
