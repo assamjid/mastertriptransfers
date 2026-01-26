@@ -556,27 +556,25 @@ button:hover{transform:translateY(-2px)}
    SLIDER EXCURSIONS — AUTO SCROLL
    Compatible JS scrollTo()
 =============================== */
-
 .exc-slider{
-  display:flex;
+  position:relative;
   width:100%;
-  height:200px;        /* hauteur carte */
-  overflow:hidden;     /* pas de swipe manuel */
-  scroll-behavior:smooth;
+  height:200px;
+  overflow:hidden;
 }
 
 .exc-slider img{
-  min-width:100%;      /* 1 image = 1 slide */
+  position:absolute;
+  inset:0;
+  width:100%;
   height:100%;
   object-fit:cover;
-  flex-shrink:0;
-  display:block;
-  cursor:pointer;
+  opacity:0;
+  transition:opacity .8s ease-in-out;
 }
 
-/* Sliders détails (plus grands) */
-#excursionDetails .exc-slider{
-  height:340px;
+.exc-slider img.active{
+  opacity:1;
 }
 
 /* Mobile */
