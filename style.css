@@ -552,23 +552,38 @@ button:hover{transform:translateY(-2px)}
 .exc-card a:hover{background:#e08e0b}
 .exc-card p{font-size:15px;line-height:1.6}
 
-/* ================= SLIDER ================= */
-.exc-slider.auto{
-  width:100%;
-  height:200px;
-  overflow:hidden;
+/* ===============================
+   SLIDER EXCURSIONS — AUTO SCROLL
+   Compatible JS scrollTo()
+=============================== */
+
+.exc-slider{
   display:flex;
+  width:100%;
+  height:200px;        /* hauteur carte */
+  overflow:hidden;     /* pas de swipe manuel */
+  scroll-behavior:smooth;
 }
-.exc-slider.auto img{
-  min-width:100%;
-  height:200px;
+
+.exc-slider img{
+  min-width:100%;      /* 1 image = 1 slide */
+  height:100%;
   object-fit:cover;
-  border-radius:14px;
   flex-shrink:0;
+  display:block;
+  cursor:pointer;
 }
+
+/* Sliders détails (plus grands) */
+#excursionDetails .exc-slider{
+  height:340px;
+}
+
+/* Mobile */
 @media(max-width:600px){
-  .exc-slider.auto,
-  .exc-slider.auto img{height:180px}
+  .exc-slider{
+    height:180px;
+  }
 }
 
 /* ================= TEXTE PREMIUM ================= */
