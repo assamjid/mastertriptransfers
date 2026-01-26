@@ -111,6 +111,25 @@ function initExcursionClicks(){
   });
 }
 
+function openExcursion(excursionValue) {
+
+  // Scroll vers la réservation
+  fixBookingScroll();
+
+  // Forcer le service "excursion"
+  service.value = "excursion";
+  service.dispatchEvent(new Event("change"));
+
+  // Attendre l’ouverture des champs excursions
+  setTimeout(() => {
+    const circuitSelect = document.getElementById("circuit");
+    if (!circuitSelect) return;
+
+    circuitSelect.value = excursionValue;
+    circuitSelect.dispatchEvent(new Event("change"));
+  }, 250);
+}
+
 /* ===============================
    INIT GLOBAL
 =============================== */
