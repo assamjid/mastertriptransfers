@@ -1,9 +1,11 @@
-/* ================= LANG ================= */
+/* =====================================================
+   LANGUE FR / EN
+===================================================== */
 let lang = localStorage.getItem("lang") || "FR";
 
-function translateTexts() {
-  document.querySelectorAll("[data-fr]").forEach(el => {
-    el.textContent = (lang === "EN" && el.dataset.en)
+function translateTexts(){
+  document.querySelectorAll("[data-fr]").forEach(el=>{
+    el.innerHTML = (lang === "EN" && el.dataset.en)
       ? el.dataset.en
       : el.dataset.fr;
   });
@@ -18,53 +20,66 @@ function toggleLang(){
 
 function updateLangFlag(){
   const flag = document.getElementById("langFlagBtn");
+  if(!flag) return;
+
   flag.src = lang === "FR"
     ? "https://flagcdn.com/w40/gb.png"
     : "https://flagcdn.com/w40/fr.png";
 }
 
-/* ================= SLIDERS ================= */
-document.querySelectorAll(".exc-slider.auto.fast").forEach(slider=>{
-  let i = 0;
-  setInterval(()=>{
-    i++;
-    if(i >= slider.children.length) i = 0;
-    slider.scrollTo({
-      left: slider.clientWidth * i,
-      behavior: "smooth"
-    });
-  }, 5000);
-});
+/* =====================================================
+   SLIDER FADE AUTO (🔥 COMPATIBLE CSS)
+===================================================== */
+function initFadeSliders(){
 
-document.querySelectorAll(".exc-slider.auto.slow").forEach(slider=>{
-  let i = 0;
-  setInterval(()=>{
-    i++;
-    if(i >= slider.children.length) i = 0;
-    slider.scrollTo({
-      left: slider.clientWidth * i,
-      behavior: "smooth"
-    });
-  }, 8000);
-});
+  document.querySelectorAll(".exc-slider").forEach(slider=>{
+    const images = slider.querySelectorAll("img");
+    if(images.length < 2) return;
 
-/* ================= SCROLL DETAIL ================= */
+    let index = 0;
+
+    // init
+    images.forEach(img => img.classList.remove("active"));
+    images[0].classList.add("active");
+
+    setInterval(()=>{
+      images[index].classList.remove("active");
+      index = (index + 1) % images.length;
+      images[index].classList.add("active");
+    }, slider.classList.contains("slow") ? 8000 : 5000);
+  });
+
+}
+
+/* =====================================================
+   SCROLL → DÉTAIL EXCURSION
+===================================================== */
 function scrollToExcursionDetail(name){
+
   const details = document.querySelectorAll("#excursionDetails .exc-detail");
 
   for(const d of details){
     const h = d.querySelector("h3");
-    if(h && h.textContent.toLowerCase().includes(name.toLowerCase().split(" ")[0])){
+    if(!h) continue;
+
+    if(h.textContent.toLowerCase().includes(
+      name.toLowerCase().split(" ")[0]
+    )){
       const header = document.getElementById("mainHeader");
-      const y = d.getBoundingClientRect().top + window.pageYOffset - header.offsetHeight - 10;
-      window.scrollTo({ top: y, behavior: "smooth" });
+      const offset = header ? header.offsetHeight + 15 : 0;
+
+      const y = d.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top:y, behavior:"smooth" });
       break;
     }
   }
 }
 
-/* ================= INIT ================= */
+/* =====================================================
+   INIT
+===================================================== */
 document.addEventListener("DOMContentLoaded", ()=>{
   translateTexts();
   updateLangFlag();
+  initFadeSliders();
 });
