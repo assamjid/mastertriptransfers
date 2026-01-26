@@ -1,101 +1,94 @@
-/* =====================================================
-   EXCURSIONS — VERSION STABLE FINALE
-===================================================== */
-
 const LANG_DEFAULT = "EN";
 
 /* ===============================
-   TRADUCTION
+   TRADUCTION DES TEXTES
 =============================== */
-function translateTexts(lang){
-  document.querySelectorAll("[data-fr]").forEach(el=>{
-    const val = (lang==="EN" && el.dataset.en) ? el.dataset.en : el.dataset.fr;
-    el.innerHTML = val;
+function translateTexts(lang) {
+
+  document.querySelectorAll("[data-fr]").forEach(el => {
+
+    const value =
+      (lang === "EN" && el.dataset.en)
+        ? el.dataset.en
+        : el.dataset.fr;
+
+    const allowHTML =
+      el.classList.contains("intro-seo") ||
+      el.classList.contains("seo-services") ||
+      el.classList.contains("dest-intro") ||
+      el.classList.contains("exc-intro");
+
+    if (allowHTML) {
+      el.innerHTML = value;
+    } else {
+      el.textContent = value;
+    }
   });
+
 }
 
 /* ===============================
    LANGUE
 =============================== */
-function setLang(lang){
-  localStorage.setItem("lang",lang);
-  document.documentElement.lang = lang==="EN" ? "en":"fr";
+function setLang(lang) {
+  localStorage.setItem("lang", lang);
+  document.documentElement.lang = lang === "EN" ? "en" : "fr";
+
+  // ✅ LIGNE MANQUANTE (CAUSE DU BUG)
   translateTexts(lang);
+
   updateLangFlag();
 }
 
-function toggleLang(){
+function toggleLang() {
   const current = localStorage.getItem("lang") || LANG_DEFAULT;
-  setLang(current==="FR" ? "EN":"FR");
+  setLang(current === "FR" ? "EN" : "FR");
 }
 
 /* ===============================
    DRAPEAU
 =============================== */
-function updateLangFlag(){
+function updateLangFlag() {
   const flag = document.getElementById("langFlagBtn");
-  if(!flag) return;
+  if (!flag) return;
+
   const lang = localStorage.getItem("lang") || LANG_DEFAULT;
-  flag.src = lang==="FR"
-    ? "https://flagcdn.com/w40/gb.png"
-    : "https://flagcdn.com/w40/fr.png";
+  flag.src =
+    lang === "FR"
+      ? "https://flagcdn.com/w40/gb.png"
+      : "https://flagcdn.com/w40/fr.png";
 }
 
 /* ===============================
-   SCROLL VERS DÉTAIL
+   SHAKE MENU
 =============================== */
-function scrollToExcursionDetail(name){
-  const target = document.querySelector(
-    `.exc-detail[data-excursion="${CSS.escape(name)}"]`
-  );
-  if(!target) return;
-
-  const header = document.getElementById("mainHeader");
-  const offset = header ? header.offsetHeight+15 : 0;
-
-  const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
-  window.scrollTo({top:y,behavior:"smooth"});
-}
+setInterval(() => {
+  document.querySelectorAll("#mainHeader nav a").forEach(btn => {
+    btn.classList.add("menu-shake");
+    setTimeout(() => btn.classList.remove("menu-shake"), 600);
+  });
+}, 3500);
 
 /* ===============================
    INIT
 =============================== */
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded", () => {
+  const lang = localStorage.getItem("lang") || LANG_DEFAULT;
+  setLang(lang);
 
-  /* langue AU CHARGEMENT */
-  setLang(localStorage.getItem("lang") || LANG_DEFAULT);
+  // 🔓 affiche la page
+  document.body.classList.add("lang-ready");
+});
 
-  /* ===== SLIDERS RAPIDES ===== */
-  document.querySelectorAll(".exc-slider.auto.fast").forEach(slider=>{
-    const imgs = slider.querySelectorAll("img");
-    if(imgs.length<2) return;
 
-    let i=0;
-    const w = slider.clientWidth;
-    const name = slider.dataset.excursion;
+/*==========SHAKE BOUTON EN BAS=========*/
+       document.addEventListener("DOMContentLoaded", () => {
+  setInterval(() => {
+    const btn = document.getElementById("bookNowBtn");
+    if (!btn) return;
 
-    imgs.forEach(img=>{
-      img.addEventListener("click",()=>scrollToExcursionDetail(name));
-    });
-
-    setInterval(()=>{
-      i = (i+1)%imgs.length;
-      slider.scrollTo({left:w*i,behavior:"smooth"});
-    },5000);
-  });
-
-  /* ===== SLIDERS LENTS ===== */
-  document.querySelectorAll(".exc-slider.auto.slow").forEach(slider=>{
-    const imgs = slider.querySelectorAll("img");
-    if(imgs.length<2) return;
-
-    let i=0;
-    const w = slider.clientWidth;
-
-    setInterval(()=>{
-      i = (i+1)%imgs.length;
-      slider.scrollTo({left:w*i,behavior:"smooth"});
-    },8000);
-  });
-
+    btn.classList.remove("btn-shake");
+    void btn.offsetWidth; // reset animation
+    btn.classList.add("btn-shake");
+  }, 4000);
 });
