@@ -95,29 +95,30 @@ document.addEventListener("DOMContentLoaded", () => {
   =============================== */
   document.querySelectorAll(".exc-slider.auto").forEach(slider => {
 
-    const images = slider.querySelectorAll("img");
-    if (images.length <= 1) return;
+  const images = slider.querySelectorAll("img");
+  if (images.length <= 1) return;
 
-    let index = 0;
-    const delay = slider.classList.contains("slow") ? 8000 : 5000;
+  let index = 0;
+  const delay = slider.classList.contains("slow") ? 8000 : 5000;
 
-    setInterval(() => {
-      index = (index + 1) % images.length;
-      slider.scrollTo({
-        left: slider.clientWidth * index,
-        behavior: "smooth"
+  setInterval(() => {
+    index = (index + 1) % images.length;
+
+    slider.style.transition = "transform 0.8s ease-in-out";
+    slider.style.transform =
+      `translateX(-${index * 100}%)`;
+  }, delay);
+
+  /* Clic image → détail */
+  const name = slider.dataset.excursion;
+  if (name) {
+    images.forEach(img => {
+      img.addEventListener("click", () => {
+        scrollToExcursionDetail(name);
       });
-    }, delay);
+    });
+  }
 
-    /* Clic image → détail */
-    const name = slider.dataset.excursion;
-    if (name) {
-      images.forEach(img => {
-        img.addEventListener("click", () => {
-          scrollToExcursionDetail(name);
-        });
-      });
-    }
-  });
+});
 
 });
