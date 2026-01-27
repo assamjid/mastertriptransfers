@@ -153,3 +153,45 @@ setInterval(() => {
     btn.classList.add("btn-shake");
   }, 4000);
 });
+
+
+
+/* ==================================
+   WHATSAPP SELON LANGUE HTML
+================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const CONFIG = {
+    fr: {
+      phone: "33746353660",
+      message: "Bonjour, je souhaite réserver un transfert ou une excursion avec MasterTripTransfers"
+    },
+    en: {
+      phone: "447463559086",
+      message: "Hello, I would like to book a transfer or an excursion with MasterTripTransfers"
+    }
+  };
+
+  function updateWhatsApp() {
+    const lang = document.documentElement.lang === "fr" ? "fr" : "en";
+    const { phone, message } = CONFIG[lang];
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+    const floatBtn = document.getElementById("whatsappFloat");
+    if (floatBtn) floatBtn.href = url;
+
+    const footerBtn = document.getElementById("footerWhatsapp");
+    if (footerBtn) footerBtn.href = url;
+  }
+
+  // Mise à jour immédiate
+  updateWhatsApp();
+
+  // Observer si la langue change (sans toggleLang)
+  const observer = new MutationObserver(updateWhatsApp);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["lang"]
+  });
+});
