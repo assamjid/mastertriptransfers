@@ -1505,6 +1505,46 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+/* =====================================================
+   PRÉ-REMPLISSAGE EXCURSIONS DEPUIS URL
+===================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+
+  const params = new URLSearchParams(window.location.search);
+
+  const serviceParam = params.get("service");
+  const circuitParam = params.get("circuit");
+
+  const serviceSelect = document.getElementById("service");
+  const circuitSelect = document.getElementById("circuit");
+
+  if (!serviceSelect) return;
+
+  // 1️⃣ Sélectionner le service excursion
+  if (serviceParam === "excursion") {
+    serviceSelect.value = "excursion";
+    serviceSelect.dispatchEvent(new Event("change"));
+  }
+
+  // 2️⃣ Sélectionner le circuit après ouverture des champs
+  if (circuitParam && circuitSelect) {
+    setTimeout(() => {
+      circuitSelect.value = circuitParam;
+      circuitSelect.dispatchEvent(new Event("change"));
+    }, 300);
+  }
+
+  // 3️⃣ Scroll automatique vers le formulaire
+  const booking = document.getElementById("bookingTitle");
+  if (booking) {
+    booking.scrollIntoView({ behavior: "smooth" });
+  }
+
+});
+
+
+
+
 /* ---------- BOOT AUTO ---------- */
 document.addEventListener("DOMContentLoaded",initReviews);
 
