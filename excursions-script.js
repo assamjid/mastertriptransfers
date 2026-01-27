@@ -157,7 +157,7 @@ setInterval(() => {
 
 
 /* ==================================
-   WHATSAPP SELON LANGUE HTML
+   WHATSAPP TEXTE + NUMÉRO (FR / EN)
 ================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -165,30 +165,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const CONFIG = {
     fr: {
       phone: "33746353660",
+      display: "+33 7 46 35 36 60",
       message: "Bonjour, je souhaite réserver un transfert ou une excursion avec MasterTripTransfers"
     },
     en: {
       phone: "447463559086",
+      display: "+44 7463 559086",
       message: "Hello, I would like to book a transfer or an excursion with MasterTripTransfers"
     }
   };
 
   function updateWhatsApp() {
     const lang = document.documentElement.lang === "fr" ? "fr" : "en";
-    const { phone, message } = CONFIG[lang];
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    const data = CONFIG[lang];
+    const url = `https://wa.me/${data.phone}?text=${encodeURIComponent(data.message)}`;
 
-    const floatBtn = document.getElementById("whatsappFloat");
-    if (floatBtn) floatBtn.href = url;
+    // Lien
+    const link = document.getElementById("footerWhatsapp");
+    if (link) link.href = url;
 
-    const footerBtn = document.getElementById("footerWhatsapp");
-    if (footerBtn) footerBtn.href = url;
+    // Numéro visible
+    const num = document.getElementById("waNumber");
+    if (num) num.textContent = data.display;
   }
 
-  // Mise à jour immédiate
+  // Initial
   updateWhatsApp();
 
-  // Observer si la langue change (sans toggleLang)
+  // Quand la langue change (<html lang>)
   const observer = new MutationObserver(updateWhatsApp);
   observer.observe(document.documentElement, {
     attributes: true,
