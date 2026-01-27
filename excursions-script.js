@@ -180,6 +180,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = CONFIG[lang];
     const url = `https://wa.me/${data.phone}?text=${encodeURIComponent(data.message)}`;
 
+    const waLabel = document.getElementById("waLabel");
+     if (waLabel) waLabel.href = url;
+     
+
     // Lien
     const link = document.getElementById("footerWhatsapp");
     if (link) link.href = url;
