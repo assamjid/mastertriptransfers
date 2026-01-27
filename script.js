@@ -1482,9 +1482,14 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
 
   const params = new URLSearchParams(window.location.search);
+
   const serviceParam = params.get("service");
   const trajetParam  = params.get("trajet");
+  const circuitParam = params.get("circuit");
 
+  /* =======================
+     INTERCITY
+  ======================= */
   if (serviceParam === "intercity" && trajetParam) {
 
     fixBookingScroll();
@@ -1496,48 +1501,35 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         trajet.value = trajetParam;
         trajet.dispatchEvent(new Event("change"));
-        
-        // ✅ NETTOYAGE URL → PLUS DE RÉINJECTION AU REFRESH
+
         window.history.replaceState({}, document.title, "index.html");
       }, 200);
 
     }, 200);
   }
-});
 
-/* =====================================================
-   PRÉ-REMPLISSAGE EXCURSIONS DEPUIS URL
-===================================================== */
-document.addEventListener("DOMContentLoaded", () => {
+  /* =======================
+     EXCURSIONS
+  ======================= */
+  if (serviceParam === "excursion" && circuitParam) {
 
-  const params = new URLSearchParams(window.location.search);
+    fixBookingScroll();
 
-  const serviceParam = params.get("service");
-  const circuitParam = params.get("circuit");
-
-  const serviceSelect = document.getElementById("service");
-  const circuitSelect = document.getElementById("circuit");
-
-  if (!serviceSelect) return;
-
-  // 1️⃣ Sélectionner le service excursion
-  if (serviceParam === "excursion") {
-    serviceSelect.value = "excursion";
-    serviceSelect.dispatchEvent(new Event("change"));
-  }
-
-  // 2️⃣ Sélectionner le circuit après ouverture des champs
-  if (circuitParam && circuitSelect) {
     setTimeout(() => {
-      circuitSelect.value = circuitParam;
-      circuitSelect.dispatchEvent(new Event("change"));
-    }, 300);
-  }
+      service.value = "excursion";
+      service.dispatchEvent(new Event("change"));
 
-  // 3️⃣ Scroll automatique vers le formulaire
-  const booking = document.getElementById("bookingTitle");
-  if (booking) {
-    booking.scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => {
+        const circuit = document.getElementById("circuit");
+        if (!circuit) return;
+
+        circuit.value = circuitParam;
+        circuit.dispatchEvent(new Event("change"));
+
+        window.history.replaceState({}, document.title, "index.html");
+      }, 250);
+
+    }, 200);
   }
 
 });
