@@ -155,7 +155,6 @@ setInterval(() => {
 });
 
 
-
 /* ==================================
    WHATSAPP TEXTE + NUMÉRO (FR / EN)
 ================================== */
@@ -176,23 +175,33 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   function updateWhatsApp() {
-  const lang = document.documentElement.lang === "fr" ? "fr" : "en";
-  const data = CONFIG[lang];
-  const url = `https://wa.me/${data.phone}?text=${encodeURIComponent(data.message)}`;
+    const lang = document.documentElement.lang === "fr" ? "fr" : "en";
+    const data = CONFIG[lang];
+    const url = `https://wa.me/${data.phone}?text=${encodeURIComponent(data.message)}`;
 
-  // Label "Need help ?"
-  const waLabel = document.getElementById("waLabel");
-  if (waLabel) waLabel.href = url;
+    // Need help ?
+    const waLabel = document.getElementById("waLabel");
+    if (waLabel) waLabel.href = url;
 
-  // Bouton flottant 📲 (LE BUG ÉTAIT ICI)
-  const floatBtn = document.getElementById("whatsappFloat");
-  if (floatBtn) floatBtn.href = url;
+    // Bouton flottant 📲
+    const floatBtn = document.getElementById("whatsappFloat");
+    if (floatBtn) floatBtn.href = url;
 
-  // Footer
-  const link = document.getElementById("footerWhatsapp");
-  if (link) link.href = url;
+    // Footer WhatsApp
+    const link = document.getElementById("footerWhatsapp");
+    if (link) link.href = url;
 
-  // Numéro visible
-  const num = document.getElementById("waNumber");
-  if (num) num.textContent = data.display;
+    // Numéro visible
+    const num = document.getElementById("waNumber");
+    if (num) num.textContent = data.display;
   }
+
+  // Initial
+  updateWhatsApp();
+
+  // Quand la langue change
+  new MutationObserver(updateWhatsApp).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["lang"]
+  });
+});
