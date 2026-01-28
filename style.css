@@ -318,11 +318,16 @@ box-sizing:border-box;
   padding:0 16px; 
   box-sizing:border-box;
 }
-    /* =======ajout=====*/
+    
+/* ===============================
+   TABLETTE – INDICATIF TÉLÉPHONE PLUS LARGE
+================================= */
 @media (min-width:601px) and (max-width:1024px){
   .phone-group select{
-    flex:0 0 110px;   /* ⬅️ PLUS LARGE SUR TABLETTE */
-    font-size:16px;
+    flex:0 0 140px;   /* ⬅️ PLUS LARGE */
+    width:140px;      /* sécurité */
+    font-size:16.5px;
+    padding-left:10px;
   }
 }
   
