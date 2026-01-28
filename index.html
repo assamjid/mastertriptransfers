@@ -931,31 +931,23 @@ avec chauffeurs professionnels, véhicules climatisés et prix fixes.
   
 <div class="service-grid">
 
-  <!-- <div class="service-pro" onclick="openService('airport')" style="cursor:pointer;">-->
-<a href="#bookingTitle"
-   class="service-pro"
-   data-service="airport"
-   style="cursor:pointer; text-decoration:none;">
-
-  <h3
-    data-fr="Transfert aéroport Agadir & chauffeur privé"
-    data-en="Agadir airport transfer & private driver">
-    Transferts Privés & Aéroport
-  </h3>
-
-  <p
-    data-fr="Transferts confortables depuis/vers l’aéroport, hôtels, riads et adresses privées avec chauffeur professionnel."
-    data-en="Comfortable transfers from/to the airport, hotels, riads and private addresses with a professional driver.">
-    Transferts confortables depuis/vers l’aéroport, hôtels, riads et adresses privées avec chauffeur professionnel.
-  </p>
-
-  <h3>
-    <span data-fr="Réserver Maintenant →" data-en="Book Now →">
-      Réserver →
-    </span>
-  </h3>
-
-</a>
+<div class="service-pro"  
+onclick="  
+openService('airport');  
+const s = document.getElementById('bookingTitle');  
+const y = s.getBoundingClientRect().top + window.pageYOffset - 20;  
+window.scrollTo({ top: y, behavior: 'smooth' });  
+"  
+style="cursor:pointer;">    <h3 data-fr="Transfert aéroport Agadir & chauffeur privé"  
+    data-en="Agadir airport transfer & private driver">  
+Transferts Privés & Aéroport  
+</h3>  <p data-fr="Transferts confortables depuis/vers l’aéroport, hôtels, riads et adresses privées avec chauffeur professionnel."  
+   data-en="Comfortable transfers from/to the airport, hotels, riads and private addresses with a professional driver.">  
+Transferts confortables depuis/vers l’aéroport, hôtels, riads et adresses privées avec chauffeur professionnel.  
+</p>  <h3>  
+<a data-fr="Réserver Maintenant →" data-en="Book Now→">Réserver →</a>  
+</h3>  
+</div>  
 
 <a href="/intervilles.html"
    class="service-pro"
@@ -977,7 +969,7 @@ avec chauffeurs professionnels, véhicules climatisés et prix fixes.
     <span
       data-fr="Voir les trajets →"
       data-en="View routes →">
-      Voir →
+      Voir trajets →
     </span>
   </h3>
 
@@ -999,8 +991,8 @@ avec chauffeurs professionnels, véhicules climatisés et prix fixes.
   </p>
 
   <h3>
-    <span data-fr="Voir →" data-en="View →">
-      Voir →
+    <span data-fr="Voir nos excursions→" data-en="View our excursions →">
+      Voir excursions →
     </span>
   </h3>
 
