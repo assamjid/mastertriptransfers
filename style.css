@@ -143,17 +143,25 @@ section{
   flex-wrap:wrap;
 }
 .footer-contact a{
-  color:white;
+/* ================= FOOTER CONTACT BUTTONS ================= */
+.footer-contact a{
+  color:#001f3f;                 /* Bleu nuit MasterTrip */
   text-decoration:none;
-  font-weight:600;
-  background:rgba(255,255,255,0.1);
-  padding:8px 14px;
+  font-weight:700;
+  background:#f1c40f;            /* Or MasterTrip (hover permanent) */
+  padding:8px 16px;
   border-radius:20px;
   transition:0.3s;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
 }
+
+/* Hover = léger boost (pas de changement brutal) */
 .footer-contact a:hover{
-  background:#f1c40f;
+  background:#ffcc33;            /* Or un peu plus clair */
   color:#001f3f;
+  transform:translateY(-2px);
 }
 .footer-copy{
   margin-top:20px;
