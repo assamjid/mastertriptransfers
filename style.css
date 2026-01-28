@@ -1580,5 +1580,10 @@ button[type="submit"]{
   line-height:1;
 }
 
+.service-pro h3 a{
+  display:inline-flex;
+  align-items:center;
+}
+
 
 
