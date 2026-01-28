@@ -1193,6 +1193,7 @@ if (btnPayDeposit) btnPayDeposit.innerText = LANG[lang].payDeposit;
   const current = localStorage.getItem("lang") || lang;
   setLang(current === "FR" ? "EN" : "FR");
   updateLangFlag();
+  updateAllWhatsAppLinks(currentLang);
 }
 
 function updateLangFlag(){
@@ -1611,3 +1612,38 @@ window.addEventListener("pageshow", (e) => {
     translateSelects(lang);
   }
 });
+
+/*==============WHATSAPP NUMERO UK ET FR============*/
+function updateAllWhatsAppLinks(lang) {
+
+  const numbers = {
+    FR: "33746353660",
+    EN: "447463559086"
+  };
+
+  const messages = {
+    FR: "Bonjour, je souhaite réserver un transfert ou une excursion avec MasterTripTransfers.",
+    EN: "Hello, I would like to book a transfer or an excursion with MasterTripTransfers."
+  };
+
+  const number = numbers[lang] || numbers.EN;
+  const text = encodeURIComponent(messages[lang] || messages.EN);
+
+  const waLink = `https://wa.me/${number}?text=${text}`;
+
+  // Bouton flottant
+  const floatBtn = document.getElementById("whatsappFloat");
+  if (floatBtn) floatBtn.href = waLink;
+
+  // Label "Besoin d’aide ?"
+  const labelBtn = document.getElementById("waLabel");
+  if (labelBtn) labelBtn.href = waLink;
+
+  // Footer
+  const footerBtn = document.getElementById("footerWhatsapp");
+  const waNumberSpan = document.getElementById("waNumber");
+  if (footerBtn && waNumberSpan) {
+    footerBtn.href = waLink;
+    waNumberSpan.textContent = `+${number}`;
+  }
+}
