@@ -1562,6 +1562,17 @@ button[type="submit"]{
   text-decoration:none;
 }
 
+/* ===============================
+   DESKTOP – INDICATIF TÉLÉPHONE PLUS LARGE
+================================= */
+@media (min-width:1025px){
+  .booking-form-card .phone-group select{
+    width:140px;        /* ⬅️ largeur confortable */
+    flex:0 0 140px;
+    font-size:16.5px;
+    padding-left:12px;
+  }
+}
 
 
 
