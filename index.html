@@ -932,35 +932,34 @@ avec chauffeurs professionnels, véhicules climatisés et prix fixes.
 <div class="service-grid">
 
   <!-- <div class="service-pro" onclick="openService('airport')" style="cursor:pointer;">-->
-<div class="service-pro"
-onclick="
-openService('airport');
-const s = document.getElementById('bookingTitle');
-const y = s.getBoundingClientRect().top + window.pageYOffset - 20;
-window.scrollTo({ top: y, behavior: 'smooth' });
-"
-style="cursor:pointer;">
+<a href="#bookingTitle"
+   class="service-pro"
+   data-service="airport"
+   style="cursor:pointer; text-decoration:none;">
 
-  
-  <h3 data-fr="Transfert aéroport Agadir & chauffeur privé"
+  <h3
+    data-fr="Transfert aéroport Agadir & chauffeur privé"
     data-en="Agadir airport transfer & private driver">
-Transferts Privés & Aéroport
-</h3>
+    Transferts Privés & Aéroport
+  </h3>
 
-<p data-fr="Transferts confortables depuis/vers l’aéroport, hôtels, riads et adresses privées avec chauffeur professionnel."
-   data-en="Comfortable transfers from/to the airport, hotels, riads and private addresses with a professional driver.">
-Transferts confortables depuis/vers l’aéroport, hôtels, riads et adresses privées avec chauffeur professionnel.
-</p>
+  <p
+    data-fr="Transferts confortables depuis/vers l’aéroport, hôtels, riads et adresses privées avec chauffeur professionnel."
+    data-en="Comfortable transfers from/to the airport, hotels, riads and private addresses with a professional driver.">
+    Transferts confortables depuis/vers l’aéroport, hôtels, riads et adresses privées avec chauffeur professionnel.
+  </p>
 
-<h3>
-<a data-fr="Réserver Maintenant →" data-en="Book Now→">Réserver →</a>
-</h3>
-</div>
+  <h3>
+    <span data-fr="Réserver Maintenant →" data-en="Book Now →">
+      Réserver →
+    </span>
+  </h3>
 
+</a>
 
-<div class="service-pro"
-     onclick="window.location.href='/intervilles.html'"
-     style="cursor:pointer;">
+<a href="/intervilles.html"
+   class="service-pro"
+   style="cursor:pointer; text-decoration:none;">
 
   <h3
     data-fr="Transport interville Maroc & chauffeur privé"
@@ -975,18 +974,18 @@ Transferts confortables depuis/vers l’aéroport, hôtels, riads et adresses pr
   </p>
 
   <h3>
-    <a   data-fr="Voir les trajets →"
-         data-en="View routes →">
-          Voir →
-    </a>
-    
+    <span
+      data-fr="Voir les trajets →"
+      data-en="View routes →">
+      Voir →
+    </span>
   </h3>
 
-</div>
+</a>
 
-  <div class="service-pro"
-     onclick="window.location.href='/excursions.html'"
-     style="cursor:pointer;">
+  <a href="/excursions.html"
+   class="service-pro"
+   style="cursor:pointer; text-decoration:none;">
 
   <h3 data-fr="Excursions à Agadir & circuits touristiques"
       data-en="Agadir excursions & tourist tours">
@@ -1000,15 +999,12 @@ Transferts confortables depuis/vers l’aéroport, hôtels, riads et adresses pr
   </p>
 
   <h3>
-    <a
-      data-fr="Voir nos excursions →"
-      data-en="View our excursions →">
-    Voir les excursions →
-    </a>
-
+    <span data-fr="Voir →" data-en="View →">
+      Voir →
+    </span>
   </h3>
 
-  </div>
+</a>
 
   
 </div>
@@ -2237,7 +2233,7 @@ Besoin d’aide ?
          aria-label="Contact WhatsApp">
          📞  <span id="waText">WhatsApp</span> : <span id="waNumber"></span>
       </a>
-      <a href="mailto:mastertrip2030@gmail.com">📧 contact@mastertriptransfers.com</a>
+      <a href="mailto:mastertrip2030@gmail.com">📧 mastertrip2030@gmail.com</a>
     </div>
 
     <p class="footer-copy"
