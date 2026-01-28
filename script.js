@@ -1188,10 +1188,12 @@ if (btnPayDeposit) btnPayDeposit.innerText = LANG[lang].payDeposit;
  
   function toggleLang(){
   const current = localStorage.getItem("lang") || lang;
-  setLang(current === "FR" ? "EN" : "FR");
+  const newLang = current === "FR" ? "EN" : "FR";
+
+  setLang(newLang);
   updateLangFlag();
-  updateAllWhatsAppLinks(currentLang);
-}
+  updateAllWhatsAppLinks(newLang);
+  }
 
 function updateLangFlag(){
   const current = localStorage.getItem("lang") || lang;
@@ -1688,3 +1690,10 @@ function sendBookingToWhatsApp(message) {
 
   window.open(waLink, "_blank");
 }
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const currentLang = localStorage.getItem("lang") || "EN";
+  updateAllWhatsAppLinks(currentLang);
+});
