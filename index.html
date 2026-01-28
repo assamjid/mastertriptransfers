@@ -1108,21 +1108,6 @@ data-en="🚐 Modern air-conditioned vehicles">
 </div>
 </div>
 </section>
-
-
-  
- 
-
-
-
-
-  
-  
-
-
-
-
-
     
 
   <div class="trust-box">
@@ -2267,12 +2252,17 @@ Votre avis est précieux. Aidez d’autres voyageurs en partageant votre expéri
   
 
   <div class="wa-label"
-     data-fr="Besoin d’aide ?"
-     data-en="Need help?">
+   <a href="#"
+   id="waLabel"
+   class="wa-label"
+   data-fr="Besoin d’aide ?"
+   data-en="Need help?"
+   aria-label="Need help WhatsApp">
 Besoin d’aide ?
-  </div>
+ </a>
 
-<a href="https://wa.me/212691059759?text=Bonjour%20je%20souhaite%20réserver%20un%20transfert%20ou%20une%20excursion%20avec%20MasterTripTransfers"
+<a href="#"
+   id="whatsappFloat"
    class="whatsapp-float"
    target="_blank"
    aria-label="Contact WhatsApp">
@@ -2306,7 +2296,12 @@ Besoin d’aide ?
     </p>
 
     <div class="footer-contact">
-      <a href="https://wa.me/212691059759" target="_blank">📞 WhatsApp : +212 6 36 34 27 76</a>
+        <a href="#"
+         id="footerWhatsapp"
+         target="_blank"
+         aria-label="Contact WhatsApp">
+         📞  <span id="waText">WhatsApp</span> : <span id="waNumber"></span>
+      </a>
       <a href="mailto:mastertrip2030@gmail.com">📧 contact@mastertriptransfers.com</a>
     </div>
 
