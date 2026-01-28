@@ -800,10 +800,7 @@ btnConfirm.addEventListener("click", async () => {
   const msg = document.getElementById("emailMessage").value;
 
   // 1️⃣ WhatsApp
-  window.open(
-    "https://wa.me/212636342776?text=" + encodeURIComponent(msg),
-    "_blank"
-  );
+  sendBookingToWhatsApp(msg);
 
   // 2️⃣ EMAIL (Netlify Function)
   try {
@@ -1616,34 +1613,78 @@ window.addEventListener("pageshow", (e) => {
 /*==============WHATSAPP NUMERO UK ET FR============*/
 function updateAllWhatsAppLinks(lang) {
 
+  // 🔹 Numéros WhatsApp par langue
   const numbers = {
     FR: "33746353660",
     EN: "447463559086"
   };
 
+  // 🔹 Messages WhatsApp par langue
   const messages = {
     FR: "Bonjour, je souhaite réserver un transfert ou une excursion avec MasterTripTransfers.",
     EN: "Hello, I would like to book a transfer or an excursion with MasterTripTransfers."
   };
 
-  const number = numbers[lang] || numbers.EN;
-  const text = encodeURIComponent(messages[lang] || messages.EN);
+  // 🔹 Sécurité langue
+  const currentLang = lang === "FR" ? "FR" : "EN";
 
-  const waLink = `https://wa.me/${number}?text=${text}`;
+  const number = numbers[currentLang];
+  const message = encodeURIComponent(messages[currentLang]);
 
-  // Bouton flottant
+  const waLink = `https://wa.me/${number}?text=${message}`;
+
+  // =========================
+  // 📲 Bouton flottant
+  // =========================
   const floatBtn = document.getElementById("whatsappFloat");
-  if (floatBtn) floatBtn.href = waLink;
+  if (floatBtn) {
+    floatBtn.href = waLink;
+  }
 
-  // Label "Besoin d’aide ?"
+  // =========================
+  // 💬 Label "Besoin d’aide ?"
+  // =========================
   const labelBtn = document.getElementById("waLabel");
-  if (labelBtn) labelBtn.href = waLink;
+  if (labelBtn) {
+    labelBtn.href = waLink;
+  }
 
-  // Footer
+  // =========================
+  // 📞 Footer WhatsApp
+  // =========================
   const footerBtn = document.getElementById("footerWhatsapp");
   const waNumberSpan = document.getElementById("waNumber");
-  if (footerBtn && waNumberSpan) {
+  const waTextSpan = document.getElementById("waText");
+
+  if (footerBtn) {
     footerBtn.href = waLink;
+  }
+
+  if (waNumberSpan) {
     waNumberSpan.textContent = `+${number}`;
   }
+
+  if (waTextSpan) {
+    waTextSpan.textContent = "WhatsApp";
+  }
+}
+
+
+
+function sendBookingToWhatsApp(message) {
+
+  const numbers = {
+    FR: "33746353660",
+    EN: "447463559086"
+  };
+
+  const number = numbers[lang] || numbers.EN;
+
+  const waLink =
+    "https://wa.me/" +
+    number +
+    "?text=" +
+    encodeURIComponent(message);
+
+  window.open(waLink, "_blank");
 }
