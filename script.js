@@ -1183,6 +1183,7 @@ if (btnPayDeposit) btnPayDeposit.innerText = LANG[lang].payDeposit;
   if(service.value === "excursion"){
   updateCircuitPlaces();
   }
+  renderReviews();
 }
   
  
@@ -1263,16 +1264,43 @@ function initReviews(){
   let all = getReviews();
   if(all.length === 0){
     all = [
-      {id:1,name:"Sarah",stars:5,msg:"Chauffeur très ponctuel, voiture propre, service parfait.",country:"fr"},
-      {id:2,name:"John",stars:5,msg:"Excursion Paradise Valley incroyable. Organisation top !",country:"gb"},
-      {id:3,name:"Fatima",stars:5,msg:"Très bonne communication WhatsApp, je recommande.",country:"ma"}
+      {
+        id:1,
+        name:"Sarah",
+        stars:5,
+        msg:{
+          FR:"Chauffeur très ponctuel, voiture propre, service parfait.",
+          EN:"Very punctual driver, clean car, perfect service."
+        },
+        country:"fr"
+      },
+      {
+        id:2,
+        name:"John",
+        stars:5,
+        msg:{
+          FR:"Excursion Paradise Valley incroyable. Organisation top !",
+          EN:"Amazing Paradise Valley excursion. Perfect organization!"
+        },
+        country:"gb"
+      },
+      {
+        id:3,
+        name:"Fatima",
+        stars:5,
+        msg:{
+          FR:"Très bonne communication WhatsApp, je recommande.",
+          EN:"Very good WhatsApp communication, highly recommended."
+        },
+        country:"ma"
+      }
     ];
     saveReviews(all);
   }
   renderReviews();
 }
 
-/* ---------- AFFICHAGE ---------- */
+/* ---------- AFFICHAGE REVIEWS---------- 
 function renderReviews(){
   const box = document.getElementById("liveReviews");
   box.innerHTML = "";
@@ -1307,6 +1335,62 @@ function renderReviews(){
     box.appendChild(d);
   });
 }
+===================FIN REVIEWS =============*/
+function normalizeFlag(code){
+  if(!code) return "fr";
+
+  return code
+    .toLowerCase()
+    .replace("🇬🇧","gb")
+    .replace("🇫🇷","fr")
+    .replace("🇲🇦","ma")
+    .replace("🇺🇸","us")
+    .replace("🇪🇸","es")
+    .replace("🇩🇪","de")
+    .replace("🇮🇹","it")
+    .replace("🇧🇪","be")
+    .replace("🇳🇱","nl")
+    .replace("🇨🇭","ch")
+    .replace(/[^a-z]/g,"");
+             }
+
+function renderReviews(){
+  const box = document.getElementById("liveReviews");
+  if (!box) return;
+
+  box.innerHTML = "";
+
+  getReviews().forEach(r => {
+
+    // 🌍 Texte selon langue (FR / EN + fallback)
+    const reviewText =
+      typeof r.msg === "object"
+        ? (r.msg[lang] || r.msg.FR)
+        : r.msg;
+
+    // 🚩 Normalisation du drapeau
+    const flag = normalizeFlag(r.country);
+
+    const d = document.createElement("div");
+    d.className = "review-card";
+    d.dataset.id = r.id;
+
+    d.innerHTML = `
+      <div class="review-stars">${"⭐".repeat(r.stars || 5)}</div>
+      <div class="review-msg">“${escapeHTML(reviewText)}”</div>
+      <div class="review-name">
+        <img class="review-flag"
+             src="https://flagcdn.com/w20/${flag}.png"
+             alt="${flag}">
+        ${escapeHTML(r.name || "")}
+      </div>
+    `;
+
+    box.appendChild(d);
+  });
+}
+
+
 
 /* ---------- AJOUT ---------- */
 function sendReview(){
