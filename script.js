@@ -55,7 +55,42 @@ EN:{
 };
 
 let lang;
- 
+ /* ===============================
+   💱 GESTION DEVISE ULTRA PRO
+=============================== */
+
+// Toujours stocker les prix en EURO
+const BASE_CURRENCY = "EUR";
+
+// Taux € → £ (modifiable plus tard)
+const EUR_TO_GBP = 0.86;
+
+function formatPrice(amountEuro) {
+
+  if (amountEuro === undefined || amountEuro === null) return "";
+
+  if (lang === "EN") {
+    const gbp = amountEuro * EUR_TO_GBP;
+    return Math.round(gbp) + " £";
+  }
+
+  return Math.round(amountEuro) + " €";
+}
+
+function refreshDisplayedPrices() {
+
+  if (transferPrix && transferPrix.dataset.raw) {
+    transferPrix.value = formatPrice(Number(transferPrix.dataset.raw));
+  }
+
+  if (prix && prix.dataset.raw) {
+    prix.value = formatPrice(Number(prix.dataset.raw));
+  }
+
+  if (circuitPrix && circuitPrix.dataset.raw) {
+    circuitPrix.value = formatPrice(Number(circuitPrix.dataset.raw));
+  }
+}
   
 /* =====================================================
    VARIABLES GLOBALES
@@ -340,7 +375,11 @@ function calculPrixTransfert() {
     base = 30; extra = 2;
   }
 
-  transferPrix.value = (base + Math.max(0, nb - 5) * extra) + " €";
+/*  transferPrix.value = (base + Math.max(0, nb - 5) * extra) + " €"; */
+  const totalEuro = base + Math.max(0, nb - 5) * extra;
+
+transferPrix.dataset.raw = totalEuro; // stocké en €
+transferPrix.value = formatPrice(totalEuro);
 }
 
 if (transferPlaces) {
@@ -391,7 +430,11 @@ function calculPrixIntervilles() {
   }
 
   const nb = parseInt(places.value, 10);
-  prix.value = (data.base + Math.max(0, nb - 5) * data.extra) + " €";
+  /*prix.value = (data.base + Math.max(0, nb - 5) * data.extra) + " €";*/
+  const totalEuro = data.base + Math.max(0, nb - 5) * data.extra;
+
+   prix.dataset.raw = totalEuro;
+   prix.value = formatPrice(totalEuro);
 }
 
 
@@ -430,6 +473,7 @@ const PERSON_PRICE = {
    CALCUL PRIX CIRCUIT
 ===================================================== */
 function calculPrixCircuit() {
+  circuitPrix.dataset.raw = "";
 
   if (!circuit.value || !circuitPlaces.value) {
     circuitPrix.value = "";
@@ -447,9 +491,12 @@ function calculPrixCircuit() {
     }
 
     const pricePerPerson = PERSON_PRICE[quadType.value];
-    const total = pricePerPerson * nb;
+    /*const total = pricePerPerson * nb;
+    circuitPrix.value = `${total} €`;*/
+    const totalEuro = pricePerPerson * nb;
 
-    circuitPrix.value = `${total} €`;
+    circuitPrix.dataset.raw = totalEuro;
+    circuitPrix.value = formatPrice(totalEuro);
     return;
   }
 
@@ -462,9 +509,12 @@ function calculPrixCircuit() {
   }
 
   const pricePerPerson = PERSON_PRICE[camelType.value];
-  const total = pricePerPerson * nb;
+ /* const total = pricePerPerson * nb;
+  circuitPrix.value = `${total} €`;*/
+     const totalEuro = pricePerPerson * nb;
 
-  circuitPrix.value = `${total} €`;
+    circuitPrix.dataset.raw = totalEuro;
+    circuitPrix.value = formatPrice(totalEuro);
   return;
 }
 
@@ -473,8 +523,12 @@ function calculPrixCircuit() {
   const data = circuitPrices[circuit.value];
   if (!data) return;
 
-  circuitPrix.value =
-    (data.base + Math.max(0, nb - 5) * data.extra) + " €";
+  /*circuitPrix.value =
+    (data.base + Math.max(0, nb - 5) * data.extra) + " €";*/
+  const totalEuro = data.base + Math.max(0, nb - 5) * data.extra;
+
+   circuitPrix.dataset.raw = totalEuro;
+   circuitPrix.value = formatPrice(totalEuro);
 }
 
 function updateCircuitPlaces() {
@@ -750,7 +804,8 @@ function setStripeAmount(priceText) {
   }
 
   const amountEuro = parseFloat(
-    priceText.replace("€", "").trim()
+    /*priceText.replace("€", "").trim()*/
+    priceText.replace(/[€£]/g, "").trim()
   );
 
   if (isNaN(amountEuro) || amountEuro <= 0) {
@@ -1184,6 +1239,7 @@ if (btnPayDeposit) btnPayDeposit.innerText = LANG[lang].payDeposit;
   updateCircuitPlaces();
   }
   renderReviews();
+  refreshDisplayedPrices();
 }
   
  
