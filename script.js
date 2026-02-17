@@ -1145,7 +1145,7 @@ if (service && service.value === "excursion") {
     FR:{
       depart:"Adresse, aéroport, hôtel...",
       arrivee:"Adresse, aéroport, hôtel...",
-      flight:"Ex : FR456",
+      flight:"Ex : FR4567",
       price:"0,00€",
       message:"Bagages, siège bébé...",
       phone:"Téléphone",
@@ -1154,11 +1154,11 @@ if (service && service.value === "excursion") {
     EN:{
       depart:"Address, airport, hotel...",
       arrivee:"Address, airport, hotel...",
-      flight:"Eg: FR456",
-      price:"0.00€",
+      flight:"Ex U23175: ",
+      price:"0.00£",
       message:"Luggage, baby seat...",
       phone:"Phone number",
-      email:"Exemple@gmail.com"
+      email:"Example@gmail.com"
     }
     
   };
