@@ -1231,9 +1231,9 @@ if (btnPayDeposit) btnPayDeposit.innerText = LANG[lang].payDeposit;
   /* ===============================
      LABELS PRIX (€)
   =============================== */
-  document.querySelectorAll("input[readonly] + label").forEach(label => {
+  /*document.querySelectorAll("input[readonly] + label").forEach(label => {
     label.textContent = lang === "EN" ? "Price (€)" : "Prix (€)";
-  });
+  });*/
   
   if(service.value === "excursion"){
   updateCircuitPlaces();
