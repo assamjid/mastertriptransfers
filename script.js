@@ -333,11 +333,11 @@ function calculPrixTransfert() {
   let base = 0, extra = 0;
 
   if (transferType.value.includes("Agadir ville")) {
-    base = 30; extra = 2;
+    base = 25; extra = 2;
   }
 
   if (transferType.value.includes("Taghazout Bay")) {
-    base = 40; extra = 2.5;
+    base = 30; extra = 2;
   }
 
   transferPrix.value = (base + Math.max(0, nb - 5) * extra) + " €";
