@@ -1154,7 +1154,7 @@ if (service && service.value === "excursion") {
     EN:{
       depart:"Address, airport, hotel...",
       arrivee:"Address, airport, hotel...",
-      flight:"Ex U23175: ",
+      flight:"Ex : U23175",
       price:"0.00£",
       message:"Luggage, baby seat...",
       phone:"Phone number",
