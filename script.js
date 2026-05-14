@@ -449,7 +449,7 @@ if (trajet && places) {
    PRIX CIRCUITS
 ===================================================== */
 const circuitPrices = {
-  "Excursion Paradise Valley": { base: 18, extra: 18 },
+/*  "Excursion Paradise Valley": { base: 18, extra: 18 }, */
   "Tour de la ville d’Agadir": { base: 40, extra: 10 },
   "Souk El Had – Circuit Shopping": { base: 30, extra: 10 },
   "Visite du Crocoparc": { base: 40, extra: 15 },
@@ -462,6 +462,7 @@ const circuitPrices = {
 ===================================================== */
 
 const PERSON_PRICE = {
+  "Excursion Paradise Valley": 18,
   "Quad simple": 25,
   "Buggy": 70,
   "Promenade seule": 15,
