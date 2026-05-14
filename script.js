@@ -449,7 +449,7 @@ if (trajet && places) {
    PRIX CIRCUITS
 ===================================================== */
 const circuitPrices = {
-  "Excursion Paradise Valley": { base: 18, extra: 18 }, 
+  "Excursion Paradise Valley": { base: 36, extra: 18 }, 
   "Tour de la ville d’Agadir": { base: 40, extra: 10 },
   "Souk El Had – Circuit Shopping": { base: 30, extra: 10 },
   "Visite du Crocoparc": { base: 40, extra: 15 },
@@ -559,10 +559,10 @@ function updateCircuitPlaces() {
     return;
   }
 
-  // Autres excursions = Moins de 5, puis 6 → 15
+  // Autres excursions = Moins de 2, puis 3 → 15
   const less = document.createElement("option");
   less.value = "2";
-  less.dataset.fr = "2 et moins ";
+  less.dataset.fr = "2 ou moins ";
   less.dataset.en = "2 or less";
   less.textContent = LANG[lang].upto2;
   circuitPlaces.appendChild(less);
