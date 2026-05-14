@@ -908,6 +908,9 @@ btnConfirm.addEventListener("click", async () => {
   }
 });
   
+  btnCancel.addEventListener("click", () => {
+  closeResume();
+});
 }
 
 
