@@ -524,8 +524,8 @@ function calculPrixCircuit() {
   if (!data) return;
 
   /*circuitPrix.value =
-    (data.base + Math.max(0, nb - 5) * data.extra) + " €";*/
-  const totalEuro = data.base + Math.max(0, nb - 5) * data.extra;
+    (data.base + Math.max(0, nb - 2) * data.extra) + " €";*/
+  const totalEuro = data.base + Math.max(0, nb - 2) * data.extra;
 
    circuitPrix.dataset.raw = totalEuro;
    circuitPrix.value = formatPrice(totalEuro);
@@ -562,8 +562,8 @@ function updateCircuitPlaces() {
   // Autres excursions = Moins de 5, puis 6 → 15
   const less = document.createElement("option");
   less.value = "2";
-  less.dataset.fr = "Moins de 2";
-  less.dataset.en = "Up to 2";
+  less.dataset.fr = "2 et moins ";
+  less.dataset.en = "2 or less";
   less.textContent = LANG[lang].upto2;
   circuitPlaces.appendChild(less);
 
