@@ -634,7 +634,10 @@ fixedTime.innerHTML = `
   ===================================== */
   if (
     circuit.value === "Chameau" ||
-    circuit.value === "Safari Quad / Buggy"
+    circuit.value === "Safari Quad / Buggy" ||
+    circuit.value === "Excursion Paradise Valley"
+    
+    
   ) {
 
     setHeureMode("fixed");
@@ -664,6 +667,15 @@ fixedTime.innerHTML = `
       );
     }
 
+/* =====================================
+   7️⃣ HORAIRES PARADISE VALLEY
+===================================== */
+if (circuit.value === "Excursion Paradise Valley") {
+  ["09:00", "14:00"].forEach(h =>
+    fixedTime.add(new Option(h, h))
+  );
+}
+    
     return;
   }
 
