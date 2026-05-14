@@ -449,12 +449,12 @@ if (trajet && places) {
    PRIX CIRCUITS
 ===================================================== */
 const circuitPrices = {
-  "Excursion Paradise Valley": { base: 70, extra: 5 },
-  "Tour de la ville d’Agadir": { base: 60, extra: 5 },
-  "Souk El Had – Circuit Shopping": { base: 40, extra: 5 },
-  "Visite du Crocoparc": { base: 60, extra: 5 },
-  "Téléphérique et visite de la Kasbah": { base: 30, extra: 4 },
-  "Dunes de Timlaline – Expérience Désert": { base: 70, extra: 5 }
+  "Excursion Paradise Valley": { base: 18, extra: 18 },
+  "Tour de la ville d’Agadir": { base: 40, extra: 10 },
+  "Souk El Had – Circuit Shopping": { base: 30, extra: 10 },
+  "Visite du Crocoparc": { base: 40, extra: 15 },
+  "Téléphérique et visite de la Kasbah": { base: 30, extra: 5 },
+  "Dunes de Timlaline – Expérience Désert": { base: 55, extra: 5 }
 };
 
 /* =====================================================
@@ -561,13 +561,13 @@ function updateCircuitPlaces() {
 
   // Autres excursions = Moins de 5, puis 6 → 15
   const less = document.createElement("option");
-  less.value = "5";
-  less.dataset.fr = "Moins de 5";
-  less.dataset.en = "Up to 5";
-  less.textContent = LANG[lang].upto5;
+  less.value = "2";
+  less.dataset.fr = "Moins de 2";
+  less.dataset.en = "Up to 2";
+  less.textContent = LANG[lang].upto2;
   circuitPlaces.appendChild(less);
 
-  for (let i = 6; i <= 15; i++) {
+  for (let i = 3; i <= 15; i++) {
     const o = document.createElement("option");
     o.value = i;
     o.dataset.fr = i;
