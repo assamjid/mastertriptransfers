@@ -273,7 +273,10 @@ if (service) {
   setHeureMode("fixed");
 
   fixedTime.innerHTML = `
-    <option value="">Choisir l’horaire</option>
+    <option value=""
+    data-fr="Choisir l’horaire"
+    data-en="Select time"
+    >Choisir l’horaire</option>
     <option value="10:00">10:00</option>
     <option value="14:00">14:00</option>
     <option value="18:00">18:00</option>
@@ -1248,6 +1251,7 @@ if (service && service.value === "excursion") {
   const PH = {
     FR:{
       depart:"Adresse, aéroport, hôtel...",
+      departshuttle:"Adresse, hôtel...",
       arrivee:"Adresse, aéroport, hôtel...",
       flight:"Ex : FR4567",
       price:"0,00€",
@@ -1257,6 +1261,7 @@ if (service && service.value === "excursion") {
     },
     EN:{
       depart:"Address, airport, hotel...",
+      departshuttle:"Address, hotel...",
       arrivee:"Address, airport, hotel...",
       flight:"Ex : U23175",
       price:"0.00£",
