@@ -274,7 +274,7 @@ if (service) {
 
   fixedTime.innerHTML = `
     <option value="">Choisir l’horaire</option>
-    <option value="09:00">09:00</option>
+    <option value="10:00">10:00</option>
     <option value="14:00">14:00</option>
     <option value="18:00">18:00</option>
   `;
@@ -475,7 +475,7 @@ const shuttlePrices = {
 
 "Agadir ville vers Aéroport Agadir": 8,
 
-"Taghazout / Tamraght vers Aéroport Agadir": 12
+"Taghazout / Tamraght vers Aéroport Agadir": 10
 
 };
 
