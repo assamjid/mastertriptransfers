@@ -249,6 +249,12 @@ data-en="">
   <select id="service" name="service" required>
   <option value="" data-fr="Choisir un service" data-en="Choose a service"></option>
 
+    <option value="shuttle"
+    data-fr="Shuttle Aéroport"
+    data-en="Airport Shuttle">
+    Airport Shuttle 
+    </option>
+
   <option value="airport"
     data-fr="Transferts Aéroport & Privés"
     data-en="Airport & Private Transfers">
@@ -274,6 +280,44 @@ data-en="Our services">
 Nos services
 </label>
 </div>
+
+  /*====Shuttle =====*/
+<div id="shuttleFields">   
+
+<div class="floating-field">
+
+  
+<select id="shuttleType" name="shuttle">
+    <option value=""
+  data-fr="Choisir Shuttle"
+  data-en="Choose Shuttle">
+  Choisir shuttle
+</option>
+
+  <option value="Shuttle Agadir ville vers Aéroport d'Agadir"
+          data-fr="Shuttle Agadir ville vers Aéroport d'Agadir"
+          data-en="Shuttle Agadir City to Agadir Airport">
+    Shuttle Agadir ville vers Aéroport d'Agadir
+  </option>
+
+  <option value="Shuttle Taghazout / Tamraght vers Aéroport d'Agadir"
+          data-fr="Shuttle Taghazout / Tamraght vers Aéroport d'Agadir"
+          data-en="Shuttle Taghazout / Tamraght to Agadir Airport">
+    Shuttle Taghazout / Tamraght vers Aéroport d'Agadir
+  </option>
+  </select>
+  
+  <label for="shuttleType"
+  data-fr="Shuttle"
+  data-en="Shuttle">
+  Shuttle 
+  </label>
+</div>
+
+
+
+
+  /*=====fin Shuttle ======*/
 
 
 <div id="transferFields">   
