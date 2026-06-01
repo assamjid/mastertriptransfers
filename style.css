@@ -748,16 +748,16 @@ button:hover{transform:translateY(-2px)}
 
   /* ===============================
    CARTE SERVICES EXCURSIONS — PREMIUM PLEINE LARGEUR
-================================= */
+================================= 
 #services .service-pro:nth-child(3){
-  grid-column:1 / -1;                 /* pleine largeur */
-  background:linear-gradient(160deg,#001f3f,#003b6f); /* même couleur */
-  padding:18px 22px;                  /* plus compacte */
+  grid-column:1 / -1;                
+  background:linear-gradient(160deg,#001f3f,#003b6f);
+  padding:18px 22px;                  
   min-height:unset;
   border-radius:22px;
 }
 
-/* Texte compact */
+/* Texte compact 
 #services .service-pro:nth-child(3) p{
   margin-bottom:10px;
   font-size:15.5px;
@@ -767,26 +767,28 @@ button:hover{transform:translateY(-2px)}
   margin-right:auto;
 }
 
-/* Titre */
+/* Titre 
 #services .service-pro:nth-child(3) h3{
   margin:8px 0;
   font-size:22px;
 }
 
-/* Bouton */
+/* Bouton 
 #services .service-pro:nth-child(3) a{
   margin-top:8px;
   font-size:16px;
   padding:10px 26px;
 }
 
-/* Mobile */
+/* Mobile 
 @media(max-width:700px){
   #services .service-pro:nth-child(3){
     grid-column:1;
     padding:16px 18px;
   }
   }
+*/
+
   /* ===============================
    TITRES PREMIUM – STYLE DESTINATIONS
 ================================= */
