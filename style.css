@@ -260,6 +260,11 @@ font-size:16.5px;
 box-sizing:border-box;
 }
 
+#shuttleFields{
+    display:flex;
+    flex-direction:column;
+}
+
 
 
 
