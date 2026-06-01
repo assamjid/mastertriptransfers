@@ -250,10 +250,10 @@ data-en="">
   <option value="" data-fr="Choisir un service" data-en="Choose a service"></option>
 
     <option value="shuttle"
-    data-fr="Shuttle Aéroport"
-    data-en="Airport Shuttle">
-    Airport Shuttle 
-    </option>
+        data-fr="Navette Partagée"
+        data-en="Shared Shuttle">
+  Navette Partagée
+</option>
 
   <option value="airport"
     data-fr="Transferts Aéroport & Privés"
@@ -282,89 +282,68 @@ Nos services
 </div>
 
   <!====Shuttle =====-->
-<div id="shuttleFields">   
+
+  <div id="shuttleFields">
 
 <div class="floating-field">
+<select id="shuttleRoute" name="shuttle_route">
 
-  
-<select id="shuttleType" name="shuttle">
-    <option value=""
-  data-fr="Choisir Shuttle"
-  data-en="Choose Shuttle">
-  Choisir shuttle
+<option value=""
+        data-fr="Choisir une navette"
+        data-en="Choose a shuttle">
+Choisir une navette
 </option>
 
-  <option value="Shuttle Agadir ville vers Aéroport d'Agadir"
-          data-fr="Shuttle Agadir ville vers Aéroport d'Agadir"
-          data-en="Shuttle Agadir City to Agadir Airport">
-    Shuttle Agadir ville vers Aéroport d'Agadir
-  </option>
-
-  <option value="Shuttle Taghazout / Tamraght vers Aéroport d'Agadir"
-          data-fr="Shuttle Taghazout / Tamraght vers Aéroport d'Agadir"
-          data-en="Shuttle Taghazout / Tamraght to Agadir Airport">
-    Shuttle Taghazout / Tamraght vers Aéroport d'Agadir
-  </option>
-  </select>
-  
-  <label for="shuttleType"
-  data-fr="Shuttle"
-  data-en="Shuttle">
-  Shuttle 
-  </label>
-</div>
-  <div class="floating-field">
-  <input id="depart" name="pickup" type="text" placeholder="adresse, aéroport, hotel ..." >
-  <label for="depart"
-  data-fr="Lieu de prise en charge"
-  data-en="Pickup location">
-  Lieu de prise en charge
-  </label>
-</div>
-
-<div class="floating-field">
-  <select id="shuttlePlaces" name="shuttle_people" required>
-  <option value=""
-  data-fr="Nombre de places"
-  data-en="Number of people">
-  Nombre de places
+  <option value="Agadir ville vers Aéroport Agadir"
+        data-fr="Agadir ville vers Aéroport Agadir"
+        data-en="Agadir City to Agadir Airport">
+        Agadir ville vers Aéroport Agadir
 </option>
-  <option value="1" data-fr="1" data-en="1">1</option>
-  <option value="2" data-fr="2" data-en="2">2</option>
-  <option value="3" data-fr="3" data-en="3">3</option>
-  <option value="4" data-fr="4" data-en="4">4</option>
-  <option value="5" data-fr="5" data-en="5">5</option>
-  <option value="6" data-fr="6" data-en="6">6</option>
-  <option value="7" data-fr="7" data-en="7">7</option>
-  <option value="8" data-fr="8" data-en="8">8</option>
-  <option value="9" data-fr="9" data-en="9">9</option>
-  <option value="10" data-fr="10" data-en="10">10</option>
-  <option value="11" data-fr="11" data-en="11">11</option>
-  <option value="12" data-fr="12" data-en="12">12</option>
-  <option value="13" data-fr="13" data-en="13">13</option>
-  <option value="14" data-fr="14" data-en="14">14</option>
-  <option value="15" data-fr="15" data-en="15">15</option>
-  </select>
-    
-  <label for="transferPlaces"
-  data-fr="Places"
-  data-en="Seats">
-  Places
-  </label>
-</div>
- 
-<div class="floating-field">
-<input type="text" id="shuttlePrix" name="shuttle_price" placeholder="0,00" readonly>
-<label for="shuttlePrix"
-  data-fr="Prix (€)"
-  data-en="Price (£)">
-  Prix (€)
+
+
+<option value="Taghazout / Tamraght vers Aéroport Agadir"
+        data-fr="Taghazout /  Tamraght vers Aéroport Agadir"
+        data-en="Taghazout / Tamraght to Agadir Airport">
+         Taghazout / Tamraght vers Aéroport Agadir
+</option>
+
+</select>
+
+<label for="shuttleRoute"
+       data-fr="Navette"
+       data-en="Shuttle">
+Navette
 </label>
 </div>
 
+<div class="floating-field">
+<input type="number"
+       id="shuttlePlaces"
+       name="shuttle_people"
+       min="1"
+       max="15">
+
+<label for="shuttlePlaces"
+       data-fr="Places"
+       data-en="Seats">
+Places
+</label>
 </div>
 
+<div class="floating-field">
+<input type="text"
+       id="shuttlePrix"
+       name="shuttle_price"
+       readonly>
 
+<label for="shuttlePrix"
+       data-fr="Prix (€)"
+       data-en="Price (£)">
+Prix (€)
+</label>
+</div>
+
+  </div>
 
 
   <! =====fin Shuttle ====== -->
