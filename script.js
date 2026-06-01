@@ -108,6 +108,11 @@ const bookingSubtitle = document.getElementById("bookingSubtitle");
 const transferFields = document.getElementById("transferFields");
 const intervillesFields = document.getElementById("intervillesFields");
 const circuitsFields = document.getElementById("circuitsFields");
+const shuttleFields = document.getElementById("shuttleFields");
+
+const shuttleRoute = document.getElementById("shuttleRoute");
+const shuttlePlaces = document.getElementById("shuttlePlaces");
+const shuttlePrix = document.getElementById("shuttlePrix");
 
 const transferType = document.getElementById("transferType");
 const depart = document.getElementById("depart");
@@ -186,6 +191,12 @@ if (tel) {
 
 function resetAll() {
 
+  if (shuttleFields) shuttleFields.style.display = "none";
+
+if (shuttleRoute) shuttleRoute.value = "";
+if (shuttlePlaces) shuttlePlaces.value = "";
+if (shuttlePrix) shuttlePrix.value = "";
+
   if (transferFields) transferFields.style.display = "none";
   if (intervillesFields) intervillesFields.style.display = "none";
   if (circuitsFields) circuitsFields.style.display = "none";
@@ -246,6 +257,28 @@ function resetDefaults(){
 if (service) {
     service.addEventListener("change", () => {
   resetAll();
+
+      if (service.value === "shuttle") {
+
+  bookingSubtitle.textContent =
+    lang === "EN"
+      ? "Shared shuttle details"
+      : "Détails de votre navette";
+
+  shuttleFields.style.display = "flex";
+
+  shuttleRoute.required = true;
+  shuttlePlaces.required = true;
+
+  setHeureMode("fixed");
+
+  fixedTime.innerHTML = `
+    <option value="">Choisir l’horaire</option>
+    <option value="09:00">09:00</option>
+    <option value="14:00">14:00</option>
+    <option value="18:00">18:00</option>
+  `;
+      }
 
   if (service.value === "airport") {
     bookingSubtitle.textContent = LANG[lang].subtitle_transfer;
@@ -358,6 +391,26 @@ transferType.addEventListener("change", () => {
 
 
 /* =====================================================
+   PRIX Shuttle 
+===================================================== */
+
+function calculPrixShuttle(){
+
+  if(!shuttleRoute.value || !shuttlePlaces.value){
+    shuttlePrix.value = "";
+    return;
+  }
+
+  const nb = parseInt(shuttlePlaces.value,10);
+
+  const totalEuro =
+    (shuttlePrices[shuttleRoute.value] || 0) * nb;
+
+  shuttlePrix.dataset.raw = totalEuro;
+  shuttlePrix.value = formatPrice(totalEuro);
+}
+
+/* =====================================================
    PRIX TRANSFERT
 ===================================================== */
 
@@ -416,6 +469,17 @@ const intervillesPrices = {
   "Agadir / Taghazout vers Imsouane": { base: 70, extra: 10 },
   "Imsouane vers Agadir / Taghazout": { base: 70, extra: 10 }
 };
+const shuttlePrices = {
+
+"Agadir ville vers Aéroport Agadir": 8,
+
+"Taghazout / Tamraght vers Aéroport Agadir": 12
+
+};
+
+
+shuttleRoute.addEventListener("change", calculPrixShuttle);
+shuttlePlaces.addEventListener("input", calculPrixShuttle);
 
 function calculPrixIntervilles() {
   if (!trajet.value || !places.value) {
@@ -762,6 +826,7 @@ function escapeHTML(str) {
   function buildRecap(){
 
   let price = "";
+  if(service.value === "shuttle")   price = shuttlePrix.value;
   if(service.value === "airport")   price = transferPrix.value;
   if(service.value === "intercity") price = prix.value;
   if(service.value === "excursion") price = circuitPrix.value;
@@ -771,6 +836,11 @@ function escapeHTML(str) {
   const timeValue = fixedTimeField.style.display === "block" ? fixedTime.value : heure.value;
 
   let type="-", choix="", placesTxt="-";
+
+  if(service.value==="shuttle"){
+  type = shuttleRoute.value;
+  placesTxt = shuttlePlaces.value;
+}
 
   if(service.value==="airport"){ type=transferType.value; placesTxt=transferPlaces.value; }
   if(service.value==="intercity"){ type=trajet.value; placesTxt=places.value; }
