@@ -1265,8 +1265,7 @@ if (service && service.value === "excursion") {
 
   const PH = {
     FR:{
-      depart:"Adresse, aéroport, hôtel...",
-      departshuttle:"Adresse, hôtel...",
+      depart:"Adresse, hôtel...",
       arrivee:"Adresse, aéroport, hôtel...",
       flight:"Ex : FR4567",
       price:"0,00€",
@@ -1275,8 +1274,7 @@ if (service && service.value === "excursion") {
       email:"Exemple@gmail.com"
     },
     EN:{
-      depart:"Address, airport, hotel...",
-      departshuttle:"Address, hotel...",
+      depart:"Address, hotel...",
       arrivee:"Address, airport, hotel...",
       flight:"Ex : U23175",
       price:"0.00£",
