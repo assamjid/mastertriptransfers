@@ -272,22 +272,26 @@ if (service) {
 
   setHeureMode("fixed");
 
-  fixedTime.innerHTML = `
-    <! <option value=""
+ /* fixedTime.innerHTML = `
+    <option value=""
     data-fr="Choisir l’horaire"
     data-en="Select time"
-    >Choisir l’horaire</option> -->
-
-    <option value=""
-  data-fr="Choisir l’horaire"
-  data-en="Select time">
-  ${LANG[lang].fixedtime}
-</option>`;
+    >Choisir l’horaire</option> 
         
     <option value="10:00">10:00</option>
     <option value="14:00">14:00</option>
     <option value="18:00">18:00</option>
   `;
+  */
+
+        fixedTime.innerHTML = `
+  <option value="">
+    ${currentLang === "en" ? "Select time" : "Choisir l’horaire"}
+  </option>
+  <option value="10:00">10:00</option>
+  <option value="14:00">14:00</option>
+  <option value="18:00">18:00</option>
+`;
       }
 
   if (service.value === "airport") {
