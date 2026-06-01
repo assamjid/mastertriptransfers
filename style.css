@@ -264,6 +264,11 @@ box-sizing:border-box;
     display:flex;
     flex-direction:column;
 }
+#shuttleFields{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
 
 
 
