@@ -285,7 +285,7 @@ if (service) {
   */
 
         fixedTime.innerHTML = `
-<option value="">${currentLang === "EN" ? "Select time" : "Choisir l’horaire"}</option>
+<option value="">${LANG === "EN" ? "Select time" : "Choisir l’horaire"}</option>
 <option value="10:00">10:00</option>
 <option value="14:00">14:00</option>
 <option value="18:00">18:00</option>
