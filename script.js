@@ -390,6 +390,35 @@ transferType.addEventListener("change", () => {
 }
 
 
+function updateShuttlePlaces() {
+
+  shuttlePlaces.innerHTML = "";
+
+  const first = document.createElement("option");
+  first.value = "";
+  first.dataset.fr = "Nombre de places";
+  first.dataset.en = "Number of people";
+  first.textContent = LANG[lang].places;
+
+  shuttlePlaces.appendChild(first);
+
+  for (let i = 1; i <= 15; i++) {
+    const option = document.createElement("option");
+    option.value = i;
+    option.dataset.fr = i;
+    option.dataset.en = i;
+    option.textContent = i;
+
+    shuttlePlaces.appendChild(option);
+  }
+
+  translateSelects(lang);
+}
+
+
+
+
+
 /* =====================================================
    PRIX Shuttle 
 ===================================================== */
@@ -1340,6 +1369,7 @@ if (btnPayDeposit) btnPayDeposit.innerText = LANG[lang].payDeposit;
   if(service.value === "excursion"){
   updateCircuitPlaces();
   }
+  updateShuttlePlaces();
   renderReviews();
   refreshDisplayedPrices();
 }
