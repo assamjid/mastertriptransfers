@@ -285,11 +285,17 @@ if (service) {
   */
 
         fixedTime.innerHTML = `
-<option value="">${LANG === "EN" ? "Select time" : "Choisir l’horaire"}</option>
+<option value=""
+        data-fr="Choisir l’horaire"
+        data-en="Select time">
+  ${LANG[lang].fixedtime}
+</option>
 <option value="10:00">10:00</option>
 <option value="14:00">14:00</option>
 <option value="18:00">18:00</option>
 `;
+
+translateSelects(lang);
       }
 
   if (service.value === "airport") {
