@@ -1279,6 +1279,7 @@ if (service && service.value === "excursion") {
   if(transferPrix) transferPrix.placeholder = PH[lang].price;
   if(prix) prix.placeholder = PH[lang].price;
   if(circuitPrix) circuitPrix.placeholder = PH[lang].price;
+  if(shuttlePrix) shuttlePrix.placeholder = PH[lang].price;
   if(message) message.placeholder = PH[lang].message;
   if(tel) tel.placeholder = PH[lang].phone;
   if(email) email.placeholder = PH[lang].email;
