@@ -258,7 +258,63 @@ if (service) {
     service.addEventListener("change", () => {
   resetAll();
 
+
+
       if (service.value === "shuttle") {
+
+  bookingSubtitle.textContent =
+    lang === "EN"
+      ? "Shared shuttle details"
+      : "Détails de votre navette";
+
+  shuttleFields.style.display = "flex";
+
+  shuttleRoute.required = true;
+  shuttlePlaces.required = true;
+
+  setHeureMode("fixed");
+
+  updateShuttleTimes();
+
+  translateSelects(lang);
+      }
+
+
+      function updateShuttleTimes() {
+
+  if (shuttleRoute.value === "Aéroport Agadir vers Agadir / Tamraght / Taghazout") {
+
+    fixedTime.innerHTML = `
+      <option value=""
+          data-fr="Choisir l’horaire"
+          data-en="Select time">
+        ${LANG[lang].fixedtime}
+      </option>
+      <option value="10:00">10:00</option>
+      <option value="14:00">14:00</option>
+      <option value="19:00">19:00</option>
+    `;
+
+  } else {
+
+    fixedTime.innerHTML = `
+      <option value=""
+          data-fr="Choisir l’horaire"
+          data-en="Select time">
+        ${LANG[lang].fixedtime}
+      </option>
+      <option value="08:00">08:00</option>
+      <option value="12:00">12:00</option>
+      <option value="16:00">16:00</option>
+    `;
+  }
+
+  translateSelects(lang);
+      }
+
+      shuttleRoute.addEventListener("change", updateShuttleTimes);
+
+     /* if (service.value === "shuttle") {
 
   bookingSubtitle.textContent =
     lang === "EN"
@@ -285,6 +341,7 @@ if (service) {
 
 translateSelects(lang);
       }
+      */
 
   if (service.value === "airport") {
     bookingSubtitle.textContent = LANG[lang].subtitle_transfer;
