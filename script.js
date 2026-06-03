@@ -113,6 +113,8 @@ const shuttleFields = document.getElementById("shuttleFields");
 const shuttleRoute = document.getElementById("shuttleRoute");
 const shuttlePlaces = document.getElementById("shuttlePlaces");
 const shuttlePrix = document.getElementById("shuttlePrix");
+const pickupField = document.getElementById("pickupField");
+const dropoffField = document.getElementById("dropoffField");
 
 const transferType = document.getElementById("transferType");
 const depart = document.getElementById("depart");
@@ -193,9 +195,11 @@ function resetAll() {
 
   if (shuttleFields) shuttleFields.style.display = "none";
 
-if (shuttleRoute) shuttleRoute.value = "";
-if (shuttlePlaces) shuttlePlaces.value = "";
-if (shuttlePrix) shuttlePrix.value = "";
+  if (shuttleRoute) shuttleRoute.value = "";
+  if (shuttlePlaces) shuttlePlaces.value = "";
+  if (shuttlePrix) shuttlePrix.value = "";
+  if (pickupField) pickupField.style.display = "none";
+  if (dropoffField) dropoffField.style.display = "none";
 
   if (transferFields) transferFields.style.display = "none";
   if (intervillesFields) intervillesFields.style.display = "none";
@@ -235,7 +239,10 @@ if (shuttlePrix) shuttlePrix.value = "";
   if (camelType) camelType.required = false;
   if (fixedTime) fixedTime.required = false;
 
+  
+
   setHeureMode("hidden");
+  
 }
 
 
@@ -346,6 +353,9 @@ translateSelects(lang);
 
   if (shuttleRoute.value === "Aéroport Agadir vers Agadir / Tamraght / Taghazout") {
 
+    pickupField.style.display = "none";
+    dropoffField.style.display = "block";
+
     fixedTime.innerHTML = `
       <option value=""
           data-fr="Choisir l’horaire"
@@ -357,7 +367,10 @@ translateSelects(lang);
       <option value="19:00">19:00</option>
     `;
 
-  } else {
+  } else if (shuttleRoute.value === "Taghazout / Tamraght / Agadir vers Aéroport Agadir") {
+
+    pickupField.style.display = "block";
+    dropoffField.style.display = "none";
 
     fixedTime.innerHTML = `
       <option value=""
@@ -369,10 +382,15 @@ translateSelects(lang);
       <option value="12:00">12:00</option>
       <option value="16:00">16:00</option>
     `;
+
+  } else {
+
+    pickupField.style.display = "none";
+    dropoffField.style.display = "none";
   }
 
   translateSelects(lang);
-  }
+}
   shuttleRoute.addEventListener("change", updateShuttleTimes);
 
 }
