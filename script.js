@@ -279,41 +279,6 @@ if (service) {
   translateSelects(lang);
       }
 
-
-      function updateShuttleTimes() {
-
-  if (shuttleRoute.value === "Aéroport Agadir vers Agadir / Tamraght / Taghazout") {
-
-    fixedTime.innerHTML = `
-      <option value=""
-          data-fr="Choisir l’horaire"
-          data-en="Select time">
-        ${LANG[lang].fixedtime}
-      </option>
-      <option value="10:00">10:00</option>
-      <option value="14:00">14:00</option>
-      <option value="19:00">19:00</option>
-    `;
-
-  } else {
-
-    fixedTime.innerHTML = `
-      <option value=""
-          data-fr="Choisir l’horaire"
-          data-en="Select time">
-        ${LANG[lang].fixedtime}
-      </option>
-      <option value="08:00">08:00</option>
-      <option value="12:00">12:00</option>
-      <option value="16:00">16:00</option>
-    `;
-  }
-
-  translateSelects(lang);
-      }
-
-      shuttleRoute.addEventListener("change", updateShuttleTimes);
-
      /* if (service.value === "shuttle") {
 
   bookingSubtitle.textContent =
@@ -377,6 +342,38 @@ translateSelects(lang);
   }
       
 });
+  function updateShuttleTimes() {
+
+  if (shuttleRoute.value === "Aéroport Agadir vers Agadir / Tamraght / Taghazout") {
+
+    fixedTime.innerHTML = `
+      <option value=""
+          data-fr="Choisir l’horaire"
+          data-en="Select time">
+        ${LANG[lang].fixedtime}
+      </option>
+      <option value="10:00">10:00</option>
+      <option value="14:00">14:00</option>
+      <option value="19:00">19:00</option>
+    `;
+
+  } else {
+
+    fixedTime.innerHTML = `
+      <option value=""
+          data-fr="Choisir l’horaire"
+          data-en="Select time">
+        ${LANG[lang].fixedtime}
+      </option>
+      <option value="08:00">08:00</option>
+      <option value="12:00">12:00</option>
+      <option value="16:00">16:00</option>
+    `;
+  }
+
+  translateSelects(lang);
+  }
+  shuttleRoute.addEventListener("change", updateShuttleTimes);
 
 }
 
@@ -534,17 +531,16 @@ const intervillesPrices = {
   "Agadir / Taghazout vers Imsouane": { base: 70, extra: 10 },
   "Imsouane vers Agadir / Taghazout": { base: 70, extra: 10 }
 };
+
+
 const shuttlePrices = {
-
-"Agadir ville vers Aéroport Agadir": 8,
-
-"Taghazout / Tamraght vers Aéroport Agadir": 10
-
+  "Aéroport Agadir vers Agadir / Tamraght / Taghazout": 10,
+  "Taghazout / Tamraght / Agadir vers Aéroport Agadir": 10
 };
 
 
 shuttleRoute.addEventListener("change", calculPrixShuttle);
-shuttlePlaces.addEventListener("input", calculPrixShuttle);
+shuttlePlaces.addEventListener("change", calculPrixShuttle);
 
 function calculPrixIntervilles() {
   if (!trajet.value || !places.value) {
