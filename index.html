@@ -306,7 +306,7 @@ Choisir une navette
 
 <option value="Taghazout / Tamraght / Agadir vers Aéroport Agadir"
         data-fr="Taghazout /  Tamraght / Agadir vers Aéroport Agadir"
-        data-en="Taghazout / Tamraght / Agadir to Agadir Airport">
+        data-en="Taghazout / Tamraght / Agadir city to Agadir Airport">
          Taghazout / Tamraght /Agadir vers Aéroport Agadir
 </option>
 
@@ -318,14 +318,24 @@ Choisir une navette
 Navette
 </label>
 </div>
-    <div class="floating-field">
-  <input id="depart" name="pickup" type="text" placeholder="adresse, hotel ..." >
+
+    <div class="floating-field" id="pickupField">
+  <input id="depart" name="pickup" type="text" placeholder="adresse, hotel ...">
   <label for="depart"
-  data-fr="Lieu de prise en charge"
-  data-en="Pickup location">
-  Lieu de prise en charge
+    data-fr="Lieu de prise en charge"
+    data-en="Pickup location">
+    Lieu de prise en charge
   </label>
     </div>
+    
+<div class="floating-field" id="dropoffField">
+  <input id="arrivee" name="dropoff" type="text" placeholder="adresse, hotel ...">
+  <label for="arrivee"
+    data-fr="Destination"
+    data-en="Destination">
+    Destination
+  </label>
+</div>
 
     <div class="floating-field">
 <select id="shuttlePlaces" name="shuttle_people">
